@@ -2,7 +2,7 @@
 import type { Point3 } from "./Point3";
 
 /**
- * A straight segment, such as a pillar or a context link.
+ * A straight segment.
  */
 export type Segment3 = { 
 /**

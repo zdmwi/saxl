@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@1.97
       - uses: Swatinem/rust-cache@v2
-      - run: cargo run -p saxl-cli -- check examples/snip.saxl --deny warnings --format github
+      - run: cargo run -p saxl-cli -- check examples/*.saxl --deny warnings --format github
       - run: cargo run -p saxl-cli -- fmt --check examples/*.saxl
 
   generated:

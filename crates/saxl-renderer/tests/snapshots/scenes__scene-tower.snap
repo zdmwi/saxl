@@ -21,338 +21,430 @@ expression: "saxl_renderer::to_json(&scene)"
         "kind": "floor",
         "center": {
           "x": 0.0,
-          "y": 0.03,
+          "y": -0.25,
           "z": 0.0
         },
         "size": {
-          "x": 9.42,
-          "y": 0.06,
-          "z": 7.33
+          "x": 16.72,
+          "y": 0.5,
+          "z": 13.68
         },
         "label": "us-east-1",
-        "sublabel": null
+        "sublabel": "region"
       },
       {
-        "id": "group:us-east-1/0",
+        "id": "group:us-east-1/k8s cluster",
         "kind": "floor",
         "center": {
-          "x": -0.5,
-          "y": 0.08,
-          "z": 0.1
+          "x": -2.2,
+          "y": 0.11,
+          "z": 0.0
         },
         "size": {
-          "x": 3.35,
-          "y": 0.03,
-          "z": 6.6
+          "x": 8.6,
+          "y": 0.22,
+          "z": 10.8
         },
-        "label": "k8s",
-        "sublabel": null
+        "label": "k8s cluster",
+        "sublabel": "group"
       },
       {
-        "id": "group:us-east-1/1",
+        "id": "group:us-east-1/managed",
         "kind": "floor",
         "center": {
-          "x": 2.94,
-          "y": 0.08,
-          "z": -0.73
+          "x": 4.4,
+          "y": 0.11,
+          "z": 0.0
         },
         "size": {
-          "x": 3.01,
-          "y": 0.03,
-          "z": 4.93
+          "x": 4.2,
+          "y": 0.22,
+          "z": 10.8
         },
         "label": "managed",
-        "sublabel": null
+        "sublabel": "group"
+      }
+    ],
+    "labels": [
+      {
+        "text": "US-EAST-1 · REGION",
+        "position": {
+          "x": -7.86,
+          "y": 0.0,
+          "z": 6.59
+        }
       },
       {
-        "id": "workload:us-east-1/Redirect",
-        "kind": "service",
-        "center": {
-          "x": -0.5,
-          "y": 0.18,
-          "z": -2.1
-        },
-        "size": {
-          "x": 2.81,
-          "y": 0.18,
-          "z": 1.27
-        },
-        "label": null,
-        "sublabel": null
+        "text": "K8S CLUSTER",
+        "position": {
+          "x": -6.1,
+          "y": 0.0,
+          "z": 4.9
+        }
       },
       {
-        "id": "workload:us-east-1/Dashboard",
-        "kind": "service",
-        "center": {
-          "x": -0.5,
-          "y": 0.18,
-          "z": -0.57
-        },
-        "size": {
-          "x": 2.81,
-          "y": 0.18,
-          "z": 1.27
-        },
-        "label": null,
-        "sublabel": null
-      },
-      {
-        "id": "workload:us-east-1/LinksAPI",
-        "kind": "service",
-        "center": {
-          "x": -0.5,
-          "y": 0.18,
-          "z": 0.97
-        },
-        "size": {
-          "x": 2.81,
-          "y": 0.18,
-          "z": 1.27
-        },
-        "label": null,
-        "sublabel": null
-      },
-      {
-        "id": "workload:us-east-1/Worker",
-        "kind": "service",
-        "center": {
-          "x": -0.5,
-          "y": 0.18,
-          "z": 2.5
-        },
-        "size": {
-          "x": 2.81,
-          "y": 0.18,
-          "z": 1.27
-        },
-        "label": null,
-        "sublabel": null
-      },
-      {
-        "id": "workload:us-east-1/Postgres",
-        "kind": "store",
-        "center": {
-          "x": 2.94,
-          "y": 0.18,
-          "z": -1.97
-        },
-        "size": {
-          "x": 2.47,
-          "y": 0.18,
-          "z": 1.53
-        },
-        "label": null,
-        "sublabel": null
-      },
-      {
-        "id": "workload:us-east-1/Redis",
-        "kind": "store",
-        "center": {
-          "x": 2.94,
-          "y": 0.18,
-          "z": -0.33
-        },
-        "size": {
-          "x": 2.47,
-          "y": 0.18,
-          "z": 1.2
-        },
-        "label": null,
-        "sublabel": null
-      },
-      {
-        "id": "workload:us-east-1/Clicks",
-        "kind": "queue",
-        "center": {
-          "x": 2.94,
-          "y": 0.18,
-          "z": 1.0
-        },
-        "size": {
-          "x": 2.47,
-          "y": 0.18,
-          "z": 0.93
-        },
-        "label": null,
-        "sublabel": null
+        "text": "MANAGED",
+        "position": {
+          "x": 2.7,
+          "y": 0.0,
+          "z": 4.9
+        }
       }
     ],
     "pods": [
       {
-        "id": "pod:us-east-1/Redirect#0",
-        "kind": "service",
-        "center": {
-          "x": -1.37,
-          "y": 0.36,
-          "z": -2.1
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "Dashboard",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Dashboard#0",
+          "kind": "service",
+          "center": {
+            "x": -4.88,
+            "y": 0.35,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/Redirect#1",
-        "kind": "service",
-        "center": {
-          "x": -0.5,
-          "y": 0.36,
-          "z": -2.1
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "Dashboard",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Dashboard#1",
+          "kind": "service",
+          "center": {
+            "x": -3.93,
+            "y": 0.35,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/Redirect#2",
-        "kind": "service",
-        "center": {
-          "x": 0.37,
-          "y": 0.36,
-          "z": -2.1
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "LinksAPI",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/LinksAPI#0",
+          "kind": "service",
+          "center": {
+            "x": -4.88,
+            "y": 0.35,
+            "z": 0.0
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/Dashboard#0",
-        "kind": "service",
-        "center": {
-          "x": -0.96,
-          "y": 0.36,
-          "z": -0.57
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "LinksAPI",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/LinksAPI#1",
+          "kind": "service",
+          "center": {
+            "x": -3.93,
+            "y": 0.35,
+            "z": 0.0
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/Dashboard#1",
-        "kind": "service",
-        "center": {
-          "x": -0.04,
-          "y": 0.36,
-          "z": -0.57
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "Redirect",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Redirect#0",
+          "kind": "service",
+          "center": {
+            "x": -5.35,
+            "y": 0.35,
+            "z": 3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/LinksAPI#0",
-        "kind": "service",
-        "center": {
-          "x": -0.96,
-          "y": 0.36,
-          "z": 0.97
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "Redirect",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Redirect#1",
+          "kind": "service",
+          "center": {
+            "x": -4.4,
+            "y": 0.35,
+            "z": 3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/LinksAPI#1",
-        "kind": "service",
-        "center": {
-          "x": -0.04,
-          "y": 0.36,
-          "z": 0.97
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "Redirect",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Redirect#2",
+          "kind": "service",
+          "center": {
+            "x": -3.45,
+            "y": 0.35,
+            "z": 3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/Worker#0",
-        "kind": "service",
-        "center": {
-          "x": -0.5,
-          "y": 0.36,
-          "z": 2.5
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "Worker",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Worker#0",
+          "kind": "service",
+          "center": {
+            "x": 0.0,
+            "y": 0.35,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/Postgres#0",
-        "kind": "store",
-        "center": {
-          "x": 2.94,
-          "y": 0.36,
-          "z": -1.97
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "Postgres",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/Postgres#0",
+          "kind": "store",
+          "center": {
+            "x": 3.83,
+            "y": 0.06,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/Redis#0",
-        "kind": "store",
-        "center": {
-          "x": 2.94,
-          "y": 0.36,
-          "z": -0.33
-        },
-        "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
-        },
-        "label": null,
-        "sublabel": null
+        "element": "Postgres",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/Postgres#1",
+          "kind": "store",
+          "center": {
+            "x": 4.98,
+            "y": 0.06,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
       },
       {
-        "id": "pod:us-east-1/Clicks#0",
-        "kind": "queue",
+        "element": "Redis",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/Redis#0",
+          "kind": "store",
+          "center": {
+            "x": 4.4,
+            "y": 0.06,
+            "z": 3.6
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Clicks",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/Clicks#0",
+          "kind": "queue",
+          "center": {
+            "x": 4.4,
+            "y": 0.06,
+            "z": 0.0
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      }
+    ],
+    "tags": [
+      {
+        "element": "Dashboard",
+        "text": "×2",
+        "position": {
+          "x": -4.4,
+          "y": 0.05,
+          "z": -2.75
+        }
+      },
+      {
+        "element": "LinksAPI",
+        "text": "×2",
+        "position": {
+          "x": -4.4,
+          "y": 0.05,
+          "z": 0.85
+        }
+      },
+      {
+        "element": "Redirect",
+        "text": "×3 autoscale",
+        "position": {
+          "x": -4.4,
+          "y": 0.05,
+          "z": 4.45
+        }
+      },
+      {
+        "element": "Worker",
+        "text": "×1",
+        "position": {
+          "x": 0.0,
+          "y": 0.05,
+          "z": -2.75
+        }
+      },
+      {
+        "element": "Postgres",
+        "text": "primary + replica",
+        "position": {
+          "x": 4.4,
+          "y": 0.05,
+          "z": -2.75
+        }
+      },
+      {
+        "element": "Redis",
+        "text": "managed",
+        "position": {
+          "x": 4.4,
+          "y": 0.05,
+          "z": 4.45
+        }
+      },
+      {
+        "element": "Clicks",
+        "text": "managed",
+        "position": {
+          "x": 4.4,
+          "y": 0.05,
+          "z": 0.85
+        }
+      }
+    ],
+    "infra": [
+      {
+        "id": "Edge",
+        "kind": "infra",
         "center": {
-          "x": 2.94,
-          "y": 0.36,
-          "z": 1.0
+          "x": -10.36,
+          "y": 0.14,
+          "z": -5.64
         },
         "size": {
-          "x": 0.72,
-          "y": 0.18,
-          "z": 0.72
+          "x": 2.0,
+          "y": 0.28,
+          "z": 1.2
         },
-        "label": null,
-        "sublabel": null
+        "label": "Edge",
+        "sublabel": "cdn"
+      }
+    ],
+    "level": 7.0,
+    "tiers": [
+      {
+        "id": "k8s cluster",
+        "label": "k8s cluster",
+        "min": {
+          "x": -6.45,
+          "y": 11.35,
+          "z": -5.25
+        },
+        "max": {
+          "x": 2.05,
+          "y": 11.35,
+          "z": 5.25
+        }
+      },
+      {
+        "id": "managed",
+        "label": "managed",
+        "min": {
+          "x": 2.35,
+          "y": 6.95,
+          "z": -5.25
+        },
+        "max": {
+          "x": 6.45,
+          "y": 6.95,
+          "z": 5.25
+        }
       }
     ],
     "containers": [
@@ -360,14 +452,14 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Dashboard",
         "kind": "service",
         "center": {
-          "x": -0.5,
-          "y": 3.4,
-          "z": -0.57
+          "x": -4.4,
+          "y": 11.9,
+          "z": -3.6
         },
         "size": {
-          "x": 2.0,
-          "y": 0.8,
-          "z": 1.2
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
         },
         "label": "Dashboard",
         "sublabel": "web frontend"
@@ -376,14 +468,14 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "LinksAPI",
         "kind": "service",
         "center": {
-          "x": -0.5,
-          "y": 3.4,
-          "z": 0.97
+          "x": -4.4,
+          "y": 11.9,
+          "z": 0.0
         },
         "size": {
-          "x": 2.81,
-          "y": 0.8,
-          "z": 1.2
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
         },
         "label": "LinksAPI",
         "sublabel": "create, edit, stats"
@@ -392,14 +484,14 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Redirect",
         "kind": "service",
         "center": {
-          "x": -0.5,
-          "y": 3.4,
-          "z": -2.1
+          "x": -4.4,
+          "y": 11.9,
+          "z": 3.6
         },
         "size": {
-          "x": 2.81,
-          "y": 0.8,
-          "z": 1.2
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
         },
         "label": "Redirect",
         "sublabel": "hot path, stateless"
@@ -408,14 +500,14 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Worker",
         "kind": "service",
         "center": {
-          "x": -0.5,
-          "y": 3.4,
-          "z": 2.5
+          "x": 0.0,
+          "y": 11.9,
+          "z": -3.6
         },
         "size": {
-          "x": 2.45,
-          "y": 0.8,
-          "z": 1.2
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
         },
         "label": "Worker",
         "sublabel": "aggregates stats"
@@ -424,14 +516,14 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Postgres",
         "kind": "store",
         "center": {
-          "x": 2.94,
-          "y": 3.4,
-          "z": -1.97
+          "x": 4.4,
+          "y": 7.6,
+          "z": -3.6
         },
         "size": {
-          "x": 1.3,
-          "y": 1.4,
-          "z": 1.3
+          "x": 1.8,
+          "y": 1.2,
+          "z": 1.8
         },
         "label": "Postgres",
         "sublabel": "source of truth"
@@ -440,14 +532,14 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Redis",
         "kind": "store",
         "center": {
-          "x": 2.94,
-          "y": 3.4,
-          "z": -0.33
+          "x": 4.4,
+          "y": 7.6,
+          "z": 3.6
         },
         "size": {
-          "x": 1.3,
-          "y": 1.4,
-          "z": 1.3
+          "x": 1.8,
+          "y": 1.2,
+          "z": 1.8
         },
         "label": "Redis",
         "sublabel": "code → URL cache"
@@ -456,171 +548,32 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Clicks",
         "kind": "queue",
         "center": {
-          "x": 2.94,
-          "y": 3.4,
-          "z": 1.0
+          "x": 4.4,
+          "y": 7.62,
+          "z": 0.0
         },
         "size": {
-          "x": 2.47,
-          "y": 0.8,
-          "z": 0.8
+          "x": 3.6,
+          "y": 0.9,
+          "z": 0.9
         },
         "label": "Clicks",
         "sublabel": "async events"
       }
     ],
-    "pillars": [
-      {
-        "from": {
-          "x": -0.96,
-          "y": 0.45,
-          "z": -0.57
-        },
-        "to": {
-          "x": -0.96,
-          "y": 3.0,
-          "z": -0.57
-        }
-      },
-      {
-        "from": {
-          "x": -0.04,
-          "y": 0.45,
-          "z": -0.57
-        },
-        "to": {
-          "x": -0.04,
-          "y": 3.0,
-          "z": -0.57
-        }
-      },
-      {
-        "from": {
-          "x": -0.96,
-          "y": 0.45,
-          "z": 0.97
-        },
-        "to": {
-          "x": -0.96,
-          "y": 3.0,
-          "z": 0.97
-        }
-      },
-      {
-        "from": {
-          "x": -0.04,
-          "y": 0.45,
-          "z": 0.97
-        },
-        "to": {
-          "x": -0.04,
-          "y": 3.0,
-          "z": 0.97
-        }
-      },
-      {
-        "from": {
-          "x": -1.37,
-          "y": 0.45,
-          "z": -2.1
-        },
-        "to": {
-          "x": -1.37,
-          "y": 3.0,
-          "z": -2.1
-        }
-      },
-      {
-        "from": {
-          "x": -0.5,
-          "y": 0.45,
-          "z": -2.1
-        },
-        "to": {
-          "x": -0.5,
-          "y": 3.0,
-          "z": -2.1
-        }
-      },
-      {
-        "from": {
-          "x": 0.37,
-          "y": 0.45,
-          "z": -2.1
-        },
-        "to": {
-          "x": 0.37,
-          "y": 3.0,
-          "z": -2.1
-        }
-      },
-      {
-        "from": {
-          "x": -0.5,
-          "y": 0.45,
-          "z": 2.5
-        },
-        "to": {
-          "x": -0.5,
-          "y": 3.0,
-          "z": 2.5
-        }
-      },
-      {
-        "from": {
-          "x": 2.94,
-          "y": 0.45,
-          "z": -1.97
-        },
-        "to": {
-          "x": 2.94,
-          "y": 2.7,
-          "z": -1.97
-        }
-      },
-      {
-        "from": {
-          "x": 2.94,
-          "y": 0.45,
-          "z": -0.33
-        },
-        "to": {
-          "x": 2.94,
-          "y": 2.7,
-          "z": -0.33
-        }
-      },
-      {
-        "from": {
-          "x": 2.94,
-          "y": 0.45,
-          "z": 1.0
-        },
-        "to": {
-          "x": 2.94,
-          "y": 3.0,
-          "z": 1.0
-        }
-      }
-    ],
-    "shell": {
-      "radius": 8.030687389377766,
-      "y_min": -0.3,
-      "y_max": 5.6
-    },
     "outside": [
       {
         "id": "Visitor",
         "kind": "actor",
         "center": {
-          "x": -8.69,
-          "y": 3.4,
-          "z": -5.02
+          "x": -8.8,
+          "y": 12.13,
+          "z": 3.6
         },
         "size": {
-          "x": 2.09,
-          "y": 0.8,
-          "z": 1.2
+          "x": 1.5,
+          "y": 1.45,
+          "z": 1.5
         },
         "label": "Visitor",
         "sublabel": "follows links"
@@ -629,14 +582,14 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Owner",
         "kind": "actor",
         "center": {
-          "x": -8.69,
-          "y": 3.4,
-          "z": 5.02
+          "x": -8.8,
+          "y": 12.13,
+          "z": -3.6
         },
         "size": {
-          "x": 2.09,
-          "y": 0.8,
-          "z": 1.2
+          "x": 1.5,
+          "y": 1.45,
+          "z": 1.5
         },
         "label": "Owner",
         "sublabel": "creates links"
@@ -645,13 +598,13 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "IdP",
         "kind": "external",
         "center": {
-          "x": 8.69,
-          "y": 3.4,
-          "z": 5.02
+          "x": 8.8,
+          "y": 11.9,
+          "z": 0.0
         },
         "size": {
-          "x": 2.09,
-          "y": 0.8,
+          "x": 2.0,
+          "y": 1.0,
           "z": 1.2
         },
         "label": "IdP",
@@ -661,185 +614,888 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Email",
         "kind": "external",
         "center": {
-          "x": 8.69,
-          "y": 3.4,
-          "z": -5.02
+          "x": 8.8,
+          "y": 11.9,
+          "z": -3.6
         },
         "size": {
           "x": 2.0,
-          "y": 0.8,
+          "y": 1.0,
           "z": 1.2
         },
         "label": "Email",
         "sublabel": "stat digests"
       }
     ],
-    "infra": [
+    "leaders": [
       {
-        "id": "Edge",
-        "kind": "infra",
-        "center": {
-          "x": -6.91,
-          "y": 0.1,
-          "z": -2.87
+        "element": "Dashboard",
+        "from": {
+          "x": -4.88,
+          "y": 0.7,
+          "z": -3.6
         },
-        "size": {
-          "x": 2.0,
-          "y": 0.2,
-          "z": 1.0
+        "to": {
+          "x": -4.88,
+          "y": 11.4,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "Dashboard",
+        "from": {
+          "x": -3.93,
+          "y": 0.7,
+          "z": -3.6
         },
-        "label": "Edge",
-        "sublabel": "cdn"
+        "to": {
+          "x": -3.93,
+          "y": 11.4,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "LinksAPI",
+        "from": {
+          "x": -4.88,
+          "y": 0.7,
+          "z": 0.0
+        },
+        "to": {
+          "x": -4.88,
+          "y": 11.4,
+          "z": 0.0
+        }
+      },
+      {
+        "element": "LinksAPI",
+        "from": {
+          "x": -3.93,
+          "y": 0.7,
+          "z": 0.0
+        },
+        "to": {
+          "x": -3.93,
+          "y": 11.4,
+          "z": 0.0
+        }
+      },
+      {
+        "element": "Redirect",
+        "from": {
+          "x": -5.35,
+          "y": 0.7,
+          "z": 3.6
+        },
+        "to": {
+          "x": -5.35,
+          "y": 11.4,
+          "z": 3.6
+        }
+      },
+      {
+        "element": "Redirect",
+        "from": {
+          "x": -4.4,
+          "y": 0.7,
+          "z": 3.6
+        },
+        "to": {
+          "x": -4.4,
+          "y": 11.4,
+          "z": 3.6
+        }
+      },
+      {
+        "element": "Redirect",
+        "from": {
+          "x": -3.45,
+          "y": 0.7,
+          "z": 3.6
+        },
+        "to": {
+          "x": -3.45,
+          "y": 11.4,
+          "z": 3.6
+        }
+      },
+      {
+        "element": "Worker",
+        "from": {
+          "x": 0.0,
+          "y": 0.7,
+          "z": -3.6
+        },
+        "to": {
+          "x": 0.0,
+          "y": 11.4,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "Postgres",
+        "from": {
+          "x": 3.83,
+          "y": 0.12,
+          "z": -3.6
+        },
+        "to": {
+          "x": 3.83,
+          "y": 7.0,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "Postgres",
+        "from": {
+          "x": 4.98,
+          "y": 0.12,
+          "z": -3.6
+        },
+        "to": {
+          "x": 4.98,
+          "y": 7.0,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "Redis",
+        "from": {
+          "x": 4.4,
+          "y": 0.12,
+          "z": 3.6
+        },
+        "to": {
+          "x": 4.4,
+          "y": 7.0,
+          "z": 3.6
+        }
+      },
+      {
+        "element": "Clicks",
+        "from": {
+          "x": 4.4,
+          "y": 0.12,
+          "z": 0.0
+        },
+        "to": {
+          "x": 4.4,
+          "y": 7.17,
+          "z": 0.0
+        }
       }
     ],
-    "context_links": [
+    "pipes": [
       {
-        "from": {
-          "x": -8.69,
-          "y": 3.4,
-          "z": 5.02
-        },
-        "to": {
-          "x": -0.5,
-          "y": 3.4,
-          "z": -0.57
-        }
-      },
-      {
-        "from": {
-          "x": 8.69,
-          "y": 3.4,
-          "z": 5.02
-        },
-        "to": {
-          "x": -0.5,
-          "y": 3.4,
-          "z": 0.97
-        }
-      },
-      {
-        "from": {
-          "x": -8.69,
-          "y": 3.4,
-          "z": -5.02
-        },
-        "to": {
-          "x": -0.5,
-          "y": 3.4,
-          "z": -2.1
-        }
-      },
-      {
-        "from": {
-          "x": 8.69,
-          "y": 3.4,
-          "z": -5.02
-        },
-        "to": {
-          "x": -0.5,
-          "y": 3.4,
-          "z": 2.5
-        }
-      }
-    ],
-    "fills": [
-      {
-        "store": "Postgres",
-        "role": "truth",
-        "entities": [
-          "Link",
-          "User",
-          "Click"
-        ],
-        "geometry": {
-          "id": "fill:Postgres:truth",
-          "kind": "store",
-          "center": {
-            "x": 2.94,
-            "y": 3.4,
-            "z": -1.97
-          },
-          "size": {
-            "x": 1.01,
-            "y": 1.09,
-            "z": 1.01
-          },
-          "label": null,
-          "sublabel": null
-        }
-      },
-      {
-        "store": "Redis",
-        "role": "cache",
-        "entities": [
-          "Link"
-        ],
-        "geometry": {
-          "id": "fill:Redis:cache",
-          "kind": "store",
-          "center": {
-            "x": 2.94,
-            "y": 3.4,
-            "z": -0.33
-          },
-          "size": {
-            "x": 0.81,
-            "y": 0.87,
-            "z": 0.81
-          },
-          "label": null,
-          "sublabel": null
-        }
-      }
-    ],
-    "flows": [
-      {
-        "id": "Click",
+        "id": "Owner>Dashboard",
+        "from": "Owner",
+        "to": "Dashboard",
+        "async": false,
         "points": [
           {
-            "x": 2.94,
-            "y": 3.4,
-            "z": 1.0
+            "x": -8.5,
+            "y": 11.7,
+            "z": -3.6
           },
           {
-            "x": -0.5,
-            "y": 3.4,
-            "z": 2.5
-          },
-          {
-            "x": 2.94,
-            "y": 3.4,
-            "z": -1.97
+            "x": -5.8,
+            "y": 11.7,
+            "z": -3.6
           }
-        ]
+        ],
+        "route": [
+          {
+            "x": -8.5,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -5.8,
+            "y": 11.7,
+            "z": -3.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Dashboard>LinksAPI",
+        "from": "Dashboard",
+        "to": "LinksAPI",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": -2.8
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": -0.8
+          }
+        ],
+        "route": [
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": -2.8
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": -0.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "LinksAPI>Postgres",
+        "from": "LinksAPI",
+        "to": "Postgres",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": -0.8
+          },
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": -1.8
+          },
+          {
+            "x": 2.2,
+            "y": 12.1,
+            "z": -1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.7,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": -2.7
+          }
+        ],
+        "route": [
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": -0.8
+          },
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": -1.8
+          },
+          {
+            "x": 2.2,
+            "y": 12.1,
+            "z": -1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.7,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": -2.7
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "LinksAPI>Redis",
+        "from": "LinksAPI",
+        "to": "Redis",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": 0.8
+          },
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": 1.48
+          },
+          {
+            "x": 1.88,
+            "y": 12.1,
+            "z": 1.48
+          },
+          {
+            "x": 1.88,
+            "y": 7.7,
+            "z": 1.48
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": 1.48
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": 2.7
+          }
+        ],
+        "route": [
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": 0.8
+          },
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": 1.48
+          },
+          {
+            "x": 1.88,
+            "y": 12.1,
+            "z": 1.48
+          },
+          {
+            "x": 1.88,
+            "y": 7.7,
+            "z": 1.48
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": 1.48
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": 2.7
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "LinksAPI>IdP",
+        "from": "LinksAPI",
+        "to": "IdP",
+        "async": false,
+        "points": [
+          {
+            "x": -3.0,
+            "y": 11.7,
+            "z": 0.0
+          },
+          {
+            "x": 7.8,
+            "y": 11.7,
+            "z": 0.0
+          }
+        ],
+        "route": [
+          {
+            "x": -3.0,
+            "y": 11.7,
+            "z": 0.0
+          },
+          {
+            "x": 7.8,
+            "y": 11.7,
+            "z": 0.0
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Visitor>Redirect",
+        "from": "Visitor",
+        "to": "Redirect",
+        "async": false,
+        "points": [
+          {
+            "x": -8.5,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -5.8,
+            "y": 11.7,
+            "z": 3.6
+          }
+        ],
+        "route": [
+          {
+            "x": -8.5,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -5.8,
+            "y": 11.7,
+            "z": 3.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Redirect>Redis",
+        "from": "Redirect",
+        "to": "Redis",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 4.4
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 5.4
+          },
+          {
+            "x": 2.2,
+            "y": 11.7,
+            "z": 5.4
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": 5.4
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": 5.4
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": 4.5
+          }
+        ],
+        "route": [
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 4.4
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 5.4
+          },
+          {
+            "x": 2.2,
+            "y": 11.7,
+            "z": 5.4
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": 5.4
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": 5.4
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": 4.5
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Redirect>Postgres",
+        "from": "Redirect",
+        "to": "Postgres",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 2.8
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 1.8
+          },
+          {
+            "x": 2.2,
+            "y": 11.7,
+            "z": 1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -2.7
+          }
+        ],
+        "route": [
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 2.8
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 1.8
+          },
+          {
+            "x": 2.2,
+            "y": 11.7,
+            "z": 1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -2.7
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Redirect>Clicks",
+        "from": "Redirect",
+        "to": "Clicks",
+        "async": true,
+        "points": [
+          {
+            "x": -4.08,
+            "y": 11.7,
+            "z": 2.8
+          },
+          {
+            "x": -4.08,
+            "y": 11.7,
+            "z": 2.12
+          },
+          {
+            "x": 2.52,
+            "y": 11.7,
+            "z": 2.12
+          },
+          {
+            "x": 2.52,
+            "y": 7.3,
+            "z": 2.12
+          },
+          {
+            "x": 4.72,
+            "y": 7.3,
+            "z": 2.12
+          },
+          {
+            "x": 4.72,
+            "y": 7.3,
+            "z": 0.45
+          }
+        ],
+        "route": [
+          {
+            "x": -4.08,
+            "y": 11.7,
+            "z": 2.8
+          },
+          {
+            "x": -4.08,
+            "y": 11.7,
+            "z": 2.12
+          },
+          {
+            "x": 2.52,
+            "y": 11.7,
+            "z": 2.12
+          },
+          {
+            "x": 2.52,
+            "y": 7.3,
+            "z": 2.12
+          },
+          {
+            "x": 4.72,
+            "y": 7.3,
+            "z": 2.12
+          },
+          {
+            "x": 4.72,
+            "y": 7.3,
+            "z": 0.45
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Clicks>Worker",
+        "from": "Clicks",
+        "to": "Worker",
+        "async": true,
+        "points": [
+          {
+            "x": 4.72,
+            "y": 7.6,
+            "z": -0.45
+          },
+          {
+            "x": 4.72,
+            "y": 7.6,
+            "z": -2.12
+          },
+          {
+            "x": 4.72,
+            "y": 8.3,
+            "z": -2.12
+          },
+          {
+            "x": 1.88,
+            "y": 8.3,
+            "z": -2.12
+          },
+          {
+            "x": 1.88,
+            "y": 12.7,
+            "z": -2.12
+          },
+          {
+            "x": 0.32,
+            "y": 12.7,
+            "z": -2.12
+          },
+          {
+            "x": 0.32,
+            "y": 12.0,
+            "z": -2.12
+          },
+          {
+            "x": 0.32,
+            "y": 12.0,
+            "z": -2.8
+          }
+        ],
+        "route": [
+          {
+            "x": 4.72,
+            "y": 7.6,
+            "z": -0.45
+          },
+          {
+            "x": 4.72,
+            "y": 7.6,
+            "z": -2.12
+          },
+          {
+            "x": 4.72,
+            "y": 8.3,
+            "z": -2.12
+          },
+          {
+            "x": 1.88,
+            "y": 8.3,
+            "z": -2.12
+          },
+          {
+            "x": 1.88,
+            "y": 12.7,
+            "z": -2.12
+          },
+          {
+            "x": 0.32,
+            "y": 12.7,
+            "z": -2.12
+          },
+          {
+            "x": 0.32,
+            "y": 12.0,
+            "z": -2.12
+          },
+          {
+            "x": 0.32,
+            "y": 12.0,
+            "z": -2.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Worker>Postgres",
+        "from": "Worker",
+        "to": "Postgres",
+        "async": false,
+        "points": [
+          {
+            "x": -0.32,
+            "y": 12.3,
+            "z": -2.8
+          },
+          {
+            "x": -0.32,
+            "y": 12.3,
+            "z": -2.44
+          },
+          {
+            "x": 1.56,
+            "y": 12.3,
+            "z": -2.44
+          },
+          {
+            "x": 1.56,
+            "y": 7.9,
+            "z": -2.44
+          },
+          {
+            "x": 4.08,
+            "y": 7.9,
+            "z": -2.44
+          },
+          {
+            "x": 4.08,
+            "y": 7.9,
+            "z": -2.76
+          }
+        ],
+        "route": [
+          {
+            "x": -0.32,
+            "y": 12.3,
+            "z": -2.8
+          },
+          {
+            "x": -0.32,
+            "y": 12.3,
+            "z": -2.44
+          },
+          {
+            "x": 1.56,
+            "y": 12.3,
+            "z": -2.44
+          },
+          {
+            "x": 1.56,
+            "y": 7.9,
+            "z": -2.44
+          },
+          {
+            "x": 4.08,
+            "y": 7.9,
+            "z": -2.44
+          },
+          {
+            "x": 4.08,
+            "y": 7.9,
+            "z": -2.76
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Worker>Email",
+        "from": "Worker",
+        "to": "Email",
+        "async": false,
+        "points": [
+          {
+            "x": 1.4,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": 7.8,
+            "y": 11.7,
+            "z": -3.6
+          }
+        ],
+        "route": [
+          {
+            "x": 1.4,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": 7.8,
+            "y": 11.7,
+            "z": -3.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
       }
     ],
-    "labels": [
-      {
-        "text": "us-east-1",
-        "position": {
-          "x": -4.51,
-          "y": 0.11,
-          "z": -3.47
-        }
+    "trunks": [],
+    "boundary": {
+      "label": "Snip",
+      "min": {
+        "x": -6.6,
+        "y": 6.6,
+        "z": -5.4
       },
-      {
-        "text": "k8s",
-        "position": {
-          "x": -1.98,
-          "y": 0.14,
-          "z": -3.0
-        }
-      },
-      {
-        "text": "managed",
-        "position": {
-          "x": 1.64,
-          "y": 0.14,
-          "z": -3.0
-        }
+      "max": {
+        "x": 6.6,
+        "y": 13.0,
+        "z": 5.4
       }
-    ]
+    },
+    "clashes": 0
   },
   "timelines": [
     {

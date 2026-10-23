@@ -105,7 +105,7 @@ Every view below is generated from the file above.
 
 ![Deployment view](docs/images/snip-deployment.svg)
 
-**Tower:** the deployment floor at the bottom, containers floating above it on one pillar per replica, the context shell around them, data as color, and scenarios replayed as a thread moving through the system. It is interactive (orbit, layer toggles, playback, "time upward"), so it lives in the HTML output, `saxl serve`, and the playground rather than in an image.
+**Tower:** an axonometric 3D view. The deployment floor sits at the bottom; containers hang above it in tiers, one per deployment group (in declaration order, top first), each on dashed leaders from its replicas; relations are pipes routed so that unrelated pipes never touch, and a container with four or more outgoing relations sends them through a shared trunk. It is interactive (drag the model to rotate, drag empty space to pan, hover or click to focus, explode the tiers, and play a scenario as tokens moving along the pipes), so it lives in the HTML output, `saxl serve`, and the playground rather than in an image. [examples/shopfront.saxl](examples/shopfront.saxl) is a 24-container example that exercises it.
 
 ## Install
 

@@ -1,0 +1,115 @@
+# Shopfront: an online store, large enough to stress the tower layout
+system Shopfront "online store"
+
+actor    Shopper  "browses and buys"
+actor    Merchant "manages the catalog"
+external Stripe   "card payments"
+external Shippo   "shipping labels"
+external SendGrid "transactional email"
+
+service Storefront    "web"
+service MobileBFF     "mobile api"
+service AdminUI       "merchant tools"
+service Gateway       "auth, routing"
+service Catalog       "products"
+service Search        "queries"
+service Accounts      "users"
+service Cart          "baskets"
+service Inventory     "stock"
+service Checkout      "orchestrates"
+service Payments      "charges"
+service Fulfillment   "shipping"
+service Orders        "order records"
+service Notifications "email, push"
+store   CatalogDB     "products"
+store   Blob          "images"
+store   SearchIndex   "search index"
+store   Redis         "carts, sessions"
+store   CommerceDB    "source of truth"
+queue   ProductEvents "catalog changes"
+queue   OrderEvents   "order lifecycle"
+
+Shopper  -> Storefront
+Shopper  -> MobileBFF
+Merchant -> AdminUI
+
+Storefront -> Gateway
+MobileBFF  -> Gateway
+AdminUI    -> Gateway
+
+Gateway -> Catalog
+Gateway -> Search
+Gateway -> Cart
+Gateway -> Checkout
+Gateway -> Orders
+Gateway -> Accounts
+
+Catalog       -> CatalogDB
+Catalog       -> Blob
+Catalog       ~> ProductEvents
+ProductEvents ~> Search
+Search        -> SearchIndex
+Cart          -> Redis
+Cart          -> Inventory
+
+Checkout -> Cart
+Checkout -> Payments
+Checkout -> Orders
+Checkout -> Inventory
+
+Payments      -> Stripe
+Orders        -> CommerceDB
+Orders        ~> OrderEvents
+OrderEvents   ~> Fulfillment
+OrderEvents   ~> Notifications
+Fulfillment   -> Shippo
+Fulfillment   -> Inventory
+Notifications -> SendGrid
+Inventory     -> CommerceDB
+Accounts      -> CommerceDB
+
+data Product in CatalogDB cached SearchIndex { sku, title, price, image_key }
+data Basket  in Redis                        { session, skus }
+data Order   in CommerceDB                   { id, account, total, status }
+data Account in CommerceDB                   { id, email, address }
+data Stock   in CommerceDB                   { sku, on_hand }
+
+deploy region us-east-1 {
+  cluster edge {
+    Storefront, Gateway x3 autoscale
+    MobileBFF x2
+    AdminUI x1
+  }
+  cluster domain {
+    Cart, Checkout x3 autoscale
+    Catalog, Search, Accounts, Inventory, Payments, Orders, Notifications x2
+    Fulfillment x1
+  }
+  managed {
+    CatalogDB, CommerceDB, Redis primary+replica
+    SearchIndex x3
+    Blob
+    ProductEvents
+    OrderEvents x3
+  }
+}
+
+scenario checkout {
+  Shopper -> Storefront : POST /checkout
+  Storefront -> Gateway
+  Gateway -> Checkout
+  Checkout -> Cart : read cart
+  Cart --> Checkout : items
+  Checkout -> Payments : charge card
+  Payments -> Stripe
+  Stripe --> Payments : charged
+  Payments --> Checkout
+  Checkout -> Orders : write order
+  Orders -> CommerceDB
+  CommerceDB --> Orders
+  Orders ~> OrderEvents : order placed
+  OrderEvents ~> Notifications
+  Notifications -> SendGrid : confirmation
+}
+
+allow W102 "single region is acceptable for the example"
