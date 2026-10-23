@@ -15,7 +15,13 @@ saxl-core.workspace = true
 saxl-validator.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+thiserror.workspace = true
 ts-rs = { workspace = true, optional = true }
+
+[dev-dependencies]
+saxl-parser.workspace = true
+insta.workspace = true
+serde_json.workspace = true
 
 [lints]
 workspace = true

@@ -1,0 +1,477 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "containers"
+  },
+  "title": "Containers: Snip",
+  "size": {
+    "w": 1325.6,
+    "h": 350.0
+  },
+  "nodes": [
+    {
+      "id": "Visitor",
+      "kind": "actor",
+      "label": "Visitor",
+      "sublabel": "follows links",
+      "rect": {
+        "x": 24.0,
+        "y": 174.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 55,
+        "end": 88
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Owner",
+      "kind": "actor",
+      "label": "Owner",
+      "sublabel": "creates links",
+      "rect": {
+        "x": 24.0,
+        "y": 254.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 89,
+        "end": 122
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "IdP",
+      "kind": "external",
+      "label": "IdP",
+      "sublabel": "OAuth sign-in",
+      "rect": {
+        "x": 1176.0,
+        "y": 228.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 123,
+        "end": 156
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Email",
+      "kind": "external",
+      "label": "Email",
+      "sublabel": "stat digests",
+      "rect": {
+        "x": 1178.8,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 157,
+        "end": 189
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Dashboard",
+      "kind": "service",
+      "label": "Dashboard",
+      "sublabel": "web frontend",
+      "rect": {
+        "x": 255.6,
+        "y": 254.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 191,
+        "end": 223
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "LinksAPI",
+      "kind": "service",
+      "label": "LinksAPI",
+      "sublabel": "create, edit, stats",
+      "rect": {
+        "x": 480.0,
+        "y": 230.0,
+        "w": 168.8,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 224,
+        "end": 263
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Redirect",
+      "kind": "service",
+      "label": "Redirect",
+      "sublabel": "hot path, stateless",
+      "rect": {
+        "x": 231.2,
+        "y": 174.0,
+        "w": 168.8,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 264,
+        "end": 303
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Worker",
+      "kind": "service",
+      "label": "Worker",
+      "sublabel": "aggregates stats",
+      "rect": {
+        "x": 728.8,
+        "y": 94.0,
+        "w": 147.2,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 304,
+        "end": 340
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Postgres",
+      "kind": "store",
+      "label": "Postgres",
+      "sublabel": "source of truth",
+      "rect": {
+        "x": 956.0,
+        "y": 164.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 341,
+        "end": 376
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Redis",
+      "kind": "store",
+      "label": "Redis",
+      "sublabel": "code → URL cache",
+      "rect": {
+        "x": 728.8,
+        "y": 174.0,
+        "w": 147.2,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 377,
+        "end": 415
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Clicks",
+      "kind": "queue",
+      "label": "Clicks",
+      "sublabel": "async events",
+      "rect": {
+        "x": 504.4,
+        "y": 94.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 416,
+        "end": 448
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "Owner",
+      "to": "Dashboard",
+      "style": "sync",
+      "points": [
+        {
+          "x": 149.6,
+          "y": 282.0
+        },
+        {
+          "x": 255.6,
+          "y": 282.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Dashboard",
+      "to": "LinksAPI",
+      "style": "sync",
+      "points": [
+        {
+          "x": 375.6,
+          "y": 282.0
+        },
+        {
+          "x": 480.0,
+          "y": 258.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "LinksAPI",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 648.8,
+          "y": 258.0
+        },
+        {
+          "x": 728.8,
+          "y": 258.0
+        },
+        {
+          "x": 876.0,
+          "y": 258.0
+        },
+        {
+          "x": 956.0,
+          "y": 192.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "LinksAPI",
+      "to": "Redis",
+      "style": "sync",
+      "points": [
+        {
+          "x": 648.8,
+          "y": 248.0
+        },
+        {
+          "x": 728.8,
+          "y": 207.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "LinksAPI",
+      "to": "IdP",
+      "style": "sync",
+      "points": [
+        {
+          "x": 648.8,
+          "y": 268.0
+        },
+        {
+          "x": 728.8,
+          "y": 322.0
+        },
+        {
+          "x": 876.0,
+          "y": 322.0
+        },
+        {
+          "x": 956.0,
+          "y": 256.0
+        },
+        {
+          "x": 1096.0,
+          "y": 256.0
+        },
+        {
+          "x": 1176.0,
+          "y": 256.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Visitor",
+      "to": "Redirect",
+      "style": "sync",
+      "points": [
+        {
+          "x": 149.6,
+          "y": 202.0
+        },
+        {
+          "x": 231.2,
+          "y": 202.0
+        }
+      ],
+      "label": "GET /abc"
+    },
+    {
+      "from": "Redirect",
+      "to": "Redis",
+      "style": "sync",
+      "points": [
+        {
+          "x": 400.0,
+          "y": 202.0
+        },
+        {
+          "x": 480.0,
+          "y": 202.0
+        },
+        {
+          "x": 648.8,
+          "y": 202.0
+        },
+        {
+          "x": 728.8,
+          "y": 197.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Redirect",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 400.0,
+          "y": 212.0
+        },
+        {
+          "x": 480.0,
+          "y": 314.0
+        },
+        {
+          "x": 648.8,
+          "y": 314.0
+        },
+        {
+          "x": 728.8,
+          "y": 290.0
+        },
+        {
+          "x": 876.0,
+          "y": 290.0
+        },
+        {
+          "x": 956.0,
+          "y": 202.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Redirect",
+      "to": "Clicks",
+      "style": "async",
+      "points": [
+        {
+          "x": 400.0,
+          "y": 192.0
+        },
+        {
+          "x": 504.4,
+          "y": 122.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Clicks",
+      "to": "Worker",
+      "style": "async",
+      "points": [
+        {
+          "x": 624.4,
+          "y": 122.0
+        },
+        {
+          "x": 728.8,
+          "y": 122.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Worker",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 876.0,
+          "y": 127.0
+        },
+        {
+          "x": 956.0,
+          "y": 182.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Worker",
+      "to": "Email",
+      "style": "sync",
+      "points": [
+        {
+          "x": 876.0,
+          "y": 117.0
+        },
+        {
+          "x": 956.0,
+          "y": 52.0
+        },
+        {
+          "x": 1096.0,
+          "y": 52.0
+        },
+        {
+          "x": 1178.8,
+          "y": 52.0
+        }
+      ],
+      "label": null
+    }
+  ],
+  "groups": [],
+  "timelines": []
+}

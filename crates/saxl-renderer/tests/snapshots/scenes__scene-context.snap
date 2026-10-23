@@ -1,0 +1,179 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "context"
+  },
+  "title": "Context: Snip",
+  "size": {
+    "w": 699.2,
+    "h": 184.0
+  },
+  "nodes": [
+    {
+      "id": "Snip",
+      "kind": "system",
+      "label": "Snip",
+      "sublabel": "URL shortener",
+      "rect": {
+        "x": 229.6,
+        "y": 24.0,
+        "w": 240.0,
+        "h": 136.0
+      },
+      "source": {
+        "file": 0,
+        "start": 26,
+        "end": 53
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Visitor",
+      "kind": "actor",
+      "label": "Visitor",
+      "sublabel": "follows links",
+      "rect": {
+        "x": 24.0,
+        "y": 24.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 55,
+        "end": 88
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Owner",
+      "kind": "actor",
+      "label": "Owner",
+      "sublabel": "creates links",
+      "rect": {
+        "x": 24.0,
+        "y": 104.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 89,
+        "end": 122
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "IdP",
+      "kind": "external",
+      "label": "IdP",
+      "sublabel": "OAuth sign-in",
+      "rect": {
+        "x": 549.6,
+        "y": 24.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 123,
+        "end": 156
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Email",
+      "kind": "external",
+      "label": "Email",
+      "sublabel": "stat digests",
+      "rect": {
+        "x": 552.4,
+        "y": 104.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 157,
+        "end": 189
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "Visitor",
+      "to": "Snip",
+      "style": "sync",
+      "points": [
+        {
+          "x": 149.6,
+          "y": 52.0
+        },
+        {
+          "x": 229.6,
+          "y": 52.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Owner",
+      "to": "Snip",
+      "style": "sync",
+      "points": [
+        {
+          "x": 149.6,
+          "y": 132.0
+        },
+        {
+          "x": 229.6,
+          "y": 132.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Snip",
+      "to": "IdP",
+      "style": "sync",
+      "points": [
+        {
+          "x": 469.6,
+          "y": 52.0
+        },
+        {
+          "x": 549.6,
+          "y": 52.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Snip",
+      "to": "Email",
+      "style": "sync",
+      "points": [
+        {
+          "x": 469.6,
+          "y": 132.0
+        },
+        {
+          "x": 552.4,
+          "y": 132.0
+        }
+      ],
+      "label": null
+    }
+  ],
+  "groups": [],
+  "timelines": []
+}

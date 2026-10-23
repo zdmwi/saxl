@@ -1,0 +1,219 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "deployment"
+  },
+  "title": "Deployment: Snip",
+  "size": {
+    "w": 612.0,
+    "h": 488.0
+  },
+  "nodes": [
+    {
+      "id": "us-east-1/Edge",
+      "kind": "infra",
+      "label": "Edge",
+      "sublabel": "cdn",
+      "rect": {
+        "x": 40.0,
+        "y": 80.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 933,
+        "end": 941
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "us-east-1/Redirect",
+      "kind": "service",
+      "label": "Redirect",
+      "sublabel": "hot path, stateless",
+      "rect": {
+        "x": 192.0,
+        "y": 80.0,
+        "w": 168.8,
+        "h": 76.0
+      },
+      "source": {
+        "file": 0,
+        "start": 264,
+        "end": 303
+      },
+      "badges": [
+        "×3",
+        "autoscale"
+      ],
+      "fields": []
+    },
+    {
+      "id": "us-east-1/Dashboard",
+      "kind": "service",
+      "label": "Dashboard",
+      "sublabel": "web frontend",
+      "rect": {
+        "x": 192.0,
+        "y": 172.0,
+        "w": 168.8,
+        "h": 76.0
+      },
+      "source": {
+        "file": 0,
+        "start": 191,
+        "end": 223
+      },
+      "badges": [
+        "×2"
+      ],
+      "fields": []
+    },
+    {
+      "id": "us-east-1/LinksAPI",
+      "kind": "service",
+      "label": "LinksAPI",
+      "sublabel": "create, edit, stats",
+      "rect": {
+        "x": 192.0,
+        "y": 264.0,
+        "w": 168.8,
+        "h": 76.0
+      },
+      "source": {
+        "file": 0,
+        "start": 224,
+        "end": 263
+      },
+      "badges": [
+        "×2"
+      ],
+      "fields": []
+    },
+    {
+      "id": "us-east-1/Worker",
+      "kind": "service",
+      "label": "Worker",
+      "sublabel": "aggregates stats",
+      "rect": {
+        "x": 192.0,
+        "y": 356.0,
+        "w": 168.8,
+        "h": 76.0
+      },
+      "source": {
+        "file": 0,
+        "start": 304,
+        "end": 340
+      },
+      "badges": [
+        "×1"
+      ],
+      "fields": []
+    },
+    {
+      "id": "us-east-1/Postgres",
+      "kind": "store",
+      "label": "Postgres",
+      "sublabel": "source of truth",
+      "rect": {
+        "x": 408.8,
+        "y": 80.0,
+        "w": 147.2,
+        "h": 76.0
+      },
+      "source": {
+        "file": 0,
+        "start": 341,
+        "end": 376
+      },
+      "badges": [
+        "primary+replica"
+      ],
+      "fields": []
+    },
+    {
+      "id": "us-east-1/Redis",
+      "kind": "store",
+      "label": "Redis",
+      "sublabel": "code → URL cache",
+      "rect": {
+        "x": 408.8,
+        "y": 172.0,
+        "w": 147.2,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 377,
+        "end": 415
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "us-east-1/Clicks",
+      "kind": "queue",
+      "label": "Clicks",
+      "sublabel": "async events",
+      "rect": {
+        "x": 408.8,
+        "y": 244.0,
+        "w": 147.2,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 416,
+        "end": 448
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [],
+  "groups": [
+    {
+      "id": "us-east-1",
+      "kind": "region",
+      "label": "us-east-1",
+      "rect": {
+        "x": 24.0,
+        "y": 24.0,
+        "w": 564.0,
+        "h": 440.0
+      },
+      "depth": 0
+    },
+    {
+      "id": "us-east-1/0",
+      "kind": "cluster",
+      "label": "k8s",
+      "rect": {
+        "x": 176.0,
+        "y": 52.0,
+        "w": 200.8,
+        "h": 396.0
+      },
+      "depth": 1
+    },
+    {
+      "id": "us-east-1/1",
+      "kind": "managed",
+      "label": "managed",
+      "rect": {
+        "x": 392.8,
+        "y": 52.0,
+        "w": 179.2,
+        "h": 264.0
+      },
+      "depth": 1
+    }
+  ],
+  "timelines": []
+}

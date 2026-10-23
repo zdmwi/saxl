@@ -1,8 +1,12 @@
 //! Build helpers for the saxl workspace. Run with `cargo xtask <command>`.
 
+use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
 const USAGE: &str = "usage: cargo xtask <types|viewer|wasm|playground|ci>";
+
+/// Where ts-rs writes the generated TypeScript types.
+const GENERATED: &str = "crates/saxl-renderer/viewer/src/generated";
 
 fn main() -> ExitCode {
     let Some(cmd) = std::env::args().nth(1) else {
@@ -10,10 +14,10 @@ fn main() -> ExitCode {
         return ExitCode::from(2);
     };
     let result = match cmd.as_str() {
+        "types" => types(),
+        "viewer" => viewer(),
         "ci" => ci(),
-        "types" | "viewer" | "wasm" | "playground" => {
-            Err(format!("`{cmd}` is not implemented yet"))
-        }
+        "wasm" | "playground" => Err(format!("`{cmd}` is not implemented yet")),
         _ => Err(USAGE.to_owned()),
     };
     match result {
@@ -25,7 +29,43 @@ fn main() -> ExitCode {
     }
 }
 
-/// Runs the checks of the CI `rust` and `self-check` jobs.
+fn root() -> PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("..")
+}
+
+/// Regenerates the TypeScript types for scenes and diagnostics.
+fn types() -> Result<(), String> {
+    let dir = root().join(GENERATED);
+    if dir.exists() {
+        std::fs::remove_dir_all(&dir).map_err(|e| format!("can't clear {GENERATED}: {e}"))?;
+    }
+    std::fs::create_dir_all(&dir).map_err(|e| format!("can't create {GENERATED}: {e}"))?;
+    let dir = dir
+        .canonicalize()
+        .map_err(|e| format!("can't resolve {GENERATED}: {e}"))?;
+    run_with_env(
+        "cargo",
+        &[
+            "test",
+            "-p",
+            "saxl-core",
+            "-p",
+            "saxl-renderer",
+            "--features",
+            "saxl-core/ts,saxl-renderer/ts",
+            "export_bindings",
+        ],
+        &[("TS_RS_EXPORT_DIR", dir.as_os_str())],
+    )
+}
+
+/// Bundles the viewer into `crates/saxl-renderer/assets/viewer.js`.
+fn viewer() -> Result<(), String> {
+    run("npm", &["ci"])?;
+    run("npm", &["run", "build", "-w", "@saxl/viewer"])
+}
+
+/// Runs what CI runs: the `rust`, `self-check`, and `generated` jobs.
 fn ci() -> Result<(), String> {
     run("cargo", &["fmt", "--all", "--check"])?;
     run(
@@ -53,13 +93,35 @@ fn ci() -> Result<(), String> {
             "warnings",
         ],
     )?;
-    Ok(())
+    types()?;
+    viewer()?;
+    run("npm", &["run", "typecheck", "-w", "@saxl/viewer"])?;
+    run(
+        "git",
+        &[
+            "diff",
+            "--exit-code",
+            "--",
+            GENERATED,
+            "crates/saxl-renderer/assets/viewer.js",
+        ],
+    )
 }
 
 fn run(program: &str, args: &[&str]) -> Result<(), String> {
+    run_with_env(program, args, &[])
+}
+
+fn run_with_env(
+    program: &str,
+    args: &[&str],
+    env: &[(&str, &std::ffi::OsStr)],
+) -> Result<(), String> {
     eprintln!("$ {program} {}", args.join(" "));
     let status = Command::new(program)
         .args(args)
+        .envs(env.iter().copied())
+        .current_dir(root())
         .status()
         .map_err(|e| format!("failed to run {program}: {e}"))?;
     if status.success() {

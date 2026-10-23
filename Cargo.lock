@@ -808,10 +808,13 @@ dependencies = [
 name = "saxl-renderer"
 version = "0.1.0"
 dependencies = [
+ "insta",
  "saxl-core",
+ "saxl-parser",
  "saxl-validator",
  "serde",
  "serde_json",
+ "thiserror",
  "ts-rs",
 ]
 

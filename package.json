@@ -1,4 +1,4 @@
 {
   "private": true,
-  "workspaces": ["crates/saxl-renderer/viewer", "playground/web"]
+  "workspaces": ["crates/saxl-renderer/viewer"]
 }

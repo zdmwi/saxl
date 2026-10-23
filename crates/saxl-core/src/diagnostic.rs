@@ -16,7 +16,7 @@ impl std::fmt::Display for Code {
 /// How serious a diagnostic is.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize)]
 #[serde(rename_all = "lowercase")]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 #[cfg_attr(feature = "ts", ts(rename_all = "lowercase"))]
 pub enum Severity {
     /// Blocks rendering.
@@ -29,7 +29,7 @@ pub enum Severity {
 
 /// A span with a short message.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct Label {
     /// The labeled source range.
     pub span: Span,
@@ -61,7 +61,7 @@ impl Label {
 
 /// A problem reported by any stage of the toolchain.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct Diagnostic {
     /// Stable code, for example `E006`.
     #[cfg_attr(feature = "ts", ts(type = "string"))]
@@ -138,7 +138,7 @@ pub enum ColumnUnit {
 
 /// A byte range without its file, as written in JSON output.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct ByteRange {
     /// Byte offset of the first byte.
     pub start: u32,
@@ -148,7 +148,7 @@ pub struct ByteRange {
 
 /// A start and end position.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct Range {
     /// Where the range starts.
     pub start: Position,
@@ -158,7 +158,7 @@ pub struct Range {
 
 /// A label with its line and column range.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct LocatedLabel {
     /// Whether this is the diagnostic's main location.
     pub primary: bool,
@@ -173,7 +173,7 @@ pub struct LocatedLabel {
 /// The JSON form of a diagnostic, shared by `saxl check --format json` and the
 /// playground. Labels carry line and column ranges.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct LocatedDiagnostic {
     /// Stable code, for example `E006`.
     #[cfg_attr(feature = "ts", ts(type = "string"))]

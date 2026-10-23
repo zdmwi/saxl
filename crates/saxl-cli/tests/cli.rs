@@ -163,3 +163,88 @@ fn invalid_fixture_output() {
         insta::assert_snapshot!(String::from_utf8(output.stdout).unwrap());
     });
 }
+
+fn out_path(name: &str) -> PathBuf {
+    let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join("saxl-render-test");
+    std::fs::create_dir_all(&dir).unwrap();
+    dir.join(name)
+}
+
+#[test]
+fn render_formats() {
+    let svg = out_path("containers.svg");
+    saxl()
+        .args(["render", "examples/snip.saxl", "--view", "containers", "-o"])
+        .arg(&svg)
+        .assert()
+        .success();
+    assert!(std::fs::read_to_string(&svg).unwrap().starts_with("<svg"));
+
+    let html = out_path("snip.html");
+    saxl()
+        .args(["render", "examples/snip.saxl", "-o"])
+        .arg(&html)
+        .assert()
+        .success();
+    let page = std::fs::read_to_string(&html).unwrap();
+    assert!(page.contains("saxlViewer.mount"));
+
+    let json = out_path("all.json");
+    saxl()
+        .args(["render", "examples/snip.saxl", "-o"])
+        .arg(&json)
+        .assert()
+        .success();
+    let scenes: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&json).unwrap()).unwrap();
+    assert_eq!(scenes.as_array().unwrap().len(), 6);
+
+    let runtime = out_path("hit.json");
+    saxl()
+        .args([
+            "render",
+            "examples/snip.saxl",
+            "--view",
+            "runtime",
+            "--scenario",
+            "redirect_hit",
+            "-o",
+        ])
+        .arg(&runtime)
+        .assert()
+        .success();
+    let scene: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&runtime).unwrap()).unwrap();
+    assert_eq!(scene["view"]["scenario"], "redirect_hit");
+}
+
+#[test]
+fn render_refuses_bad_input() {
+    let out = out_path("bad.svg");
+    // Errors in the model: exit 1, nothing written.
+    saxl()
+        .args(["render", E006, "--view", "context", "-o"])
+        .arg(&out)
+        .assert()
+        .code(1);
+    assert!(!out.exists());
+    // Usage problems: exit 2.
+    for args in [
+        vec!["--view", "runtime"],
+        vec!["--view", "runtime", "--scenario", "nope"],
+        vec!["--view", "context", "--scenario", "redirect_hit"],
+        vec![],
+    ] {
+        saxl()
+            .args(["render", "examples/snip.saxl"])
+            .args(&args)
+            .arg("-o")
+            .arg(&out)
+            .assert()
+            .code(2);
+    }
+    saxl()
+        .args(["render", "examples/snip.saxl", "-o", "out.png"])
+        .assert()
+        .code(2);
+}

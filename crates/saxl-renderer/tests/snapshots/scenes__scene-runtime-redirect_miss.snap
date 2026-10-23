@@ -1,0 +1,372 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "runtime",
+    "scenario": "redirect_miss"
+  },
+  "title": "Runtime: redirect_miss",
+  "size": {
+    "w": 1236.8,
+    "h": 466.0
+  },
+  "nodes": [
+    {
+      "id": "Visitor",
+      "kind": "actor",
+      "label": "Visitor",
+      "sublabel": "follows links",
+      "rect": {
+        "x": 61.6,
+        "y": 24.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 55,
+        "end": 88
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Edge",
+      "kind": "infra",
+      "label": "Edge",
+      "sublabel": "cdn",
+      "rect": {
+        "x": 257.2,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 933,
+        "end": 941
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Redirect",
+      "kind": "service",
+      "label": "Redirect",
+      "sublabel": "hot path, stateless",
+      "rect": {
+        "x": 425.6,
+        "y": 24.0,
+        "w": 168.8,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 264,
+        "end": 303
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Redis",
+      "kind": "store",
+      "label": "Redis",
+      "sublabel": "code → URL cache",
+      "rect": {
+        "x": 629.2,
+        "y": 24.0,
+        "w": 147.2,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 377,
+        "end": 415
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Postgres",
+      "kind": "store",
+      "label": "Postgres",
+      "sublabel": "source of truth",
+      "rect": {
+        "x": 825.6,
+        "y": 24.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 341,
+        "end": 376
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Clicks",
+      "kind": "queue",
+      "label": "Clicks",
+      "sublabel": "async events",
+      "rect": {
+        "x": 1028.4,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 416,
+        "end": 448
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "Visitor",
+      "to": "Edge",
+      "style": "sync",
+      "points": [
+        {
+          "x": 124.4,
+          "y": 112.0
+        },
+        {
+          "x": 317.2,
+          "y": 112.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Edge",
+      "to": "Redirect",
+      "style": "sync",
+      "points": [
+        {
+          "x": 317.2,
+          "y": 112.0
+        },
+        {
+          "x": 510.0,
+          "y": 112.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Redirect",
+      "to": "Redis",
+      "style": "sync",
+      "points": [
+        {
+          "x": 510.0,
+          "y": 156.0
+        },
+        {
+          "x": 702.8,
+          "y": 156.0
+        }
+      ],
+      "label": "get abc"
+    },
+    {
+      "from": "Redis",
+      "to": "Redirect",
+      "style": "reply",
+      "points": [
+        {
+          "x": 702.8,
+          "y": 200.0
+        },
+        {
+          "x": 510.0,
+          "y": 200.0
+        }
+      ],
+      "label": "miss"
+    },
+    {
+      "from": "Redirect",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 510.0,
+          "y": 244.0
+        },
+        {
+          "x": 895.6,
+          "y": 244.0
+        }
+      ],
+      "label": "select url"
+    },
+    {
+      "from": "Postgres",
+      "to": "Redirect",
+      "style": "reply",
+      "points": [
+        {
+          "x": 895.6,
+          "y": 288.0
+        },
+        {
+          "x": 510.0,
+          "y": 288.0
+        }
+      ],
+      "label": "url"
+    },
+    {
+      "from": "Redirect",
+      "to": "Visitor",
+      "style": "reply",
+      "points": [
+        {
+          "x": 510.0,
+          "y": 332.0
+        },
+        {
+          "x": 124.4,
+          "y": 332.0
+        }
+      ],
+      "label": "302"
+    },
+    {
+      "from": "Redirect",
+      "to": "Clicks",
+      "style": "async",
+      "points": [
+        {
+          "x": 510.0,
+          "y": 376.0
+        },
+        {
+          "x": 1088.4,
+          "y": 376.0
+        }
+      ],
+      "label": "click event"
+    },
+    {
+      "from": "Redirect",
+      "to": "Redis",
+      "style": "sync",
+      "points": [
+        {
+          "x": 510.0,
+          "y": 420.0
+        },
+        {
+          "x": 702.8,
+          "y": 420.0
+        }
+      ],
+      "label": "warm cache"
+    }
+  ],
+  "groups": [
+    {
+      "id": "parallel-0",
+      "kind": "parallel",
+      "label": "parallel",
+      "rect": {
+        "x": 24.0,
+        "y": 304.0,
+        "w": 1188.8,
+        "h": 130.0
+      },
+      "depth": 0
+    }
+  ],
+  "timelines": [
+    {
+      "scenario": "redirect_miss",
+      "steps": [
+        {
+          "index": 0,
+          "from": "Visitor",
+          "to": "Redirect",
+          "via": [
+            "Edge"
+          ],
+          "arrow": "sync",
+          "label": null,
+          "row": 0
+        },
+        {
+          "index": 1,
+          "from": "Redirect",
+          "to": "Redis",
+          "via": [],
+          "arrow": "sync",
+          "label": "get abc",
+          "row": 1
+        },
+        {
+          "index": 2,
+          "from": "Redis",
+          "to": "Redirect",
+          "via": [],
+          "arrow": "reply",
+          "label": "miss",
+          "row": 2
+        },
+        {
+          "index": 3,
+          "from": "Redirect",
+          "to": "Postgres",
+          "via": [],
+          "arrow": "sync",
+          "label": "select url",
+          "row": 3
+        },
+        {
+          "index": 4,
+          "from": "Postgres",
+          "to": "Redirect",
+          "via": [],
+          "arrow": "reply",
+          "label": "url",
+          "row": 4
+        },
+        {
+          "index": 5,
+          "from": "Redirect",
+          "to": "Visitor",
+          "via": [],
+          "arrow": "reply",
+          "label": "302",
+          "row": 5
+        },
+        {
+          "index": 5,
+          "from": "Redirect",
+          "to": "Clicks",
+          "via": [],
+          "arrow": "async",
+          "label": "click event",
+          "row": 6
+        },
+        {
+          "index": 5,
+          "from": "Redirect",
+          "to": "Redis",
+          "via": [],
+          "arrow": "sync",
+          "label": "warm cache",
+          "row": 7
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "data"
+  },
+  "title": "Data: Snip",
+  "size": {
+    "w": 764.0,
+    "h": 320.0
+  },
+  "nodes": [
+    {
+      "id": "Postgres",
+      "kind": "store",
+      "label": "Postgres",
+      "sublabel": "source of truth",
+      "rect": {
+        "x": 24.0,
+        "y": 24.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 341,
+        "end": 376
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Redis",
+      "kind": "store",
+      "label": "Redis",
+      "sublabel": "code → URL cache",
+      "rect": {
+        "x": 204.0,
+        "y": 24.0,
+        "w": 147.2,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 377,
+        "end": 415
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Clicks",
+      "kind": "queue",
+      "label": "Clicks",
+      "sublabel": "async events",
+      "rect": {
+        "x": 391.2,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 416,
+        "end": 448
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "data:Link",
+      "kind": "data_card",
+      "label": "Link",
+      "sublabel": "in Postgres, cached Redis",
+      "rect": {
+        "x": 24.0,
+        "y": 160.0,
+        "w": 212.0,
+        "h": 118.0
+      },
+      "source": {
+        "file": 0,
+        "start": 699,
+        "end": 765
+      },
+      "badges": [],
+      "fields": [
+        "code",
+        "target_url",
+        "owner_id"
+      ]
+    },
+    {
+      "id": "data:User",
+      "kind": "data_card",
+      "label": "User",
+      "sublabel": "in Postgres",
+      "rect": {
+        "x": 276.0,
+        "y": 160.0,
+        "w": 212.0,
+        "h": 118.0
+      },
+      "source": {
+        "file": 0,
+        "start": 766,
+        "end": 830
+      },
+      "badges": [],
+      "fields": [
+        "id",
+        "email",
+        "oauth_subject"
+      ]
+    },
+    {
+      "id": "data:Click",
+      "kind": "data_card",
+      "label": "Click",
+      "sublabel": "via Clicks → Postgres",
+      "rect": {
+        "x": 528.0,
+        "y": 160.0,
+        "w": 212.0,
+        "h": 136.0
+      },
+      "source": {
+        "file": 0,
+        "start": 831,
+        "end": 903
+      },
+      "badges": [],
+      "fields": [
+        "link_code",
+        "ts",
+        "referrer",
+        "country"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "data:Link",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 48.0,
+          "y": 160.0
+        },
+        {
+          "x": 48.0,
+          "y": 96.0
+        },
+        {
+          "x": 78.0,
+          "y": 96.0
+        },
+        {
+          "x": 78.0,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Link",
+      "to": "Redis",
+      "style": "reply",
+      "points": [
+        {
+          "x": 64.0,
+          "y": 160.0
+        },
+        {
+          "x": 64.0,
+          "y": 106.0
+        },
+        {
+          "x": 277.6,
+          "y": 106.0
+        },
+        {
+          "x": 277.6,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:User",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 300.0,
+          "y": 160.0
+        },
+        {
+          "x": 300.0,
+          "y": 116.0
+        },
+        {
+          "x": 94.0,
+          "y": 116.0
+        },
+        {
+          "x": 94.0,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Click",
+      "to": "Clicks",
+      "style": "async",
+      "points": [
+        {
+          "x": 552.0,
+          "y": 160.0
+        },
+        {
+          "x": 552.0,
+          "y": 126.0
+        },
+        {
+          "x": 451.2,
+          "y": 126.0
+        },
+        {
+          "x": 451.2,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Click",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 568.0,
+          "y": 160.0
+        },
+        {
+          "x": 568.0,
+          "y": 136.0
+        },
+        {
+          "x": 110.0,
+          "y": 136.0
+        },
+        {
+          "x": 110.0,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    }
+  ],
+  "groups": [],
+  "timelines": []
+}
