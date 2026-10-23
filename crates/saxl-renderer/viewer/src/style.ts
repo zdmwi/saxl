@@ -15,6 +15,7 @@ export const CSS = `
 .saxl-diag-toggle[data-count="0"]{display:none}
 .saxl-stage{position:relative;flex:1;min-height:0;cursor:grab;touch-action:none}
 .saxl-stage.dragging{cursor:grabbing}
+.saxl-stage.is-3d{cursor:auto}
 .saxl-stage svg{display:block;width:100%;height:100%}
 .saxl-card{position:absolute;pointer-events:none;max-width:280px;padding:8px 10px;border:1px solid var(--saxl-line);border-radius:8px;background:var(--saxl-panel);box-shadow:0 4px 16px rgb(0 0 0/.12)}
 .saxl-card b{display:block}
@@ -51,4 +52,20 @@ export const CSS = `
 .saxl-viewer .arrow-sync,.saxl-viewer .arrow-reply{fill:var(--saxl-muted)}
 .saxl-viewer .arrow-async{fill:var(--saxl-event)}
 .saxl-viewer.dimmed .saxl-stage{opacity:.45}
+.saxl-viewer .marker circle{fill:var(--saxl-request);stroke:var(--saxl-bg);stroke-width:2}
+.saxl-viewer .marker text{fill:#151a22;font-size:12px;font-weight:700}
+.saxl-viewer .marker-error circle{fill:var(--saxl-event)}
+.saxl-viewer .marker-error text{fill:#fff}
+.saxl-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:auto}
+.saxl-tower-panel{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:8px;max-width:220px;cursor:auto}
+.saxl-tower-panel fieldset{margin:0;padding:6px 10px 8px;border:1px solid var(--saxl-line);border-radius:8px;background:var(--saxl-panel);display:flex;flex-direction:column;gap:4px}
+.saxl-tower-panel legend{padding:0 4px;color:var(--saxl-muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.saxl-tower-panel label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.saxl-tower-panel button,.saxl-tower-panel select{font:inherit;color:var(--saxl-fg);background:var(--saxl-bg);border:1px solid var(--saxl-line);border-radius:6px;padding:3px 8px;cursor:pointer}
+.saxl-tower-panel .saxl-row{display:flex;gap:4px}
+.saxl-tower-panel .saxl-row button:nth-child(2){flex:1}
+.saxl-tower-panel input[type=range]{width:100%;accent-color:var(--saxl-request)}
+.saxl-card .diag{margin-top:4px;color:var(--saxl-request)}
+.saxl-card .diag.error{color:var(--saxl-event)}
+@media (max-width:560px){.saxl-tower-panel{max-width:170px;font-size:12px}}
 `;

@@ -221,6 +221,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "depth": 0
     }
   ],
+  "tower": null,
   "timelines": [
     {
       "scenario": "redirect_hit",
@@ -273,6 +274,368 @@ expression: "saxl_renderer::to_json(&scene)"
           "row": 4
         }
       ]
+    }
+  ],
+  "anchors": [
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 55,
+        "end": 88
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 553,
+        "end": 560
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1125,
+        "end": 1132
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1307,
+        "end": 1314
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1426,
+        "end": 1433
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1541,
+        "end": 1548
+      }
+    },
+    {
+      "node": "Edge",
+      "span": {
+        "file": 0,
+        "start": 933,
+        "end": 941
+      }
+    },
+    {
+      "node": "Edge",
+      "span": {
+        "file": 0,
+        "start": 1136,
+        "end": 1140
+      }
+    },
+    {
+      "node": "Edge",
+      "span": {
+        "file": 0,
+        "start": 1437,
+        "end": 1441
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 264,
+        "end": 303
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 566,
+        "end": 574
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 586,
+        "end": 594
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 605,
+        "end": 613
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 627,
+        "end": 635
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 962,
+        "end": 970
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1144,
+        "end": 1152
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1155,
+        "end": 1163
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1195,
+        "end": 1203
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1213,
+        "end": 1221
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1262,
+        "end": 1270
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1294,
+        "end": 1302
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1325,
+        "end": 1333
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1362,
+        "end": 1370
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1445,
+        "end": 1453
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1456,
+        "end": 1464
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1496,
+        "end": 1504
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1528,
+        "end": 1536
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1559,
+        "end": 1567
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 377,
+        "end": 415
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 530,
+        "end": 535
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 599,
+        "end": 604
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 729,
+        "end": 734
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1074,
+        "end": 1079
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1167,
+        "end": 1172
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1185,
+        "end": 1190
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1374,
+        "end": 1379
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1468,
+        "end": 1473
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1486,
+        "end": 1491
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 416,
+        "end": 448
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 640,
+        "end": 646
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 647,
+        "end": 653
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 846,
+        "end": 852
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1084,
+        "end": 1090
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1337,
+        "end": 1343
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1571,
+        "end": 1577
+      }
     }
   ]
 }

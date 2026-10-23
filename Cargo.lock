@@ -808,6 +808,7 @@ dependencies = [
 name = "saxl-renderer"
 version = "0.1.0"
 dependencies = [
+ "indexmap",
  "insta",
  "saxl-core",
  "saxl-parser",

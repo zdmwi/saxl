@@ -96,6 +96,7 @@ fn kind_name(kind: NodeKind) -> &'static str {
         NodeKind::System => "system",
         NodeKind::Infra => "infra",
         NodeKind::DataCard => "data_card",
+        NodeKind::Floor => "floor",
     }
 }
 

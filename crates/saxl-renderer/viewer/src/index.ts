@@ -5,25 +5,27 @@ import type { Diagnostic } from "./generated/Diagnostic";
 import type { Scene } from "./generated/Scene";
 import type { Span } from "./generated/Span";
 import type { ViewKind } from "./generated/ViewKind";
+import { markersFor } from "./markers";
 import { panZoom, type PanZoom } from "./panzoom";
 import { draw, type Drawn } from "./render2d";
 import { CSS } from "./style";
+import { mountTower, type TowerHandle } from "./tower";
 
 export type { Diagnostic, Scene, Span, ViewKind };
 
 export interface ViewerOptions {
   /** The view shown first. Defaults to the first scene. */
   initialView?: ViewKind;
-  /** Diagnostics listed under the view. */
+  /** Diagnostics listed under the view and marked on the nodes they name. */
   diagnostics?: Diagnostic[];
 }
 
 export interface ViewerHandle {
   /** Shows a view. Ignored if no scene has it. */
   show(view: ViewKind): void;
-  /** Shows a scenario. Animated playback arrives with the tower view. */
+  /** Plays a scenario in the tower, or shows its runtime view if there is no tower. */
   play(scenario: string): void;
-  /** Steps scenario playback. Reserved for the tower view. */
+  /** Steps tower playback by `delta` slots. */
   step(delta: number): void;
   setDiagnostics(diags: Diagnostic[]): void;
   /** Replaces the scenes, keeping the current view if it still exists. */
@@ -75,11 +77,15 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
   let current: ViewKind | null = null;
   let drawn: Drawn | null = null;
   let pz: PanZoom | null = null;
+  let tower: TowerHandle | null = null;
   let selected: string | null = null;
   let diagnostics: Diagnostic[] = [];
   const selectCallbacks: ((id: string, source?: Span) => void)[] = [];
 
   const sceneFor = (view: ViewKind) => scenes.find((s) => sameView(s.view, view));
+  const emitSelect = (id: string, source?: Span) => {
+    for (const cb of selectCallbacks) cb(id, source);
+  };
 
   function renderBar() {
     bar.replaceChildren();
@@ -100,7 +106,7 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
         const runtimes = scenes.filter((s) => s.view.kind === "runtime");
         if (runtimes.length > 1) {
           const select = h("select");
-          select.setAttribute("aria-label", "Scenario");
+          select.setAttribute("aria-label", "Runtime scenario");
           for (const s of runtimes) {
             if (s.view.kind !== "runtime") continue;
             const option = h("option", undefined, s.view.scenario);
@@ -124,8 +130,7 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
       renderBar();
     });
     bar.append(toggle);
-    const title = h("span", "saxl-title", current ? (sceneFor(current)?.title ?? "") : "");
-    bar.append(title);
+    bar.append(h("span", "saxl-title", current ? (sceneFor(current)?.title ?? "") : ""));
   }
 
   function renderDiagnostics() {
@@ -144,12 +149,30 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
     if (id && drawn) drawn.nodes.get(id)?.classList.add("selected");
   }
 
+  function teardown() {
+    pz?.destroy();
+    pz = null;
+    tower?.destroy();
+    tower = null;
+    drawn = null;
+  }
+
   function show(view: ViewKind) {
     const scene = sceneFor(view);
     if (!scene) return;
     current = scene.view;
-    pz?.destroy();
-    drawn = draw(scene);
+    teardown();
+    root.dataset.view = scene.view.kind;
+    const markers = markersFor(scene, diagnostics);
+    if (scene.tower) {
+      stage.classList.add("is-3d");
+      stage.replaceChildren();
+      tower = mountTower(stage, scene, { onSelect: emitSelect, markers });
+      renderBar();
+      return;
+    }
+    stage.classList.remove("is-3d");
+    drawn = draw(scene, markers);
     stage.replaceChildren(drawn.svg, card);
     pz = panZoom(stage, drawn.content, scene.size.w, scene.size.h);
     pz.fit();
@@ -160,6 +183,7 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
         card.replaceChildren(h("span", "k", n.kind.replace("_", " ")), h("b", undefined, n.label));
         if (n.sublabel) card.append(h("div", undefined, n.sublabel));
         if (n.badges.length) card.append(h("div", "k", n.badges.join(" · ")));
+        for (const m of markers.get(n.id) ?? []) card.append(h("div", `diag ${m.severity}`, `${m.code}: ${m.message}`));
         const box = stage.getBoundingClientRect();
         card.style.left = `${e.clientX - box.left + 12}px`;
         card.style.top = `${e.clientY - box.top + 12}px`;
@@ -170,7 +194,7 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
       });
       g.addEventListener("click", () => {
         select(n.id);
-        for (const cb of selectCallbacks) cb(n.id, n.source ?? undefined);
+        emitSelect(n.id, n.source ?? undefined);
       });
     }
     if (selected) select(selected);
@@ -180,13 +204,23 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
   const handle: ViewerHandle = {
     show,
     play(scenario) {
-      show({ kind: "runtime", scenario });
+      if (scenes.some((s) => s.view.kind === "tower")) {
+        if (current?.kind !== "tower") show({ kind: "tower" });
+        tower?.play(scenario);
+      } else {
+        show({ kind: "runtime", scenario });
+      }
     },
-    step() {},
+    step(delta) {
+      tower?.step(delta);
+    },
     setDiagnostics(diags) {
       diagnostics = diags;
       renderDiagnostics();
-      renderBar();
+      const scene = current ? sceneFor(current) : undefined;
+      if (tower && scene) tower.setMarkers(markersFor(scene, diagnostics));
+      else if (current) show(current);
+      else renderBar();
     },
     setScenes(next) {
       scenes = next;
@@ -196,7 +230,7 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
       selectCallbacks.push(cb);
     },
     destroy() {
-      pz?.destroy();
+      teardown();
       el.replaceChildren();
     },
   };

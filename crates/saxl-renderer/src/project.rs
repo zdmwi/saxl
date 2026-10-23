@@ -45,7 +45,7 @@ pub(crate) struct PEdge {
     pub label: Option<String>,
 }
 
-fn element_node(model: &Model, index: usize) -> PNode {
+pub(crate) fn element_node(model: &Model, index: usize) -> PNode {
     let e = &model.elements[index];
     PNode {
         sublabel: e.description.clone(),

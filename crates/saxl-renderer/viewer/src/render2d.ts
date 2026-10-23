@@ -7,6 +7,7 @@ import type { Scene } from "./generated/Scene";
 import type { SceneEdge } from "./generated/SceneEdge";
 import type { SceneGroup } from "./generated/SceneGroup";
 import type { SceneNode } from "./generated/SceneNode";
+import type { Marker } from "./markers";
 
 const NS = "http://www.w3.org/2000/svg";
 const PAD = 24;
@@ -35,7 +36,7 @@ export interface Drawn {
   nodes: Map<string, SVGGElement>;
 }
 
-export function draw(scene: Scene): Drawn {
+export function draw(scene: Scene, markers: Map<string, Marker[]> = new Map()): Drawn {
   const id = `saxl${++instance}`;
   const svg = el("svg", { role: "img", "aria-label": scene.title });
   const defs = el("defs");
@@ -70,7 +71,7 @@ export function draw(scene: Scene): Drawn {
   for (const e of scene.edges) content.append(...edge(e, id));
   const nodes = new Map<string, SVGGElement>();
   for (const n of scene.nodes) {
-    const g = node(n);
+    const g = node(n, markers.get(n.id) ?? []);
     nodes.set(n.id, g);
     content.append(g);
   }
@@ -122,7 +123,7 @@ function edge(e: SceneEdge, id: string): SVGElement[] {
   return [path, label];
 }
 
-function node(n: SceneNode): SVGGElement {
+function node(n: SceneNode, marks: Marker[]): SVGGElement {
   const r = n.rect;
   const radius = n.kind === "actor" ? 18 : n.kind === "system" ? 12 : 6;
   const g = el("g", { class: `node node-${n.kind}`, "data-id": n.id, tabindex: 0 });
@@ -155,6 +156,16 @@ function node(n: SceneNode): SVGGElement {
   for (const f of n.fields) {
     y += FIELD_LINE;
     g.append(el("text", { class: "field", x: r.x + 16, y: y - 3 }, f));
+  }
+  if (marks.length > 0) {
+    const error = marks.some((m) => m.severity === "error");
+    const badge = el("g", { class: `marker${error ? " marker-error" : ""}` });
+    badge.append(
+      el("title", {}, marks.map((m) => `${m.code}: ${m.message}`).join("\n")),
+      el("circle", { cx: r.x + r.w - 2, cy: r.y + 2, r: 9 }),
+      el("text", { x: r.x + r.w - 2, y: r.y + 6.5, "text-anchor": "middle" }, "!"),
+    );
+    g.append(badge);
   }
   return g;
 }

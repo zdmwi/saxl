@@ -191,6 +191,8 @@ pub enum NodeKind {
     Infra,
     /// A data entity card.
     DataCard,
+    /// A region or group slab in the tower's floor.
+    Floor,
 }
 
 impl From<saxl_core::ElementKind> for NodeKind {
@@ -353,6 +355,160 @@ pub struct Scene {
     pub edges: Vec<SceneEdge>,
     /// Boundaries, regions, clusters, and parallel brackets.
     pub groups: Vec<SceneGroup>,
-    /// Runtime: the scenario's steps.
+    /// The 3D geometry. Tower only.
+    pub tower: Option<Tower>,
+    /// Runtime: the scenario's steps. Tower: one per scenario.
     pub timelines: Vec<Timeline>,
+    /// Every source span that names something drawn in this scene, so the
+    /// viewer can mark the nodes a diagnostic's primary label points at.
+    pub anchors: Vec<Anchor>,
+}
+
+/// A source span that names the node (or 3D box) with id `node`.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Anchor {
+    /// The node or box id.
+    pub node: String,
+    /// A declaration or reference of the element it depicts.
+    pub span: Span,
+}
+
+/// A 3D point. World units, y up.
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Point3 {
+    /// X.
+    pub x: f64,
+    /// Y, up.
+    pub y: f64,
+    /// Z.
+    pub z: f64,
+}
+
+impl Point3 {
+    /// A point at `(x, y, z)`.
+    pub fn new(x: f64, y: f64, z: f64) -> Self {
+        Self { x, y, z }
+    }
+}
+
+impl Serialize for Point3 {
+    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Error> {
+        rounded(s, "Point3", &[("x", self.x), ("y", self.y), ("z", self.z)])
+    }
+}
+
+/// An axis-aligned box.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Box3 {
+    /// Unique within its list. Element and infrastructure boxes use the name.
+    pub id: String,
+    /// What the box depicts.
+    pub kind: NodeKind,
+    /// Center.
+    pub center: Point3,
+    /// Full extent along each axis.
+    pub size: Point3,
+    /// Title, drawn as a sprite.
+    pub label: Option<String>,
+    /// Description.
+    pub sublabel: Option<String>,
+}
+
+/// A straight segment, such as a pillar or a context link.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Segment3 {
+    /// Start.
+    pub from: Point3,
+    /// End.
+    pub to: Point3,
+}
+
+/// A path through several points, such as a data flow.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Polyline3 {
+    /// What the path depicts, for example the data entity's name.
+    pub id: String,
+    /// The points, in order.
+    pub points: Vec<Point3>,
+}
+
+/// A floating caption.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Label3 {
+    /// The text.
+    pub text: String,
+    /// Where it sits.
+    pub position: Point3,
+}
+
+/// The context shell: an open cylinder around the system.
+#[derive(Debug, Clone, Copy, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Shell {
+    /// Radius.
+    pub radius: f64,
+    /// Bottom.
+    pub y_min: f64,
+    /// Top.
+    pub y_max: f64,
+}
+
+/// Why a store holds data.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "lowercase")]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub enum FillRole {
+    /// The store is the source of truth for the entities.
+    Truth,
+    /// The store holds cached copies.
+    Cache,
+}
+
+/// Data at rest inside a store's container box.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Fill {
+    /// The store's container box id.
+    pub store: String,
+    /// Truth fills are drawn stronger than cache fills.
+    pub role: FillRole,
+    /// The data entities held.
+    pub entities: Vec<String>,
+    /// Geometry, inside the store's box.
+    pub geometry: Box3,
+}
+
+/// The stacked 3D view: deployment floor, containers above on pillars, the
+/// context shell around them, data as color, and scenarios as a thread.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Tower {
+    /// Floor slabs: regions, groups, workloads.
+    pub slabs: Vec<Box3>,
+    /// One box per replica.
+    pub pods: Vec<Box3>,
+    /// One box per internal element; id is the element name.
+    pub containers: Vec<Box3>,
+    /// From each pod up to its container.
+    pub pillars: Vec<Segment3>,
+    /// The context shell.
+    pub shell: Shell,
+    /// Actors and externals, outside the shell.
+    pub outside: Vec<Box3>,
+    /// Infrastructure nodes on the floor.
+    pub infra: Vec<Box3>,
+    /// From each outside box to the containers it relates to.
+    pub context_links: Vec<Segment3>,
+    /// Data at rest.
+    pub fills: Vec<Fill>,
+    /// Data in flight: queue to consumer to store.
+    pub flows: Vec<Polyline3>,
+    /// Floor and group captions.
+    pub labels: Vec<Label3>,
 }

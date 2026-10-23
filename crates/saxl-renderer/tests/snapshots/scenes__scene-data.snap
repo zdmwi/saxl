@@ -263,5 +263,248 @@ expression: "saxl_renderer::to_json(&scene)"
     }
   ],
   "groups": [],
-  "timelines": []
+  "tower": null,
+  "timelines": [],
+  "anchors": [
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 341,
+        "end": 376
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 508,
+        "end": 516
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 618,
+        "end": 626
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 670,
+        "end": 678
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 713,
+        "end": 721
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 780,
+        "end": 788
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 856,
+        "end": 864
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1045,
+        "end": 1053
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1225,
+        "end": 1233
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1249,
+        "end": 1257
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 377,
+        "end": 415
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 530,
+        "end": 535
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 599,
+        "end": 604
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 729,
+        "end": 734
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1074,
+        "end": 1079
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1167,
+        "end": 1172
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1185,
+        "end": 1190
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1374,
+        "end": 1379
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1468,
+        "end": 1473
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1486,
+        "end": 1491
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 416,
+        "end": 448
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 640,
+        "end": 646
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 647,
+        "end": 653
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 846,
+        "end": 852
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1084,
+        "end": 1090
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1337,
+        "end": 1343
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1571,
+        "end": 1577
+      }
+    },
+    {
+      "node": "data:Link",
+      "span": {
+        "file": 0,
+        "start": 699,
+        "end": 765
+      }
+    },
+    {
+      "node": "data:User",
+      "span": {
+        "file": 0,
+        "start": 766,
+        "end": 830
+      }
+    },
+    {
+      "node": "data:Click",
+      "span": {
+        "file": 0,
+        "start": 831,
+        "end": 903
+      }
+    }
+  ]
 }

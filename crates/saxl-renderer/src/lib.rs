@@ -4,6 +4,7 @@
 //! the model to a view-specific graph) and a layout (`layout`, which assigns
 //! geometry). Only a [`ValidatedModel`] can be rendered.
 
+mod anchors;
 mod html;
 mod layout;
 mod project;
@@ -27,9 +28,6 @@ pub enum RenderError {
     /// SVG output was requested for the 3D tower.
     #[error("the tower view is 3D and has no SVG form")]
     NotTwoDimensional,
-    /// The view is not implemented yet.
-    #[error("the {0} view is not implemented yet")]
-    Unsupported(&'static str),
 }
 
 /// Projects and lays out one view.
@@ -42,7 +40,9 @@ pub fn scene(model: &ValidatedModel, view: &ViewKind) -> Result<Scene, RenderErr
         nodes: Vec::new(),
         edges: Vec::new(),
         groups: Vec::new(),
+        tower: None,
         timelines: Vec::new(),
+        anchors: Vec::new(),
     };
     match view {
         ViewKind::Context => {
@@ -74,13 +74,22 @@ pub fn scene(model: &ValidatedModel, view: &ViewKind) -> Result<Scene, RenderErr
             scene.title = format!("Deployment: {system}");
             (scene.nodes, scene.groups, scene.size) = (l.nodes, l.groups, l.size);
         }
-        ViewKind::Tower => return Err(RenderError::Unsupported("tower")),
+        ViewKind::Tower => {
+            scene.title = format!("Tower: {system}");
+            scene.tower = Some(layout::tower::layout(model));
+            for s in &model.model().scenarios {
+                scene
+                    .timelines
+                    .push(project::runtime(model, &s.name.text)?.timeline);
+            }
+        }
     }
+    scene.anchors = anchors::SpanIndex::new(model.model()).anchors(&scene);
     Ok(scene)
 }
 
 /// Every view the model supports, in a fixed order: context, containers, one
-/// runtime view per scenario, data, deployment.
+/// runtime view per scenario, data, deployment, tower.
 pub fn views(model: &ValidatedModel) -> Vec<ViewKind> {
     let mut views = vec![ViewKind::Context, ViewKind::Containers];
     views.extend(model.model().scenarios.iter().map(|s| ViewKind::Runtime {
@@ -88,6 +97,7 @@ pub fn views(model: &ValidatedModel) -> Vec<ViewKind> {
     }));
     views.push(ViewKind::Data);
     views.push(ViewKind::Deployment);
+    views.push(ViewKind::Tower);
     views
 }
 

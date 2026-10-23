@@ -197,7 +197,7 @@ fn render_formats() {
         .success();
     let scenes: serde_json::Value =
         serde_json::from_str(&std::fs::read_to_string(&json).unwrap()).unwrap();
-    assert_eq!(scenes.as_array().unwrap().len(), 6);
+    assert_eq!(scenes.as_array().unwrap().len(), 7);
 
     let runtime = out_path("hit.json");
     saxl()
@@ -245,6 +245,12 @@ fn render_refuses_bad_input() {
     }
     saxl()
         .args(["render", "examples/snip.saxl", "-o", "out.png"])
+        .assert()
+        .code(2);
+    // The tower has no SVG form.
+    saxl()
+        .args(["render", "examples/snip.saxl", "--view", "tower", "-o"])
+        .arg(&out)
         .assert()
         .code(2);
 }

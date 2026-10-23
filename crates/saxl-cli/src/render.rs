@@ -115,7 +115,7 @@ pub fn run(args: &Args) -> Result<ExitCode, CliError> {
                 &model,
                 &HtmlOptions {
                     title,
-                    initial_view: view.unwrap_or(ViewKind::Context),
+                    initial_view: view.unwrap_or(ViewKind::Tower),
                     diagnostics,
                 },
             )

@@ -175,5 +175,112 @@ expression: "saxl_renderer::to_json(&scene)"
     }
   ],
   "groups": [],
-  "timelines": []
+  "tower": null,
+  "timelines": [],
+  "anchors": [
+    {
+      "node": "Snip",
+      "span": {
+        "file": 0,
+        "start": 26,
+        "end": 53
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 55,
+        "end": 88
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 553,
+        "end": 560
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1125,
+        "end": 1132
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1307,
+        "end": 1314
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1426,
+        "end": 1433
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1541,
+        "end": 1548
+      }
+    },
+    {
+      "node": "Owner",
+      "span": {
+        "file": 0,
+        "start": 89,
+        "end": 122
+      }
+    },
+    {
+      "node": "Owner",
+      "span": {
+        "file": 0,
+        "start": 450,
+        "end": 455
+      }
+    },
+    {
+      "node": "IdP",
+      "span": {
+        "file": 0,
+        "start": 123,
+        "end": 156
+      }
+    },
+    {
+      "node": "IdP",
+      "span": {
+        "file": 0,
+        "start": 549,
+        "end": 552
+      }
+    },
+    {
+      "node": "Email",
+      "span": {
+        "file": 0,
+        "start": 157,
+        "end": 189
+      }
+    },
+    {
+      "node": "Email",
+      "span": {
+        "file": 0,
+        "start": 692,
+        "end": 697
+      }
+    }
+  ]
 }

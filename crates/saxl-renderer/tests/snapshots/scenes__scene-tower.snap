@@ -1,0 +1,1587 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "tower"
+  },
+  "title": "Tower: Snip",
+  "size": {
+    "w": 0.0,
+    "h": 0.0
+  },
+  "nodes": [],
+  "edges": [],
+  "groups": [],
+  "tower": {
+    "slabs": [
+      {
+        "id": "region:us-east-1",
+        "kind": "floor",
+        "center": {
+          "x": 0.0,
+          "y": 0.03,
+          "z": 0.0
+        },
+        "size": {
+          "x": 9.4,
+          "y": 0.06,
+          "z": 7.33
+        },
+        "label": "us-east-1",
+        "sublabel": null
+      },
+      {
+        "id": "group:us-east-1/0",
+        "kind": "floor",
+        "center": {
+          "x": -0.49,
+          "y": 0.08,
+          "z": 0.1
+        },
+        "size": {
+          "x": 3.35,
+          "y": 0.03,
+          "z": 6.6
+        },
+        "label": "k8s",
+        "sublabel": null
+      },
+      {
+        "id": "group:us-east-1/1",
+        "kind": "floor",
+        "center": {
+          "x": 2.94,
+          "y": 0.08,
+          "z": -1.0
+        },
+        "size": {
+          "x": 2.99,
+          "y": 0.03,
+          "z": 4.4
+        },
+        "label": "managed",
+        "sublabel": null
+      },
+      {
+        "id": "workload:us-east-1/Redirect",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 0.18,
+          "z": -2.1
+        },
+        "size": {
+          "x": 2.81,
+          "y": 0.18,
+          "z": 1.27
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "workload:us-east-1/Dashboard",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 0.18,
+          "z": -0.57
+        },
+        "size": {
+          "x": 2.81,
+          "y": 0.18,
+          "z": 1.27
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "workload:us-east-1/LinksAPI",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 0.18,
+          "z": 0.97
+        },
+        "size": {
+          "x": 2.81,
+          "y": 0.18,
+          "z": 1.27
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "workload:us-east-1/Worker",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 0.18,
+          "z": 2.5
+        },
+        "size": {
+          "x": 2.81,
+          "y": 0.18,
+          "z": 1.27
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "workload:us-east-1/Postgres",
+        "kind": "store",
+        "center": {
+          "x": 2.94,
+          "y": 0.18,
+          "z": -2.1
+        },
+        "size": {
+          "x": 2.45,
+          "y": 0.18,
+          "z": 1.27
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "workload:us-east-1/Redis",
+        "kind": "store",
+        "center": {
+          "x": 2.94,
+          "y": 0.18,
+          "z": -0.73
+        },
+        "size": {
+          "x": 2.45,
+          "y": 0.18,
+          "z": 0.93
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "workload:us-east-1/Clicks",
+        "kind": "queue",
+        "center": {
+          "x": 2.94,
+          "y": 0.18,
+          "z": 0.47
+        },
+        "size": {
+          "x": 2.45,
+          "y": 0.18,
+          "z": 0.93
+        },
+        "label": null,
+        "sublabel": null
+      }
+    ],
+    "pods": [
+      {
+        "id": "pod:us-east-1/Redirect#0",
+        "kind": "service",
+        "center": {
+          "x": -1.36,
+          "y": 0.36,
+          "z": -2.1
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/Redirect#1",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 0.36,
+          "z": -2.1
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/Redirect#2",
+        "kind": "service",
+        "center": {
+          "x": 0.38,
+          "y": 0.36,
+          "z": -2.1
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/Dashboard#0",
+        "kind": "service",
+        "center": {
+          "x": -0.95,
+          "y": 0.36,
+          "z": -0.57
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/Dashboard#1",
+        "kind": "service",
+        "center": {
+          "x": -0.03,
+          "y": 0.36,
+          "z": -0.57
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/LinksAPI#0",
+        "kind": "service",
+        "center": {
+          "x": -0.95,
+          "y": 0.36,
+          "z": 0.97
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/LinksAPI#1",
+        "kind": "service",
+        "center": {
+          "x": -0.03,
+          "y": 0.36,
+          "z": 0.97
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/Worker#0",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 0.36,
+          "z": 2.5
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/Postgres#0",
+        "kind": "store",
+        "center": {
+          "x": 2.94,
+          "y": 0.36,
+          "z": -2.1
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/Redis#0",
+        "kind": "store",
+        "center": {
+          "x": 2.94,
+          "y": 0.36,
+          "z": -0.73
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      },
+      {
+        "id": "pod:us-east-1/Clicks#0",
+        "kind": "queue",
+        "center": {
+          "x": 2.94,
+          "y": 0.36,
+          "z": 0.47
+        },
+        "size": {
+          "x": 0.72,
+          "y": 0.18,
+          "z": 0.72
+        },
+        "label": null,
+        "sublabel": null
+      }
+    ],
+    "containers": [
+      {
+        "id": "Dashboard",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 3.4,
+          "z": -0.57
+        },
+        "size": {
+          "x": 2.0,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "Dashboard",
+        "sublabel": "web frontend"
+      },
+      {
+        "id": "LinksAPI",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 3.4,
+          "z": 0.97
+        },
+        "size": {
+          "x": 2.81,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "LinksAPI",
+        "sublabel": "create, edit, stats"
+      },
+      {
+        "id": "Redirect",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 3.4,
+          "z": -2.1
+        },
+        "size": {
+          "x": 2.81,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "Redirect",
+        "sublabel": "hot path, stateless"
+      },
+      {
+        "id": "Worker",
+        "kind": "service",
+        "center": {
+          "x": -0.49,
+          "y": 3.4,
+          "z": 2.5
+        },
+        "size": {
+          "x": 2.45,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "Worker",
+        "sublabel": "aggregates stats"
+      },
+      {
+        "id": "Postgres",
+        "kind": "store",
+        "center": {
+          "x": 2.94,
+          "y": 3.4,
+          "z": -2.1
+        },
+        "size": {
+          "x": 2.33,
+          "y": 1.1,
+          "z": 1.2
+        },
+        "label": "Postgres",
+        "sublabel": "source of truth"
+      },
+      {
+        "id": "Redis",
+        "kind": "store",
+        "center": {
+          "x": 2.94,
+          "y": 3.4,
+          "z": -0.73
+        },
+        "size": {
+          "x": 2.45,
+          "y": 1.1,
+          "z": 1.2
+        },
+        "label": "Redis",
+        "sublabel": "code → URL cache"
+      },
+      {
+        "id": "Clicks",
+        "kind": "queue",
+        "center": {
+          "x": 2.94,
+          "y": 3.4,
+          "z": 0.47
+        },
+        "size": {
+          "x": 2.0,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "Clicks",
+        "sublabel": "async events"
+      }
+    ],
+    "pillars": [
+      {
+        "from": {
+          "x": -0.95,
+          "y": 0.45,
+          "z": -0.57
+        },
+        "to": {
+          "x": -0.95,
+          "y": 3.0,
+          "z": -0.57
+        }
+      },
+      {
+        "from": {
+          "x": -0.03,
+          "y": 0.45,
+          "z": -0.57
+        },
+        "to": {
+          "x": -0.03,
+          "y": 3.0,
+          "z": -0.57
+        }
+      },
+      {
+        "from": {
+          "x": -0.95,
+          "y": 0.45,
+          "z": 0.97
+        },
+        "to": {
+          "x": -0.95,
+          "y": 3.0,
+          "z": 0.97
+        }
+      },
+      {
+        "from": {
+          "x": -0.03,
+          "y": 0.45,
+          "z": 0.97
+        },
+        "to": {
+          "x": -0.03,
+          "y": 3.0,
+          "z": 0.97
+        }
+      },
+      {
+        "from": {
+          "x": -1.36,
+          "y": 0.45,
+          "z": -2.1
+        },
+        "to": {
+          "x": -1.36,
+          "y": 3.0,
+          "z": -2.1
+        }
+      },
+      {
+        "from": {
+          "x": -0.49,
+          "y": 0.45,
+          "z": -2.1
+        },
+        "to": {
+          "x": -0.49,
+          "y": 3.0,
+          "z": -2.1
+        }
+      },
+      {
+        "from": {
+          "x": 0.38,
+          "y": 0.45,
+          "z": -2.1
+        },
+        "to": {
+          "x": 0.38,
+          "y": 3.0,
+          "z": -2.1
+        }
+      },
+      {
+        "from": {
+          "x": -0.49,
+          "y": 0.45,
+          "z": 2.5
+        },
+        "to": {
+          "x": -0.49,
+          "y": 3.0,
+          "z": 2.5
+        }
+      },
+      {
+        "from": {
+          "x": 2.94,
+          "y": 0.45,
+          "z": -2.1
+        },
+        "to": {
+          "x": 2.94,
+          "y": 2.85,
+          "z": -2.1
+        }
+      },
+      {
+        "from": {
+          "x": 2.94,
+          "y": 0.45,
+          "z": -0.73
+        },
+        "to": {
+          "x": 2.94,
+          "y": 2.85,
+          "z": -0.73
+        }
+      },
+      {
+        "from": {
+          "x": 2.94,
+          "y": 0.45,
+          "z": 0.47
+        },
+        "to": {
+          "x": 2.94,
+          "y": 3.0,
+          "z": 0.47
+        }
+      }
+    ],
+    "shell": {
+      "radius": 8.022865764200407,
+      "y_min": -0.3,
+      "y_max": 5.6
+    },
+    "outside": [
+      {
+        "id": "Visitor",
+        "kind": "actor",
+        "center": {
+          "x": -8.68,
+          "y": 3.4,
+          "z": -5.01
+        },
+        "size": {
+          "x": 2.09,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "Visitor",
+        "sublabel": "follows links"
+      },
+      {
+        "id": "Owner",
+        "kind": "actor",
+        "center": {
+          "x": -8.68,
+          "y": 3.4,
+          "z": 5.01
+        },
+        "size": {
+          "x": 2.09,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "Owner",
+        "sublabel": "creates links"
+      },
+      {
+        "id": "IdP",
+        "kind": "external",
+        "center": {
+          "x": 8.68,
+          "y": 3.4,
+          "z": 5.01
+        },
+        "size": {
+          "x": 2.09,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "IdP",
+        "sublabel": "OAuth sign-in"
+      },
+      {
+        "id": "Email",
+        "kind": "external",
+        "center": {
+          "x": 8.68,
+          "y": 3.4,
+          "z": -5.01
+        },
+        "size": {
+          "x": 2.0,
+          "y": 0.8,
+          "z": 1.2
+        },
+        "label": "Email",
+        "sublabel": "stat digests"
+      }
+    ],
+    "infra": [
+      {
+        "id": "Edge",
+        "kind": "infra",
+        "center": {
+          "x": -6.9,
+          "y": 0.1,
+          "z": -2.87
+        },
+        "size": {
+          "x": 2.0,
+          "y": 0.2,
+          "z": 1.0
+        },
+        "label": "Edge",
+        "sublabel": "cdn"
+      }
+    ],
+    "context_links": [
+      {
+        "from": {
+          "x": -8.68,
+          "y": 3.4,
+          "z": 5.01
+        },
+        "to": {
+          "x": -0.49,
+          "y": 3.4,
+          "z": -0.57
+        }
+      },
+      {
+        "from": {
+          "x": 8.68,
+          "y": 3.4,
+          "z": 5.01
+        },
+        "to": {
+          "x": -0.49,
+          "y": 3.4,
+          "z": 0.97
+        }
+      },
+      {
+        "from": {
+          "x": -8.68,
+          "y": 3.4,
+          "z": -5.01
+        },
+        "to": {
+          "x": -0.49,
+          "y": 3.4,
+          "z": -2.1
+        }
+      },
+      {
+        "from": {
+          "x": 8.68,
+          "y": 3.4,
+          "z": -5.01
+        },
+        "to": {
+          "x": -0.49,
+          "y": 3.4,
+          "z": 2.5
+        }
+      }
+    ],
+    "fills": [
+      {
+        "store": "Postgres",
+        "role": "truth",
+        "entities": [
+          "Link",
+          "User",
+          "Click"
+        ],
+        "geometry": {
+          "id": "fill:Postgres:truth",
+          "kind": "store",
+          "center": {
+            "x": 2.94,
+            "y": 3.4,
+            "z": -2.1
+          },
+          "size": {
+            "x": 1.82,
+            "y": 0.86,
+            "z": 0.94
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "store": "Redis",
+        "role": "cache",
+        "entities": [
+          "Link"
+        ],
+        "geometry": {
+          "id": "fill:Redis:cache",
+          "kind": "store",
+          "center": {
+            "x": 2.94,
+            "y": 3.4,
+            "z": -0.73
+          },
+          "size": {
+            "x": 1.52,
+            "y": 0.68,
+            "z": 0.74
+          },
+          "label": null,
+          "sublabel": null
+        }
+      }
+    ],
+    "flows": [
+      {
+        "id": "Click",
+        "points": [
+          {
+            "x": 2.94,
+            "y": 3.4,
+            "z": 0.47
+          },
+          {
+            "x": -0.49,
+            "y": 3.4,
+            "z": 2.5
+          },
+          {
+            "x": 2.94,
+            "y": 3.4,
+            "z": -2.1
+          }
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "text": "us-east-1",
+        "position": {
+          "x": -4.5,
+          "y": 0.11,
+          "z": -3.47
+        }
+      },
+      {
+        "text": "k8s",
+        "position": {
+          "x": -1.97,
+          "y": 0.14,
+          "z": -3.0
+        }
+      },
+      {
+        "text": "managed",
+        "position": {
+          "x": 1.65,
+          "y": 0.14,
+          "z": -3.0
+        }
+      }
+    ]
+  },
+  "timelines": [
+    {
+      "scenario": "redirect_miss",
+      "steps": [
+        {
+          "index": 0,
+          "from": "Visitor",
+          "to": "Redirect",
+          "via": [
+            "Edge"
+          ],
+          "arrow": "sync",
+          "label": null,
+          "row": 0
+        },
+        {
+          "index": 1,
+          "from": "Redirect",
+          "to": "Redis",
+          "via": [],
+          "arrow": "sync",
+          "label": "get abc",
+          "row": 1
+        },
+        {
+          "index": 2,
+          "from": "Redis",
+          "to": "Redirect",
+          "via": [],
+          "arrow": "reply",
+          "label": "miss",
+          "row": 2
+        },
+        {
+          "index": 3,
+          "from": "Redirect",
+          "to": "Postgres",
+          "via": [],
+          "arrow": "sync",
+          "label": "select url",
+          "row": 3
+        },
+        {
+          "index": 4,
+          "from": "Postgres",
+          "to": "Redirect",
+          "via": [],
+          "arrow": "reply",
+          "label": "url",
+          "row": 4
+        },
+        {
+          "index": 5,
+          "from": "Redirect",
+          "to": "Visitor",
+          "via": [],
+          "arrow": "reply",
+          "label": "302",
+          "row": 5
+        },
+        {
+          "index": 5,
+          "from": "Redirect",
+          "to": "Clicks",
+          "via": [],
+          "arrow": "async",
+          "label": "click event",
+          "row": 6
+        },
+        {
+          "index": 5,
+          "from": "Redirect",
+          "to": "Redis",
+          "via": [],
+          "arrow": "sync",
+          "label": "warm cache",
+          "row": 7
+        }
+      ]
+    },
+    {
+      "scenario": "redirect_hit",
+      "steps": [
+        {
+          "index": 0,
+          "from": "Visitor",
+          "to": "Redirect",
+          "via": [
+            "Edge"
+          ],
+          "arrow": "sync",
+          "label": null,
+          "row": 0
+        },
+        {
+          "index": 1,
+          "from": "Redirect",
+          "to": "Redis",
+          "via": [],
+          "arrow": "sync",
+          "label": "get abc",
+          "row": 1
+        },
+        {
+          "index": 2,
+          "from": "Redis",
+          "to": "Redirect",
+          "via": [],
+          "arrow": "reply",
+          "label": "hit",
+          "row": 2
+        },
+        {
+          "index": 3,
+          "from": "Redirect",
+          "to": "Visitor",
+          "via": [],
+          "arrow": "reply",
+          "label": "302",
+          "row": 3
+        },
+        {
+          "index": 3,
+          "from": "Redirect",
+          "to": "Clicks",
+          "via": [],
+          "arrow": "async",
+          "label": "click event",
+          "row": 4
+        }
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "node": "Dashboard",
+      "span": {
+        "file": 0,
+        "start": 191,
+        "end": 223
+      }
+    },
+    {
+      "node": "Dashboard",
+      "span": {
+        "file": 0,
+        "start": 463,
+        "end": 472
+      }
+    },
+    {
+      "node": "Dashboard",
+      "span": {
+        "file": 0,
+        "start": 473,
+        "end": 482
+      }
+    },
+    {
+      "node": "Dashboard",
+      "span": {
+        "file": 0,
+        "start": 988,
+        "end": 997
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 224,
+        "end": 263
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 486,
+        "end": 494
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 495,
+        "end": 503
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 517,
+        "end": 525
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 536,
+        "end": 544
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 999,
+        "end": 1007
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 264,
+        "end": 303
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 566,
+        "end": 574
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 586,
+        "end": 594
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 605,
+        "end": 613
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 627,
+        "end": 635
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 962,
+        "end": 970
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1144,
+        "end": 1152
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1155,
+        "end": 1163
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1195,
+        "end": 1203
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1213,
+        "end": 1221
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1262,
+        "end": 1270
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1294,
+        "end": 1302
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1325,
+        "end": 1333
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1362,
+        "end": 1370
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1445,
+        "end": 1453
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1456,
+        "end": 1464
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1496,
+        "end": 1504
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1528,
+        "end": 1536
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1559,
+        "end": 1567
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 304,
+        "end": 340
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 660,
+        "end": 666
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 660,
+        "end": 666
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 679,
+        "end": 685
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 1015,
+        "end": 1021
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 341,
+        "end": 376
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 508,
+        "end": 516
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 618,
+        "end": 626
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 670,
+        "end": 678
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 713,
+        "end": 721
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 780,
+        "end": 788
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 856,
+        "end": 864
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1045,
+        "end": 1053
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1225,
+        "end": 1233
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1249,
+        "end": 1257
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 377,
+        "end": 415
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 530,
+        "end": 535
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 599,
+        "end": 604
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 729,
+        "end": 734
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1074,
+        "end": 1079
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1167,
+        "end": 1172
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1185,
+        "end": 1190
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1374,
+        "end": 1379
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1468,
+        "end": 1473
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1486,
+        "end": 1491
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 416,
+        "end": 448
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 640,
+        "end": 646
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 647,
+        "end": 653
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 846,
+        "end": 852
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1084,
+        "end": 1090
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1337,
+        "end": 1343
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1571,
+        "end": 1577
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 55,
+        "end": 88
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 553,
+        "end": 560
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1125,
+        "end": 1132
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1307,
+        "end": 1314
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1426,
+        "end": 1433
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1541,
+        "end": 1548
+      }
+    },
+    {
+      "node": "Owner",
+      "span": {
+        "file": 0,
+        "start": 89,
+        "end": 122
+      }
+    },
+    {
+      "node": "Owner",
+      "span": {
+        "file": 0,
+        "start": 450,
+        "end": 455
+      }
+    },
+    {
+      "node": "IdP",
+      "span": {
+        "file": 0,
+        "start": 123,
+        "end": 156
+      }
+    },
+    {
+      "node": "IdP",
+      "span": {
+        "file": 0,
+        "start": 549,
+        "end": 552
+      }
+    },
+    {
+      "node": "Email",
+      "span": {
+        "file": 0,
+        "start": 157,
+        "end": 189
+      }
+    },
+    {
+      "node": "Email",
+      "span": {
+        "file": 0,
+        "start": 692,
+        "end": 697
+      }
+    },
+    {
+      "node": "Edge",
+      "span": {
+        "file": 0,
+        "start": 933,
+        "end": 941
+      }
+    },
+    {
+      "node": "Edge",
+      "span": {
+        "file": 0,
+        "start": 1136,
+        "end": 1140
+      }
+    },
+    {
+      "node": "Edge",
+      "span": {
+        "file": 0,
+        "start": 1437,
+        "end": 1441
+      }
+    }
+  ]
+}

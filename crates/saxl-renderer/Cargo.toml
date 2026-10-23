@@ -14,6 +14,7 @@ ts = ["dep:ts-rs", "saxl-core/ts"]
 saxl-core.workspace = true
 saxl-validator.workspace = true
 serde.workspace = true
+indexmap.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
 ts-rs = { workspace = true, optional = true }

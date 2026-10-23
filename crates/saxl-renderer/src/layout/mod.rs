@@ -6,6 +6,7 @@ pub(crate) mod data;
 pub(crate) mod deployment;
 pub(crate) mod layered;
 pub(crate) mod runtime;
+pub(crate) mod tower;
 
 use crate::project::PNode;
 use crate::scene::{Rect, SceneNode};
