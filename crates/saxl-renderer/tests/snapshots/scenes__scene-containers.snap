@@ -9,7 +9,7 @@ expression: "saxl_renderer::to_json(&scene)"
   "title": "Containers: Snip",
   "size": {
     "w": 1325.6,
-    "h": 350.0
+    "h": 372.0
   },
   "nodes": [
     {
@@ -19,7 +19,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "follows links",
       "rect": {
         "x": 24.0,
-        "y": 174.0,
+        "y": 188.0,
         "w": 125.6,
         "h": 56.0
       },
@@ -38,7 +38,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "creates links",
       "rect": {
         "x": 24.0,
-        "y": 254.0,
+        "y": 268.0,
         "w": 125.6,
         "h": 56.0
       },
@@ -57,7 +57,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "OAuth sign-in",
       "rect": {
         "x": 1176.0,
-        "y": 228.0,
+        "y": 240.0,
         "w": 125.6,
         "h": 56.0
       },
@@ -95,7 +95,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "web frontend",
       "rect": {
         "x": 255.6,
-        "y": 254.0,
+        "y": 268.0,
         "w": 120.0,
         "h": 56.0
       },
@@ -114,7 +114,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "create, edit, stats",
       "rect": {
         "x": 480.0,
-        "y": 230.0,
+        "y": 252.0,
         "w": 168.8,
         "h": 56.0
       },
@@ -133,7 +133,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "hot path, stateless",
       "rect": {
         "x": 231.2,
-        "y": 174.0,
+        "y": 188.0,
         "w": 168.8,
         "h": 56.0
       },
@@ -152,7 +152,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "aggregates stats",
       "rect": {
         "x": 728.8,
-        "y": 94.0,
+        "y": 100.0,
         "w": 147.2,
         "h": 56.0
       },
@@ -171,9 +171,9 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "source of truth",
       "rect": {
         "x": 956.0,
-        "y": 164.0,
+        "y": 168.0,
         "w": 140.0,
-        "h": 56.0
+        "h": 72.0
       },
       "source": {
         "file": 0,
@@ -190,9 +190,9 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "code → URL cache",
       "rect": {
         "x": 728.8,
-        "y": 174.0,
+        "y": 180.0,
         "w": 147.2,
-        "h": 56.0
+        "h": 72.0
       },
       "source": {
         "file": 0,
@@ -208,9 +208,9 @@ expression: "saxl_renderer::to_json(&scene)"
       "label": "Clicks",
       "sublabel": "async events",
       "rect": {
-        "x": 504.4,
-        "y": 94.0,
-        "w": 120.0,
+        "x": 490.2,
+        "y": 100.0,
+        "w": 148.4,
         "h": 56.0
       },
       "source": {
@@ -230,11 +230,11 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 149.6,
-          "y": 282.0
+          "y": 296.0
         },
         {
           "x": 255.6,
-          "y": 282.0
+          "y": 296.0
         }
       ],
       "label": null
@@ -246,11 +246,11 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 375.6,
-          "y": 282.0
+          "y": 296.0
         },
         {
           "x": 480.0,
-          "y": 258.0
+          "y": 280.0
         }
       ],
       "label": null
@@ -262,19 +262,19 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 648.8,
-          "y": 258.0
+          "y": 280.0
         },
         {
           "x": 728.8,
-          "y": 258.0
+          "y": 280.0
         },
         {
           "x": 876.0,
-          "y": 258.0
+          "y": 280.0
         },
         {
           "x": 956.0,
-          "y": 192.0
+          "y": 204.0
         }
       ],
       "label": null
@@ -286,11 +286,11 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 648.8,
-          "y": 248.0
+          "y": 270.0
         },
         {
           "x": 728.8,
-          "y": 207.0
+          "y": 221.0
         }
       ],
       "label": null
@@ -302,27 +302,27 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 648.8,
-          "y": 268.0
+          "y": 290.0
         },
         {
           "x": 728.8,
-          "y": 322.0
+          "y": 344.0
         },
         {
           "x": 876.0,
-          "y": 322.0
+          "y": 344.0
         },
         {
           "x": 956.0,
-          "y": 256.0
+          "y": 268.0
         },
         {
           "x": 1096.0,
-          "y": 256.0
+          "y": 268.0
         },
         {
           "x": 1176.0,
-          "y": 256.0
+          "y": 268.0
         }
       ],
       "label": null
@@ -334,11 +334,11 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 149.6,
-          "y": 202.0
+          "y": 216.0
         },
         {
           "x": 231.2,
-          "y": 202.0
+          "y": 216.0
         }
       ],
       "label": "GET /abc"
@@ -350,19 +350,19 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 400.0,
-          "y": 202.0
+          "y": 216.0
         },
         {
           "x": 480.0,
-          "y": 202.0
+          "y": 216.0
         },
         {
           "x": 648.8,
-          "y": 202.0
+          "y": 216.0
         },
         {
           "x": 728.8,
-          "y": 197.0
+          "y": 211.0
         }
       ],
       "label": null
@@ -374,27 +374,27 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 400.0,
-          "y": 212.0
+          "y": 226.0
         },
         {
           "x": 480.0,
-          "y": 314.0
+          "y": 336.0
         },
         {
           "x": 648.8,
-          "y": 314.0
+          "y": 336.0
         },
         {
           "x": 728.8,
-          "y": 290.0
+          "y": 312.0
         },
         {
           "x": 876.0,
-          "y": 290.0
+          "y": 312.0
         },
         {
           "x": 956.0,
-          "y": 202.0
+          "y": 214.0
         }
       ],
       "label": null
@@ -406,11 +406,11 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 400.0,
-          "y": 192.0
+          "y": 206.0
         },
         {
-          "x": 504.4,
-          "y": 122.0
+          "x": 490.2,
+          "y": 128.0
         }
       ],
       "label": null
@@ -421,12 +421,12 @@ expression: "saxl_renderer::to_json(&scene)"
       "style": "async",
       "points": [
         {
-          "x": 624.4,
-          "y": 122.0
+          "x": 638.6,
+          "y": 128.0
         },
         {
           "x": 728.8,
-          "y": 122.0
+          "y": 128.0
         }
       ],
       "label": null
@@ -438,11 +438,11 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 876.0,
-          "y": 127.0
+          "y": 133.0
         },
         {
           "x": 956.0,
-          "y": 182.0
+          "y": 194.0
         }
       ],
       "label": null
@@ -454,7 +454,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 876.0,
-          "y": 117.0
+          "y": 123.0
         },
         {
           "x": 956.0,

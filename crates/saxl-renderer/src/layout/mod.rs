@@ -9,7 +9,7 @@ pub(crate) mod runtime;
 pub(crate) mod tower;
 
 use crate::project::PNode;
-use crate::scene::{Rect, SceneNode};
+use crate::scene::{NodeKind, Rect, SceneNode};
 
 /// Canvas margin.
 pub(crate) const PAD: f64 = 24.0;
@@ -25,6 +25,30 @@ const MIN_W: f64 = 120.0;
 pub(crate) const BADGE_ROW: f64 = 20.0;
 /// Height of one field line in a data card.
 pub(crate) const FIELD_LINE: f64 = 18.0;
+/// Vertical radius of a store cylinder's top and bottom ellipses.
+pub(crate) const STORE_CAP: f64 = 8.0;
+/// Horizontal radius of a queue pipe's end ellipses.
+pub(crate) const QUEUE_CAP: f64 = 10.0;
+
+/// How far a node's text starts below its top edge. A store's text sits
+/// below the cylinder's top ellipse.
+pub(crate) fn content_top(kind: NodeKind) -> f64 {
+    if kind == NodeKind::Store {
+        1.5 * STORE_CAP
+    } else {
+        0.0
+    }
+}
+
+/// How far a node's centered text sits left of its center. A queue's visible
+/// face ends where its right end's rim curves in.
+pub(crate) fn content_shift(kind: NodeKind) -> f64 {
+    if kind == NodeKind::Queue {
+        QUEUE_CAP / 2.0
+    } else {
+        0.0
+    }
+}
 
 /// Width of `text` at `px`.
 pub(crate) fn text_width(text: &str, px: f64) -> f64 {
@@ -60,6 +84,12 @@ pub(crate) fn node_size(n: &PNode) -> (f64, f64) {
     if !n.fields.is_empty() {
         h += n.fields.len() as f64 * FIELD_LINE + 8.0;
     }
+    // Room for a cylinder's top and bottom ellipses, or a pipe's ends.
+    let (w, h) = match n.kind {
+        NodeKind::Store => (w, h + 2.0 * STORE_CAP),
+        NodeKind::Queue => (w + 3.0 * QUEUE_CAP, h),
+        _ => (w, h),
+    };
     (w.max(MIN_W), h)
 }
 

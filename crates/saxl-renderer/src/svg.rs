@@ -3,9 +3,12 @@
 use std::fmt::Write;
 
 use crate::RenderError;
-use crate::layout::{BADGE_ROW, FIELD_LINE, PAD, SMALL_PX, badge_text};
+use crate::layout::{
+    BADGE_ROW, FIELD_LINE, PAD, QUEUE_CAP, SMALL_PX, STORE_CAP, badge_text, content_shift,
+    content_top,
+};
 use crate::scene::{
-    EdgeStyle, GroupKind, NodeKind, Point2, Scene, SceneEdge, SceneGroup, SceneNode, ViewKind,
+    EdgeStyle, GroupKind, NodeKind, Point2, Rect, Scene, SceneEdge, SceneGroup, SceneNode, ViewKind,
 };
 
 /// Color tokens: name, light value, dark value.
@@ -35,7 +38,7 @@ const SHAPE_RULES: &str = "text{font-size:14px}.sub,.badge,.field,.edge-label,.g
 .edge{fill:none;stroke-width:1.5}.edge-async{stroke-dasharray:6 4}.edge-reply{stroke-dasharray:2 4;opacity:.75}\
 .edge-label{paint-order:stroke;stroke-width:4px}.lifeline{stroke-dasharray:4 4;opacity:.6}\
 .group rect{fill:none;stroke-width:1.2}.group-cluster rect,.group-managed rect{stroke-dasharray:6 3}\
-.group-parallel rect{fill-opacity:.06}";
+.group-parallel rect{fill-opacity:.06}.node .rim{fill:none;stroke:currentColor;stroke-width:1.5}";
 
 fn colors(dark: bool) -> String {
     let mut rules = COLOR_RULES.to_owned();
@@ -216,20 +219,32 @@ fn node(s: &mut String, n: &SceneNode) {
         NodeKind::System => 12.0,
         _ => 6.0,
     };
-    let rect = format!(
-        r#"x="{}" y="{}" width="{}" height="{}" rx="{radius}""#,
-        num(r.x),
-        num(r.y),
-        num(r.w),
-        num(r.h)
-    );
     let _ = write!(
         s,
-        r#"<g class="node node-{}" data-id="{}"><rect class="base" {rect}/><rect class="tint" {rect}/>"#,
+        r#"<g class="node node-{}" data-id="{}">"#,
         kind_name(n.kind),
         escape(&n.id)
     );
-    let cx = num(r.center().x);
+    if let Some((body, rim)) = cylinder_paths(n.kind, r) {
+        let _ = write!(
+            s,
+            r#"<path class="base" d="{body}"/><path class="tint" d="{body}"/><path class="rim" d="{rim}"/>"#
+        );
+    } else {
+        let rect = format!(
+            r#"x="{}" y="{}" width="{}" height="{}" rx="{radius}""#,
+            num(r.x),
+            num(r.y),
+            num(r.w),
+            num(r.h)
+        );
+        let _ = write!(
+            s,
+            r#"<rect class="base" {rect}/><rect class="tint" {rect}/>"#
+        );
+    }
+    let top = r.y + content_top(n.kind);
+    let cx = num(r.center().x - content_shift(n.kind));
     let left = n.kind == NodeKind::DataCard;
     let (tx, anchor) = if left {
         (num(r.x + 16.0), "start")
@@ -244,18 +259,18 @@ fn node(s: &mut String, n: &SceneNode) {
     let _ = write!(
         s,
         r#"<text x="{tx}" y="{}" text-anchor="{anchor}" font-weight="600">{}</text>"#,
-        num(r.y + title_y),
+        num(top + title_y),
         escape(&n.label)
     );
     if let Some(sub) = &n.sublabel {
         let _ = write!(
             s,
             r#"<text class="sub" x="{tx}" y="{}" text-anchor="{anchor}">{}</text>"#,
-            num(r.y + sub_y),
+            num(top + sub_y),
             escape(sub)
         );
     }
-    let mut y = r.y + if n.sublabel.is_some() { 56.0 } else { 40.0 };
+    let mut y = top + if n.sublabel.is_some() { 56.0 } else { 40.0 };
     if !n.badges.is_empty() {
         let _ = write!(
             s,
@@ -278,9 +293,52 @@ fn node(s: &mut String, n: &SceneNode) {
     s.push_str("</g>\n");
 }
 
+/// Outlines for the standard data shapes: a store is a vertical cylinder and a
+/// queue a horizontal pipe. Returns the silhouette path and the rim path (the
+/// near edge of the cylinder's top, or of the pipe's right end).
+fn cylinder_paths(kind: NodeKind, r: &Rect) -> Option<(String, String)> {
+    let (x, y, w, h) = (r.x, r.y, r.w, r.h);
+    match kind {
+        NodeKind::Store => {
+            let (rx, ry) = (num(w / 2.0), num(STORE_CAP));
+            let (top, bottom) = (num(y + STORE_CAP), num(y + h - STORE_CAP));
+            let (left, right) = (num(x), num(x + w));
+            Some((
+                format!(
+                    "M{left} {top}V{bottom}A{rx} {ry} 0 0 0 {right} {bottom}V{top}A{rx} {ry} 0 0 0 {left} {top}Z"
+                ),
+                format!("M{left} {top}A{rx} {ry} 0 0 0 {right} {top}"),
+            ))
+        }
+        NodeKind::Queue => {
+            let (rx, ry) = (num(QUEUE_CAP), num(h / 2.0));
+            let (left, right) = (num(x + QUEUE_CAP), num(x + w - QUEUE_CAP));
+            let (top, bottom) = (num(y), num(y + h));
+            Some((
+                format!(
+                    "M{left} {top}H{right}A{rx} {ry} 0 0 1 {right} {bottom}H{left}A{rx} {ry} 0 0 1 {left} {top}Z"
+                ),
+                format!("M{right} {top}A{rx} {ry} 0 0 0 {right} {bottom}"),
+            ))
+        }
+        _ => None,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn data_shapes() {
+        let r = Rect::new(10.0, 20.0, 120.0, 72.0);
+        let (body, rim) = cylinder_paths(NodeKind::Store, &r).unwrap_or_default();
+        assert_eq!(body, "M10 28V84A60 8 0 0 0 130 84V28A60 8 0 0 0 10 28Z");
+        assert_eq!(rim, "M10 28A60 8 0 0 0 130 28");
+        let (body, _) = cylinder_paths(NodeKind::Queue, &r).unwrap_or_default();
+        assert_eq!(body, "M20 20H120A10 36 0 0 1 120 92H20A10 36 0 0 1 20 20Z");
+        assert!(cylinder_paths(NodeKind::Service, &r).is_none());
+    }
 
     #[test]
     fn numbers_and_escaping() {

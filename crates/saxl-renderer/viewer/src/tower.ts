@@ -165,9 +165,25 @@ function textSprite(text: string, color: string, height: number, background?: st
   return sprite;
 }
 
-function boxMesh(b: Box3, color: Color, opacity: number, edgeOpacity: number): Group {
+/** A store is a vertical cylinder and a queue a pipe along x; anything else
+ * (or anything when `shaped` is false, such as floor tiles) is a box. */
+function shapeGeometry(kind: NodeKind, size: Point3, shaped: boolean): BufferGeometry {
+  if (shaped && (kind === "store" || kind === "queue")) {
+    const g = new CylinderGeometry(0.5, 0.5, 1, 48);
+    if (kind === "queue") g.rotateZ(Math.PI / 2);
+    g.scale(size.x, size.y, size.z);
+    return g;
+  }
+  return new BoxGeometry(size.x, size.y, size.z);
+}
+
+/** Outline edges only where faces meet sharply, so a cylinder shows its rims
+ * and not every side facet. */
+const EDGE_ANGLE = 30;
+
+function boxMesh(b: Box3, color: Color, opacity: number, edgeOpacity: number, shaped = false): Group {
   const g = new Group();
-  const geometry = new BoxGeometry(b.size.x, b.size.y, b.size.z);
+  const geometry = shapeGeometry(b.kind, b.size, shaped);
   const mesh = new Mesh(
     geometry,
     new MeshStandardMaterial({
@@ -182,7 +198,7 @@ function boxMesh(b: Box3, color: Color, opacity: number, edgeOpacity: number): G
   g.add(mesh);
   if (edgeOpacity > 0) {
     const edges = new LineSegments(
-      new EdgesGeometry(geometry),
+      new EdgesGeometry(geometry, EDGE_ANGLE),
       new LineBasicMaterial({ color, transparent: true, opacity: edgeOpacity }),
     );
     g.add(edges);
@@ -303,7 +319,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
 
   // Containers and pillars.
   for (const b of tower.containers) {
-    const g = boxMesh(b, kindColor(colors, b.kind), 0.28, 0.9);
+    const g = boxMesh(b, kindColor(colors, b.kind), 0.28, 0.9, true);
     pickable.push(g.children[0]);
     boxes.set(b.id, b);
     layers.containers.add(g);
@@ -349,7 +365,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
   // Data: fills at rest, flows in motion.
   for (const f of tower.fills) {
     const truth = f.role === "truth";
-    layers.data.add(boxMesh(f.geometry, colors.store, truth ? 0.55 : 0.22, 0));
+    layers.data.add(boxMesh(f.geometry, colors.store, truth ? 0.55 : 0.22, 0, true));
   }
   const particles: { mesh: Mesh; curve: CatmullRomCurve3; offset: number }[] = [];
   for (const flow of tower.flows) {
@@ -374,7 +390,8 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     const b = id ? boxes.get(id) : undefined;
     if (!b) return;
     const pad = 0.12;
-    const geometry = new EdgesGeometry(new BoxGeometry(b.size.x + pad, b.size.y + pad, b.size.z + pad));
+    const padded = { x: b.size.x + pad, y: b.size.y + pad, z: b.size.z + pad };
+    const geometry = new EdgesGeometry(shapeGeometry(b.kind, padded, true), EDGE_ANGLE);
     const lines = new LineSegments(geometry, new LineBasicMaterial({ color: colors.request }));
     lines.position.copy(v3(b.center));
     outline.add(lines);

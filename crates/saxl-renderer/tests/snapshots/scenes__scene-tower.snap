@@ -25,7 +25,7 @@ expression: "saxl_renderer::to_json(&scene)"
           "z": 0.0
         },
         "size": {
-          "x": 9.4,
+          "x": 9.42,
           "y": 0.06,
           "z": 7.33
         },
@@ -36,7 +36,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "group:us-east-1/0",
         "kind": "floor",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.08,
           "z": 0.1
         },
@@ -54,12 +54,12 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 0.08,
-          "z": -1.0
+          "z": -0.73
         },
         "size": {
-          "x": 2.99,
+          "x": 3.01,
           "y": 0.03,
-          "z": 4.4
+          "z": 4.93
         },
         "label": "managed",
         "sublabel": null
@@ -68,7 +68,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "workload:us-east-1/Redirect",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.18,
           "z": -2.1
         },
@@ -84,7 +84,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "workload:us-east-1/Dashboard",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.18,
           "z": -0.57
         },
@@ -100,7 +100,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "workload:us-east-1/LinksAPI",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.18,
           "z": 0.97
         },
@@ -116,7 +116,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "workload:us-east-1/Worker",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.18,
           "z": 2.5
         },
@@ -134,12 +134,12 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 0.18,
-          "z": -2.1
+          "z": -1.97
         },
         "size": {
-          "x": 2.45,
+          "x": 2.47,
           "y": 0.18,
-          "z": 1.27
+          "z": 1.53
         },
         "label": null,
         "sublabel": null
@@ -150,12 +150,12 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 0.18,
-          "z": -0.73
+          "z": -0.33
         },
         "size": {
-          "x": 2.45,
+          "x": 2.47,
           "y": 0.18,
-          "z": 0.93
+          "z": 1.2
         },
         "label": null,
         "sublabel": null
@@ -166,10 +166,10 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 0.18,
-          "z": 0.47
+          "z": 1.0
         },
         "size": {
-          "x": 2.45,
+          "x": 2.47,
           "y": 0.18,
           "z": 0.93
         },
@@ -182,7 +182,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "pod:us-east-1/Redirect#0",
         "kind": "service",
         "center": {
-          "x": -1.36,
+          "x": -1.37,
           "y": 0.36,
           "z": -2.1
         },
@@ -198,7 +198,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "pod:us-east-1/Redirect#1",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.36,
           "z": -2.1
         },
@@ -214,7 +214,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "pod:us-east-1/Redirect#2",
         "kind": "service",
         "center": {
-          "x": 0.38,
+          "x": 0.37,
           "y": 0.36,
           "z": -2.1
         },
@@ -230,7 +230,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "pod:us-east-1/Dashboard#0",
         "kind": "service",
         "center": {
-          "x": -0.95,
+          "x": -0.96,
           "y": 0.36,
           "z": -0.57
         },
@@ -246,7 +246,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "pod:us-east-1/Dashboard#1",
         "kind": "service",
         "center": {
-          "x": -0.03,
+          "x": -0.04,
           "y": 0.36,
           "z": -0.57
         },
@@ -262,7 +262,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "pod:us-east-1/LinksAPI#0",
         "kind": "service",
         "center": {
-          "x": -0.95,
+          "x": -0.96,
           "y": 0.36,
           "z": 0.97
         },
@@ -278,7 +278,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "pod:us-east-1/LinksAPI#1",
         "kind": "service",
         "center": {
-          "x": -0.03,
+          "x": -0.04,
           "y": 0.36,
           "z": 0.97
         },
@@ -294,7 +294,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "pod:us-east-1/Worker#0",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.36,
           "z": 2.5
         },
@@ -312,7 +312,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 0.36,
-          "z": -2.1
+          "z": -1.97
         },
         "size": {
           "x": 0.72,
@@ -328,7 +328,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 0.36,
-          "z": -0.73
+          "z": -0.33
         },
         "size": {
           "x": 0.72,
@@ -344,7 +344,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 0.36,
-          "z": 0.47
+          "z": 1.0
         },
         "size": {
           "x": 0.72,
@@ -360,7 +360,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Dashboard",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.4,
           "z": -0.57
         },
@@ -376,7 +376,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "LinksAPI",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.4,
           "z": 0.97
         },
@@ -392,7 +392,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Redirect",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.4,
           "z": -2.1
         },
@@ -408,7 +408,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Worker",
         "kind": "service",
         "center": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.4,
           "z": 2.5
         },
@@ -426,12 +426,12 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 3.4,
-          "z": -2.1
+          "z": -1.97
         },
         "size": {
-          "x": 2.33,
-          "y": 1.1,
-          "z": 1.2
+          "x": 1.3,
+          "y": 1.4,
+          "z": 1.3
         },
         "label": "Postgres",
         "sublabel": "source of truth"
@@ -442,12 +442,12 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 3.4,
-          "z": -0.73
+          "z": -0.33
         },
         "size": {
-          "x": 2.45,
-          "y": 1.1,
-          "z": 1.2
+          "x": 1.3,
+          "y": 1.4,
+          "z": 1.3
         },
         "label": "Redis",
         "sublabel": "code → URL cache"
@@ -458,12 +458,12 @@ expression: "saxl_renderer::to_json(&scene)"
         "center": {
           "x": 2.94,
           "y": 3.4,
-          "z": 0.47
+          "z": 1.0
         },
         "size": {
-          "x": 2.0,
+          "x": 2.47,
           "y": 0.8,
-          "z": 1.2
+          "z": 0.8
         },
         "label": "Clicks",
         "sublabel": "async events"
@@ -472,96 +472,96 @@ expression: "saxl_renderer::to_json(&scene)"
     "pillars": [
       {
         "from": {
-          "x": -0.95,
+          "x": -0.96,
           "y": 0.45,
           "z": -0.57
         },
         "to": {
-          "x": -0.95,
-          "y": 3.0,
-          "z": -0.57
-        }
-      },
-      {
-        "from": {
-          "x": -0.03,
-          "y": 0.45,
-          "z": -0.57
-        },
-        "to": {
-          "x": -0.03,
+          "x": -0.96,
           "y": 3.0,
           "z": -0.57
         }
       },
       {
         "from": {
-          "x": -0.95,
+          "x": -0.04,
+          "y": 0.45,
+          "z": -0.57
+        },
+        "to": {
+          "x": -0.04,
+          "y": 3.0,
+          "z": -0.57
+        }
+      },
+      {
+        "from": {
+          "x": -0.96,
           "y": 0.45,
           "z": 0.97
         },
         "to": {
-          "x": -0.95,
+          "x": -0.96,
           "y": 3.0,
           "z": 0.97
         }
       },
       {
         "from": {
-          "x": -0.03,
+          "x": -0.04,
           "y": 0.45,
           "z": 0.97
         },
         "to": {
-          "x": -0.03,
+          "x": -0.04,
           "y": 3.0,
           "z": 0.97
         }
       },
       {
         "from": {
-          "x": -1.36,
+          "x": -1.37,
           "y": 0.45,
           "z": -2.1
         },
         "to": {
-          "x": -1.36,
+          "x": -1.37,
           "y": 3.0,
           "z": -2.1
         }
       },
       {
         "from": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.45,
           "z": -2.1
         },
         "to": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.0,
           "z": -2.1
         }
       },
       {
         "from": {
-          "x": 0.38,
+          "x": 0.37,
           "y": 0.45,
           "z": -2.1
         },
         "to": {
-          "x": 0.38,
+          "x": 0.37,
           "y": 3.0,
           "z": -2.1
         }
       },
       {
         "from": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 0.45,
           "z": 2.5
         },
         "to": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.0,
           "z": 2.5
         }
@@ -570,41 +570,41 @@ expression: "saxl_renderer::to_json(&scene)"
         "from": {
           "x": 2.94,
           "y": 0.45,
-          "z": -2.1
+          "z": -1.97
         },
         "to": {
           "x": 2.94,
-          "y": 2.85,
-          "z": -2.1
+          "y": 2.7,
+          "z": -1.97
         }
       },
       {
         "from": {
           "x": 2.94,
           "y": 0.45,
-          "z": -0.73
+          "z": -0.33
         },
         "to": {
           "x": 2.94,
-          "y": 2.85,
-          "z": -0.73
+          "y": 2.7,
+          "z": -0.33
         }
       },
       {
         "from": {
           "x": 2.94,
           "y": 0.45,
-          "z": 0.47
+          "z": 1.0
         },
         "to": {
           "x": 2.94,
           "y": 3.0,
-          "z": 0.47
+          "z": 1.0
         }
       }
     ],
     "shell": {
-      "radius": 8.022865764200407,
+      "radius": 8.030687389377766,
       "y_min": -0.3,
       "y_max": 5.6
     },
@@ -613,9 +613,9 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Visitor",
         "kind": "actor",
         "center": {
-          "x": -8.68,
+          "x": -8.69,
           "y": 3.4,
-          "z": -5.01
+          "z": -5.02
         },
         "size": {
           "x": 2.09,
@@ -629,9 +629,9 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Owner",
         "kind": "actor",
         "center": {
-          "x": -8.68,
+          "x": -8.69,
           "y": 3.4,
-          "z": 5.01
+          "z": 5.02
         },
         "size": {
           "x": 2.09,
@@ -645,9 +645,9 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "IdP",
         "kind": "external",
         "center": {
-          "x": 8.68,
+          "x": 8.69,
           "y": 3.4,
-          "z": 5.01
+          "z": 5.02
         },
         "size": {
           "x": 2.09,
@@ -661,9 +661,9 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Email",
         "kind": "external",
         "center": {
-          "x": 8.68,
+          "x": 8.69,
           "y": 3.4,
-          "z": -5.01
+          "z": -5.02
         },
         "size": {
           "x": 2.0,
@@ -679,7 +679,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "id": "Edge",
         "kind": "infra",
         "center": {
-          "x": -6.9,
+          "x": -6.91,
           "y": 0.1,
           "z": -2.87
         },
@@ -695,48 +695,48 @@ expression: "saxl_renderer::to_json(&scene)"
     "context_links": [
       {
         "from": {
-          "x": -8.68,
+          "x": -8.69,
           "y": 3.4,
-          "z": 5.01
+          "z": 5.02
         },
         "to": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.4,
           "z": -0.57
         }
       },
       {
         "from": {
-          "x": 8.68,
+          "x": 8.69,
           "y": 3.4,
-          "z": 5.01
+          "z": 5.02
         },
         "to": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.4,
           "z": 0.97
         }
       },
       {
         "from": {
-          "x": -8.68,
+          "x": -8.69,
           "y": 3.4,
-          "z": -5.01
+          "z": -5.02
         },
         "to": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.4,
           "z": -2.1
         }
       },
       {
         "from": {
-          "x": 8.68,
+          "x": 8.69,
           "y": 3.4,
-          "z": -5.01
+          "z": -5.02
         },
         "to": {
-          "x": -0.49,
+          "x": -0.5,
           "y": 3.4,
           "z": 2.5
         }
@@ -757,12 +757,12 @@ expression: "saxl_renderer::to_json(&scene)"
           "center": {
             "x": 2.94,
             "y": 3.4,
-            "z": -2.1
+            "z": -1.97
           },
           "size": {
-            "x": 1.82,
-            "y": 0.86,
-            "z": 0.94
+            "x": 1.01,
+            "y": 1.09,
+            "z": 1.01
           },
           "label": null,
           "sublabel": null
@@ -780,12 +780,12 @@ expression: "saxl_renderer::to_json(&scene)"
           "center": {
             "x": 2.94,
             "y": 3.4,
-            "z": -0.73
+            "z": -0.33
           },
           "size": {
-            "x": 1.52,
-            "y": 0.68,
-            "z": 0.74
+            "x": 0.81,
+            "y": 0.87,
+            "z": 0.81
           },
           "label": null,
           "sublabel": null
@@ -799,17 +799,17 @@ expression: "saxl_renderer::to_json(&scene)"
           {
             "x": 2.94,
             "y": 3.4,
-            "z": 0.47
+            "z": 1.0
           },
           {
-            "x": -0.49,
+            "x": -0.5,
             "y": 3.4,
             "z": 2.5
           },
           {
             "x": 2.94,
             "y": 3.4,
-            "z": -2.1
+            "z": -1.97
           }
         ]
       }
@@ -818,7 +818,7 @@ expression: "saxl_renderer::to_json(&scene)"
       {
         "text": "us-east-1",
         "position": {
-          "x": -4.5,
+          "x": -4.51,
           "y": 0.11,
           "z": -3.47
         }
@@ -826,7 +826,7 @@ expression: "saxl_renderer::to_json(&scene)"
       {
         "text": "k8s",
         "position": {
-          "x": -1.97,
+          "x": -1.98,
           "y": 0.14,
           "z": -3.0
         }
@@ -834,7 +834,7 @@ expression: "saxl_renderer::to_json(&scene)"
       {
         "text": "managed",
         "position": {
-          "x": 1.65,
+          "x": 1.64,
           "y": 0.14,
           "z": -3.0
         }

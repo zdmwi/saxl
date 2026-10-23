@@ -14,6 +14,10 @@ const PAD = 24;
 const BADGE_ROW = 20;
 const FIELD_LINE = 18;
 const CORNER = 8;
+/** Vertical radius of a store cylinder's top and bottom ellipses (matches Rust). */
+const STORE_CAP = 8;
+/** Horizontal radius of a queue pipe's end ellipses (matches Rust). */
+const QUEUE_CAP = 10;
 
 let instance = 0;
 
@@ -123,31 +127,65 @@ function edge(e: SceneEdge, id: string): SVGElement[] {
   return [path, label];
 }
 
+/** Outlines for the standard data shapes: a store is a vertical cylinder and a
+ * queue a horizontal pipe. Returns the silhouette and the rim (the near edge
+ * of the cylinder's top, or of the pipe's right end). Mirrors `svg.rs`. */
+export function cylinderPaths(n: SceneNode): { body: string; rim: string } | null {
+  const { x, y, w, h } = n.rect;
+  if (n.kind === "store") {
+    const [rx, ry, top, bottom] = [w / 2, STORE_CAP, y + STORE_CAP, y + h - STORE_CAP];
+    return {
+      body: `M${x} ${top}V${bottom}A${rx} ${ry} 0 0 0 ${x + w} ${bottom}V${top}A${rx} ${ry} 0 0 0 ${x} ${top}Z`,
+      rim: `M${x} ${top}A${rx} ${ry} 0 0 0 ${x + w} ${top}`,
+    };
+  }
+  if (n.kind === "queue") {
+    const [rx, ry, left, right] = [QUEUE_CAP, h / 2, x + QUEUE_CAP, x + w - QUEUE_CAP];
+    return {
+      body: `M${left} ${y}H${right}A${rx} ${ry} 0 0 1 ${right} ${y + h}H${left}A${rx} ${ry} 0 0 1 ${left} ${y}Z`,
+      rim: `M${right} ${y}A${rx} ${ry} 0 0 0 ${right} ${y + h}`,
+    };
+  }
+  return null;
+}
+
 function node(n: SceneNode, marks: Marker[]): SVGGElement {
   const r = n.rect;
   const radius = n.kind === "actor" ? 18 : n.kind === "system" ? 12 : 6;
   const g = el("g", { class: `node node-${n.kind}`, "data-id": n.id, tabindex: 0 });
-  const box = { x: r.x, y: r.y, width: r.w, height: r.h, rx: radius };
-  g.append(el("rect", { class: "base", ...box }), el("rect", { class: "tint", ...box }));
+  const shape = cylinderPaths(n);
+  if (shape) {
+    g.append(
+      el("path", { class: "base", d: shape.body }),
+      el("path", { class: "tint", d: shape.body }),
+      el("path", { class: "rim", d: shape.rim }),
+    );
+  } else {
+    const box = { x: r.x, y: r.y, width: r.w, height: r.h, rx: radius };
+    g.append(el("rect", { class: "base", ...box }), el("rect", { class: "tint", ...box }));
+  }
+  // Text sits below a cylinder's top, and on a pipe's visible face.
+  const top = r.y + (n.kind === "store" ? 1.5 * STORE_CAP : 0);
+  const cx = r.x + r.w / 2 - (n.kind === "queue" ? QUEUE_CAP / 2 : 0);
   const left = n.kind === "data_card";
-  const tx = left ? r.x + 16 : r.x + r.w / 2;
+  const tx = left ? r.x + 16 : cx;
   const anchor = left ? "start" : "middle";
   g.append(
     el(
       "text",
-      { x: tx, y: r.y + (n.sublabel ? 22 : 25), "text-anchor": anchor, "font-weight": 600 },
+      { x: tx, y: top + (n.sublabel ? 22 : 25), "text-anchor": anchor, "font-weight": 600 },
       n.label,
     ),
   );
   if (n.sublabel) {
-    g.append(el("text", { class: "sub", x: tx, y: r.y + 40, "text-anchor": anchor }, n.sublabel));
+    g.append(el("text", { class: "sub", x: tx, y: top + 40, "text-anchor": anchor }, n.sublabel));
   }
-  let y = r.y + (n.sublabel ? 56 : 40);
+  let y = top + (n.sublabel ? 56 : 40);
   if (n.badges.length > 0) {
     g.append(
       el(
         "text",
-        { class: "badge", x: r.x + r.w / 2, y: y + BADGE_ROW - 8, "text-anchor": "middle" },
+        { class: "badge", x: cx, y: y + BADGE_ROW - 8, "text-anchor": "middle" },
         n.badges.join("  "),
       ),
     );

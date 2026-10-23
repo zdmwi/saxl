@@ -38,7 +38,8 @@ export const CSS = `
 .saxl-viewer .node .base{fill:var(--saxl-bg)}
 .saxl-viewer .node .tint{fill:currentColor;fill-opacity:.1;stroke:currentColor;stroke-width:1.5}
 .saxl-viewer .node:hover .tint{fill-opacity:.18}
-.saxl-viewer .node.selected .tint{stroke-width:3}
+.saxl-viewer .node .rim{fill:none;stroke:currentColor;stroke-width:1.5}
+.saxl-viewer .node.selected .tint,.saxl-viewer .node.selected .rim{stroke-width:3}
 .saxl-viewer .node-external .tint,.saxl-viewer .node-infra .tint{stroke-dasharray:5 3}
 .saxl-viewer .node-system .tint{fill-opacity:.05;stroke-width:2}
 .saxl-viewer .edge{fill:none;stroke:var(--saxl-muted);stroke-width:1.5}

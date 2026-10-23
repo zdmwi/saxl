@@ -9,7 +9,7 @@ expression: "saxl_renderer::to_json(&scene)"
   "title": "Data: Snip",
   "size": {
     "w": 764.0,
-    "h": 320.0
+    "h": 336.0
   },
   "nodes": [
     {
@@ -21,7 +21,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "x": 24.0,
         "y": 24.0,
         "w": 140.0,
-        "h": 56.0
+        "h": 72.0
       },
       "source": {
         "file": 0,
@@ -40,7 +40,7 @@ expression: "saxl_renderer::to_json(&scene)"
         "x": 204.0,
         "y": 24.0,
         "w": 147.2,
-        "h": 56.0
+        "h": 72.0
       },
       "source": {
         "file": 0,
@@ -58,7 +58,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "rect": {
         "x": 391.2,
         "y": 24.0,
-        "w": 120.0,
+        "w": 148.4,
         "h": 56.0
       },
       "source": {
@@ -76,7 +76,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "in Postgres, cached Redis",
       "rect": {
         "x": 24.0,
-        "y": 160.0,
+        "y": 176.0,
         "w": 212.0,
         "h": 118.0
       },
@@ -99,7 +99,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "in Postgres",
       "rect": {
         "x": 276.0,
-        "y": 160.0,
+        "y": 176.0,
         "w": 212.0,
         "h": 118.0
       },
@@ -122,7 +122,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "sublabel": "via Clicks → Postgres",
       "rect": {
         "x": 528.0,
-        "y": 160.0,
+        "y": 176.0,
         "w": 212.0,
         "h": 136.0
       },
@@ -148,19 +148,19 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 48.0,
-          "y": 160.0
+          "y": 176.0
         },
         {
           "x": 48.0,
-          "y": 96.0
+          "y": 112.0
+        },
+        {
+          "x": 78.0,
+          "y": 112.0
         },
         {
           "x": 78.0,
           "y": 96.0
-        },
-        {
-          "x": 78.0,
-          "y": 80.0
         }
       ],
       "label": null
@@ -172,19 +172,19 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 64.0,
-          "y": 160.0
+          "y": 176.0
         },
         {
           "x": 64.0,
-          "y": 106.0
+          "y": 122.0
         },
         {
           "x": 277.6,
-          "y": 106.0
+          "y": 122.0
         },
         {
           "x": 277.6,
-          "y": 80.0
+          "y": 96.0
         }
       ],
       "label": null
@@ -196,19 +196,19 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 300.0,
-          "y": 160.0
+          "y": 176.0
         },
         {
           "x": 300.0,
-          "y": 116.0
+          "y": 132.0
         },
         {
           "x": 94.0,
-          "y": 116.0
+          "y": 132.0
         },
         {
           "x": 94.0,
-          "y": 80.0
+          "y": 96.0
         }
       ],
       "label": null
@@ -220,18 +220,18 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 552.0,
-          "y": 160.0
+          "y": 176.0
         },
         {
           "x": 552.0,
-          "y": 126.0
+          "y": 142.0
         },
         {
-          "x": 451.2,
-          "y": 126.0
+          "x": 465.4,
+          "y": 142.0
         },
         {
-          "x": 451.2,
+          "x": 465.4,
           "y": 80.0
         }
       ],
@@ -244,19 +244,19 @@ expression: "saxl_renderer::to_json(&scene)"
       "points": [
         {
           "x": 568.0,
-          "y": 160.0
+          "y": 176.0
         },
         {
           "x": 568.0,
-          "y": 136.0
+          "y": 152.0
         },
         {
           "x": 110.0,
-          "y": 136.0
+          "y": 152.0
         },
         {
           "x": 110.0,
-          "y": 80.0
+          "y": 96.0
         }
       ],
       "label": null

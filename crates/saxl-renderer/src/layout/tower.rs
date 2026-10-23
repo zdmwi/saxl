@@ -26,19 +26,25 @@ const POD_GAP: f64 = 0.2;
 /// Height of the container level.
 const LEVEL: f64 = 3.4;
 const SERVICE_H: f64 = 0.8;
-const STORE_H: f64 = 1.1;
 const CONTAINER_D: f64 = 1.2;
+/// A store is a vertical cylinder: this tall and this wide.
+const STORE_H: f64 = 1.4;
+const STORE_D: f64 = 1.3;
+/// A queue is a horizontal pipe along x, this thick.
+const QUEUE_D: f64 = 0.8;
 const SHELL_MARGIN: f64 = 1.5;
 const OUTSIDE_MARGIN: f64 = 2.0;
 const SHELL_BOTTOM: f64 = -0.3;
 const SHELL_TOP: f64 = 5.6;
 const INFRA_Y: f64 = 0.1;
 
-fn container_height(kind: ElementKind) -> f64 {
-    if kind == ElementKind::Store {
-        STORE_H
-    } else {
-        SERVICE_H
+/// A container's size: a cylinder for stores, a pipe for queues, and a
+/// label-wide box for services. `label_w` is the 2D node width in world units.
+fn container_size(kind: ElementKind, label_w: f64) -> Point3 {
+    match kind {
+        ElementKind::Store => Point3::new(STORE_D, STORE_H, STORE_D),
+        ElementKind::Queue => Point3::new(label_w, QUEUE_D, QUEUE_D),
+        _ => Point3::new(label_w, SERVICE_H, CONTAINER_D),
     }
 }
 
@@ -189,7 +195,15 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
             continue;
         }
         let pnode = project::element_node(model, i);
-        let h = container_height(e.kind);
+        let mut b = labeled_box(
+            &pnode,
+            &e.name.text,
+            Point3::default(),
+            SERVICE_H,
+            CONTAINER_D,
+        );
+        b.size = container_size(e.kind, b.size.x);
+        let h = b.size.y;
         let center = match footprints.get(&i) {
             Some(r) => to3(r.x + r.w / 2.0, r.y + r.h / 2.0, LEVEL),
             None => {
@@ -199,7 +213,7 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
                 c
             }
         };
-        let b = labeled_box(&pnode, &e.name.text, center, h, CONTAINER_D);
+        b.center = center;
         for top in &pod_tops[i] {
             tower.pillars.push(Segment3 {
                 from: *top,
