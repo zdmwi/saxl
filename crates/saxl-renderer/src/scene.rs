@@ -570,8 +570,10 @@ pub struct Trunk {
 #[derive(Debug, Clone, PartialEq, Serialize)]
 #[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct Boundary {
-    /// The system's name.
+    /// The system's or library's name.
     pub label: String,
+    /// `system` or `library`.
+    pub kind: NodeKind,
     /// Lower corner.
     pub min: Point3,
     /// Upper corner.

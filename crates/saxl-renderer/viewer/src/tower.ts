@@ -320,6 +320,14 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
       inner: lineMat(colors.thin),
     },
     plate: { face: faceMaterial(colors.plate), hull: hullMaterial(colors.ink, outline), edge: lineMat(colors.ink), inner: lineMat(colors.thin) },
+    // A hook: see-through like a ghost, with accent dashes, since it is code
+    // the library calls but does not own.
+    socket: {
+      face: faceMaterial(colors.neutral, 0.5),
+      hull: hullMaterial(colors.accentInk, outline),
+      edge: new LineDashedMaterial({ color: colors.accentInk, dashSize: 0.12, gapSize: 0.09 }),
+      inner: lineMat(colors.accentInk),
+    },
   } satisfies Record<string, Theme>;
   const pipeThemes = {
     neutral: { ...themes.neutral, hull: hullMaterial(colors.ink, pipeOutline) },
@@ -561,10 +569,15 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
         hit = queuePipe(g, c, b.size.x, b.size.y / 2, themes.neutral);
         break;
       case "actor":
+      case "consumer":
         hit = actor(g, b);
         break;
       case "external":
+      case "package":
         hit = box(g, c, v3(b.size), themes.ghost, 0.12);
+        break;
+      case "hook":
+        hit = box(g, c, v3(b.size), themes.socket, 0.12);
         break;
       default:
         hit = box(g, c, v3(b.size), themes.neutral, 0.18);
@@ -575,7 +588,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     });
     boxes.set(b.id, b);
     pickable.push(g);
-    const small = b.kind === "actor" || b.kind === "external";
+    const small = ["actor", "external", "consumer", "package", "hook"].includes(b.kind);
     card(g, new Vector3(b.center.x, b.center.y + b.size.y / 2 + 0.2, b.center.z), b.label ?? b.id, b.sublabel, small);
   }
 
@@ -587,7 +600,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     for (let i = 0; i < 4; i++) dotted(upper, corners[i], corners[(i + 1) % 4], 0.22, colors.thin, 0.035);
   }
 
-  // System boundary: a dotted box.
+  // System or library boundary: a dotted box.
   {
     const [a, b] = [v3(tower.boundary.min), v3(tower.boundary.max)];
     const xz = [[a.x, a.z], [b.x, a.z], [b.x, b.z], [a.x, b.z]];
@@ -597,7 +610,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
       dotted(upper, new Vector3(p[0], b.y, p[1]), new Vector3(q[0], b.y, q[1]), 0.32, colors.muted, 0.045);
       dotted(upper, new Vector3(p[0], a.y, p[1]), new Vector3(p[0], b.y, p[1]), 0.32, colors.muted, 0.045);
     }
-    floorText(upper, new Vector3(a.x + 0.4, a.y, b.z - 0.3), `${tower.boundary.label.toUpperCase()} · SYSTEM BOUNDARY`);
+    floorText(upper, new Vector3(a.x + 0.4, a.y, b.z - 0.3), `${tower.boundary.label.toUpperCase()} · ${tower.boundary.kind === "library" ? "LIBRARY" : "SYSTEM"} BOUNDARY`);
   }
 
   // ---------- Pipes ----------

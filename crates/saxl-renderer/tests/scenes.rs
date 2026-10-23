@@ -37,19 +37,45 @@ fn snip_scene_snapshots() {
 fn quill_scene_snapshots() {
     let m = model(include_str!("../../../examples/quill.saxl"));
     for view in saxl_renderer::views(&m) {
-        if view == ViewKind::Tower {
-            continue;
-        }
         let scene = saxl_renderer::scene(&m, &view).unwrap();
         insta::assert_snapshot!(
             format!("quill-scene-{}", view.slug()),
             saxl_renderer::to_json(&scene)
         );
-        insta::assert_snapshot!(
-            format!("quill-svg-{}", view.slug()),
-            saxl_renderer::to_svg(&scene).unwrap()
-        );
+        if view != ViewKind::Tower {
+            insta::assert_snapshot!(
+                format!("quill-svg-{}", view.slug()),
+                saxl_renderer::to_svg(&scene).unwrap()
+            );
+        }
     }
+}
+
+#[test]
+fn quill_tower_puts_hooks_outside_the_library() {
+    use saxl_renderer::NodeKind;
+    let m = model(include_str!("../../../examples/quill.saxl"));
+    let scene = saxl_renderer::scene(&m, &ViewKind::Tower).unwrap();
+    let tower = scene.tower.unwrap();
+    assert_eq!(tower.boundary.kind, NodeKind::Library);
+    let tiers: Vec<_> = tower.tiers.iter().map(|t| t.label.as_str()).collect();
+    assert_eq!(tiers, ["crate quill"]);
+    let hooks: Vec<_> = tower
+        .outside
+        .iter()
+        .filter(|b| b.kind == NodeKind::Hook)
+        .collect();
+    assert_eq!(hooks.len(), 2);
+    for hook in hooks {
+        assert!(hook.center.x > tower.boundary.max.x, "{}", hook.id);
+    }
+    // Scenario steps into a hook follow a pipe out to it.
+    for hook in ["Extension", "Highlighter"] {
+        assert!(tower.pipes.iter().any(|p| p.to == hook), "{hook}");
+    }
+    // `parse` ships in both packages, so it has a pod on each registry's plate.
+    let pods = tower.pods.iter().filter(|p| p.element == "parse").count();
+    assert_eq!(pods, 2);
 }
 
 #[test]

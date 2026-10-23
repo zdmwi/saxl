@@ -1484,6 +1484,7 @@ expression: "saxl_renderer::to_json(&scene)"
     "trunks": [],
     "boundary": {
       "label": "Snip",
+      "kind": "system",
       "min": {
         "x": -6.6,
         "y": 6.6,
