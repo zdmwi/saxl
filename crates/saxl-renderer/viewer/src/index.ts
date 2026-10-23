@@ -2,16 +2,17 @@
 // the playground.
 
 import type { Diagnostic } from "./generated/Diagnostic";
+import type { LocatedDiagnostic } from "./generated/LocatedDiagnostic";
 import type { Scene } from "./generated/Scene";
 import type { Span } from "./generated/Span";
 import type { ViewKind } from "./generated/ViewKind";
 import { markersFor } from "./markers";
-import { panZoom, type PanZoom } from "./panzoom";
+import { panZoom, type PanZoom, type PanZoomState } from "./panzoom";
 import { draw, type Drawn } from "./render2d";
 import { CSS } from "./style";
-import { mountTower, type TowerHandle } from "./tower";
+import { mountTower, type TowerHandle, type TowerState } from "./tower";
 
-export type { Diagnostic, Scene, Span, ViewKind };
+export type { Diagnostic, LocatedDiagnostic, Scene, Span, ViewKind };
 
 export interface ViewerOptions {
   /** The view shown first. Defaults to the first scene. */
@@ -31,6 +32,8 @@ export interface ViewerHandle {
   /** Replaces the scenes, keeping the current view if it still exists. */
   setScenes(scenes: Scene[]): void;
   onSelect(cb: (id: string, source?: Span) => void): void;
+  /** Highlights the element named `id` in the current view, or clears it. */
+  select(id: string | null): void;
   destroy(): void;
 }
 
@@ -78,6 +81,10 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
   let drawn: Drawn | null = null;
   let pz: PanZoom | null = null;
   let tower: TowerHandle | null = null;
+  // Camera state per view, kept across view switches and scene updates.
+  const panStates = new Map<string, PanZoomState>();
+  let towerState: TowerState | undefined;
+  const viewKey = (v: ViewKind) => (v.kind === "runtime" ? `runtime:${v.scenario}` : v.kind);
   let selected: string | null = null;
   let diagnostics: Diagnostic[] = [];
   const selectCallbacks: ((id: string, source?: Span) => void)[] = [];
@@ -143,13 +150,22 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
     diagPanel.replaceChildren(list);
   }
 
+  /** 2D nodes depicting element `id`: the node itself, or `region/id` in the deployment view. */
+  function nodesFor(id: string): SVGGElement[] {
+    if (!drawn) return [];
+    return [...drawn.nodes].filter(([key]) => key === id || key.endsWith(`/${id}`)).map(([, g]) => g);
+  }
+
   function select(id: string | null) {
-    if (selected && drawn) drawn.nodes.get(selected)?.classList.remove("selected");
+    if (selected) for (const g of nodesFor(selected)) g.classList.remove("selected");
     selected = id;
-    if (id && drawn) drawn.nodes.get(id)?.classList.add("selected");
+    if (id) for (const g of nodesFor(id)) g.classList.add("selected");
+    tower?.select(id);
   }
 
   function teardown() {
+    if (pz && current) panStates.set(viewKey(current), pz.state());
+    if (tower) towerState = tower.state();
     pz?.destroy();
     pz = null;
     tower?.destroy();
@@ -160,22 +176,24 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
   function show(view: ViewKind) {
     const scene = sceneFor(view);
     if (!scene) return;
-    current = scene.view;
     teardown();
+    current = scene.view;
     root.dataset.view = scene.view.kind;
     const markers = markersFor(scene, diagnostics);
     if (scene.tower) {
       stage.classList.add("is-3d");
       stage.replaceChildren();
-      tower = mountTower(stage, scene, { onSelect: emitSelect, markers });
+      tower = mountTower(stage, scene, { onSelect: emitSelect, markers, restore: towerState });
+      if (selected) tower.select(selected);
       renderBar();
       return;
     }
     stage.classList.remove("is-3d");
     drawn = draw(scene, markers);
     stage.replaceChildren(drawn.svg, card);
-    pz = panZoom(stage, drawn.content, scene.size.w, scene.size.h);
-    pz.fit();
+    const saved = panStates.get(viewKey(scene.view));
+    pz = panZoom(stage, drawn.content, scene.size.w, scene.size.h, saved);
+    if (!saved) pz.fit();
     for (const n of scene.nodes) {
       const g = drawn.nodes.get(n.id);
       if (!g) continue;
@@ -229,6 +247,7 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
     onSelect(cb) {
       selectCallbacks.push(cb);
     },
+    select,
     destroy() {
       teardown();
       el.replaceChildren();

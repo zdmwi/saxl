@@ -16,8 +16,9 @@ fn main() -> ExitCode {
     let result = match cmd.as_str() {
         "types" => types(),
         "viewer" => viewer(),
+        "wasm" => wasm(),
+        "playground" => playground(),
         "ci" => ci(),
-        "wasm" | "playground" => Err(format!("`{cmd}` is not implemented yet")),
         _ => Err(USAGE.to_owned()),
     };
     match result {
@@ -63,6 +64,55 @@ fn types() -> Result<(), String> {
 fn viewer() -> Result<(), String> {
     run("npm", &["ci"])?;
     run("npm", &["run", "build", "-w", "@saxl/viewer"])
+}
+
+/// The `wasm-bindgen-cli` version, which must equal the `wasm-bindgen` crate's.
+const WASM_BINDGEN: &str = "0.2.129";
+
+/// Builds `saxl-wasm` and generates its JS bindings in `playground/web/src/wasm`.
+fn wasm() -> Result<(), String> {
+    let installed = Command::new("wasm-bindgen")
+        .arg("--version")
+        .output()
+        .ok()
+        .map(|o| String::from_utf8_lossy(&o.stdout).trim().to_owned());
+    if installed.as_deref() != Some(&format!("wasm-bindgen {WASM_BINDGEN}")) {
+        return Err(format!(
+            "wasm-bindgen-cli {WASM_BINDGEN} is required (found {}); install it with:\n  \
+             cargo install wasm-bindgen-cli --version {WASM_BINDGEN} --locked",
+            installed.as_deref().unwrap_or("none")
+        ));
+    }
+    run(
+        "cargo",
+        &[
+            "build",
+            "-p",
+            "saxl-wasm",
+            "--target",
+            "wasm32-unknown-unknown",
+            "--release",
+        ],
+    )?;
+    let target = std::env::var("CARGO_TARGET_DIR").unwrap_or_else(|_| "target".to_owned());
+    let wasm = format!("{target}/wasm32-unknown-unknown/release/saxl_wasm.wasm");
+    run(
+        "wasm-bindgen",
+        &[
+            "--target",
+            "web",
+            "--out-dir",
+            "playground/web/src/wasm",
+            &wasm,
+        ],
+    )
+}
+
+/// Builds the wasm bindings, then the playground into `playground/web/dist`.
+fn playground() -> Result<(), String> {
+    wasm()?;
+    run("npm", &["ci"])?;
+    run("npm", &["run", "build", "-w", "saxl-playground"])
 }
 
 /// Runs what CI runs: the `rust`, `self-check`, and `generated` jobs.

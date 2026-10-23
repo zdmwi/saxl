@@ -2,10 +2,12 @@
 
 export interface PanZoom {
   fit(): void;
+  /** The current pan and zoom, to restore later. */
+  state(): PanZoomState;
   destroy(): void;
 }
 
-interface View {
+export interface PanZoomState {
   x: number;
   y: number;
   k: number;
@@ -14,8 +16,19 @@ interface View {
 const MIN_K = 0.1;
 const MAX_K = 4;
 
-export function panZoom(stage: HTMLElement, target: SVGGElement, width: number, height: number): PanZoom {
-  let view: View = { x: 0, y: 0, k: 1 };
+type View = PanZoomState;
+
+/** Pans and zooms `target` inside `stage`. Starts from `initial` if given,
+ * otherwise fits the content and keeps fitting on resize until the user moves it. */
+export function panZoom(
+  stage: HTMLElement,
+  target: SVGGElement,
+  width: number,
+  height: number,
+  initial?: PanZoomState,
+): PanZoom {
+  let view: View = initial ?? { x: 0, y: 0, k: 1 };
+  let auto = !initial;
   const pointers = new Map<number, { x: number; y: number }>();
   let pinch: { dist: number; k: number } | null = null;
 
@@ -42,6 +55,7 @@ export function panZoom(stage: HTMLElement, target: SVGGElement, width: number, 
 
   const onWheel = (e: WheelEvent) => {
     e.preventDefault();
+    auto = false;
     const p = local(e);
     zoomAt(p.x, p.y, view.k * Math.exp(-e.deltaY * 0.0015));
   };
@@ -49,6 +63,7 @@ export function panZoom(stage: HTMLElement, target: SVGGElement, width: number, 
   const onDown = (e: PointerEvent) => {
     if ((e.target as Element).closest?.(".node")) return;
     stage.setPointerCapture(e.pointerId);
+    auto = false;
     pointers.set(e.pointerId, local(e));
     stage.classList.add("dragging");
     if (pointers.size === 2) {
@@ -83,19 +98,27 @@ export function panZoom(stage: HTMLElement, target: SVGGElement, width: number, 
   stage.addEventListener("pointermove", onMove);
   stage.addEventListener("pointerup", onUp);
   stage.addEventListener("pointercancel", onUp);
-  stage.addEventListener("dblclick", fit);
-  const resize = new ResizeObserver(fit);
+  const refit = () => {
+    auto = true;
+    fit();
+  };
+  stage.addEventListener("dblclick", refit);
+  const resize = new ResizeObserver(() => {
+    if (auto) fit();
+  });
   resize.observe(stage);
 
+  apply();
   return {
     fit,
+    state: () => ({ ...view }),
     destroy() {
       stage.removeEventListener("wheel", onWheel);
       stage.removeEventListener("pointerdown", onDown);
       stage.removeEventListener("pointermove", onMove);
       stage.removeEventListener("pointerup", onUp);
       stage.removeEventListener("pointercancel", onUp);
-      stage.removeEventListener("dblclick", fit);
+      stage.removeEventListener("dblclick", refit);
       resize.disconnect();
     },
   };

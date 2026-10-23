@@ -46,3 +46,7 @@ unwrap_used = "deny"
 expect_used = "deny"
 panic = "deny"
 dbg_macro = "deny"
+
+# The playground's wasm is downloaded by browsers, so optimize it for size.
+[profile.release.package.saxl-wasm]
+opt-level = "s"

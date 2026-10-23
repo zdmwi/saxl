@@ -53,7 +53,10 @@ const RISE = 0.6;
 const THREAD_RADIUS = 0.035;
 
 export interface TowerHandle {
+  state(): TowerState;
   play(scenario?: string): void;
+  /** Outlines a box, or clears the outline. */
+  select(id: string | null): void;
   step(delta: number): void;
   setMarkers(markers: Map<string, Marker[]>): void;
   destroy(): void;
@@ -62,6 +65,19 @@ export interface TowerHandle {
 export interface TowerOptions {
   onSelect(id: string, source?: Span): void;
   markers: Map<string, Marker[]>;
+  /** State from an earlier tower, kept when scenes are replaced. */
+  restore?: TowerState;
+}
+
+/** What survives replacing the scene: camera, playback, and toggles. */
+export interface TowerState {
+  position: [number, number, number];
+  target: [number, number, number];
+  framed: boolean;
+  scenario?: string;
+  t: number;
+  rise: boolean;
+  hidden: string[];
 }
 
 type Layer = "shell" | "containers" | "pillars" | "floor" | "data";
@@ -350,6 +366,20 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     }
   }
 
+  // Selection outline.
+  const outline = new Group();
+  world.add(outline);
+  function selectBox(id: string | null) {
+    outline.clear();
+    const b = id ? boxes.get(id) : undefined;
+    if (!b) return;
+    const pad = 0.12;
+    const geometry = new EdgesGeometry(new BoxGeometry(b.size.x + pad, b.size.y + pad, b.size.z + pad));
+    const lines = new LineSegments(geometry, new LineBasicMaterial({ color: colors.request }));
+    lines.position.copy(v3(b.center));
+    outline.add(lines);
+  }
+
   // Diagnostic markers.
   const markerGroup = new Group();
   world.add(markerGroup);
@@ -375,7 +405,9 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     const label = h("label");
     const box = h("input");
     box.type = "checkbox";
-    box.checked = true;
+    box.checked = !opts.restore?.hidden.includes(key);
+    layers[key].visible = box.checked;
+    if (key === "containers") markerGroup.visible = box.checked;
     box.addEventListener("change", () => {
       layers[key].visible = box.checked;
       if (key === "containers") markerGroup.visible = box.checked;
@@ -386,10 +418,12 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
   panel.append(layerBox);
 
   const timelines = scene.timelines;
-  let timeline: Timeline | undefined = timelines[0];
+  const restore = opts.restore;
+  let timeline: Timeline | undefined =
+    timelines.find((tl) => tl.scenario === restore?.scenario) ?? timelines[0];
   let t = 0;
   let playing = false;
-  let rise = false;
+  let rise = restore?.rise ?? false;
   const slots = (tl?: Timeline) => (tl ? Math.max(0, ...tl.steps.map((s) => s.index + 1)) : 0);
 
   const play = h("fieldset");
@@ -546,6 +580,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     const id = pick(e);
     if (!id) return;
     const anchor = scene.anchors.find((a) => a.node === id);
+    selectBox(id);
     opts.onSelect(id, anchor?.span);
   };
   canvas.addEventListener("pointermove", onMove);
@@ -596,9 +631,32 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
   stage.dataset.outside = String(tower.outside.length);
   stage.dataset.infra = String(tower.infra.length);
   stage.dataset.scenarios = String(timelines.length);
+  if (restore) {
+    framed = restore.framed;
+    if (framed) {
+      camera.position.set(...restore.position);
+      controls.target.set(...restore.target);
+      controls.autoRotate = false;
+      controls.update();
+    }
+    riseBox.checked = rise;
+    t = Math.min(restore.t, slots(timeline));
+    drawThread();
+  }
   syncControls();
 
   const handle: TowerHandle = {
+    state() {
+      return {
+        position: [camera.position.x, camera.position.y, camera.position.z],
+        target: [controls.target.x, controls.target.y, controls.target.z],
+        framed,
+        scenario: timeline?.scenario,
+        t,
+        rise,
+        hidden: LAYERS.filter(([key]) => !layers[key].visible).map(([key]) => key),
+      };
+    },
     play(scenario) {
       if (scenario) timeline = timelines.find((tl) => tl.scenario === scenario) ?? timeline;
       controls.autoRotate = false;
@@ -610,6 +668,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
       controls.autoRotate = false;
       setTime(Math.round(t) + delta);
     },
+    select: selectBox,
     setMarkers(next) {
       markers = next;
       drawMarkers();

@@ -5,3 +5,7 @@ node_modules/
 /fuzz/artifacts
 /fuzz/coverage
 *.snap.new
+/playground/web/src/wasm/
+/playground/web/dist/
+/playground/web/test-results/
+/playground/web/playwright-report/
