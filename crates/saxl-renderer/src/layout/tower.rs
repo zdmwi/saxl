@@ -45,11 +45,12 @@ struct TierInfo {
     members: Vec<usize>,
 }
 
+/// Library kinds reuse the closest system shape until the tower draws them.
 fn shape(kind: ElementKind) -> Shape {
     match kind {
-        ElementKind::Actor => Shape::Actor,
-        ElementKind::External => Shape::External,
-        ElementKind::Service => Shape::Service,
+        ElementKind::Actor | ElementKind::Consumer => Shape::Actor,
+        ElementKind::External | ElementKind::Package | ElementKind::Hook => Shape::External,
+        ElementKind::Service | ElementKind::Api | ElementKind::Module => Shape::Service,
         ElementKind::Store => Shape::Store,
         ElementKind::Queue => Shape::Queue,
     }
@@ -58,7 +59,7 @@ fn shape(kind: ElementKind) -> Shape {
 /// An element's box: its kind's shape, `base` the tier's height.
 fn element_box(n: &PNode, id: &str, kind: ElementKind, x: f64, z: f64, base: f64) -> Box3 {
     let (size, mid) = match kind {
-        ElementKind::Service => (
+        ElementKind::Service | ElementKind::Api | ElementKind::Module => (
             Point3::new(SERVICE.0, SERVICE.1, SERVICE.2),
             SERVICE.1 / 2.0,
         ),
@@ -67,8 +68,10 @@ fn element_box(n: &PNode, id: &str, kind: ElementKind, x: f64, z: f64, base: f64
             STORE.1 / 2.0,
         ),
         ElementKind::Queue => (Point3::new(QUEUE.0, 2.0 * QUEUE.1, 2.0 * QUEUE.1), QUEUE.2),
-        ElementKind::Actor => (Point3::new(ACTOR.0, ACTOR.1, ACTOR.2), ACTOR.1 / 2.0),
-        ElementKind::External => (
+        ElementKind::Actor | ElementKind::Consumer => {
+            (Point3::new(ACTOR.0, ACTOR.1, ACTOR.2), ACTOR.1 / 2.0)
+        }
+        ElementKind::External | ElementKind::Package | ElementKind::Hook => (
             Point3::new(EXTERNAL.0, EXTERNAL.1, EXTERNAL.2),
             EXTERNAL.1 / 2.0,
         ),

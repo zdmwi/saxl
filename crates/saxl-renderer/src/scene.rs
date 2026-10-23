@@ -195,14 +195,16 @@ pub enum NodeKind {
     Floor,
 }
 
+/// Library kinds map to the closest system kind until the views draw them.
 impl From<saxl_core::ElementKind> for NodeKind {
     fn from(kind: saxl_core::ElementKind) -> Self {
+        use saxl_core::ElementKind as K;
         match kind {
-            saxl_core::ElementKind::Actor => Self::Actor,
-            saxl_core::ElementKind::External => Self::External,
-            saxl_core::ElementKind::Service => Self::Service,
-            saxl_core::ElementKind::Store => Self::Store,
-            saxl_core::ElementKind::Queue => Self::Queue,
+            K::Actor | K::Consumer => Self::Actor,
+            K::External | K::Package | K::Hook => Self::External,
+            K::Service | K::Api | K::Module => Self::Service,
+            K::Store => Self::Store,
+            K::Queue => Self::Queue,
         }
     }
 }

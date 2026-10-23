@@ -20,7 +20,7 @@ impl super::Rule for Rule {
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
-        match cx.model.systems.as_slice() {
+        match cx.model.roots.as_slice() {
             [] => {
                 let m = cx.model;
                 let file = m
@@ -46,16 +46,24 @@ impl super::Rule for Rule {
             }
             [_] => {}
             [first, rest @ ..] => {
-                for system in rest {
-                    out.push(
-                        Diagnostic::error(
-                            "E003",
-                            "more than one `system` statement",
-                            system.span,
-                            "second `system`",
+                let first_kw = first.kind.keyword();
+                for root in rest {
+                    let kw = root.kind.keyword();
+                    let (message, help) = if root.kind == first.kind {
+                        (
+                            format!("more than one `{kw}` statement"),
+                            format!("describe one {kw} per file"),
                         )
-                        .with_secondary(first.span, "first `system` here")
-                        .with_help("describe one system per file"),
+                    } else {
+                        (
+                            "both a `system` and a `library` statement".to_owned(),
+                            "describe the system and the library in separate files".to_owned(),
+                        )
+                    };
+                    out.push(
+                        Diagnostic::error("E003", message, root.span, format!("second `{kw}`"))
+                            .with_secondary(first.span, format!("first `{first_kw}` here"))
+                            .with_help(help),
                     );
                 }
             }

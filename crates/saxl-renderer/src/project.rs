@@ -95,7 +95,7 @@ pub(crate) struct Context {
 pub(crate) fn context(vm: &ValidatedModel) -> Context {
     let model = vm.model();
     let mut system = PNode::new("system", NodeKind::System, "");
-    if let Some(s) = model.systems.first() {
+    if let Some(s) = model.roots.first() {
         system.id.clone_from(&s.name.text);
         system.label.clone_from(&s.name.text);
         system.sublabel.clone_from(&s.description);
@@ -204,6 +204,7 @@ pub(crate) fn deployment(vm: &ValidatedModel) -> Vec<DeployRegion> {
                                 Attribute::Replicas { count, .. } => format!("×{count}"),
                                 Attribute::Autoscale { .. } => "autoscale".to_owned(),
                                 Attribute::PrimaryReplica { .. } => "primary+replica".to_owned(),
+                                Attribute::Feature { name, .. } => format!("feature {}", name.text),
                                 Attribute::Unknown { text, .. } => text.clone(),
                             })
                             .collect();
@@ -452,10 +453,10 @@ pub(crate) fn data(vm: &ValidatedModel) -> Data {
     }
 }
 
-/// The system's name, for titles.
+/// The system's or library's name, for titles.
 pub(crate) fn system_name(model: &Model) -> &str {
     model
-        .systems
+        .roots
         .first()
         .map_or("system", |s| s.name.text.as_str())
 }

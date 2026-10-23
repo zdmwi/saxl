@@ -3,8 +3,9 @@
 //!
 //! - One space between tokens, none before `,` or around `+`.
 //! - Two spaces of indentation per open brace.
-//! - Runs of consecutive top-level elements, relations, and single-line data
-//!   statements are aligned in columns (a blank or comment line ends a run).
+//! - Runs of consecutive top-level elements, relations (including `impl`
+//!   lines), and single-line data statements are aligned in columns (a blank
+//!   or comment line ends a run). An element's `at` clause gets its own column.
 //! - At most one blank line in a row, none just inside braces, and none at
 //!   the start or end of the file. A trailing comment follows one space.
 
@@ -187,14 +188,39 @@ fn cells(tokens: &[Tok], indent: usize) -> (Kind, Vec<String>) {
     }
     match tokens {
         [
-            kind @ (Tok::Actor | Tok::External | Tok::Service | Tok::Store | Tok::Queue),
+            kind @ (Tok::Actor
+            | Tok::External
+            | Tok::Service
+            | Tok::Store
+            | Tok::Queue
+            | Tok::Consumer
+            | Tok::Package
+            | Tok::Api
+            | Tok::Module
+            | Tok::Hook),
             name,
             rest @ ..,
-        ] => (
-            Kind::Element,
-            vec![token_text(kind), token_text(name), join(rest)],
-        ),
+        ] => {
+            // Every element line has four cells so a run aligns even when only
+            // some lines have a description or an `at` clause.
+            let at = rest
+                .iter()
+                .position(|t| matches!(t, Tok::Ident(w) if w == "at"))
+                .unwrap_or(rest.len());
+            (
+                Kind::Element,
+                vec![
+                    token_text(kind),
+                    token_text(name),
+                    join(&rest[..at]),
+                    join(&rest[at..]),
+                ],
+            )
+        }
         [Tok::Ident(first), Tok::Arrow | Tok::AsyncArrow, ..] => {
+            (Kind::Relation, vec![first.clone(), join(&tokens[1..])])
+        }
+        [Tok::Ident(first), Tok::Ident(word), ..] if word == "impl" => {
             (Kind::Relation, vec![first.clone(), join(&tokens[1..])])
         }
         [Tok::Data, name, rest @ ..] if rest.last() == Some(&Tok::RBrace) => {
@@ -261,6 +287,14 @@ mod tests {
         let src = "system S\nstore Db\nstore C\nqueue Q\ndata Link in Db cached C { code, url }\ndata User in Db { id }\ndata Click via Q -> Db {\n  ts,   # when\n  ref,\n}\n";
         let want = "system S\nstore Db\nstore C\nqueue Q\ndata Link in Db cached C { code, url }\ndata User in Db          { id }\ndata Click via Q -> Db {\n  ts, # when\n  ref,\n}\n";
         assert_eq!(format(src).unwrap(), want);
+    }
+
+    #[test]
+    fn library_alignment() {
+        let src = "library L \"lib\"\napi parse \"text\" at \"src/parse.rs\"\nmodule lexer at \"src/lexer.rs\"\nhook Highlighter \"colors code\"\nparse -> lexer\nlexer impl Highlighter\ndata Doc in lexer pub { blocks }\ndata Token in lexer { kind }\npublish \"crates.io\" {\n  crate l   target wasm32 {\n    parse,lexer  feature   syntax\n  }\n}\n";
+        let want = "library L \"lib\"\napi    parse       \"text\"        at \"src/parse.rs\"\nmodule lexer                     at \"src/lexer.rs\"\nhook   Highlighter \"colors code\"\nparse -> lexer\nlexer impl Highlighter\ndata Doc   in lexer pub { blocks }\ndata Token in lexer     { kind }\npublish \"crates.io\" {\n  crate l target wasm32 {\n    parse, lexer feature syntax\n  }\n}\n";
+        assert_eq!(format(src).unwrap(), want);
+        assert_eq!(format(want).unwrap(), want);
     }
 
     #[test]

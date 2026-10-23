@@ -108,7 +108,7 @@ pub fn run(args: &Args) -> Result<ExitCode, CliError> {
             }
             let title = model
                 .model()
-                .systems
+                .roots
                 .first()
                 .map_or_else(|| "saxl".to_owned(), |s| s.name.text.clone());
             saxl_renderer::to_html(

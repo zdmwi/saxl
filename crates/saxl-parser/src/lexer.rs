@@ -16,6 +16,9 @@ pub enum Tok {
     /// `system`
     #[token("system")]
     System,
+    /// `library`
+    #[token("library")]
+    Library,
     /// `actor`
     #[token("actor")]
     Actor,
@@ -31,6 +34,21 @@ pub enum Tok {
     /// `queue`
     #[token("queue")]
     Queue,
+    /// `consumer`
+    #[token("consumer")]
+    Consumer,
+    /// `package`
+    #[token("package")]
+    Package,
+    /// `api`
+    #[token("api")]
+    Api,
+    /// `module`
+    #[token("module")]
+    Module,
+    /// `hook`
+    #[token("hook")]
+    Hook,
     /// `data`
     #[token("data")]
     Data,
@@ -58,6 +76,9 @@ pub enum Tok {
     /// `managed`
     #[token("managed")]
     Managed,
+    /// `publish`
+    #[token("publish")]
+    Publish,
     /// `scenario`
     #[token("scenario")]
     Scenario,
@@ -116,11 +137,17 @@ impl Tok {
     pub fn text(&self) -> &'static str {
         match self {
             Tok::System => "system",
+            Tok::Library => "library",
             Tok::Actor => "actor",
             Tok::External => "external",
             Tok::Service => "service",
             Tok::Store => "store",
             Tok::Queue => "queue",
+            Tok::Consumer => "consumer",
+            Tok::Package => "package",
+            Tok::Api => "api",
+            Tok::Module => "module",
+            Tok::Hook => "hook",
             Tok::Data => "data",
             Tok::In => "in",
             Tok::Cached => "cached",
@@ -130,6 +157,7 @@ impl Tok {
             Tok::Cdn => "cdn",
             Tok::Cluster => "cluster",
             Tok::Managed => "managed",
+            Tok::Publish => "publish",
             Tok::Scenario => "scenario",
             Tok::Parallel => "parallel",
             Tok::Allow => "allow",
@@ -242,6 +270,30 @@ mod tests {
                 Tok::Parallel,
                 Tok::Allow,
             ]
+        );
+    }
+
+    #[test]
+    fn library_keywords() {
+        assert_eq!(
+            toks("library consumer package api module hook publish"),
+            vec![
+                Tok::Library,
+                Tok::Consumer,
+                Tok::Package,
+                Tok::Api,
+                Tok::Module,
+                Tok::Hook,
+                Tok::Publish,
+            ]
+        );
+    }
+
+    #[test]
+    fn contextual_words_are_identifiers() {
+        assert_eq!(
+            toks("impl at pub crate feature target"),
+            ["impl", "at", "pub", "crate", "feature", "target"].map(id)
         );
     }
 

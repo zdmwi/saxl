@@ -68,7 +68,7 @@ impl SpanIndex {
                 .iter()
                 .map(|d| (d.name.text.clone(), d.span))
                 .collect(),
-            system: model.systems.first().map(|s| s.span),
+            system: model.roots.first().map(|s| s.span),
         }
     }
 

@@ -4,9 +4,10 @@ expression: parse_clean(&src)
 input_file: tests/fixtures/valid/minimal.saxl
 ---
 {
-  "ir_version": 1,
-  "systems": [
+  "ir_version": 2,
+  "roots": [
     {
+      "kind": "system",
       "name": {
         "text": "Tiny",
         "span": {

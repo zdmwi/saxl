@@ -1,8 +1,11 @@
 //! Recursive descent over the token vector, with line-based error recovery.
 
-use saxl_core::{Attribute, Diagnostic, ElementKind, FileId, GroupKind, Span, StepArrow, Style};
+use saxl_core::{
+    Attribute, Diagnostic, ElementKind, FileId, Glob, GroupKind, PackageKind, RootKind, Span,
+    StepArrow, Style,
+};
 
-use crate::ast::{DeployItem, Ident, Placement, Step, Stmt, Workload};
+use crate::ast::{DeployItem, Ident, Placement, PublishedPackage, Step, Stmt, Workload};
 use crate::lexer::Tok;
 
 /// The diagnostic is already recorded when `Err` is returned.
@@ -130,6 +133,27 @@ impl<'t> Parser<'t> {
         }
     }
 
+    /// Whether the next token is the contextual keyword `word`, which lexes
+    /// as an identifier.
+    fn at_word(&self, word: &str) -> bool {
+        matches!(self.peek(), Some(Tok::Ident(text)) if text == word)
+    }
+
+    /// An identifier or a string, for names such as `"@quill/wasm"` that are
+    /// not valid identifiers.
+    fn name_or_str(&mut self, what: &str) -> PResult<Ident> {
+        match self.peek() {
+            Some(Tok::Str(text)) => {
+                let span = self.bump();
+                Ok(Ident {
+                    text: text.clone(),
+                    span,
+                })
+            }
+            _ => self.ident(what),
+        }
+    }
+
     fn opt_str(&mut self) -> Option<String> {
         match self.peek() {
             Some(Tok::Str(s)) => {
@@ -211,14 +235,21 @@ impl<'t> Parser<'t> {
 
     fn statement(&mut self) -> PResult<Stmt> {
         match self.peek() {
-            Some(Tok::System) => self.system(),
+            Some(Tok::System) => self.root(RootKind::System),
+            Some(Tok::Library) => self.root(RootKind::Library),
             Some(Tok::Actor) => self.element(ElementKind::Actor),
             Some(Tok::External) => self.element(ElementKind::External),
             Some(Tok::Service) => self.element(ElementKind::Service),
             Some(Tok::Store) => self.element(ElementKind::Store),
             Some(Tok::Queue) => self.element(ElementKind::Queue),
+            Some(Tok::Consumer) => self.element(ElementKind::Consumer),
+            Some(Tok::Package) => self.element(ElementKind::Package),
+            Some(Tok::Api) => self.element(ElementKind::Api),
+            Some(Tok::Module) => self.element(ElementKind::Module),
+            Some(Tok::Hook) => self.element(ElementKind::Hook),
             Some(Tok::Data) => self.data(),
             Some(Tok::Deploy) => self.deploy(),
+            Some(Tok::Publish) => self.publish(),
             Some(Tok::Scenario) => self.scenario(),
             Some(Tok::Allow) => self.allow(),
             Some(Tok::Ident(_)) => self.relation(),
@@ -226,13 +257,14 @@ impl<'t> Parser<'t> {
         }
     }
 
-    fn system(&mut self) -> PResult<Stmt> {
+    fn root(&mut self, kind: RootKind) -> PResult<Stmt> {
         let start = self.bump();
-        let name = self.ident("system name")?;
+        let name = self.ident(&format!("{} name", kind.keyword()))?;
         let description = self.opt_str();
         let span = start.to(self.prev);
         self.end_line()?;
-        Ok(Stmt::System {
+        Ok(Stmt::Root {
+            kind,
             name,
             description,
             span,
@@ -243,18 +275,43 @@ impl<'t> Parser<'t> {
         let start = self.bump();
         let name = self.ident(&format!("{} name", kind.keyword()))?;
         let description = self.opt_str();
+        let at = if self.at_word("at") {
+            self.bump();
+            match self.peek() {
+                Some(Tok::Str(text)) => Some(Glob {
+                    text: text.clone(),
+                    span: self.bump(),
+                }),
+                _ => return self.error("a path pattern string"),
+            }
+        } else {
+            None
+        };
         let span = start.to(self.prev);
         self.end_line()?;
         Ok(Stmt::Element {
             kind,
             name,
             description,
+            at,
             span,
         })
     }
 
     fn relation(&mut self) -> PResult<Stmt> {
-        let mut hops = vec![self.ident("name")?];
+        let first = self.ident("name")?;
+        if self.at_word("impl") {
+            self.bump();
+            let hook = self.ident("hook name")?;
+            let span = first.span.to(hook.span);
+            self.end_line()?;
+            return Ok(Stmt::Impl {
+                implementor: first,
+                hook,
+                span,
+            });
+        }
+        let mut hops = vec![first];
         let mut arrows = Vec::new();
         loop {
             let style = match self.peek() {
@@ -334,6 +391,10 @@ impl<'t> Parser<'t> {
             }
             _ => return self.error("`in` or `via`"),
         };
+        let public = self.at_word("pub");
+        if public {
+            self.bump();
+        }
         self.expect(Tok::LBrace)?;
         let mut fields = Vec::new();
         loop {
@@ -357,6 +418,7 @@ impl<'t> Parser<'t> {
             name,
             placement,
             fields,
+            public,
             span: start.to(end),
         })
     }
@@ -416,6 +478,43 @@ impl<'t> Parser<'t> {
         }
     }
 
+    fn publish(&mut self) -> PResult<Stmt> {
+        let start = self.bump();
+        let name = self.name_or_str("registry name")?;
+        let (packages, end) = self.block(Self::published_package)?;
+        self.end_line()?;
+        Ok(Stmt::Publish {
+            name,
+            packages,
+            span: start.to(end),
+        })
+    }
+
+    fn published_package(&mut self) -> PResult<PublishedPackage> {
+        let kind = match self.peek() {
+            Some(Tok::Package) => PackageKind::Package,
+            _ if self.at_word("crate") => PackageKind::Crate,
+            _ => return self.error("`crate`, `package`, or `}`"),
+        };
+        let start = self.bump();
+        let name = self.name_or_str("package name")?;
+        let target = if self.at_word("target") {
+            self.bump();
+            Some(self.ident("target name")?)
+        } else {
+            None
+        };
+        let (workloads, end) = self.block(Self::workload)?;
+        self.end_line()?;
+        Ok(PublishedPackage {
+            kind,
+            name,
+            target,
+            workloads,
+            span: start.to(end),
+        })
+    }
+
     fn workload(&mut self) -> PResult<Workload> {
         let first = self.ident("workload name")?;
         let start = first.span;
@@ -439,7 +538,7 @@ impl<'t> Parser<'t> {
         })
     }
 
-    /// `attribute = REPLICAS | IDENT [ "+" IDENT ]`. A malformed replica count
+    /// `attribute = REPLICAS | "feature" IDENT | IDENT [ "+" IDENT ]`. A malformed replica count
     /// is reported (P007) and dropped without failing the line.
     fn attribute(&mut self) -> PResult<Option<Attribute>> {
         let first = self.ident("attribute")?;
@@ -457,6 +556,14 @@ impl<'t> Parser<'t> {
                     }
                 },
             ));
+        }
+        if first.text == "feature" {
+            let name = self.ident("feature name")?;
+            let span = first.span.to(name.span);
+            return Ok(Some(Attribute::Feature {
+                name: name.name(),
+                span,
+            }));
         }
         let span = first.span;
         if first.text == "autoscale" {

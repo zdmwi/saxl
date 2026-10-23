@@ -89,7 +89,7 @@ fn check_github() {
 fn ir_prints_model() {
     let out = stdout(saxl().args(["ir", "examples/snip.saxl"]));
     let json: serde_json::Value = serde_json::from_str(&out).unwrap();
-    assert_eq!(json["ir_version"], 1);
+    assert_eq!(json["ir_version"], 2);
     assert_eq!(json["elements"].as_array().unwrap().len(), 11);
 }
 
