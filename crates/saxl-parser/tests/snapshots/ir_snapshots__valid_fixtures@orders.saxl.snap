@@ -1,0 +1,1239 @@
+---
+source: crates/saxl-parser/tests/ir_snapshots.rs
+expression: parse_clean(&src)
+input_file: tests/fixtures/valid/orders.saxl
+---
+{
+  "ir_version": 1,
+  "systems": [
+    {
+      "name": {
+        "text": "Orders",
+        "span": {
+          "file": 0,
+          "start": 135,
+          "end": 141
+        }
+      },
+      "description": "order processing",
+      "span": {
+        "file": 0,
+        "start": 128,
+        "end": 160
+      }
+    }
+  ],
+  "elements": [
+    {
+      "name": {
+        "text": "Customer",
+        "span": {
+          "file": 0,
+          "start": 171,
+          "end": 179
+        }
+      },
+      "kind": "actor",
+      "description": "places orders",
+      "span": {
+        "file": 0,
+        "start": 162,
+        "end": 195
+      }
+    },
+    {
+      "name": {
+        "text": "Payments",
+        "span": {
+          "file": 0,
+          "start": 205,
+          "end": 213
+        }
+      },
+      "kind": "external",
+      "description": "card processor",
+      "span": {
+        "file": 0,
+        "start": 196,
+        "end": 230
+      }
+    },
+    {
+      "name": {
+        "text": "Web",
+        "span": {
+          "file": 0,
+          "start": 240,
+          "end": 243
+        }
+      },
+      "kind": "service",
+      "description": "storefront",
+      "span": {
+        "file": 0,
+        "start": 232,
+        "end": 259
+      }
+    },
+    {
+      "name": {
+        "text": "Api",
+        "span": {
+          "file": 0,
+          "start": 268,
+          "end": 271
+        }
+      },
+      "kind": "service",
+      "description": "order API",
+      "span": {
+        "file": 0,
+        "start": 260,
+        "end": 286
+      }
+    },
+    {
+      "name": {
+        "text": "Fulfil",
+        "span": {
+          "file": 0,
+          "start": 295,
+          "end": 301
+        }
+      },
+      "kind": "service",
+      "description": "ships orders",
+      "span": {
+        "file": 0,
+        "start": 287,
+        "end": 316
+      }
+    },
+    {
+      "name": {
+        "text": "Db",
+        "span": {
+          "file": 0,
+          "start": 325,
+          "end": 327
+        }
+      },
+      "kind": "store",
+      "description": "orders database",
+      "span": {
+        "file": 0,
+        "start": 317,
+        "end": 349
+      }
+    },
+    {
+      "name": {
+        "text": "Cache",
+        "span": {
+          "file": 0,
+          "start": 358,
+          "end": 363
+        }
+      },
+      "kind": "store",
+      "description": "hot orders",
+      "span": {
+        "file": 0,
+        "start": 350,
+        "end": 377
+      }
+    },
+    {
+      "name": {
+        "text": "Search",
+        "span": {
+          "file": 0,
+          "start": 386,
+          "end": 392
+        }
+      },
+      "kind": "store",
+      "description": "order search index",
+      "span": {
+        "file": 0,
+        "start": 378,
+        "end": 413
+      }
+    },
+    {
+      "name": {
+        "text": "Events",
+        "span": {
+          "file": 0,
+          "start": 422,
+          "end": 428
+        }
+      },
+      "kind": "queue",
+      "description": "order events",
+      "span": {
+        "file": 0,
+        "start": 414,
+        "end": 443
+      }
+    }
+  ],
+  "relations": [
+    {
+      "from": {
+        "text": "Customer",
+        "span": {
+          "file": 0,
+          "start": 445,
+          "end": 453
+        }
+      },
+      "to": {
+        "text": "Web",
+        "span": {
+          "file": 0,
+          "start": 457,
+          "end": 460
+        }
+      },
+      "style": "sync",
+      "description": "browses and buys",
+      "span": {
+        "file": 0,
+        "start": 445,
+        "end": 460
+      }
+    },
+    {
+      "from": {
+        "text": "Web",
+        "span": {
+          "file": 0,
+          "start": 480,
+          "end": 483
+        }
+      },
+      "to": {
+        "text": "Api",
+        "span": {
+          "file": 0,
+          "start": 487,
+          "end": 490
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 480,
+        "end": 490
+      }
+    },
+    {
+      "from": {
+        "text": "Api",
+        "span": {
+          "file": 0,
+          "start": 487,
+          "end": 490
+        }
+      },
+      "to": {
+        "text": "Db",
+        "span": {
+          "file": 0,
+          "start": 494,
+          "end": 496
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 487,
+        "end": 496
+      }
+    },
+    {
+      "from": {
+        "text": "Api",
+        "span": {
+          "file": 0,
+          "start": 497,
+          "end": 500
+        }
+      },
+      "to": {
+        "text": "Cache",
+        "span": {
+          "file": 0,
+          "start": 504,
+          "end": 509
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 497,
+        "end": 509
+      }
+    },
+    {
+      "from": {
+        "text": "Api",
+        "span": {
+          "file": 0,
+          "start": 510,
+          "end": 513
+        }
+      },
+      "to": {
+        "text": "Payments",
+        "span": {
+          "file": 0,
+          "start": 517,
+          "end": 525
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 510,
+        "end": 525
+      }
+    },
+    {
+      "from": {
+        "text": "Api",
+        "span": {
+          "file": 0,
+          "start": 526,
+          "end": 529
+        }
+      },
+      "to": {
+        "text": "Events",
+        "span": {
+          "file": 0,
+          "start": 533,
+          "end": 539
+        }
+      },
+      "style": "async",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 526,
+        "end": 539
+      }
+    },
+    {
+      "from": {
+        "text": "Events",
+        "span": {
+          "file": 0,
+          "start": 533,
+          "end": 539
+        }
+      },
+      "to": {
+        "text": "Fulfil",
+        "span": {
+          "file": 0,
+          "start": 543,
+          "end": 549
+        }
+      },
+      "style": "async",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 533,
+        "end": 549
+      }
+    },
+    {
+      "from": {
+        "text": "Fulfil",
+        "span": {
+          "file": 0,
+          "start": 543,
+          "end": 549
+        }
+      },
+      "to": {
+        "text": "Db",
+        "span": {
+          "file": 0,
+          "start": 553,
+          "end": 555
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 543,
+        "end": 555
+      }
+    },
+    {
+      "from": {
+        "text": "Fulfil",
+        "span": {
+          "file": 0,
+          "start": 556,
+          "end": 562
+        }
+      },
+      "to": {
+        "text": "Search",
+        "span": {
+          "file": 0,
+          "start": 566,
+          "end": 572
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 556,
+        "end": 572
+      }
+    }
+  ],
+  "data": [
+    {
+      "name": {
+        "text": "Order",
+        "span": {
+          "file": 0,
+          "start": 579,
+          "end": 584
+        }
+      },
+      "placement": {
+        "kind": "in",
+        "store": {
+          "text": "Db",
+          "span": {
+            "file": 0,
+            "start": 588,
+            "end": 590
+          }
+        },
+        "cached": [
+          {
+            "text": "Cache",
+            "span": {
+              "file": 0,
+              "start": 598,
+              "end": 603
+            }
+          },
+          {
+            "text": "Search",
+            "span": {
+              "file": 0,
+              "start": 605,
+              "end": 611
+            }
+          }
+        ]
+      },
+      "fields": [
+        {
+          "text": "id",
+          "span": {
+            "file": 0,
+            "start": 616,
+            "end": 618
+          }
+        },
+        {
+          "text": "customer_id",
+          "span": {
+            "file": 0,
+            "start": 622,
+            "end": 633
+          }
+        },
+        {
+          "text": "total",
+          "span": {
+            "file": 0,
+            "start": 635,
+            "end": 640
+          }
+        },
+        {
+          "text": "status",
+          "span": {
+            "file": 0,
+            "start": 644,
+            "end": 650
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 574,
+        "end": 653
+      }
+    },
+    {
+      "name": {
+        "text": "Shipment",
+        "span": {
+          "file": 0,
+          "start": 659,
+          "end": 667
+        }
+      },
+      "placement": {
+        "kind": "via",
+        "queue": {
+          "text": "Events",
+          "span": {
+            "file": 0,
+            "start": 672,
+            "end": 678
+          }
+        },
+        "store": {
+          "text": "Db",
+          "span": {
+            "file": 0,
+            "start": 682,
+            "end": 684
+          }
+        }
+      },
+      "fields": [
+        {
+          "text": "order_id",
+          "span": {
+            "file": 0,
+            "start": 687,
+            "end": 695
+          }
+        },
+        {
+          "text": "carrier",
+          "span": {
+            "file": 0,
+            "start": 697,
+            "end": 704
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 654,
+        "end": 706
+      }
+    }
+  ],
+  "regions": [
+    {
+      "name": {
+        "text": "eu-west-1",
+        "span": {
+          "file": 0,
+          "start": 722,
+          "end": 731
+        }
+      },
+      "infra": [
+        {
+          "name": {
+            "text": "Front",
+            "span": {
+              "file": 0,
+              "start": 740,
+              "end": 745
+            }
+          },
+          "kind": "cdn",
+          "span": {
+            "file": 0,
+            "start": 736,
+            "end": 745
+          }
+        }
+      ],
+      "groups": [
+        {
+          "kind": "cluster",
+          "name": {
+            "text": "k8s",
+            "span": {
+              "file": 0,
+              "start": 756,
+              "end": 759
+            }
+          },
+          "workloads": [
+            {
+              "names": [
+                {
+                  "text": "Web",
+                  "span": {
+                    "file": 0,
+                    "start": 766,
+                    "end": 769
+                  }
+                },
+                {
+                  "text": "Api",
+                  "span": {
+                    "file": 0,
+                    "start": 771,
+                    "end": 774
+                  }
+                }
+              ],
+              "attributes": [
+                {
+                  "kind": "replicas",
+                  "count": 3,
+                  "span": {
+                    "file": 0,
+                    "start": 775,
+                    "end": 777
+                  }
+                },
+                {
+                  "kind": "autoscale",
+                  "span": {
+                    "file": 0,
+                    "start": 778,
+                    "end": 787
+                  }
+                }
+              ],
+              "span": {
+                "file": 0,
+                "start": 766,
+                "end": 787
+              }
+            },
+            {
+              "names": [
+                {
+                  "text": "Fulfil",
+                  "span": {
+                    "file": 0,
+                    "start": 792,
+                    "end": 798
+                  }
+                }
+              ],
+              "attributes": [
+                {
+                  "kind": "replicas",
+                  "count": 2,
+                  "span": {
+                    "file": 0,
+                    "start": 799,
+                    "end": 801
+                  }
+                }
+              ],
+              "span": {
+                "file": 0,
+                "start": 792,
+                "end": 801
+              }
+            }
+          ],
+          "span": {
+            "file": 0,
+            "start": 748,
+            "end": 805
+          }
+        },
+        {
+          "kind": "managed",
+          "name": null,
+          "workloads": [
+            {
+              "names": [
+                {
+                  "text": "Db",
+                  "span": {
+                    "file": 0,
+                    "start": 822,
+                    "end": 824
+                  }
+                }
+              ],
+              "attributes": [
+                {
+                  "kind": "primary_replica",
+                  "span": {
+                    "file": 0,
+                    "start": 825,
+                    "end": 840
+                  }
+                }
+              ],
+              "span": {
+                "file": 0,
+                "start": 822,
+                "end": 840
+              }
+            },
+            {
+              "names": [
+                {
+                  "text": "Cache",
+                  "span": {
+                    "file": 0,
+                    "start": 845,
+                    "end": 850
+                  }
+                },
+                {
+                  "text": "Search",
+                  "span": {
+                    "file": 0,
+                    "start": 852,
+                    "end": 858
+                  }
+                },
+                {
+                  "text": "Events",
+                  "span": {
+                    "file": 0,
+                    "start": 860,
+                    "end": 866
+                  }
+                }
+              ],
+              "attributes": [],
+              "span": {
+                "file": 0,
+                "start": 845,
+                "end": 866
+              }
+            }
+          ],
+          "span": {
+            "file": 0,
+            "start": 808,
+            "end": 870
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 708,
+        "end": 872
+      }
+    },
+    {
+      "name": {
+        "text": "us-east-1",
+        "span": {
+          "file": 0,
+          "start": 888,
+          "end": 897
+        }
+      },
+      "infra": [],
+      "groups": [
+        {
+          "kind": "cluster",
+          "name": {
+            "text": "k8s",
+            "span": {
+              "file": 0,
+              "start": 910,
+              "end": 913
+            }
+          },
+          "workloads": [
+            {
+              "names": [
+                {
+                  "text": "Web",
+                  "span": {
+                    "file": 0,
+                    "start": 920,
+                    "end": 923
+                  }
+                },
+                {
+                  "text": "Api",
+                  "span": {
+                    "file": 0,
+                    "start": 925,
+                    "end": 928
+                  }
+                }
+              ],
+              "attributes": [
+                {
+                  "kind": "replicas",
+                  "count": 2,
+                  "span": {
+                    "file": 0,
+                    "start": 929,
+                    "end": 931
+                  }
+                }
+              ],
+              "span": {
+                "file": 0,
+                "start": 920,
+                "end": 931
+              }
+            },
+            {
+              "names": [
+                {
+                  "text": "Fulfil",
+                  "span": {
+                    "file": 0,
+                    "start": 936,
+                    "end": 942
+                  }
+                }
+              ],
+              "attributes": [
+                {
+                  "kind": "replicas",
+                  "count": 2,
+                  "span": {
+                    "file": 0,
+                    "start": 943,
+                    "end": 945
+                  }
+                }
+              ],
+              "span": {
+                "file": 0,
+                "start": 936,
+                "end": 945
+              }
+            }
+          ],
+          "span": {
+            "file": 0,
+            "start": 902,
+            "end": 949
+          }
+        },
+        {
+          "kind": "managed",
+          "name": null,
+          "workloads": [
+            {
+              "names": [
+                {
+                  "text": "Db",
+                  "span": {
+                    "file": 0,
+                    "start": 966,
+                    "end": 968
+                  }
+                }
+              ],
+              "attributes": [
+                {
+                  "kind": "primary_replica",
+                  "span": {
+                    "file": 0,
+                    "start": 969,
+                    "end": 984
+                  }
+                }
+              ],
+              "span": {
+                "file": 0,
+                "start": 966,
+                "end": 984
+              }
+            },
+            {
+              "names": [
+                {
+                  "text": "Cache",
+                  "span": {
+                    "file": 0,
+                    "start": 989,
+                    "end": 994
+                  }
+                },
+                {
+                  "text": "Search",
+                  "span": {
+                    "file": 0,
+                    "start": 996,
+                    "end": 1002
+                  }
+                },
+                {
+                  "text": "Events",
+                  "span": {
+                    "file": 0,
+                    "start": 1004,
+                    "end": 1010
+                  }
+                }
+              ],
+              "attributes": [],
+              "span": {
+                "file": 0,
+                "start": 989,
+                "end": 1010
+              }
+            }
+          ],
+          "span": {
+            "file": 0,
+            "start": 952,
+            "end": 1014
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 874,
+        "end": 1016
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "name": {
+        "text": "checkout",
+        "span": {
+          "file": 0,
+          "start": 1027,
+          "end": 1035
+        }
+      },
+      "steps": [
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "Customer",
+              "span": {
+                "file": 0,
+                "start": 1040,
+                "end": 1048
+              }
+            },
+            {
+              "text": "Front",
+              "span": {
+                "file": 0,
+                "start": 1052,
+                "end": 1057
+              }
+            },
+            {
+              "text": "Web",
+              "span": {
+                "file": 0,
+                "start": 1061,
+                "end": 1064
+              }
+            }
+          ],
+          "arrows": [
+            "call",
+            "call"
+          ],
+          "label": null,
+          "span": {
+            "file": 0,
+            "start": 1040,
+            "end": 1064
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "Web",
+              "span": {
+                "file": 0,
+                "start": 1067,
+                "end": 1070
+              }
+            },
+            {
+              "text": "Api",
+              "span": {
+                "file": 0,
+                "start": 1074,
+                "end": 1077
+              }
+            }
+          ],
+          "arrows": [
+            "call"
+          ],
+          "label": "POST /orders #1",
+          "span": {
+            "file": 0,
+            "start": 1067,
+            "end": 1095
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "Api",
+              "span": {
+                "file": 0,
+                "start": 1098,
+                "end": 1101
+              }
+            },
+            {
+              "text": "Payments",
+              "span": {
+                "file": 0,
+                "start": 1105,
+                "end": 1113
+              }
+            }
+          ],
+          "arrows": [
+            "call"
+          ],
+          "label": "charge",
+          "span": {
+            "file": 0,
+            "start": 1098,
+            "end": 1122
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "Payments",
+              "span": {
+                "file": 0,
+                "start": 1125,
+                "end": 1133
+              }
+            },
+            {
+              "text": "Api",
+              "span": {
+                "file": 0,
+                "start": 1138,
+                "end": 1141
+              }
+            }
+          ],
+          "arrows": [
+            "reply"
+          ],
+          "label": "ok",
+          "span": {
+            "file": 0,
+            "start": 1125,
+            "end": 1146
+          }
+        },
+        {
+          "kind": "parallel",
+          "steps": [
+            {
+              "kind": "message",
+              "hops": [
+                {
+                  "text": "Api",
+                  "span": {
+                    "file": 0,
+                    "start": 1164,
+                    "end": 1167
+                  }
+                },
+                {
+                  "text": "Db",
+                  "span": {
+                    "file": 0,
+                    "start": 1171,
+                    "end": 1173
+                  }
+                }
+              ],
+              "arrows": [
+                "call"
+              ],
+              "label": "insert",
+              "span": {
+                "file": 0,
+                "start": 1164,
+                "end": 1182
+              }
+            },
+            {
+              "kind": "message",
+              "hops": [
+                {
+                  "text": "Api",
+                  "span": {
+                    "file": 0,
+                    "start": 1187,
+                    "end": 1190
+                  }
+                },
+                {
+                  "text": "Events",
+                  "span": {
+                    "file": 0,
+                    "start": 1194,
+                    "end": 1200
+                  }
+                }
+              ],
+              "arrows": [
+                "async"
+              ],
+              "label": "order placed",
+              "span": {
+                "file": 0,
+                "start": 1187,
+                "end": 1215
+              }
+            },
+            {
+              "kind": "parallel",
+              "steps": [
+                {
+                  "kind": "message",
+                  "hops": [
+                    {
+                      "text": "Api",
+                      "span": {
+                        "file": 0,
+                        "start": 1237,
+                        "end": 1240
+                      }
+                    },
+                    {
+                      "text": "Cache",
+                      "span": {
+                        "file": 0,
+                        "start": 1244,
+                        "end": 1249
+                      }
+                    }
+                  ],
+                  "arrows": [
+                    "call"
+                  ],
+                  "label": "warm",
+                  "span": {
+                    "file": 0,
+                    "start": 1237,
+                    "end": 1256
+                  }
+                }
+              ],
+              "span": {
+                "file": 0,
+                "start": 1220,
+                "end": 1262
+              }
+            }
+          ],
+          "span": {
+            "file": 0,
+            "start": 1149,
+            "end": 1266
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "Api",
+              "span": {
+                "file": 0,
+                "start": 1269,
+                "end": 1272
+              }
+            },
+            {
+              "text": "Web",
+              "span": {
+                "file": 0,
+                "start": 1277,
+                "end": 1280
+              }
+            }
+          ],
+          "arrows": [
+            "reply"
+          ],
+          "label": "201",
+          "span": {
+            "file": 0,
+            "start": 1269,
+            "end": 1286
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "Web",
+              "span": {
+                "file": 0,
+                "start": 1289,
+                "end": 1292
+              }
+            },
+            {
+              "text": "Front",
+              "span": {
+                "file": 0,
+                "start": 1297,
+                "end": 1302
+              }
+            },
+            {
+              "text": "Customer",
+              "span": {
+                "file": 0,
+                "start": 1307,
+                "end": 1315
+              }
+            }
+          ],
+          "arrows": [
+            "reply",
+            "reply"
+          ],
+          "label": "confirmation",
+          "span": {
+            "file": 0,
+            "start": 1289,
+            "end": 1330
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 1018,
+        "end": 1332
+      }
+    }
+  ],
+  "allows": []
+}

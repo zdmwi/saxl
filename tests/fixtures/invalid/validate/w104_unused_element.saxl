@@ -1,0 +1,7 @@
+# expect: W104 @ 5:1
+system Shop
+actor Buyer
+service Web
+service Legacy
+Buyer -> Web
+allow W101 "fixture"

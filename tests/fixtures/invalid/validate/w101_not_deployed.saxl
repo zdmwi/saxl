@@ -1,0 +1,5 @@
+# expect: W101 @ 4:1
+system Shop
+actor Buyer
+service Web
+Buyer -> Web

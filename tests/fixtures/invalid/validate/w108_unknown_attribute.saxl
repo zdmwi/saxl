@@ -1,0 +1,13 @@
+# expect: W108 @ 8:12
+# expect: W108 @ 9:9
+system Shop
+service Web
+service Api
+deploy region eu {
+  cluster main {
+    Web x2 spot
+    Api foo+bar x2
+  }
+}
+allow W102 "fixture"
+allow W104 "fixture"

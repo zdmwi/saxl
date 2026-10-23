@@ -1,0 +1,11 @@
+# expect: E006 @ 9:3
+system Shop
+actor Buyer
+service Web
+external Email
+Buyer -> Web
+scenario order {
+  Buyer -> Web
+  Web ~> Email : receipt
+}
+allow W101 "fixture"

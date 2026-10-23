@@ -1,0 +1,6 @@
+# expect: E001 @ 4:7
+system Shop
+service Web
+store Web
+allow W101 "fixture"
+allow W104 "fixture"

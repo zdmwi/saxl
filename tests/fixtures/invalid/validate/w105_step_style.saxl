@@ -1,0 +1,11 @@
+# expect: W105 @ 9:3
+system Shop
+service Web
+service Worker
+queue Jobs
+Web -> Jobs
+Jobs ~> Worker
+scenario order {
+  Web ~> Jobs : enqueue
+}
+allow W101 "fixture"

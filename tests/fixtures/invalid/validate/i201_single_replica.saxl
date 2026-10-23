@@ -1,0 +1,16 @@
+# expect: I201 @ 9:5
+system Shop
+actor Buyer
+service Web
+service Api
+Buyer -> Web -> Api
+deploy region eu {
+  cluster main {
+    Web x1
+    Api autoscale
+  }
+}
+scenario browse {
+  Buyer -> Web -> Api
+}
+allow W102 "fixture"

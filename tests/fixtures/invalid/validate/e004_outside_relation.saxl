@@ -1,0 +1,5 @@
+# expect: E004 @ 5:1
+system Shop
+actor Buyer
+external Payments
+Buyer -> Payments

@@ -1,0 +1,5 @@
+# expect: P005 @ 4:7
+# expect: P005 @ 5:7
+system Shop
+allow W10 "single region is fine for now"
+allow "missing code"

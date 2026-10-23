@@ -1,0 +1,7 @@
+# expect: E010 @ 5:7
+# expect: E010 @ 6:7
+# expect: E010 @ 7:7
+system Shop
+allow E006 "scenarios are drafts"
+allow P001 "parse errors are fine"
+allow W999 "no such rule"
