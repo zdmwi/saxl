@@ -1,0 +1,27 @@
+# expect: E015 @ 8:16
+# expect: E015 @ 9:1
+# expect: E015 @ 13:1
+# expect: E015 @ 14:6
+# expect: E015 @ 17:9
+# expect: E015 @ 20:1
+system Shop
+service Web at "src/web.rs"
+module Cart
+store DB
+Web -> Cart
+Web -> DB
+Cart impl Web
+data Order in DB pub { id }
+deploy region eu {
+  cluster main {
+    Web feature beta
+  }
+}
+publish npm {
+  package web {
+    Web
+  }
+}
+allow W101 "fixture"
+allow W102 "fixture"
+allow W103 "fixture"

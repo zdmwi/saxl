@@ -1,0 +1,42 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e013_impl_kind.saxl
+---
+E013
+
+  × `parse` implements `ast`, which is not a hook
+    ╭─[tests/fixtures/invalid/validate/e013_impl_kind.saxl:12:12]
+ 11 │ App -> parse
+ 12 │ parse impl ast
+    ·            ─┬─
+    ·             ╰── `ast` is a module
+ 13 │ unicode impl ast
+    ╰────
+  help: only hooks can be implemented; declare `ast` as `hook`, or remove this line
+
+E013
+
+  × `unicode` can't implement a hook
+    ╭─[tests/fixtures/invalid/validate/e013_impl_kind.saxl:13:1]
+ 12 │ parse impl ast
+ 13 │ unicode impl ast
+    · ───┬───
+    ·    ╰── `unicode` is a package
+ 14 │ allow W110 "fixture"
+    ╰────
+  help: a hook is implemented by an api, a module, or a consumer
+
+E013
+
+  × `unicode` implements `ast`, which is not a hook
+    ╭─[tests/fixtures/invalid/validate/e013_impl_kind.saxl:13:14]
+ 12 │ parse impl ast
+ 13 │ unicode impl ast
+    ·              ─┬─
+    ·               ╰── `ast` is a module
+ 14 │ allow W110 "fixture"
+    ╰────
+  help: only hooks can be implemented; declare `ast` as `hook`, or remove this line
+
+checked 1 file: 3 errors, 0 warnings, 0 infos

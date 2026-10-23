@@ -4,7 +4,9 @@
 mod resolve;
 mod rules;
 
-pub use resolve::{BrokenRefs, DeployedElement, ElementId, InfraId, Resolved, Target};
+pub use resolve::{
+    BrokenRefs, DeployedElement, ElementId, InfraId, PublishedElement, Resolved, Target,
+};
 pub use rules::{Context, Rule, rules};
 use saxl_core::{Diagnostic, Model, Severity};
 
@@ -89,8 +91,8 @@ macro_rules! docs {
 
 static DOCS: &[(&str, &str)] = docs![
     "P001", "P002", "P003", "P004", "P005", "P006", "P007", "E001", "E002", "E003", "E004", "E005",
-    "E006", "E007", "E008", "E009", "E010", "E011", "W101", "W102", "W103", "W104", "W105", "W106",
-    "W107", "W108", "I201",
+    "E006", "E007", "E008", "E009", "E010", "E011", "E012", "E013", "E014", "E015", "W101", "W102",
+    "W103", "W104", "W105", "W106", "W107", "W108", "W109", "W110", "I201", "I202",
 ];
 
 /// The markdown documentation for `code`, if the code exists.

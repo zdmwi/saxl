@@ -1,4 +1,4 @@
-//! W108: unknown deployment attribute.
+//! W108: unknown deployment or publish attribute.
 
 use saxl_core::{Attribute, Diagnostic, Severity};
 
@@ -16,30 +16,48 @@ impl super::Rule for Rule {
     }
 
     fn summary(&self) -> &'static str {
-        "unknown deployment attribute"
+        "unknown deployment or publish attribute"
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
-        let workloads = cx
+        let deployed = cx
             .model
             .regions
             .iter()
             .flat_map(|r| &r.groups)
             .flat_map(|g| &g.workloads);
-        for attr in workloads.flat_map(|w| &w.attributes) {
-            if let Attribute::Unknown { text, span } = attr {
-                out.push(
-                    Diagnostic::new(
-                        "W108",
-                        Severity::Warning,
-                        format!("unknown deployment attribute `{text}`"),
-                        *span,
-                        "not a known attribute",
-                    )
-                    .with_help(
-                        "known attributes are `xN` (replicas), `autoscale`, and `primary+replica`",
-                    ),
-                );
+        let published = cx
+            .model
+            .registries
+            .iter()
+            .flat_map(|r| &r.packages)
+            .flat_map(|p| &p.workloads);
+        let blocks = [
+            (
+                deployed.collect::<Vec<_>>(),
+                "deployment",
+                "known attributes are `xN` (replicas), `autoscale`, and `primary+replica`",
+            ),
+            (
+                published.collect(),
+                "publish",
+                "the known attribute is `feature <name>`",
+            ),
+        ];
+        for (workloads, block, help) in blocks {
+            for attr in workloads.iter().flat_map(|w| &w.attributes) {
+                if let Attribute::Unknown { text, span } = attr {
+                    out.push(
+                        Diagnostic::new(
+                            "W108",
+                            Severity::Warning,
+                            format!("unknown {block} attribute `{text}`"),
+                            *span,
+                            "not a known attribute",
+                        )
+                        .with_help(help),
+                    );
+                }
             }
         }
     }

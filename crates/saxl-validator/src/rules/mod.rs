@@ -1,7 +1,7 @@
 //! The rule registry and the helpers rules share.
 
 use saxl_core::{
-    Diagnostic, Element, Model, NameRef, Scenario, Severity, Span, Step, StepArrow, Style,
+    Diagnostic, Element, Model, NameRef, RootKind, Scenario, Severity, Span, Step, StepArrow, Style,
 };
 
 use crate::resolve::{BrokenRefs, ElementId, Resolved, Target};
@@ -17,7 +17,12 @@ mod e008_outside_deployed;
 mod e009_deployed_twice;
 mod e010_allow_code;
 mod e011_infra_misuse;
+mod e012_consumer_internal;
+mod e013_impl_kind;
+mod e014_at_overlap;
+mod e015_wrong_root;
 mod i201_single_replica;
+mod i202_unimplemented_hook;
 mod w101_not_deployed;
 mod w102_single_region;
 mod w103_store_replica;
@@ -26,6 +31,8 @@ mod w105_step_style;
 mod w106_queue_ends;
 mod w107_sync_cycle;
 mod w108_unknown_attribute;
+mod w109_feature_leak;
+mod w110_not_published;
 
 /// A semantic check.
 pub trait Rule: Sync {
@@ -50,6 +57,15 @@ pub struct Context<'a> {
 }
 
 impl Context<'_> {
+    /// Whether the file describes a library. A file with no root is checked
+    /// as a system.
+    pub fn is_library(&self) -> bool {
+        self.model
+            .roots
+            .first()
+            .is_some_and(|r| r.kind == RootKind::Library)
+    }
+
     /// The element with `id`.
     pub fn element(&self, id: ElementId) -> &Element {
         &self.model.elements[id.index()]
@@ -135,6 +151,10 @@ static RULES: &[&dyn Rule] = &[
     &e009_deployed_twice::Rule,
     &e010_allow_code::Rule,
     &e011_infra_misuse::Rule,
+    &e012_consumer_internal::Rule,
+    &e013_impl_kind::Rule,
+    &e014_at_overlap::Rule,
+    &e015_wrong_root::Rule,
     &w101_not_deployed::Rule,
     &w102_single_region::Rule,
     &w103_store_replica::Rule,
@@ -143,7 +163,10 @@ static RULES: &[&dyn Rule] = &[
     &w106_queue_ends::Rule,
     &w107_sync_cycle::Rule,
     &w108_unknown_attribute::Rule,
+    &w109_feature_leak::Rule,
+    &w110_not_published::Rule,
     &i201_single_replica::Rule,
+    &i202_unimplemented_hook::Rule,
 ];
 
 /// Every validator rule, in the order they run.

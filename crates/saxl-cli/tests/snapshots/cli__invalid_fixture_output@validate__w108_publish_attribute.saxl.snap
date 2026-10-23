@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/w108_publish_attribute.saxl
+---
+W108
+
+  ⚠ unknown publish attribute `optional`
+   ╭─[tests/fixtures/invalid/validate/w108_publish_attribute.saxl:6:11]
+ 5 │   crate quill {
+ 6 │     parse optional
+   ·           ────┬───
+   ·               ╰── not a known attribute
+ 7 │   }
+   ╰────
+  help: the known attribute is `feature <name>`
+
+checked 1 file: 0 errors, 1 warning, 0 infos

@@ -1,0 +1,9 @@
+# expect: E012 @ 7:1
+library Quill
+consumer App
+api parse
+module blocks
+App -> parse
+App -> blocks
+parse -> blocks
+allow W110 "fixture"

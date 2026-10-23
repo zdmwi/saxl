@@ -22,6 +22,9 @@ impl super::Rule for Rule {
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
+        if cx.is_library() {
+            return;
+        }
         for (i, element) in cx.model.elements.iter().enumerate() {
             if element.kind != ElementKind::Queue {
                 continue;

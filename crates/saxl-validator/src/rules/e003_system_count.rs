@@ -1,4 +1,4 @@
-//! E003: there must be exactly one `system` statement.
+//! E003: there must be exactly one `system` or `library` statement.
 
 use saxl_core::{Diagnostic, FileId, Severity, Span};
 
@@ -16,7 +16,7 @@ impl super::Rule for Rule {
     }
 
     fn summary(&self) -> &'static str {
-        "there must be exactly one `system` statement"
+        "there must be exactly one `system` or `library` statement"
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
@@ -35,12 +35,12 @@ impl super::Rule for Rule {
                 out.push(
                     Diagnostic::error(
                         "E003",
-                        "no `system` statement",
+                        "no `system` or `library` statement",
                         Span::new(file, 0, 0),
                         "file starts here",
                     )
                     .with_help(
-                        "add `system <Name> \"description\"` to name the system being described",
+                        "add `system <Name> \"description\"` or `library <Name> \"description\"` to name what the file describes",
                     ),
                 );
             }

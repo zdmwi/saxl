@@ -20,6 +20,9 @@ impl super::Rule for Rule {
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
+        if cx.is_library() {
+            return;
+        }
         let mut used = cx
             .model
             .regions

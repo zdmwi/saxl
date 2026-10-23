@@ -63,10 +63,7 @@ mod tests {
 
     #[test]
     fn quill_parses_cleanly() {
-        let parsed = parse(
-            include_str!("../../../tests/fixtures/library/quill.saxl"),
-            FileId(0),
-        );
+        let parsed = parse(include_str!("../../../examples/quill.saxl"), FileId(0));
         assert!(parsed.diagnostics.is_empty(), "{:#?}", parsed.diagnostics);
         let m = &parsed.model;
         assert_eq!(m.roots[0].kind, saxl_core::RootKind::Library);

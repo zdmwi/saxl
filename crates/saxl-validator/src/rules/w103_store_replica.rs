@@ -22,6 +22,9 @@ impl super::Rule for Rule {
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
+        if cx.is_library() {
+            return;
+        }
         let mut stores = BTreeSet::new();
         for (data, broken) in cx.model.data.iter().zip(&cx.broken.data) {
             if *broken {

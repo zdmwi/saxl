@@ -1,0 +1,54 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e014_at_overlap.saxl
+---
+E014
+
+  × `parse` and `escape` claim the same files
+   ╭─[tests/fixtures/invalid/validate/e014_at_overlap.saxl:6:18]
+ 4 │ library Quill
+ 5 │ api parse at "src/**"
+   ·              ────┬───
+   ·                  ╰── `parse` is here
+ 6 │ module escape at "src/escape.rs"
+   ·                  ───────┬───────
+   ·                         ╰── overlaps `src/**`
+ 7 │ module blocks at "src/blocks/**"
+   ╰────
+  help: narrow one pattern so each file belongs to one element
+
+E014
+
+  × `parse` and `blocks` claim the same files
+   ╭─[tests/fixtures/invalid/validate/e014_at_overlap.saxl:7:18]
+ 4 │ library Quill
+ 5 │ api parse at "src/**"
+   ·              ────┬───
+   ·                  ╰── `parse` is here
+ 6 │ module escape at "src/escape.rs"
+ 7 │ module blocks at "src/blocks/**"
+   ·                  ───────┬───────
+   ·                         ╰── overlaps `src/**`
+ 8 │ module inlines at "src/blocks/*.rs"
+   ╰────
+  help: narrow one pattern so each file belongs to one element
+
+E014
+
+  × `parse` and `inlines` claim the same files
+   ╭─[tests/fixtures/invalid/validate/e014_at_overlap.saxl:8:19]
+ 4 │ library Quill
+ 5 │ api parse at "src/**"
+   ·              ────┬───
+   ·                  ╰── `parse` is here
+ 6 │ module escape at "src/escape.rs"
+ 7 │ module blocks at "src/blocks/**"
+ 8 │ module inlines at "src/blocks/*.rs"
+   ·                   ────────┬────────
+   ·                           ╰── overlaps `src/**`
+ 9 │ parse -> escape
+   ╰────
+  help: narrow one pattern so each file belongs to one element
+
+checked 1 file: 3 errors, 0 warnings, 0 infos

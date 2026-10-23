@@ -143,6 +143,14 @@ impl ElementKind {
         )
     }
 
+    /// `a` or `an`, whichever goes before [`Self::keyword`].
+    pub fn article(self) -> &'static str {
+        match self {
+            Self::Actor | Self::External | Self::Api => "an",
+            _ => "a",
+        }
+    }
+
     /// The keyword that declares this kind.
     pub fn keyword(self) -> &'static str {
         match self {
@@ -402,6 +410,14 @@ impl Workload {
         self.attributes
             .iter()
             .any(|a| matches!(a, Attribute::Autoscale { .. }))
+    }
+
+    /// The feature named by `feature f`, if the line has one.
+    pub fn feature(&self) -> Option<&Name> {
+        self.attributes.iter().find_map(|a| match a {
+            Attribute::Feature { name, .. } => Some(name),
+            _ => None,
+        })
     }
 
     /// Whether the line has `primary+replica`.

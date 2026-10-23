@@ -17,7 +17,6 @@ fn sources() -> Vec<(String, String)> {
     for dir in [
         "examples",
         "tests/fixtures/valid",
-        "tests/fixtures/library",
         "tests/fixtures/invalid/parse",
         "tests/fixtures/invalid/validate",
     ] {

@@ -1,0 +1,19 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/i202_unimplemented_hook.saxl
+---
+I202
+
+  ☞ hook `Highlighter` has no implementation in the library
+   ╭─[tests/fixtures/invalid/validate/i202_unimplemented_hook.saxl:5:1]
+ 4 │ api to_html
+ 5 │ hook Highlighter
+   · ────────┬───────
+   ·         ╰── every consumer must provide one
+ 6 │ hook Extension
+   ╰────
+  help: add a default (`<module> impl Highlighter`), or `allow I202` if consumers are expected to
+        bring their own
+
+checked 1 file: 0 errors, 0 warnings, 1 info

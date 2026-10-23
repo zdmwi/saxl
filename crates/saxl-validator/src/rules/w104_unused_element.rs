@@ -25,6 +25,11 @@ impl super::Rule for Rule {
             used[f.index()] = true;
             used[t.index()] = true;
         }
+        // Implementing a hook uses the implementor. The hook itself counts as
+        // used only when something calls it.
+        for (implementor, _) in cx.resolved.impl_ends.iter().flatten() {
+            used[implementor.index()] = true;
+        }
         let mut mark = |r: &NameRef| {
             if let Some(id) = cx.resolved.element(&r.text) {
                 used[id.index()] = true;

@@ -56,6 +56,21 @@ pub struct DeployedElement {
     pub span: Span,
 }
 
+/// Where one element is published.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PublishedElement {
+    /// Index into [`Model::registries`].
+    pub registry: usize,
+    /// Index into the registry's packages.
+    pub package: usize,
+    /// Index into the package's workloads.
+    pub workload: usize,
+    /// The feature the workload is gated on, if any.
+    pub feature: Option<String>,
+    /// Where the element is named in the workload line.
+    pub span: Span,
+}
+
 /// The result of name resolution.
 #[derive(Debug, Clone)]
 pub struct Resolved {
@@ -70,6 +85,11 @@ pub struct Resolved {
     pub graph: DiGraph<ElementId, Style>,
     /// Per element: where it runs.
     pub deployments: Vec<Vec<DeployedElement>>,
+    /// Per element: where it is published.
+    pub publications: Vec<Vec<PublishedElement>>,
+    /// Parallel to [`Model::impls`]: `(implementor, hook)`. `None` only for
+    /// statements with a broken reference.
+    pub impl_ends: Vec<Option<(ElementId, ElementId)>>,
 }
 
 impl Resolved {
@@ -99,6 +119,8 @@ pub struct BrokenRefs {
     pub scenarios: Vec<bool>,
     /// `(region, group, workload)` triples.
     pub workloads: BTreeSet<(usize, usize, usize)>,
+    /// `(registry, package, workload)` triples.
+    pub published: BTreeSet<(usize, usize, usize)>,
     /// E001, E002, and E011 diagnostics found while resolving.
     pub(crate) diagnostics: Vec<Diagnostic>,
 }
@@ -209,6 +231,39 @@ pub(crate) fn resolve(model: &Model) -> (Resolved, BrokenRefs) {
         }
     }
 
+    let mut publications = vec![Vec::new(); model.elements.len()];
+    for (r, registry) in model.registries.iter().enumerate() {
+        for (p, package) in registry.packages.iter().enumerate() {
+            for (w, workload) in package.workloads.iter().enumerate() {
+                let feature = workload.feature().map(|f| f.text.clone());
+                for name in &workload.names {
+                    match cx.element(name, "a publish workload") {
+                        Some(id) => publications[id.index()].push(PublishedElement {
+                            registry: r,
+                            package: p,
+                            workload: w,
+                            feature: feature.clone(),
+                            span: name.span,
+                        }),
+                        None => {
+                            broken.published.insert((r, p, w));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    let impl_ends = model
+        .impls
+        .iter()
+        .map(|i| {
+            let implementor = cx.element(&i.implementor, "an `impl` statement");
+            let hook = cx.element(&i.hook, "an `impl` statement");
+            implementor.zip(hook)
+        })
+        .collect();
+
     for (i, scenario) in model.scenarios.iter().enumerate() {
         broken.scenarios[i] = !cx.steps(&scenario.steps);
     }
@@ -229,6 +284,8 @@ pub(crate) fn resolve(model: &Model) -> (Resolved, BrokenRefs) {
         relation_ends,
         graph,
         deployments,
+        publications,
+        impl_ends,
     };
     (resolved, broken)
 }

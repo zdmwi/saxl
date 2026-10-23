@@ -20,6 +20,9 @@ impl super::Rule for Rule {
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
+        if cx.is_library() {
+            return;
+        }
         for (element, deployments) in cx.model.elements.iter().zip(&cx.resolved.deployments) {
             if element.kind.is_internal() && deployments.is_empty() {
                 out.push(

@@ -1,0 +1,11 @@
+# expect: E008 @ 8:14
+library Quill
+api to_html
+hook Highlighter
+to_html -> Highlighter
+publish "crates.io" {
+  crate quill {
+    to_html, Highlighter
+  }
+}
+allow I202 "fixture"

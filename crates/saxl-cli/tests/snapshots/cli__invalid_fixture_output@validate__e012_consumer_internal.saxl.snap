@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e012_consumer_internal.saxl
+---
+E012
+
+  × consumer `App` calls an internal module
+   ╭─[tests/fixtures/invalid/validate/e012_consumer_internal.saxl:7:1]
+ 6 │ App -> parse
+ 7 │ App -> blocks
+   · ──────┬──────
+   ·       ╰── `blocks` is not part of the public API
+ 8 │ parse -> blocks
+   ╰────
+  help: call an api that uses `blocks`, or declare `blocks` as `api`
+
+checked 1 file: 1 error, 0 warnings, 0 infos

@@ -1,0 +1,19 @@
+# expect: W109 @ 10:1
+# expect: W109 @ 11:1
+# expect: W109 @ 12:1
+library Quill
+api to_html
+module html
+module highlight
+module tables
+to_html -> html
+html -> highlight
+tables -> highlight
+to_html -> tables
+publish "crates.io" {
+  crate quill {
+    to_html, html
+    highlight feature syntect
+    tables feature gfm
+  }
+}

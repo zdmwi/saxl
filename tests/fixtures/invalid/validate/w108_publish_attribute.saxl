@@ -1,0 +1,9 @@
+# expect: W108 @ 6:11
+library Quill
+api parse
+publish "crates.io" {
+  crate quill {
+    parse optional
+  }
+}
+allow W104 "fixture"

@@ -116,7 +116,7 @@ fn ir_schema() {
 #[test]
 fn explain() {
     let list = stdout(saxl().arg("explain"));
-    assert_eq!(list.lines().count(), 27);
+    assert_eq!(list.lines().count(), 34);
     assert!(list.contains("E006  a scenario step has no matching relation"));
     let doc = stdout(saxl().args(["explain", "w102"]));
     assert!(doc.starts_with("# W102:"));
