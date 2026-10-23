@@ -1,0 +1,17 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e004_outside_relation.saxl
+---
+E004
+
+  × relation connects two elements outside the system
+   ╭─[tests/fixtures/invalid/validate/e004_outside_relation.saxl:5:1]
+ 4 │ external Payments
+ 5 │ Buyer -> Payments
+   · ────────┬────────
+   ·         ╰── `Buyer` (actor) and `Payments` (external) are both outside the system
+   ╰────
+  help: a relation needs at least one service, store, or queue inside the system
+
+checked 1 file: 1 error, 0 warnings, 0 infos

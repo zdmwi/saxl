@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e008_outside_deployed.saxl
+---
+E008
+
+  × `Buyer` is an actor and can't be deployed
+   ╭─[tests/fixtures/invalid/validate/e008_outside_deployed.saxl:8:10]
+ 7 │   cluster main {
+ 8 │     Web, Buyer x2
+   ·          ──┬──
+   ·            ╰── actors run outside the system
+ 9 │   }
+   ╰────
+  help: only services, stores, and queues are deployed
+
+checked 1 file: 1 error, 0 warnings, 0 infos

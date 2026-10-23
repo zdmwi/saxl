@@ -1,0 +1,29 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/parse/p005_malformed_code.saxl
+---
+P005
+
+  × malformed rule code after `allow`, found name `W10`
+   ╭─[tests/fixtures/invalid/parse/p005_malformed_code.saxl:4:7]
+ 3 │ system Shop
+ 4 │ allow W10 "single region is fine for now"
+   ·       ─┬─
+   ·        ╰── expected a rule code
+ 5 │ allow "missing code"
+   ╰────
+  help: rule codes are a letter and three digits, for example `W102`
+
+P005
+
+  × malformed rule code after `allow`, found string
+   ╭─[tests/fixtures/invalid/parse/p005_malformed_code.saxl:5:7]
+ 4 │ allow W10 "single region is fine for now"
+ 5 │ allow "missing code"
+   ·       ───────┬──────
+   ·              ╰── expected a rule code
+   ╰────
+  help: rule codes are a letter and three digits, for example `W102`
+
+checked 1 file: 2 errors, 0 warnings, 0 infos

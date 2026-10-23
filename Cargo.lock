@@ -774,6 +774,7 @@ version = "0.1.0"
 dependencies = [
  "assert_cmd",
  "clap",
+ "insta",
  "miette",
  "saxl-core",
  "saxl-parser",

@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/i201_single_replica.saxl
+---
+I201
+
+  ☞ service `Web` runs one replica but serves synchronous calls
+    ╭─[tests/fixtures/invalid/validate/i201_single_replica.saxl:9:5]
+  8 │   cluster main {
+  9 │     Web x1
+    ·     ─┬─
+    ·      ╰── single replica
+ 10 │     Api autoscale
+    ╰────
+  help: callers wait on it, so it is a single point of failure; add replicas (`x2`) or `autoscale`
+
+checked 1 file: 0 errors, 0 warnings, 1 info

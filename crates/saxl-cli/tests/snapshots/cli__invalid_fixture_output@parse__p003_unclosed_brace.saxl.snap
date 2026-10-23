@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/parse/p003_unclosed_brace.saxl
+---
+P003
+
+  × unclosed `{` at end of file
+   ╭─[tests/fixtures/invalid/parse/p003_unclosed_brace.saxl:4:18]
+ 3 │ service Web
+ 4 │ deploy region eu {
+   ·                  ┬
+   ·                  ╰── this `{` is never closed
+ 5 │   cluster main {
+   ╰────
+  help: add a matching `}` on its own line
+
+checked 1 file: 1 error, 0 warnings, 0 infos

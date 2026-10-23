@@ -1,0 +1,20 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e003_two_systems.saxl
+---
+E003
+
+  × more than one `system` statement
+   ╭─[tests/fixtures/invalid/validate/e003_two_systems.saxl:3:1]
+ 1 │ # expect: E003 @ 3:1
+ 2 │ system Shop
+   · ─────┬─────
+   ·      ╰── first `system` here
+ 3 │ system Store
+   · ──────┬─────
+   ·       ╰── second `system`
+   ╰────
+  help: describe one system per file
+
+checked 1 file: 1 error, 0 warnings, 0 infos

@@ -1,0 +1,17 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/parse/p002_unterminated_string.saxl
+---
+P002
+
+  × unterminated string
+   ╭─[tests/fixtures/invalid/parse/p002_unterminated_string.saxl:2:13]
+ 1 │ # expect: P002 @ 2:13
+ 2 │ system Shop "online store
+   ·             ──────┬──────
+   ·                   ╰── string is not closed before the end of the line
+ 3 │ service Web
+   ╰────
+
+checked 1 file: 1 error, 0 warnings, 0 infos

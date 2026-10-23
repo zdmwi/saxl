@@ -1,0 +1,27 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/parse/p001_newline_in_statement.saxl
+---
+P001
+
+  × expected name, found end of line
+   ╭─[tests/fixtures/invalid/parse/p001_newline_in_statement.saxl:5:7]
+ 4 │ service Web
+ 5 │ Web ->
+   ·       ┬
+   ·       ╰── expected name
+ 6 │   Api
+   ╰────
+
+P001
+
+  × expected `->` or `~>`, found end of line
+   ╭─[tests/fixtures/invalid/parse/p001_newline_in_statement.saxl:6:6]
+ 5 │ Web ->
+ 6 │   Api
+   ·      ┬
+   ·      ╰── expected `->` or `~>`
+   ╰────
+
+checked 1 file: 2 errors, 0 warnings, 0 infos

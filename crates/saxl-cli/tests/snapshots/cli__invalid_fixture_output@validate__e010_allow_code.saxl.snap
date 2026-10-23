@@ -1,0 +1,41 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e010_allow_code.saxl
+---
+E010
+
+  × `E006` is an error and can't be allowed
+   ╭─[tests/fixtures/invalid/validate/e010_allow_code.saxl:5:7]
+ 4 │ system Shop
+ 5 │ allow E006 "scenarios are drafts"
+   ·       ──┬─
+   ·         ╰── error code
+ 6 │ allow P001 "parse errors are fine"
+   ╰────
+  help: only warnings (W) and infos (I) can be allowed; fix the error instead
+
+E010
+
+  × `P001` is an error and can't be allowed
+   ╭─[tests/fixtures/invalid/validate/e010_allow_code.saxl:6:7]
+ 5 │ allow E006 "scenarios are drafts"
+ 6 │ allow P001 "parse errors are fine"
+   ·       ──┬─
+   ·         ╰── error code
+ 7 │ allow W999 "no such rule"
+   ╰────
+  help: only warnings (W) and infos (I) can be allowed; fix the error instead
+
+E010
+
+  × unknown rule code `W999`
+   ╭─[tests/fixtures/invalid/validate/e010_allow_code.saxl:7:7]
+ 6 │ allow P001 "parse errors are fine"
+ 7 │ allow W999 "no such rule"
+   ·       ──┬─
+   ·         ╰── no rule has this code
+   ╰────
+  help: run `saxl explain` to list every code
+
+checked 1 file: 3 errors, 0 warnings, 0 infos

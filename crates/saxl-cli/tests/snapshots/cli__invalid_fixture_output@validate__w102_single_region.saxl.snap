@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/w102_single_region.saxl
+---
+W102
+
+  ⚠ every workload is in a single region
+   ╭─[tests/fixtures/invalid/validate/w102_single_region.saxl:6:15]
+ 5 │ Buyer -> Web
+ 6 │ deploy region eu {
+   ·               ─┬
+   ·                ╰── a regional outage takes the whole system down
+ 7 │   cluster main {
+   ╰────
+  help: deploy to a second region, or `allow W102` with a reason
+
+checked 1 file: 0 errors, 1 warning, 0 infos

@@ -1,0 +1,16 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/parse/p006_unrecognized_character.saxl
+---
+P006
+
+  × unrecognized character `@`
+   ╭─[tests/fixtures/invalid/parse/p006_unrecognized_character.saxl:3:13]
+ 2 │ system Shop
+ 3 │ service Web @ "frontend"
+   ·             ┬
+   ·             ╰── not valid here
+   ╰────
+
+checked 1 file: 1 error, 0 warnings, 0 infos

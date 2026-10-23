@@ -1,0 +1,16 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/parse/p001_unexpected_token.saxl
+---
+P001
+
+  × expected service name, found end of line
+   ╭─[tests/fixtures/invalid/parse/p001_unexpected_token.saxl:3:8]
+ 2 │ system Shop
+ 3 │ service
+   ·        ┬
+   ·        ╰── expected service name
+   ╰────
+
+checked 1 file: 1 error, 0 warnings, 0 infos

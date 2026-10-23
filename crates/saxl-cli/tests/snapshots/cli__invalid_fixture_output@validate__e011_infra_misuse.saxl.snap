@@ -1,0 +1,54 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e011_infra_misuse.saxl
+---
+E011
+
+  × infrastructure node `Edge` can't be used in a relation
+   ╭─[tests/fixtures/invalid/validate/e011_infra_misuse.saxl:8:10]
+ 7 │ service Web
+ 8 │ Buyer -> Edge
+   ·          ──┬─
+   ·            ╰── infrastructure node
+ 9 │ data Page in Edge { url }
+   ╰────
+  help: infrastructure nodes are only allowed between other hops of a scenario step
+
+E011
+
+  × infrastructure node `Edge` can't be used in a data placement
+    ╭─[tests/fixtures/invalid/validate/e011_infra_misuse.saxl:9:14]
+  8 │ Buyer -> Edge
+  9 │ data Page in Edge { url }
+    ·              ──┬─
+    ·                ╰── infrastructure node
+ 10 │ Buyer -> Web
+    ╰────
+  help: infrastructure nodes are only allowed between other hops of a scenario step
+
+E011
+
+  × infrastructure node `Edge` can't be used in a deployment workload
+    ╭─[tests/fixtures/invalid/validate/e011_infra_misuse.saxl:14:5]
+ 13 │   cluster main {
+ 14 │     Edge
+    ·     ──┬─
+    ·       ╰── infrastructure node
+ 15 │     Web x2
+    ╰────
+  help: infrastructure nodes are only allowed between other hops of a scenario step
+
+E011
+
+  × infrastructure node `Edge` can't be used in the start or end of a scenario step
+    ╭─[tests/fixtures/invalid/validate/e011_infra_misuse.saxl:19:12]
+ 18 │ scenario browse {
+ 19 │   Buyer -> Edge
+    ·            ──┬─
+    ·              ╰── infrastructure node
+ 20 │ }
+    ╰────
+  help: infrastructure nodes are only allowed between other hops of a scenario step
+
+checked 1 file: 4 errors, 0 warnings, 0 infos

@@ -1,6 +1,6 @@
 use serde::Serialize;
 
-use crate::Span;
+use crate::{LineIndex, Position, Span};
 
 /// A stable diagnostic code such as `"E006"`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize)]
@@ -124,5 +124,125 @@ impl Diagnostic {
     /// Start offset of the primary label, used for sorting.
     pub fn sort_key(&self) -> u32 {
         self.primary().map_or(0, |l| l.span.start)
+    }
+}
+
+/// How columns are counted in a [`LocatedDiagnostic`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ColumnUnit {
+    /// Unicode scalar values, for terminals.
+    Chars,
+    /// UTF-16 code units, for browser editors.
+    Utf16,
+}
+
+/// A byte range without its file, as written in JSON output.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+pub struct ByteRange {
+    /// Byte offset of the first byte.
+    pub start: u32,
+    /// Byte offset one past the last byte.
+    pub end: u32,
+}
+
+/// A start and end position.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+pub struct Range {
+    /// Where the range starts.
+    pub start: Position,
+    /// Where the range ends (exclusive).
+    pub end: Position,
+}
+
+/// A label with its line and column range.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+pub struct LocatedLabel {
+    /// Whether this is the diagnostic's main location.
+    pub primary: bool,
+    /// Short text shown next to the range.
+    pub message: String,
+    /// Byte offsets.
+    pub span: ByteRange,
+    /// 1-based lines and columns.
+    pub range: Range,
+}
+
+/// The JSON form of a diagnostic, shared by `saxl check --format json` and the
+/// playground. Labels carry line and column ranges.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS))]
+pub struct LocatedDiagnostic {
+    /// Stable code, for example `E006`.
+    #[cfg_attr(feature = "ts", ts(type = "string"))]
+    pub code: Code,
+    /// Severity.
+    pub severity: Severity,
+    /// One-line message.
+    pub message: String,
+    /// Labels, primary first.
+    pub labels: Vec<LocatedLabel>,
+    /// Optional help line.
+    pub help: Option<String>,
+}
+
+impl Diagnostic {
+    /// Resolves every label to lines and columns in `text`.
+    pub fn locate(&self, text: &str, index: &LineIndex, unit: ColumnUnit) -> LocatedDiagnostic {
+        let pos = |offset| match unit {
+            ColumnUnit::Chars => index.position(text, offset),
+            ColumnUnit::Utf16 => index.position_utf16(text, offset),
+        };
+        let mut labels: Vec<_> = self
+            .labels
+            .iter()
+            .map(|l| LocatedLabel {
+                primary: l.primary,
+                message: l.message.clone(),
+                span: ByteRange {
+                    start: l.span.start,
+                    end: l.span.end,
+                },
+                range: Range {
+                    start: pos(l.span.start),
+                    end: pos(l.span.end),
+                },
+            })
+            .collect();
+        labels.sort_by_key(|l| !l.primary);
+        LocatedDiagnostic {
+            code: self.code,
+            severity: self.severity,
+            message: self.message.clone(),
+            labels,
+            help: self.help.clone(),
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::FileId;
+
+    #[test]
+    fn locate_counts_columns_in_both_units() {
+        let text = "a𝄞 bad\n";
+        let start = text.find("bad").unwrap_or_default() as u32;
+        let d = Diagnostic::error("E002", "m", Span::new(FileId(0), start, start + 3), "here");
+        let idx = LineIndex::new(text);
+        let chars = d.locate(text, &idx, ColumnUnit::Chars);
+        let utf16 = d.locate(text, &idx, ColumnUnit::Utf16);
+        assert_eq!(chars.labels[0].range.start, Position { line: 1, col: 4 });
+        assert_eq!(utf16.labels[0].range.start, Position { line: 1, col: 5 });
+        assert_eq!(
+            chars.labels[0].span,
+            ByteRange {
+                start,
+                end: start + 3
+            }
+        );
     }
 }

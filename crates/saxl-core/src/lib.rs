@@ -5,6 +5,9 @@ mod diagnostic;
 mod ir;
 mod span;
 
-pub use diagnostic::{Code, Diagnostic, Label, Severity};
+pub use diagnostic::{
+    ByteRange, Code, ColumnUnit, Diagnostic, Label, LocatedDiagnostic, LocatedLabel, Range,
+    Severity,
+};
 pub use ir::*;
 pub use span::{FileId, LineIndex, Position, SourceFile, Span};

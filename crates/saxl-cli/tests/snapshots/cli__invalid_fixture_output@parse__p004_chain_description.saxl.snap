@@ -1,0 +1,17 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/parse/p004_chain_description.saxl
+---
+P004
+
+  × description string on a relation chain
+   ╭─[tests/fixtures/invalid/parse/p004_chain_description.saxl:6:20]
+ 5 │ store DB
+ 6 │ Buyer -> Web -> DB "checkout"
+   ·                    ─────┬────
+   ·                         ╰── a chain can't have a description
+   ╰────
+  help: split the chain into single-hop relations and describe the one you mean
+
+checked 1 file: 1 error, 0 warnings, 0 infos

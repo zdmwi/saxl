@@ -40,6 +40,19 @@ fn ci() -> Result<(), String> {
         ],
     )?;
     run("cargo", &["test", "--workspace"])?;
+    run(
+        "cargo",
+        &[
+            "run",
+            "-p",
+            "saxl-cli",
+            "--",
+            "check",
+            "examples/snip.saxl",
+            "--deny",
+            "warnings",
+        ],
+    )?;
     Ok(())
 }
 
