@@ -1,6 +1,6 @@
 //! End-to-end tests of the `saxl` binary: exit codes, output formats, and
 //! human output snapshots for every invalid fixture.
-#![allow(clippy::unwrap_used, clippy::expect_used, missing_docs)]
+#![allow(clippy::unwrap_used, clippy::expect_used, clippy::panic, missing_docs)]
 
 use std::path::{Path, PathBuf};
 
@@ -253,4 +253,165 @@ fn render_refuses_bad_input() {
         .arg(&out)
         .assert()
         .code(2);
+}
+
+fn temp_dir(name: &str) -> PathBuf {
+    let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join(name);
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+    dir
+}
+
+#[test]
+fn fmt_rewrites_and_checks() {
+    let dir = temp_dir("saxl-fmt-test");
+    let file = dir.join("messy.saxl");
+    std::fs::write(&file, "system   S\nactor U\nservice Web  \"w\"\nU->Web\n").unwrap();
+    saxl().args(["fmt", "--check"]).arg(&file).assert().code(1);
+    saxl().arg("fmt").arg(&file).assert().success();
+    assert_eq!(
+        std::fs::read_to_string(&file).unwrap(),
+        "system S\nactor   U\nservice Web \"w\"\nU -> Web\n"
+    );
+    saxl()
+        .args(["fmt", "--check"])
+        .arg(&file)
+        .assert()
+        .success()
+        .stdout("");
+    // Snip, the reference example, is canonical.
+    saxl()
+        .args(["fmt", "--check", "examples/snip.saxl"])
+        .assert()
+        .success();
+    // Files that don't parse are left alone.
+    let broken = dir.join("broken.saxl");
+    std::fs::write(&broken, "system\n").unwrap();
+    saxl().arg("fmt").arg(&broken).assert().code(1);
+    assert_eq!(std::fs::read_to_string(&broken).unwrap(), "system\n");
+}
+
+#[cfg(feature = "serve")]
+mod serve {
+    use std::io::{BufRead, BufReader, Read, Write};
+    use std::net::{TcpListener, TcpStream};
+    use std::process::{Child, Command, Stdio};
+    use std::time::{Duration, Instant};
+
+    use super::*;
+
+    /// Kills the server when the test ends, pass or fail.
+    struct Server(Child);
+
+    impl Drop for Server {
+        fn drop(&mut self) {
+            let _ = self.0.kill();
+            let _ = self.0.wait();
+        }
+    }
+
+    fn free_port() -> u16 {
+        TcpListener::bind("127.0.0.1:0")
+            .unwrap()
+            .local_addr()
+            .unwrap()
+            .port()
+    }
+
+    fn connect(port: u16) -> TcpStream {
+        let deadline = Instant::now() + Duration::from_secs(20);
+        loop {
+            match TcpStream::connect(("127.0.0.1", port)) {
+                Ok(s) => {
+                    s.set_read_timeout(Some(Duration::from_secs(15))).unwrap();
+                    return s;
+                }
+                Err(_) if Instant::now() < deadline => {
+                    std::thread::sleep(Duration::from_millis(100))
+                }
+                Err(e) => panic!("server did not start: {e}"),
+            }
+        }
+    }
+
+    fn get(port: u16, path: &str) -> String {
+        let mut s = connect(port);
+        write!(
+            s,
+            "GET {path} HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n"
+        )
+        .unwrap();
+        let mut response = String::new();
+        s.read_to_string(&mut response).unwrap();
+        response
+            .split_once("\r\n\r\n")
+            .map(|(_, body)| body.to_owned())
+            .unwrap_or_default()
+    }
+
+    #[test]
+    fn serves_and_pushes_changes() {
+        let dir = temp_dir("saxl-serve-test");
+        let file = dir.join("snip.saxl");
+        std::fs::copy(root().join("examples/snip.saxl"), &file).unwrap();
+        let port = free_port();
+        let _server = Server(
+            Command::new(assert_cmd::cargo::cargo_bin("saxl"))
+                .args(["serve", "--port", &port.to_string()])
+                .arg(&file)
+                .stdout(Stdio::null())
+                .spawn()
+                .unwrap(),
+        );
+
+        assert!(get(port, "/").contains("saxlViewer.mount"));
+        let data: serde_json::Value = serde_json::from_str(&get(port, "/data")).unwrap();
+        assert_eq!(data["scenes"].as_array().unwrap().len(), 7);
+
+        // Listen for changes, then break the file.
+        let mut events = connect(port);
+        write!(events, "GET /events HTTP/1.1\r\nHost: localhost\r\n\r\n").unwrap();
+        let mut events = BufReader::new(events);
+        let mut line = String::new();
+        while events.read_line(&mut line).unwrap() > 0 && line != "\r\n" {
+            line.clear();
+        }
+        std::thread::sleep(Duration::from_millis(300));
+        let mut text = std::fs::read_to_string(&file).unwrap();
+        text.push_str("Foo -> Bar\n");
+        std::fs::write(&file, text).unwrap();
+        let mut seen = String::new();
+        while !seen.contains("data: change") {
+            line.clear();
+            assert!(
+                events.read_line(&mut line).unwrap() > 0,
+                "event stream closed"
+            );
+            seen.push_str(&line);
+        }
+
+        let data: serde_json::Value = serde_json::from_str(&get(port, "/data")).unwrap();
+        assert!(data["scenes"].is_null());
+        assert!(data["report"].as_str().unwrap().contains("E002"));
+    }
+
+    #[test]
+    fn busy_port_is_a_usage_error() {
+        let taken = TcpListener::bind("127.0.0.1:0").unwrap();
+        let port = taken.local_addr().unwrap().port().to_string();
+        saxl()
+            .args(["serve", "examples/snip.saxl", "--port", &port])
+            .assert()
+            .code(2);
+    }
+}
+
+#[test]
+fn readme_shows_snip_verbatim() {
+    let readme = std::fs::read_to_string(root().join("README.md")).unwrap();
+    let snip = std::fs::read_to_string(root().join("examples/snip.saxl")).unwrap();
+    assert!(
+        readme.contains(&format!("```saxl\n{snip}```")),
+        "README's Snip block differs from examples/snip.saxl"
+    );
 }

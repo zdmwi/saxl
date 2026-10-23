@@ -25,8 +25,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 341,
-        "end": 376
+        "start": 337,
+        "end": 372
       },
       "badges": [],
       "fields": []
@@ -44,8 +44,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 377,
-        "end": 415
+        "start": 373,
+        "end": 411
       },
       "badges": [],
       "fields": []
@@ -63,8 +63,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 416,
-        "end": 448
+        "start": 412,
+        "end": 444
       },
       "badges": [],
       "fields": []
@@ -82,8 +82,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 699,
-        "end": 765
+        "start": 695,
+        "end": 761
       },
       "badges": [],
       "fields": [
@@ -105,8 +105,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 766,
-        "end": 830
+        "start": 762,
+        "end": 826
       },
       "badges": [],
       "fields": [
@@ -128,8 +128,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 831,
-        "end": 903
+        "start": 827,
+        "end": 899
       },
       "badges": [],
       "fields": [
@@ -270,240 +270,240 @@ expression: "saxl_renderer::to_json(&scene)"
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 341,
-        "end": 376
+        "start": 337,
+        "end": 372
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 508,
-        "end": 516
+        "start": 504,
+        "end": 512
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 618,
-        "end": 626
+        "start": 614,
+        "end": 622
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 670,
-        "end": 678
+        "start": 666,
+        "end": 674
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 713,
-        "end": 721
+        "start": 709,
+        "end": 717
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 780,
-        "end": 788
+        "start": 776,
+        "end": 784
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 856,
-        "end": 864
+        "start": 852,
+        "end": 860
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 1045,
-        "end": 1053
+        "start": 1041,
+        "end": 1049
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 1225,
-        "end": 1233
+        "start": 1221,
+        "end": 1229
       }
     },
     {
       "node": "Postgres",
       "span": {
         "file": 0,
-        "start": 1249,
-        "end": 1257
+        "start": 1245,
+        "end": 1253
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 377,
-        "end": 415
+        "start": 373,
+        "end": 411
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 530,
-        "end": 535
+        "start": 526,
+        "end": 531
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 599,
-        "end": 604
+        "start": 595,
+        "end": 600
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 729,
-        "end": 734
+        "start": 725,
+        "end": 730
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 1074,
-        "end": 1079
+        "start": 1070,
+        "end": 1075
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 1167,
-        "end": 1172
+        "start": 1163,
+        "end": 1168
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 1185,
-        "end": 1190
+        "start": 1181,
+        "end": 1186
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 1374,
-        "end": 1379
+        "start": 1370,
+        "end": 1375
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 1468,
-        "end": 1473
+        "start": 1464,
+        "end": 1469
       }
     },
     {
       "node": "Redis",
       "span": {
         "file": 0,
-        "start": 1486,
-        "end": 1491
+        "start": 1482,
+        "end": 1487
       }
     },
     {
       "node": "Clicks",
       "span": {
         "file": 0,
-        "start": 416,
-        "end": 448
+        "start": 412,
+        "end": 444
       }
     },
     {
       "node": "Clicks",
       "span": {
         "file": 0,
-        "start": 640,
-        "end": 646
+        "start": 636,
+        "end": 642
       }
     },
     {
       "node": "Clicks",
       "span": {
         "file": 0,
-        "start": 647,
-        "end": 653
+        "start": 643,
+        "end": 649
       }
     },
     {
       "node": "Clicks",
       "span": {
         "file": 0,
-        "start": 846,
-        "end": 852
+        "start": 842,
+        "end": 848
       }
     },
     {
       "node": "Clicks",
       "span": {
         "file": 0,
-        "start": 1084,
-        "end": 1090
+        "start": 1080,
+        "end": 1086
       }
     },
     {
       "node": "Clicks",
       "span": {
         "file": 0,
-        "start": 1337,
-        "end": 1343
+        "start": 1333,
+        "end": 1339
       }
     },
     {
       "node": "Clicks",
       "span": {
         "file": 0,
-        "start": 1571,
-        "end": 1577
+        "start": 1567,
+        "end": 1573
       }
     },
     {
       "node": "data:Link",
       "span": {
         "file": 0,
-        "start": 699,
-        "end": 765
+        "start": 695,
+        "end": 761
       }
     },
     {
       "node": "data:User",
       "span": {
         "file": 0,
-        "start": 766,
-        "end": 830
+        "start": 762,
+        "end": 826
       }
     },
     {
       "node": "data:Click",
       "span": {
         "file": 0,
-        "start": 831,
-        "end": 903
+        "start": 827,
+        "end": 899
       }
     }
   ]

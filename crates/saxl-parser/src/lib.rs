@@ -1,10 +1,12 @@
 //! Lexer and parser for saxl. Syntax only: names are resolved by the validator.
 
 mod ast;
+mod format;
 pub mod lexer;
 mod lower;
 mod parser;
 
+pub use format::format;
 use saxl_core::{Diagnostic, FileId, Model};
 
 /// The parser's output. `model` always exists; statements that failed to parse

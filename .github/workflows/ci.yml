@@ -27,6 +27,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@1.97
       - uses: Swatinem/rust-cache@v2
       - run: cargo run -p saxl-cli -- check examples/snip.saxl --deny warnings --format github
+      - run: cargo run -p saxl-cli -- fmt --check examples/*.saxl
 
   generated:
     runs-on: ubuntu-latest
@@ -40,6 +41,7 @@ jobs:
           cache: npm
       - run: cargo xtask types
       - run: cargo xtask viewer
+      - run: cargo xtask docs
       - run: npm run typecheck -w @saxl/viewer
       - run: git diff --exit-code
 

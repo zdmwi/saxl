@@ -2,11 +2,14 @@
 
 mod check;
 mod explain;
+mod fmt;
 mod init;
 mod ir;
 mod load;
 mod render;
 mod report;
+#[cfg(feature = "serve")]
+mod serve;
 
 use std::process::ExitCode;
 
@@ -42,6 +45,11 @@ enum Command {
     Explain(explain::Args),
     /// Write a starter file.
     Init(init::Args),
+    /// Rewrite files in canonical form.
+    Fmt(fmt::Args),
+    /// Serve the views on a local page that updates when the file is saved.
+    #[cfg(feature = "serve")]
+    Serve(serve::Args),
 }
 
 fn main() -> ExitCode {
@@ -52,6 +60,9 @@ fn main() -> ExitCode {
         Command::Ir(args) => ir::run(&args),
         Command::Explain(args) => explain::run(&args),
         Command::Init(args) => init::run(&args),
+        Command::Fmt(args) => fmt::run(&args),
+        #[cfg(feature = "serve")]
+        Command::Serve(args) => serve::run(&args),
     };
     result.unwrap_or_else(|CliError(message)| {
         eprintln!("error: {message}");

@@ -45,7 +45,7 @@ expression: "saxl_renderer::to_json(&scene)"
       "source": {
         "file": 0,
         "start": 55,
-        "end": 88
+        "end": 87
       },
       "badges": [],
       "fields": []
@@ -63,8 +63,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 89,
-        "end": 122
+        "start": 88,
+        "end": 120
       },
       "badges": [],
       "fields": []
@@ -82,8 +82,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 123,
-        "end": 156
+        "start": 121,
+        "end": 153
       },
       "badges": [],
       "fields": []
@@ -101,8 +101,8 @@ expression: "saxl_renderer::to_json(&scene)"
       },
       "source": {
         "file": 0,
-        "start": 157,
-        "end": 189
+        "start": 154,
+        "end": 185
       },
       "badges": [],
       "fields": []
@@ -191,95 +191,95 @@ expression: "saxl_renderer::to_json(&scene)"
       "span": {
         "file": 0,
         "start": 55,
-        "end": 88
+        "end": 87
       }
     },
     {
       "node": "Visitor",
-      "span": {
-        "file": 0,
-        "start": 553,
-        "end": 560
-      }
-    },
-    {
-      "node": "Visitor",
-      "span": {
-        "file": 0,
-        "start": 1125,
-        "end": 1132
-      }
-    },
-    {
-      "node": "Visitor",
-      "span": {
-        "file": 0,
-        "start": 1307,
-        "end": 1314
-      }
-    },
-    {
-      "node": "Visitor",
-      "span": {
-        "file": 0,
-        "start": 1426,
-        "end": 1433
-      }
-    },
-    {
-      "node": "Visitor",
-      "span": {
-        "file": 0,
-        "start": 1541,
-        "end": 1548
-      }
-    },
-    {
-      "node": "Owner",
-      "span": {
-        "file": 0,
-        "start": 89,
-        "end": 122
-      }
-    },
-    {
-      "node": "Owner",
-      "span": {
-        "file": 0,
-        "start": 450,
-        "end": 455
-      }
-    },
-    {
-      "node": "IdP",
-      "span": {
-        "file": 0,
-        "start": 123,
-        "end": 156
-      }
-    },
-    {
-      "node": "IdP",
       "span": {
         "file": 0,
         "start": 549,
-        "end": 552
+        "end": 556
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1121,
+        "end": 1128
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1303,
+        "end": 1310
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1422,
+        "end": 1429
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1537,
+        "end": 1544
+      }
+    },
+    {
+      "node": "Owner",
+      "span": {
+        "file": 0,
+        "start": 88,
+        "end": 120
+      }
+    },
+    {
+      "node": "Owner",
+      "span": {
+        "file": 0,
+        "start": 446,
+        "end": 451
+      }
+    },
+    {
+      "node": "IdP",
+      "span": {
+        "file": 0,
+        "start": 121,
+        "end": 153
+      }
+    },
+    {
+      "node": "IdP",
+      "span": {
+        "file": 0,
+        "start": 545,
+        "end": 548
       }
     },
     {
       "node": "Email",
       "span": {
         "file": 0,
-        "start": 157,
-        "end": 189
+        "start": 154,
+        "end": 185
       }
     },
     {
       "node": "Email",
       "span": {
         "file": 0,
-        "start": 692,
-        "end": 697
+        "start": 688,
+        "end": 693
       }
     }
   ]

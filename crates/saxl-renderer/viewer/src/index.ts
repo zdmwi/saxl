@@ -236,8 +236,10 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
       diagnostics = diags;
       renderDiagnostics();
       const scene = current ? sceneFor(current) : undefined;
-      if (tower && scene) tower.setMarkers(markersFor(scene, diagnostics));
-      else if (current) show(current);
+      if (tower && scene) {
+        tower.setMarkers(markersFor(scene, diagnostics));
+        renderBar();
+      } else if (current) show(current);
       else renderBar();
     },
     setScenes(next) {

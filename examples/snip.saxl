@@ -1,10 +1,10 @@
 # Snip: toy URL shortener
 system Snip "URL shortener"
 
-actor    Visitor  "follows links"
-actor    Owner    "creates links"
-external IdP      "OAuth sign-in"
-external Email    "stat digests"
+actor    Visitor "follows links"
+actor    Owner   "creates links"
+external IdP     "OAuth sign-in"
+external Email   "stat digests"
 
 service Dashboard "web frontend"
 service LinksAPI  "create, edit, stats"
