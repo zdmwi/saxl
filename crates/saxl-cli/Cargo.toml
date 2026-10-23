@@ -1,0 +1,38 @@
+[package]
+name = "saxl-cli"
+description = "Command-line interface for saxl"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "saxl"
+path = "src/main.rs"
+
+[features]
+default = ["serve"]
+serve = ["dep:axum", "dep:tokio", "dep:notify", "dep:futures-util"]
+
+[dependencies]
+saxl-core = { workspace = true, features = ["schema"] }
+saxl-parser.workspace = true
+saxl-validator.workspace = true
+saxl-renderer.workspace = true
+clap.workspace = true
+miette.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+schemars.workspace = true
+axum = { workspace = true, optional = true }
+tokio = { workspace = true, optional = true }
+notify = { workspace = true, optional = true }
+futures-util = { workspace = true, optional = true }
+
+[dev-dependencies]
+assert_cmd.workspace = true
+insta.workspace = true
+
+[lints]
+workspace = true

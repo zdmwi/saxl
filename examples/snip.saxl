@@ -1,0 +1,70 @@
+# Snip: toy URL shortener
+system Snip "URL shortener"
+
+actor    Visitor "follows links"
+actor    Owner   "creates links"
+external IdP     "OAuth sign-in"
+external Email   "stat digests"
+
+service Dashboard "web frontend"
+service LinksAPI  "create, edit, stats"
+service Redirect  "hot path, stateless"
+service Worker    "aggregates stats"
+store   Postgres  "source of truth"
+store   Redis     "code → URL cache"
+queue   Clicks    "async events"
+
+Owner     -> Dashboard
+Dashboard -> LinksAPI
+LinksAPI  -> Postgres
+LinksAPI  -> Redis
+LinksAPI  -> IdP
+Visitor   -> Redirect "GET /abc"
+Redirect  -> Redis
+Redirect  -> Postgres
+Redirect  ~> Clicks
+Clicks    ~> Worker -> Postgres
+Worker    -> Email
+
+data Link  in Postgres cached Redis { code, target_url, owner_id }
+data User  in Postgres              { id, email, oauth_subject }
+data Click via Clicks -> Postgres   { link_code, ts, referrer, country }
+
+deploy region us-east-1 {
+  cdn Edge
+  cluster k8s {
+    Redirect x3 autoscale
+    Dashboard, LinksAPI x2
+    Worker x1
+  }
+  managed {
+    Postgres primary+replica
+    Redis
+    Clicks
+  }
+}
+
+scenario redirect_miss {
+  Visitor -> Edge -> Redirect
+  Redirect -> Redis : get abc
+  Redis --> Redirect : miss
+  Redirect -> Postgres : select url
+  Postgres --> Redirect : url
+  parallel {
+    Redirect --> Visitor : 302
+    Redirect ~> Clicks : click event
+    Redirect -> Redis : warm cache
+  }
+}
+
+scenario redirect_hit {
+  Visitor -> Edge -> Redirect
+  Redirect -> Redis : get abc
+  Redis --> Redirect : hit
+  parallel {
+    Redirect --> Visitor : 302
+    Redirect ~> Clicks : click event
+  }
+}
+
+allow W102 "single region is acceptable for the prototype"

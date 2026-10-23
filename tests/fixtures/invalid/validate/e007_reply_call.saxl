@@ -1,0 +1,16 @@
+# expect: E007 @ 8:3
+# expect: E007 @ 14:3
+system Shop
+actor Buyer
+service Web
+Buyer -> Web
+scenario order {
+  Web --> Buyer : nothing to reply to
+  Buyer -> Web
+  parallel {
+    Web --> Buyer : 200
+    Web --> Buyer : each branch sees the open call
+  }
+  Web --> Buyer : already closed in the parallel block
+}
+allow W101 "fixture"

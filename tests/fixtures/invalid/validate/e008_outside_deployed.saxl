@@ -1,0 +1,11 @@
+# expect: E008 @ 8:10
+system Shop
+actor Buyer
+service Web
+Buyer -> Web
+deploy region eu {
+  cluster main {
+    Web, Buyer x2
+  }
+}
+allow W102 "fixture"

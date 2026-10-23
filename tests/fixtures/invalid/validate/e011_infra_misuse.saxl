@@ -1,0 +1,21 @@
+# expect: E011 @ 8:10
+# expect: E011 @ 9:14
+# expect: E011 @ 14:5
+# expect: E011 @ 19:12
+system Shop
+actor Buyer
+service Web
+Buyer -> Edge
+data Page in Edge { url }
+Buyer -> Web
+deploy region eu {
+  cdn Edge
+  cluster main {
+    Edge
+    Web x2
+  }
+}
+scenario browse {
+  Buyer -> Edge
+}
+allow W102 "fixture"

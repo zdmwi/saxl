@@ -1,0 +1,7 @@
+# expect: P003 @ 4:18
+system Shop
+service Web
+deploy region eu {
+  cluster main {
+    Web
+  }

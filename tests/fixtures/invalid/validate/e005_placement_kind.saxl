@@ -1,0 +1,8 @@
+# expect: E005 @ 6:15
+# expect: E005 @ 7:16
+# expect: E005 @ 7:23
+system Shop
+service Web
+data Order in Web { id, total }
+data Event via Web -> Web { id }
+allow W101 "fixture"

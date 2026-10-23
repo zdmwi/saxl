@@ -1,0 +1,40 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/parse/recovery_three_errors.saxl
+---
+P001
+
+  × expected service name, found end of line
+   ╭─[tests/fixtures/invalid/parse/recovery_three_errors.saxl:6:8]
+ 5 │ system Shop
+ 6 │ service
+   ·        ┬
+   ·        ╰── expected service name
+ 7 │ store DB
+ 8 │ deploy region eu {
+   ╰────
+
+P001
+
+  × expected cluster name, found `{`
+    ╭─[tests/fixtures/invalid/parse/recovery_three_errors.saxl:9:11]
+  8 │ deploy region eu {
+  9 │   cluster {
+    ·           ┬
+    ·           ╰── expected cluster name
+ 10 │     DB
+    ╰────
+
+P001
+
+  × expected `cdn`, `cluster`, `managed`, or `}`, found name `manged`
+    ╭─[tests/fixtures/invalid/parse/recovery_three_errors.saxl:12:3]
+ 11 │   }
+ 12 │   manged {
+    ·   ───┬──
+    ·      ╰── expected `cdn`, `cluster`, `managed`, or `}`
+ 13 │     DB
+    ╰────
+
+checked 1 file: 3 errors, 0 warnings, 0 infos

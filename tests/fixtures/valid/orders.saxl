@@ -1,0 +1,67 @@
+# Chains, async relations, wrapped data fields, nested parallel blocks,
+# replies through infrastructure, and no final newline.
+system Orders "order processing"
+
+actor    Customer "places orders"
+external Payments "card processor"
+
+service Web    "storefront"
+service Api    "order API"
+service Fulfil "ships orders"
+store   Db     "orders database"
+store   Cache  "hot orders"
+store   Search "order search index"
+queue   Events "order events"
+
+Customer -> Web "browses and buys"
+Web -> Api -> Db
+Api -> Cache
+Api -> Payments
+Api ~> Events ~> Fulfil -> Db
+Fulfil -> Search
+
+data Order in Db cached Cache, Search {
+  id,
+  customer_id, total,
+  status,
+}
+data Shipment via Events -> Db { order_id, carrier }
+
+deploy region eu-west-1 {
+  cdn Front
+  cluster k8s {
+    Web, Api x3 autoscale
+    Fulfil x2
+  }
+  managed {
+    Db primary+replica
+    Cache, Search, Events
+  }
+}
+
+deploy region us-east-1 {
+  cluster k8s {
+    Web, Api x2
+    Fulfil x2
+  }
+  managed {
+    Db primary+replica
+    Cache, Search, Events
+  }
+}
+
+scenario checkout {
+  Customer -> Front -> Web
+  Web -> Api : POST /orders #1
+  Api -> Payments : charge
+  Payments --> Api : ok
+  parallel {
+    Api -> Db : insert
+    Api ~> Events : order placed
+    parallel {
+      Api -> Cache : warm
+    }
+  }
+  Api --> Web : 201
+  Web --> Front --> Customer : confirmation
+}

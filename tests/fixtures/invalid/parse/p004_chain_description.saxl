@@ -1,0 +1,6 @@
+# expect: P004 @ 6:20
+system Shop
+actor Buyer
+service Web
+store DB
+Buyer -> Web -> DB "checkout"

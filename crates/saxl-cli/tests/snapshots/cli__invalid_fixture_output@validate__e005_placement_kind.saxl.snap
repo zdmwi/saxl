@@ -1,0 +1,42 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e005_placement_kind.saxl
+---
+E005
+
+  × the `in` target must be a store
+   ╭─[tests/fixtures/invalid/validate/e005_placement_kind.saxl:6:15]
+ 5 │ service Web
+ 6 │ data Order in Web { id, total }
+   ·               ─┬─
+   ·                ╰── `Web` is a service
+ 7 │ data Event via Web -> Web { id }
+   ╰────
+  help: name a store here, or declare `Web` as one
+
+E005
+
+  × the `via` source must be a queue
+   ╭─[tests/fixtures/invalid/validate/e005_placement_kind.saxl:7:16]
+ 6 │ data Order in Web { id, total }
+ 7 │ data Event via Web -> Web { id }
+   ·                ─┬─
+   ·                 ╰── `Web` is a service
+ 8 │ allow W101 "fixture"
+   ╰────
+  help: name a queue here, or declare `Web` as one
+
+E005
+
+  × the `via` destination must be a store
+   ╭─[tests/fixtures/invalid/validate/e005_placement_kind.saxl:7:23]
+ 6 │ data Order in Web { id, total }
+ 7 │ data Event via Web -> Web { id }
+   ·                       ─┬─
+   ·                        ╰── `Web` is a service
+ 8 │ allow W101 "fixture"
+   ╰────
+  help: name a store here, or declare `Web` as one
+
+checked 1 file: 3 errors, 0 warnings, 0 infos

@@ -1,0 +1,1064 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "containers"
+  },
+  "title": "Containers: Snip",
+  "size": {
+    "w": 1325.6,
+    "h": 372.0
+  },
+  "nodes": [
+    {
+      "id": "Visitor",
+      "kind": "actor",
+      "label": "Visitor",
+      "sublabel": "follows links",
+      "rect": {
+        "x": 24.0,
+        "y": 188.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 55,
+        "end": 87
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Owner",
+      "kind": "actor",
+      "label": "Owner",
+      "sublabel": "creates links",
+      "rect": {
+        "x": 24.0,
+        "y": 268.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 88,
+        "end": 120
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "IdP",
+      "kind": "external",
+      "label": "IdP",
+      "sublabel": "OAuth sign-in",
+      "rect": {
+        "x": 1176.0,
+        "y": 240.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 121,
+        "end": 153
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Email",
+      "kind": "external",
+      "label": "Email",
+      "sublabel": "stat digests",
+      "rect": {
+        "x": 1178.8,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 154,
+        "end": 185
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Dashboard",
+      "kind": "service",
+      "label": "Dashboard",
+      "sublabel": "web frontend",
+      "rect": {
+        "x": 255.6,
+        "y": 268.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 187,
+        "end": 219
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "LinksAPI",
+      "kind": "service",
+      "label": "LinksAPI",
+      "sublabel": "create, edit, stats",
+      "rect": {
+        "x": 480.0,
+        "y": 252.0,
+        "w": 168.8,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 220,
+        "end": 259
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Redirect",
+      "kind": "service",
+      "label": "Redirect",
+      "sublabel": "hot path, stateless",
+      "rect": {
+        "x": 231.2,
+        "y": 188.0,
+        "w": 168.8,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 260,
+        "end": 299
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Worker",
+      "kind": "service",
+      "label": "Worker",
+      "sublabel": "aggregates stats",
+      "rect": {
+        "x": 728.8,
+        "y": 100.0,
+        "w": 147.2,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 300,
+        "end": 336
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Postgres",
+      "kind": "store",
+      "label": "Postgres",
+      "sublabel": "source of truth",
+      "rect": {
+        "x": 956.0,
+        "y": 168.0,
+        "w": 140.0,
+        "h": 72.0
+      },
+      "source": {
+        "file": 0,
+        "start": 337,
+        "end": 372
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Redis",
+      "kind": "store",
+      "label": "Redis",
+      "sublabel": "code → URL cache",
+      "rect": {
+        "x": 728.8,
+        "y": 180.0,
+        "w": 147.2,
+        "h": 72.0
+      },
+      "source": {
+        "file": 0,
+        "start": 373,
+        "end": 411
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Clicks",
+      "kind": "queue",
+      "label": "Clicks",
+      "sublabel": "async events",
+      "rect": {
+        "x": 490.2,
+        "y": 100.0,
+        "w": 148.4,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 412,
+        "end": 444
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "Owner",
+      "to": "Dashboard",
+      "style": "sync",
+      "points": [
+        {
+          "x": 149.6,
+          "y": 296.0
+        },
+        {
+          "x": 255.6,
+          "y": 296.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Dashboard",
+      "to": "LinksAPI",
+      "style": "sync",
+      "points": [
+        {
+          "x": 375.6,
+          "y": 296.0
+        },
+        {
+          "x": 480.0,
+          "y": 280.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "LinksAPI",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 648.8,
+          "y": 280.0
+        },
+        {
+          "x": 728.8,
+          "y": 280.0
+        },
+        {
+          "x": 876.0,
+          "y": 280.0
+        },
+        {
+          "x": 956.0,
+          "y": 204.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "LinksAPI",
+      "to": "Redis",
+      "style": "sync",
+      "points": [
+        {
+          "x": 648.8,
+          "y": 270.0
+        },
+        {
+          "x": 728.8,
+          "y": 221.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "LinksAPI",
+      "to": "IdP",
+      "style": "sync",
+      "points": [
+        {
+          "x": 648.8,
+          "y": 290.0
+        },
+        {
+          "x": 728.8,
+          "y": 344.0
+        },
+        {
+          "x": 876.0,
+          "y": 344.0
+        },
+        {
+          "x": 956.0,
+          "y": 268.0
+        },
+        {
+          "x": 1096.0,
+          "y": 268.0
+        },
+        {
+          "x": 1176.0,
+          "y": 268.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Visitor",
+      "to": "Redirect",
+      "style": "sync",
+      "points": [
+        {
+          "x": 149.6,
+          "y": 216.0
+        },
+        {
+          "x": 231.2,
+          "y": 216.0
+        }
+      ],
+      "label": "GET /abc"
+    },
+    {
+      "from": "Redirect",
+      "to": "Redis",
+      "style": "sync",
+      "points": [
+        {
+          "x": 400.0,
+          "y": 216.0
+        },
+        {
+          "x": 480.0,
+          "y": 216.0
+        },
+        {
+          "x": 648.8,
+          "y": 216.0
+        },
+        {
+          "x": 728.8,
+          "y": 211.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Redirect",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 400.0,
+          "y": 226.0
+        },
+        {
+          "x": 480.0,
+          "y": 336.0
+        },
+        {
+          "x": 648.8,
+          "y": 336.0
+        },
+        {
+          "x": 728.8,
+          "y": 312.0
+        },
+        {
+          "x": 876.0,
+          "y": 312.0
+        },
+        {
+          "x": 956.0,
+          "y": 214.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Redirect",
+      "to": "Clicks",
+      "style": "async",
+      "points": [
+        {
+          "x": 400.0,
+          "y": 206.0
+        },
+        {
+          "x": 490.2,
+          "y": 128.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Clicks",
+      "to": "Worker",
+      "style": "async",
+      "points": [
+        {
+          "x": 638.6,
+          "y": 128.0
+        },
+        {
+          "x": 728.8,
+          "y": 128.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Worker",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 876.0,
+          "y": 133.0
+        },
+        {
+          "x": 956.0,
+          "y": 194.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Worker",
+      "to": "Email",
+      "style": "sync",
+      "points": [
+        {
+          "x": 876.0,
+          "y": 123.0
+        },
+        {
+          "x": 956.0,
+          "y": 52.0
+        },
+        {
+          "x": 1096.0,
+          "y": 52.0
+        },
+        {
+          "x": 1178.8,
+          "y": 52.0
+        }
+      ],
+      "label": null
+    }
+  ],
+  "groups": [],
+  "tower": null,
+  "timelines": [],
+  "anchors": [
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 55,
+        "end": 87
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 549,
+        "end": 556
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1121,
+        "end": 1128
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1303,
+        "end": 1310
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1422,
+        "end": 1429
+      }
+    },
+    {
+      "node": "Visitor",
+      "span": {
+        "file": 0,
+        "start": 1537,
+        "end": 1544
+      }
+    },
+    {
+      "node": "Owner",
+      "span": {
+        "file": 0,
+        "start": 88,
+        "end": 120
+      }
+    },
+    {
+      "node": "Owner",
+      "span": {
+        "file": 0,
+        "start": 446,
+        "end": 451
+      }
+    },
+    {
+      "node": "IdP",
+      "span": {
+        "file": 0,
+        "start": 121,
+        "end": 153
+      }
+    },
+    {
+      "node": "IdP",
+      "span": {
+        "file": 0,
+        "start": 545,
+        "end": 548
+      }
+    },
+    {
+      "node": "Email",
+      "span": {
+        "file": 0,
+        "start": 154,
+        "end": 185
+      }
+    },
+    {
+      "node": "Email",
+      "span": {
+        "file": 0,
+        "start": 688,
+        "end": 693
+      }
+    },
+    {
+      "node": "Dashboard",
+      "span": {
+        "file": 0,
+        "start": 187,
+        "end": 219
+      }
+    },
+    {
+      "node": "Dashboard",
+      "span": {
+        "file": 0,
+        "start": 459,
+        "end": 468
+      }
+    },
+    {
+      "node": "Dashboard",
+      "span": {
+        "file": 0,
+        "start": 469,
+        "end": 478
+      }
+    },
+    {
+      "node": "Dashboard",
+      "span": {
+        "file": 0,
+        "start": 984,
+        "end": 993
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 220,
+        "end": 259
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 482,
+        "end": 490
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 491,
+        "end": 499
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 513,
+        "end": 521
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 532,
+        "end": 540
+      }
+    },
+    {
+      "node": "LinksAPI",
+      "span": {
+        "file": 0,
+        "start": 995,
+        "end": 1003
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 260,
+        "end": 299
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 562,
+        "end": 570
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 582,
+        "end": 590
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 601,
+        "end": 609
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 623,
+        "end": 631
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 958,
+        "end": 966
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1140,
+        "end": 1148
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1151,
+        "end": 1159
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1191,
+        "end": 1199
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1209,
+        "end": 1217
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1258,
+        "end": 1266
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1290,
+        "end": 1298
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1321,
+        "end": 1329
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1358,
+        "end": 1366
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1441,
+        "end": 1449
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1452,
+        "end": 1460
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1492,
+        "end": 1500
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1524,
+        "end": 1532
+      }
+    },
+    {
+      "node": "Redirect",
+      "span": {
+        "file": 0,
+        "start": 1555,
+        "end": 1563
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 300,
+        "end": 336
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 656,
+        "end": 662
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 656,
+        "end": 662
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 675,
+        "end": 681
+      }
+    },
+    {
+      "node": "Worker",
+      "span": {
+        "file": 0,
+        "start": 1011,
+        "end": 1017
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 337,
+        "end": 372
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 504,
+        "end": 512
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 614,
+        "end": 622
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 666,
+        "end": 674
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 709,
+        "end": 717
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 776,
+        "end": 784
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 852,
+        "end": 860
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1041,
+        "end": 1049
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1221,
+        "end": 1229
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1245,
+        "end": 1253
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 373,
+        "end": 411
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 526,
+        "end": 531
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 595,
+        "end": 600
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 725,
+        "end": 730
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1070,
+        "end": 1075
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1163,
+        "end": 1168
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1181,
+        "end": 1186
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1370,
+        "end": 1375
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1464,
+        "end": 1469
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1482,
+        "end": 1487
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 412,
+        "end": 444
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 636,
+        "end": 642
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 643,
+        "end": 649
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 842,
+        "end": 848
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1080,
+        "end": 1086
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1333,
+        "end": 1339
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1567,
+        "end": 1573
+      }
+    }
+  ]
+}

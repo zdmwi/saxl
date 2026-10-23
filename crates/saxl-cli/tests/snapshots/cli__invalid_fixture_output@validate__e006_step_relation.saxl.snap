@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e006_step_relation.saxl
+---
+E006
+
+  × scenario step has no matching relation
+    ╭─[tests/fixtures/invalid/validate/e006_step_relation.saxl:9:3]
+  8 │   Buyer -> Web
+  9 │   Web ~> Email : receipt
+    ·   ───────────┬──────────
+    ·              ╰── no relation `Web ~> Email` is declared
+ 10 │ }
+    ╰────
+  help: add `Web ~> Email` to the relations, or route this step through a service that has one
+
+checked 1 file: 1 error, 0 warnings, 0 infos

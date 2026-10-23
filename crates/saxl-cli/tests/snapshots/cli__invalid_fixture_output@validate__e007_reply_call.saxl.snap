@@ -1,0 +1,30 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e007_reply_call.saxl
+---
+E007
+
+  × reply has no matching open call
+   ╭─[tests/fixtures/invalid/validate/e007_reply_call.saxl:8:3]
+ 7 │ scenario order {
+ 8 │   Web --> Buyer : nothing to reply to
+   ·   ─────────────────┬─────────────────
+   ·                    ╰── no open call `Buyer -> Web` to reply to
+ 9 │   Buyer -> Web
+   ╰────
+  help: a `Web --> Buyer` reply needs an earlier `Buyer -> Web` call in the same scenario
+
+E007
+
+  × reply has no matching open call
+    ╭─[tests/fixtures/invalid/validate/e007_reply_call.saxl:14:3]
+ 13 │   }
+ 14 │   Web --> Buyer : already closed in the parallel block
+    ·   ──────────────────────────┬─────────────────────────
+    ·                             ╰── no open call `Buyer -> Web` to reply to
+ 15 │ }
+    ╰────
+  help: a `Web --> Buyer` reply needs an earlier `Buyer -> Web` call in the same scenario
+
+checked 1 file: 2 errors, 0 warnings, 0 infos

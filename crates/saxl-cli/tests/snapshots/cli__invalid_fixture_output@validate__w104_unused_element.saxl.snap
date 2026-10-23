@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/w104_unused_element.saxl
+---
+W104
+
+  ⚠ `Legacy` is not used
+   ╭─[tests/fixtures/invalid/validate/w104_unused_element.saxl:5:1]
+ 4 │ service Web
+ 5 │ service Legacy
+   · ───────┬──────
+   ·        ╰── in no relation, data placement, or scenario
+ 6 │ Buyer -> Web
+   ╰────
+  help: connect it with a relation, or remove it
+
+checked 1 file: 0 errors, 1 warning, 0 infos

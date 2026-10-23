@@ -1,0 +1,510 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "data"
+  },
+  "title": "Data: Snip",
+  "size": {
+    "w": 764.0,
+    "h": 336.0
+  },
+  "nodes": [
+    {
+      "id": "Postgres",
+      "kind": "store",
+      "label": "Postgres",
+      "sublabel": "source of truth",
+      "rect": {
+        "x": 24.0,
+        "y": 24.0,
+        "w": 140.0,
+        "h": 72.0
+      },
+      "source": {
+        "file": 0,
+        "start": 337,
+        "end": 372
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Redis",
+      "kind": "store",
+      "label": "Redis",
+      "sublabel": "code → URL cache",
+      "rect": {
+        "x": 204.0,
+        "y": 24.0,
+        "w": 147.2,
+        "h": 72.0
+      },
+      "source": {
+        "file": 0,
+        "start": 373,
+        "end": 411
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Clicks",
+      "kind": "queue",
+      "label": "Clicks",
+      "sublabel": "async events",
+      "rect": {
+        "x": 391.2,
+        "y": 24.0,
+        "w": 148.4,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 412,
+        "end": 444
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "data:Link",
+      "kind": "data_card",
+      "label": "Link",
+      "sublabel": "in Postgres, cached Redis",
+      "rect": {
+        "x": 24.0,
+        "y": 176.0,
+        "w": 212.0,
+        "h": 118.0
+      },
+      "source": {
+        "file": 0,
+        "start": 695,
+        "end": 761
+      },
+      "badges": [],
+      "fields": [
+        "code",
+        "target_url",
+        "owner_id"
+      ]
+    },
+    {
+      "id": "data:User",
+      "kind": "data_card",
+      "label": "User",
+      "sublabel": "in Postgres",
+      "rect": {
+        "x": 276.0,
+        "y": 176.0,
+        "w": 212.0,
+        "h": 118.0
+      },
+      "source": {
+        "file": 0,
+        "start": 762,
+        "end": 826
+      },
+      "badges": [],
+      "fields": [
+        "id",
+        "email",
+        "oauth_subject"
+      ]
+    },
+    {
+      "id": "data:Click",
+      "kind": "data_card",
+      "label": "Click",
+      "sublabel": "via Clicks → Postgres",
+      "rect": {
+        "x": 528.0,
+        "y": 176.0,
+        "w": 212.0,
+        "h": 136.0
+      },
+      "source": {
+        "file": 0,
+        "start": 827,
+        "end": 899
+      },
+      "badges": [],
+      "fields": [
+        "link_code",
+        "ts",
+        "referrer",
+        "country"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "data:Link",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 48.0,
+          "y": 176.0
+        },
+        {
+          "x": 48.0,
+          "y": 112.0
+        },
+        {
+          "x": 78.0,
+          "y": 112.0
+        },
+        {
+          "x": 78.0,
+          "y": 96.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Link",
+      "to": "Redis",
+      "style": "reply",
+      "points": [
+        {
+          "x": 64.0,
+          "y": 176.0
+        },
+        {
+          "x": 64.0,
+          "y": 122.0
+        },
+        {
+          "x": 277.6,
+          "y": 122.0
+        },
+        {
+          "x": 277.6,
+          "y": 96.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:User",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 300.0,
+          "y": 176.0
+        },
+        {
+          "x": 300.0,
+          "y": 132.0
+        },
+        {
+          "x": 94.0,
+          "y": 132.0
+        },
+        {
+          "x": 94.0,
+          "y": 96.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Click",
+      "to": "Clicks",
+      "style": "async",
+      "points": [
+        {
+          "x": 552.0,
+          "y": 176.0
+        },
+        {
+          "x": 552.0,
+          "y": 142.0
+        },
+        {
+          "x": 465.4,
+          "y": 142.0
+        },
+        {
+          "x": 465.4,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Click",
+      "to": "Postgres",
+      "style": "sync",
+      "points": [
+        {
+          "x": 568.0,
+          "y": 176.0
+        },
+        {
+          "x": 568.0,
+          "y": 152.0
+        },
+        {
+          "x": 110.0,
+          "y": 152.0
+        },
+        {
+          "x": 110.0,
+          "y": 96.0
+        }
+      ],
+      "label": null
+    }
+  ],
+  "groups": [],
+  "tower": null,
+  "timelines": [],
+  "anchors": [
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 337,
+        "end": 372
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 504,
+        "end": 512
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 614,
+        "end": 622
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 666,
+        "end": 674
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 709,
+        "end": 717
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 776,
+        "end": 784
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 852,
+        "end": 860
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1041,
+        "end": 1049
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1221,
+        "end": 1229
+      }
+    },
+    {
+      "node": "Postgres",
+      "span": {
+        "file": 0,
+        "start": 1245,
+        "end": 1253
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 373,
+        "end": 411
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 526,
+        "end": 531
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 595,
+        "end": 600
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 725,
+        "end": 730
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1070,
+        "end": 1075
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1163,
+        "end": 1168
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1181,
+        "end": 1186
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1370,
+        "end": 1375
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1464,
+        "end": 1469
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1482,
+        "end": 1487
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 412,
+        "end": 444
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 636,
+        "end": 642
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 643,
+        "end": 649
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 842,
+        "end": 848
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1080,
+        "end": 1086
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1333,
+        "end": 1339
+      }
+    },
+    {
+      "node": "Clicks",
+      "span": {
+        "file": 0,
+        "start": 1567,
+        "end": 1573
+      }
+    },
+    {
+      "node": "data:Link",
+      "span": {
+        "file": 0,
+        "start": 695,
+        "end": 761
+      }
+    },
+    {
+      "node": "data:User",
+      "span": {
+        "file": 0,
+        "start": 762,
+        "end": 826
+      }
+    },
+    {
+      "node": "data:Click",
+      "span": {
+        "file": 0,
+        "start": 827,
+        "end": 899
+      }
+    }
+  ]
+}

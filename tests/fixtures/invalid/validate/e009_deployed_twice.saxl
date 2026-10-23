@@ -1,0 +1,13 @@
+# expect: E009 @ 9:5
+system Shop
+service Web
+deploy region eu {
+  cluster main {
+    Web x2
+  }
+  cluster spare {
+    Web x2
+  }
+}
+allow W102 "fixture"
+allow W104 "fixture"

@@ -1,0 +1,6 @@
+# expect: P001 @ 5:7
+# expect: P001 @ 6:6
+system Shop
+service Web
+Web ->
+  Api

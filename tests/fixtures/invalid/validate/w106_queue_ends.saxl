@@ -1,0 +1,12 @@
+# expect: W106 @ 6:1
+# expect: W106 @ 7:1
+# expect: W106 @ 8:1
+system Shop
+service Web
+queue Jobs
+queue Inbox
+queue Orphans
+Web ~> Jobs
+Inbox ~> Web
+allow W101 "fixture"
+allow W104 "fixture"

@@ -1,0 +1,11 @@
+# expect: P007 @ 8:9
+# expect: P007 @ 9:9
+system Shop
+service Web
+service Api
+deploy region eu {
+  cluster main {
+    Web x0
+    Api x01 autoscale
+  }
+}

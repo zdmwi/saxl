@@ -1,0 +1,10 @@
+# expect: W102 @ 6:15
+system Shop
+actor Buyer
+service Web
+Buyer -> Web
+deploy region eu {
+  cluster main {
+    Web x2
+  }
+}

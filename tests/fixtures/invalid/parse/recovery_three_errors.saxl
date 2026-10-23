@@ -1,0 +1,15 @@
+# Three unrelated syntax errors; all three are reported.
+# expect: P001 @ 6:8
+# expect: P001 @ 9:11
+# expect: P001 @ 12:3
+system Shop
+service
+store DB
+deploy region eu {
+  cluster {
+    DB
+  }
+  manged {
+    DB
+  }
+}

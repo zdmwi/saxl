@@ -1,0 +1,21 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e001_duplicate_name.saxl
+---
+E001
+
+  × `Web` is declared twice
+   ╭─[tests/fixtures/invalid/validate/e001_duplicate_name.saxl:4:7]
+ 2 │ system Shop
+ 3 │ service Web
+   ·         ─┬─
+   ·          ╰── first declared here
+ 4 │ store Web
+   ·       ─┬─
+   ·        ╰── declared again here
+ 5 │ allow W101 "fixture"
+   ╰────
+  help: rename one of them; elements and infrastructure nodes share one namespace
+
+checked 1 file: 1 error, 0 warnings, 0 infos

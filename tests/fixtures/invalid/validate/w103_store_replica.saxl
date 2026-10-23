@@ -1,0 +1,15 @@
+# expect: W103 @ 12:5
+system Shop
+service Web
+store DB
+Web -> DB
+data Order in DB { id }
+deploy region eu {
+  cluster main {
+    Web x2
+  }
+  managed {
+    DB
+  }
+}
+allow W102 "fixture"

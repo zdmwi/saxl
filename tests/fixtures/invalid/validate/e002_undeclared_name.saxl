@@ -1,0 +1,14 @@
+# Unresolved names are reported once; rules that depend on them are skipped.
+# expect: E002 @ 8:10
+# expect: E002 @ 10:12
+# expect: E002 @ 11:3
+system Shop
+actor Buyer
+service Web
+Buyer -> Wbe
+scenario browse {
+  Buyer -> Wbe
+  Wbe --> Buyer
+}
+allow W101 "fixture"
+allow W104 "fixture"

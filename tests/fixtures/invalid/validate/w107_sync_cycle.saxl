@@ -1,0 +1,10 @@
+# expect: W107 @ 8:1
+# expect: W107 @ 9:1
+system Shop
+service A
+service B
+service C
+service D
+A -> B -> C -> A
+D -> D
+allow W101 "fixture"

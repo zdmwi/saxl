@@ -1,0 +1,30 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/w108_unknown_attribute.saxl
+---
+W108
+
+  ⚠ unknown deployment attribute `spot`
+   ╭─[tests/fixtures/invalid/validate/w108_unknown_attribute.saxl:8:12]
+ 7 │   cluster main {
+ 8 │     Web x2 spot
+   ·            ──┬─
+   ·              ╰── not a known attribute
+ 9 │     Api foo+bar x2
+   ╰────
+  help: known attributes are `xN` (replicas), `autoscale`, and `primary+replica`
+
+W108
+
+  ⚠ unknown deployment attribute `foo+bar`
+    ╭─[tests/fixtures/invalid/validate/w108_unknown_attribute.saxl:9:9]
+  8 │     Web x2 spot
+  9 │     Api foo+bar x2
+    ·         ───┬───
+    ·            ╰── not a known attribute
+ 10 │   }
+    ╰────
+  help: known attributes are `xN` (replicas), `autoscale`, and `primary+replica`
+
+checked 1 file: 0 errors, 2 warnings, 0 infos

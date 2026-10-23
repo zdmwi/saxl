@@ -1,0 +1,17 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e003_no_system.saxl
+---
+E003
+
+  × no `system` statement
+   ╭─[tests/fixtures/invalid/validate/e003_no_system.saxl:1:1]
+ 1 │ # expect: E003 @ 1:1
+   · ▲
+   · ╰── file starts here
+ 2 │ allow W102 "fixture"
+   ╰────
+  help: add `system <Name> "description"` to name the system being described
+
+checked 1 file: 1 error, 0 warnings, 0 infos

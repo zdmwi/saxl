@@ -1,1 +1,12 @@
 /target
+node_modules/
+/fuzz/target
+/fuzz/corpus
+/fuzz/artifacts
+/fuzz/coverage
+*.snap.new
+/playground/web/src/wasm/
+/playground/web/dist/
+/playground/web/test-results/
+/playground/web/playwright-report/
+/docs/PLAN.md

@@ -1,0 +1,43 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/w106_queue_ends.saxl
+---
+W106
+
+  ⚠ queue `Jobs` has no consumer
+   ╭─[tests/fixtures/invalid/validate/w106_queue_ends.saxl:6:1]
+ 5 │ service Web
+ 6 │ queue Jobs
+   · ─────┬────
+   ·      ╰── no consumer
+ 7 │ queue Inbox
+   ╰────
+  help: add a relation into `Jobs` (`Producer ~> Jobs`) and one out of it (`Jobs ~> Consumer`)
+
+W106
+
+  ⚠ queue `Inbox` has no producer
+   ╭─[tests/fixtures/invalid/validate/w106_queue_ends.saxl:7:1]
+ 6 │ queue Jobs
+ 7 │ queue Inbox
+   · ─────┬─────
+   ·      ╰── no producer
+ 8 │ queue Orphans
+   ╰────
+  help: add a relation into `Inbox` (`Producer ~> Inbox`) and one out of it (`Inbox ~> Consumer`)
+
+W106
+
+  ⚠ queue `Orphans` has no producer or consumer
+   ╭─[tests/fixtures/invalid/validate/w106_queue_ends.saxl:8:1]
+ 7 │ queue Inbox
+ 8 │ queue Orphans
+   · ──────┬──────
+   ·       ╰── no producer or consumer
+ 9 │ Web ~> Jobs
+   ╰────
+  help: add a relation into `Orphans` (`Producer ~> Orphans`) and one out of it (`Orphans ~>
+        Consumer`)
+
+checked 1 file: 0 errors, 3 warnings, 0 infos

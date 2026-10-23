@@ -1,0 +1,42 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e002_undeclared_name.saxl
+---
+E002
+
+  × `Wbe` is not declared
+   ╭─[tests/fixtures/invalid/validate/e002_undeclared_name.saxl:8:10]
+ 7 │ service Web
+ 8 │ Buyer -> Wbe
+   ·          ─┬─
+   ·           ╰── not declared
+ 9 │ scenario browse {
+   ╰────
+  help: did you mean `Web`?
+
+E002
+
+  × `Wbe` is not declared
+    ╭─[tests/fixtures/invalid/validate/e002_undeclared_name.saxl:10:12]
+  9 │ scenario browse {
+ 10 │   Buyer -> Wbe
+    ·            ─┬─
+    ·             ╰── not declared
+ 11 │   Wbe --> Buyer
+    ╰────
+  help: did you mean `Web`?
+
+E002
+
+  × `Wbe` is not declared
+    ╭─[tests/fixtures/invalid/validate/e002_undeclared_name.saxl:11:3]
+ 10 │   Buyer -> Wbe
+ 11 │   Wbe --> Buyer
+    ·   ─┬─
+    ·    ╰── not declared
+ 12 │ }
+    ╰────
+  help: did you mean `Web`?
+
+checked 1 file: 3 errors, 0 warnings, 0 infos
