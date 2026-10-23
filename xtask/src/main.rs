@@ -208,6 +208,7 @@ fn ci() -> Result<(), String> {
             "--",
             "check",
             "examples/snip.saxl",
+            "examples/shopfront.saxl",
             "--deny",
             "warnings",
         ],
@@ -222,6 +223,7 @@ fn ci() -> Result<(), String> {
             "fmt",
             "--check",
             "examples/snip.saxl",
+            "examples/shopfront.saxl",
         ],
     )?;
     types()?;

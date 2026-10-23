@@ -417,7 +417,7 @@ pub struct Box3 {
     pub sublabel: Option<String>,
 }
 
-/// A straight segment, such as a pillar or a context link.
+/// A straight segment.
 #[derive(Debug, Clone, PartialEq, Serialize)]
 #[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct Segment3 {
@@ -425,16 +425,6 @@ pub struct Segment3 {
     pub from: Point3,
     /// End.
     pub to: Point3,
-}
-
-/// A path through several points, such as a data flow.
-#[derive(Debug, Clone, PartialEq, Serialize)]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
-pub struct Polyline3 {
-    /// What the path depicts, for example the data entity's name.
-    pub id: String,
-    /// The points, in order.
-    pub points: Vec<Point3>,
 }
 
 /// A floating caption.
@@ -447,68 +437,142 @@ pub struct Label3 {
     pub position: Point3,
 }
 
-/// The context shell: an open cylinder around the system.
-#[derive(Debug, Clone, Copy, PartialEq, Serialize)]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
-pub struct Shell {
-    /// Radius.
-    pub radius: f64,
-    /// Bottom.
-    pub y_min: f64,
-    /// Top.
-    pub y_max: f64,
-}
-
-/// Why a store holds data.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
-#[serde(rename_all = "lowercase")]
-#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
-pub enum FillRole {
-    /// The store is the source of truth for the entities.
-    Truth,
-    /// The store holds cached copies.
-    Cache,
-}
-
-/// Data at rest inside a store's container box.
+/// One replica (a pod on a cluster) or one managed instance, on the floor.
 #[derive(Debug, Clone, PartialEq, Serialize)]
 #[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
-pub struct Fill {
-    /// The store's container box id.
-    pub store: String,
-    /// Truth fills are drawn stronger than cache fills.
-    pub role: FillRole,
-    /// The data entities held.
-    pub entities: Vec<String>,
-    /// Geometry, inside the store's box.
+pub struct Pod {
+    /// The element it runs.
+    pub element: String,
+    /// Managed instances are flat pads; cluster replicas are cubes.
+    pub managed: bool,
+    /// Geometry.
     pub geometry: Box3,
 }
 
-/// The stacked 3D view: deployment floor, containers above on pillars, the
-/// context shell around them, data as color, and scenarios as a thread.
+/// A caption on the floor that belongs to an element, such as `×3`.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Tag {
+    /// The element it describes.
+    pub element: String,
+    /// The text.
+    pub text: String,
+    /// Where it sits.
+    pub position: Point3,
+}
+
+/// A dashed line from a pod up to the container it runs.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Leader {
+    /// The element.
+    pub element: String,
+    /// The pod's top, on the floor.
+    pub from: Point3,
+    /// The container's underside.
+    pub to: Point3,
+}
+
+/// One suspended level of containers: a deployment group.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Tier {
+    /// The group, as `region/group`.
+    pub id: String,
+    /// Caption, for example `edge cluster`.
+    pub label: String,
+    /// One corner of the tier's footprint, at the tier's base height.
+    pub min: Point3,
+    /// The opposite corner, at the same height.
+    pub max: Point3,
+}
+
+/// One relation drawn as a pipe.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Pipe {
+    /// `from>to`, unique per relation.
+    pub id: String,
+    /// The caller or sender.
+    pub from: String,
+    /// The callee or receiver.
+    pub to: String,
+    /// Asynchronous pipes carry coupling rings.
+    #[serde(rename = "async")]
+    pub is_async: bool,
+    /// The tube's center line. A trunk branch starts at its tee on the trunk.
+    pub points: Vec<Point3>,
+    /// The whole path from `from` to `to`, through the trunk for a branch;
+    /// what playback follows.
+    pub route: Vec<Point3>,
+    /// The hub whose trunk this pipe branches from.
+    pub trunk: Option<String>,
+    /// Tube radius.
+    pub radius: f64,
+}
+
+/// A shared pipe leaving a busy hub; its branches are [`Pipe`]s.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Trunk {
+    /// The hub element.
+    pub hub: String,
+    /// From the hub's face out to the lane.
+    pub stub: Vec<Point3>,
+    /// Along the lane, over every branch's tee.
+    pub run: Vec<Point3>,
+    /// The ids of the pipes branching from it.
+    pub pipes: Vec<String>,
+    /// Tube radius.
+    pub radius: f64,
+}
+
+/// The system boundary: a box around every internal container.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct Boundary {
+    /// The system's name.
+    pub label: String,
+    /// Lower corner.
+    pub min: Point3,
+    /// Upper corner.
+    pub max: Point3,
+}
+
+/// The suspended tower: the deployment floor, containers suspended above it
+/// in tiers (one per deployment group), each on a dashed leader from its
+/// replicas, and relations drawn as pipes.
 #[derive(Debug, Clone, PartialEq, Serialize)]
 #[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct Tower {
-    /// Floor slabs: regions, groups, workloads.
+    /// Floor slabs: regions and their groups.
     pub slabs: Vec<Box3>,
-    /// One box per replica.
-    pub pods: Vec<Box3>,
-    /// One box per internal element; id is the element name.
-    pub containers: Vec<Box3>,
-    /// From each pod up to its container.
-    pub pillars: Vec<Segment3>,
-    /// The context shell.
-    pub shell: Shell,
-    /// Actors and externals, outside the shell.
-    pub outside: Vec<Box3>,
+    /// Floor captions, painted flat.
+    pub labels: Vec<Label3>,
+    /// One per replica or managed instance.
+    pub pods: Vec<Pod>,
+    /// Replica counts beside each element's pods.
+    pub tags: Vec<Tag>,
     /// Infrastructure nodes on the floor.
     pub infra: Vec<Box3>,
-    /// From each outside box to the containers it relates to.
-    pub context_links: Vec<Segment3>,
-    /// Data at rest.
-    pub fills: Vec<Fill>,
-    /// Data in flight: queue to consumer to store.
-    pub flows: Vec<Polyline3>,
-    /// Floor and group captions.
-    pub labels: Vec<Label3>,
+    /// Height of the lowest tier's base. The viewer's explode control moves
+    /// everything above the floor relative to it.
+    pub level: f64,
+    /// The suspended levels, in declaration order: the top tier first.
+    pub tiers: Vec<Tier>,
+    /// One box per internal element; id is the element name.
+    pub containers: Vec<Box3>,
+    /// Actors and externals, outside the boundary.
+    pub outside: Vec<Box3>,
+    /// From each pod up to its container.
+    pub leaders: Vec<Leader>,
+    /// One per relation.
+    pub pipes: Vec<Pipe>,
+    /// Shared trunks of busy hubs.
+    pub trunks: Vec<Trunk>,
+    /// The system boundary.
+    pub boundary: Boundary,
+    /// Pairs of unrelated pipes the router could not keep apart. Zero when
+    /// every pipe clears every other.
+    pub clashes: u32,
 }

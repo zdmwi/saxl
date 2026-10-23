@@ -2,8 +2,8 @@
 // node, edge, and group classes match the Rust SVG output.
 
 export const CSS = `
-.saxl-viewer{--saxl-service:#5b57d1;--saxl-store:#0f8a6c;--saxl-event:#d4552b;--saxl-request:#c98407;--saxl-structure:#7d889a;--saxl-fg:#151a22;--saxl-muted:#586274;--saxl-bg:#f8f9fb;--saxl-panel:#ffffff;--saxl-line:#dde1e7}
-@media (prefers-color-scheme:dark){.saxl-viewer{--saxl-service:#8f8cf0;--saxl-store:#3fc79f;--saxl-event:#f07a52;--saxl-request:#f5b742;--saxl-structure:#6d7789;--saxl-fg:#e6e9ef;--saxl-muted:#97a1b2;--saxl-bg:#151a21;--saxl-panel:#1c222b;--saxl-line:#2c3440}}
+.saxl-viewer{--saxl-axo-lit:#ffffff;--saxl-axo-shade:#e1e1e7;--saxl-axo-plate-shade:#d8d8de;--saxl-axo-accent-lit:#fcefea;--saxl-axo-accent-shade:#edbfaf;--saxl-axo-ink:#2e3040;--saxl-axo-thin:#9a9cab;--saxl-axo-accent:#b5472b;--saxl-axo-muted:#8a8d9e;--saxl-axo-zone:#f7f7f9;--saxl-axo-tier:#dcdde4;--saxl-axo-opening:#dcdce2;--saxl-axo-card:#ffffff;--saxl-axo-card-line:#d4d4da;--saxl-service:#5b57d1;--saxl-store:#0f8a6c;--saxl-event:#d4552b;--saxl-request:#c98407;--saxl-structure:#7d889a;--saxl-fg:#151a22;--saxl-muted:#586274;--saxl-bg:#f8f9fb;--saxl-panel:#ffffff;--saxl-line:#dde1e7}
+@media (prefers-color-scheme:dark){.saxl-viewer{--saxl-axo-lit:#3a414d;--saxl-axo-shade:#252a33;--saxl-axo-plate-shade:#1e232b;--saxl-axo-accent-lit:#6b3a2d;--saxl-axo-accent-shade:#4a271e;--saxl-axo-ink:#c9cfda;--saxl-axo-thin:#6d7789;--saxl-axo-accent:#f07a52;--saxl-axo-muted:#97a1b2;--saxl-axo-zone:#1c222b;--saxl-axo-tier:#2c3440;--saxl-axo-opening:#151a21;--saxl-axo-card:#1c222b;--saxl-axo-card-line:#3a4250;--saxl-service:#8f8cf0;--saxl-store:#3fc79f;--saxl-event:#f07a52;--saxl-request:#f5b742;--saxl-structure:#6d7789;--saxl-fg:#e6e9ef;--saxl-muted:#97a1b2;--saxl-bg:#151a21;--saxl-panel:#1c222b;--saxl-line:#2c3440}}
 .saxl-viewer{position:relative;display:flex;flex-direction:column;height:100%;min-height:320px;background:var(--saxl-bg);color:var(--saxl-fg);font:13px/1.4 ui-monospace,Menlo,Consolas,monospace;overflow:hidden}
 .saxl-viewer *{box-sizing:border-box}
 .saxl-bar{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:8px 12px;border-bottom:1px solid var(--saxl-line);background:var(--saxl-panel)}
@@ -65,7 +65,8 @@ export const CSS = `
 .saxl-tower-panel button,.saxl-tower-panel select{font:inherit;color:var(--saxl-fg);background:var(--saxl-bg);border:1px solid var(--saxl-line);border-radius:6px;padding:3px 8px;cursor:pointer}
 .saxl-tower-panel .saxl-row{display:flex;gap:4px}
 .saxl-tower-panel .saxl-row button:nth-child(2){flex:1}
-.saxl-tower-panel input[type=range]{width:100%;accent-color:var(--saxl-request)}
+.saxl-tower-panel input[type=range]{width:100%;accent-color:var(--saxl-axo-accent)}
+.saxl-tower-panel .saxl-step{color:var(--saxl-muted);font-size:11px;min-height:1.4em}
 .saxl-card .diag{margin-top:4px;color:var(--saxl-request)}
 .saxl-card .diag.error{color:var(--saxl-event)}
 @media (max-width:560px){.saxl-tower-panel{max-width:170px;font-size:12px}}

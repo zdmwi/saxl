@@ -5,6 +5,7 @@ pub(crate) mod context;
 pub(crate) mod data;
 pub(crate) mod deployment;
 pub(crate) mod layered;
+pub(crate) mod pipes;
 pub(crate) mod runtime;
 pub(crate) mod tower;
 

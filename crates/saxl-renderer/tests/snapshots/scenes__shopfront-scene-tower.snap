@@ -1,0 +1,5977 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "tower"
+  },
+  "title": "Tower: Shopfront",
+  "size": {
+    "w": 0.0,
+    "h": 0.0
+  },
+  "nodes": [],
+  "edges": [],
+  "groups": [],
+  "tower": {
+    "slabs": [
+      {
+        "id": "region:us-east-1",
+        "kind": "floor",
+        "center": {
+          "x": 0.0,
+          "y": -0.25,
+          "z": 0.0
+        },
+        "size": {
+          "x": 29.92,
+          "y": 0.5,
+          "z": 17.28
+        },
+        "label": "us-east-1",
+        "sublabel": "region"
+      },
+      {
+        "id": "group:us-east-1/edge cluster",
+        "kind": "floor",
+        "center": {
+          "x": -11.0,
+          "y": 0.11,
+          "z": 0.0
+        },
+        "size": {
+          "x": 4.2,
+          "y": 0.22,
+          "z": 14.4
+        },
+        "label": "edge cluster",
+        "sublabel": "group"
+      },
+      {
+        "id": "group:us-east-1/domain cluster",
+        "kind": "floor",
+        "center": {
+          "x": -2.2,
+          "y": 0.11,
+          "z": 0.0
+        },
+        "size": {
+          "x": 13.0,
+          "y": 0.22,
+          "z": 14.4
+        },
+        "label": "domain cluster",
+        "sublabel": "group"
+      },
+      {
+        "id": "group:us-east-1/managed",
+        "kind": "floor",
+        "center": {
+          "x": 8.8,
+          "y": 0.11,
+          "z": 0.0
+        },
+        "size": {
+          "x": 8.6,
+          "y": 0.22,
+          "z": 14.4
+        },
+        "label": "managed",
+        "sublabel": "group"
+      }
+    ],
+    "labels": [
+      {
+        "text": "US-EAST-1 · REGION",
+        "position": {
+          "x": -14.46,
+          "y": 0.0,
+          "z": 8.39
+        }
+      },
+      {
+        "text": "EDGE CLUSTER",
+        "position": {
+          "x": -12.7,
+          "y": 0.0,
+          "z": 6.7
+        }
+      },
+      {
+        "text": "DOMAIN CLUSTER",
+        "position": {
+          "x": -8.3,
+          "y": 0.0,
+          "z": 6.7
+        }
+      },
+      {
+        "text": "MANAGED",
+        "position": {
+          "x": 4.9,
+          "y": 0.0,
+          "z": 6.7
+        }
+      }
+    ],
+    "pods": [
+      {
+        "element": "Storefront",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Storefront#0",
+          "kind": "service",
+          "center": {
+            "x": -11.95,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Storefront",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Storefront#1",
+          "kind": "service",
+          "center": {
+            "x": -11.0,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Storefront",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Storefront#2",
+          "kind": "service",
+          "center": {
+            "x": -10.05,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "MobileBFF",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/MobileBFF#0",
+          "kind": "service",
+          "center": {
+            "x": -11.48,
+            "y": 0.35,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "MobileBFF",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/MobileBFF#1",
+          "kind": "service",
+          "center": {
+            "x": -10.53,
+            "y": 0.35,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "AdminUI",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/AdminUI#0",
+          "kind": "service",
+          "center": {
+            "x": -11.0,
+            "y": 0.35,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Gateway",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Gateway#0",
+          "kind": "service",
+          "center": {
+            "x": -11.95,
+            "y": 0.35,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Gateway",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Gateway#1",
+          "kind": "service",
+          "center": {
+            "x": -11.0,
+            "y": 0.35,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Gateway",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Gateway#2",
+          "kind": "service",
+          "center": {
+            "x": -10.05,
+            "y": 0.35,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Catalog",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Catalog#0",
+          "kind": "service",
+          "center": {
+            "x": -7.07,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Catalog",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Catalog#1",
+          "kind": "service",
+          "center": {
+            "x": -6.13,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Search",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Search#0",
+          "kind": "service",
+          "center": {
+            "x": -7.07,
+            "y": 0.35,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Search",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Search#1",
+          "kind": "service",
+          "center": {
+            "x": -6.13,
+            "y": 0.35,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Accounts",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Accounts#0",
+          "kind": "service",
+          "center": {
+            "x": -7.07,
+            "y": 0.35,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Accounts",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Accounts#1",
+          "kind": "service",
+          "center": {
+            "x": -6.13,
+            "y": 0.35,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Cart",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Cart#0",
+          "kind": "service",
+          "center": {
+            "x": -7.55,
+            "y": 0.35,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Cart",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Cart#1",
+          "kind": "service",
+          "center": {
+            "x": -6.6,
+            "y": 0.35,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Cart",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Cart#2",
+          "kind": "service",
+          "center": {
+            "x": -5.65,
+            "y": 0.35,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Inventory",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Inventory#0",
+          "kind": "service",
+          "center": {
+            "x": -2.67,
+            "y": 0.35,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Inventory",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Inventory#1",
+          "kind": "service",
+          "center": {
+            "x": -1.72,
+            "y": 0.35,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Checkout",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Checkout#0",
+          "kind": "service",
+          "center": {
+            "x": -3.15,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Checkout",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Checkout#1",
+          "kind": "service",
+          "center": {
+            "x": -2.2,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Checkout",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Checkout#2",
+          "kind": "service",
+          "center": {
+            "x": -1.25,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Payments",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Payments#0",
+          "kind": "service",
+          "center": {
+            "x": -2.67,
+            "y": 0.35,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Payments",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Payments#1",
+          "kind": "service",
+          "center": {
+            "x": -1.72,
+            "y": 0.35,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Fulfillment",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Fulfillment#0",
+          "kind": "service",
+          "center": {
+            "x": 2.2,
+            "y": 0.35,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Orders",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Orders#0",
+          "kind": "service",
+          "center": {
+            "x": -2.67,
+            "y": 0.35,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Orders",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Orders#1",
+          "kind": "service",
+          "center": {
+            "x": -1.72,
+            "y": 0.35,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Notifications",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Notifications#0",
+          "kind": "service",
+          "center": {
+            "x": 1.73,
+            "y": 0.35,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Notifications",
+        "managed": false,
+        "geometry": {
+          "id": "pod:us-east-1/Notifications#1",
+          "kind": "service",
+          "center": {
+            "x": 2.68,
+            "y": 0.35,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "CatalogDB",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/CatalogDB#0",
+          "kind": "store",
+          "center": {
+            "x": 6.03,
+            "y": 0.06,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "CatalogDB",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/CatalogDB#1",
+          "kind": "store",
+          "center": {
+            "x": 7.18,
+            "y": 0.06,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Blob",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/Blob#0",
+          "kind": "store",
+          "center": {
+            "x": 6.6,
+            "y": 0.06,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "SearchIndex",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/SearchIndex#0",
+          "kind": "store",
+          "center": {
+            "x": 9.85,
+            "y": 0.06,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "SearchIndex",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/SearchIndex#1",
+          "kind": "store",
+          "center": {
+            "x": 11.0,
+            "y": 0.06,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "SearchIndex",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/SearchIndex#2",
+          "kind": "store",
+          "center": {
+            "x": 12.15,
+            "y": 0.06,
+            "z": -5.4
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Redis",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/Redis#0",
+          "kind": "store",
+          "center": {
+            "x": 10.43,
+            "y": 0.06,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "Redis",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/Redis#1",
+          "kind": "store",
+          "center": {
+            "x": 11.58,
+            "y": 0.06,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "CommerceDB",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/CommerceDB#0",
+          "kind": "store",
+          "center": {
+            "x": 10.43,
+            "y": 0.06,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "CommerceDB",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/CommerceDB#1",
+          "kind": "store",
+          "center": {
+            "x": 11.58,
+            "y": 0.06,
+            "z": -1.8
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "ProductEvents",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/ProductEvents#0",
+          "kind": "queue",
+          "center": {
+            "x": 6.6,
+            "y": 0.06,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "OrderEvents",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/OrderEvents#0",
+          "kind": "queue",
+          "center": {
+            "x": 5.45,
+            "y": 0.06,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "OrderEvents",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/OrderEvents#1",
+          "kind": "queue",
+          "center": {
+            "x": 6.6,
+            "y": 0.06,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "OrderEvents",
+        "managed": true,
+        "geometry": {
+          "id": "pod:us-east-1/OrderEvents#2",
+          "kind": "queue",
+          "center": {
+            "x": 7.75,
+            "y": 0.06,
+            "z": 5.4
+          },
+          "size": {
+            "x": 0.95,
+            "y": 0.12,
+            "z": 0.95
+          },
+          "label": null,
+          "sublabel": null
+        }
+      }
+    ],
+    "tags": [
+      {
+        "element": "Storefront",
+        "text": "×3 autoscale",
+        "position": {
+          "x": -11.0,
+          "y": 0.05,
+          "z": -4.55
+        }
+      },
+      {
+        "element": "MobileBFF",
+        "text": "×2",
+        "position": {
+          "x": -11.0,
+          "y": 0.05,
+          "z": -0.95
+        }
+      },
+      {
+        "element": "AdminUI",
+        "text": "×1",
+        "position": {
+          "x": -11.0,
+          "y": 0.05,
+          "z": 2.65
+        }
+      },
+      {
+        "element": "Gateway",
+        "text": "×3 autoscale",
+        "position": {
+          "x": -11.0,
+          "y": 0.05,
+          "z": 6.25
+        }
+      },
+      {
+        "element": "Catalog",
+        "text": "×2",
+        "position": {
+          "x": -6.6,
+          "y": 0.05,
+          "z": -4.55
+        }
+      },
+      {
+        "element": "Search",
+        "text": "×2",
+        "position": {
+          "x": -6.6,
+          "y": 0.05,
+          "z": -0.95
+        }
+      },
+      {
+        "element": "Accounts",
+        "text": "×2",
+        "position": {
+          "x": -6.6,
+          "y": 0.05,
+          "z": 2.65
+        }
+      },
+      {
+        "element": "Cart",
+        "text": "×3 autoscale",
+        "position": {
+          "x": -6.6,
+          "y": 0.05,
+          "z": 6.25
+        }
+      },
+      {
+        "element": "Inventory",
+        "text": "×2",
+        "position": {
+          "x": -2.2,
+          "y": 0.05,
+          "z": 2.65
+        }
+      },
+      {
+        "element": "Checkout",
+        "text": "×3 autoscale",
+        "position": {
+          "x": -2.2,
+          "y": 0.05,
+          "z": -4.55
+        }
+      },
+      {
+        "element": "Payments",
+        "text": "×2",
+        "position": {
+          "x": -2.2,
+          "y": 0.05,
+          "z": 6.25
+        }
+      },
+      {
+        "element": "Fulfillment",
+        "text": "×1",
+        "position": {
+          "x": 2.2,
+          "y": 0.05,
+          "z": -4.55
+        }
+      },
+      {
+        "element": "Orders",
+        "text": "×2",
+        "position": {
+          "x": -2.2,
+          "y": 0.05,
+          "z": -0.95
+        }
+      },
+      {
+        "element": "Notifications",
+        "text": "×2",
+        "position": {
+          "x": 2.2,
+          "y": 0.05,
+          "z": -0.95
+        }
+      },
+      {
+        "element": "CatalogDB",
+        "text": "primary + replica",
+        "position": {
+          "x": 6.6,
+          "y": 0.05,
+          "z": -4.55
+        }
+      },
+      {
+        "element": "Blob",
+        "text": "managed",
+        "position": {
+          "x": 6.6,
+          "y": 0.05,
+          "z": -0.95
+        }
+      },
+      {
+        "element": "SearchIndex",
+        "text": "3 instances",
+        "position": {
+          "x": 11.0,
+          "y": 0.05,
+          "z": -4.55
+        }
+      },
+      {
+        "element": "Redis",
+        "text": "primary + replica",
+        "position": {
+          "x": 11.0,
+          "y": 0.05,
+          "z": 2.65
+        }
+      },
+      {
+        "element": "CommerceDB",
+        "text": "primary + replica",
+        "position": {
+          "x": 11.0,
+          "y": 0.05,
+          "z": -0.95
+        }
+      },
+      {
+        "element": "ProductEvents",
+        "text": "managed",
+        "position": {
+          "x": 6.6,
+          "y": 0.05,
+          "z": 2.65
+        }
+      },
+      {
+        "element": "OrderEvents",
+        "text": "3 instances",
+        "position": {
+          "x": 6.6,
+          "y": 0.05,
+          "z": 6.25
+        }
+      }
+    ],
+    "infra": [],
+    "level": 7.0,
+    "tiers": [
+      {
+        "id": "edge cluster",
+        "label": "edge cluster",
+        "min": {
+          "x": -13.05,
+          "y": 15.75,
+          "z": -7.05
+        },
+        "max": {
+          "x": -8.95,
+          "y": 15.75,
+          "z": 7.05
+        }
+      },
+      {
+        "id": "domain cluster",
+        "label": "domain cluster",
+        "min": {
+          "x": -8.65,
+          "y": 11.35,
+          "z": -7.05
+        },
+        "max": {
+          "x": 4.25,
+          "y": 11.35,
+          "z": 7.05
+        }
+      },
+      {
+        "id": "managed",
+        "label": "managed",
+        "min": {
+          "x": 4.55,
+          "y": 6.95,
+          "z": -7.05
+        },
+        "max": {
+          "x": 13.05,
+          "y": 6.95,
+          "z": 7.05
+        }
+      }
+    ],
+    "containers": [
+      {
+        "id": "Storefront",
+        "kind": "service",
+        "center": {
+          "x": -11.0,
+          "y": 16.3,
+          "z": -5.4
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Storefront",
+        "sublabel": "web"
+      },
+      {
+        "id": "MobileBFF",
+        "kind": "service",
+        "center": {
+          "x": -11.0,
+          "y": 16.3,
+          "z": -1.8
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "MobileBFF",
+        "sublabel": "mobile api"
+      },
+      {
+        "id": "AdminUI",
+        "kind": "service",
+        "center": {
+          "x": -11.0,
+          "y": 16.3,
+          "z": 1.8
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "AdminUI",
+        "sublabel": "merchant tools"
+      },
+      {
+        "id": "Gateway",
+        "kind": "service",
+        "center": {
+          "x": -11.0,
+          "y": 16.3,
+          "z": 5.4
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Gateway",
+        "sublabel": "auth, routing"
+      },
+      {
+        "id": "Catalog",
+        "kind": "service",
+        "center": {
+          "x": -6.6,
+          "y": 11.9,
+          "z": -5.4
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Catalog",
+        "sublabel": "products"
+      },
+      {
+        "id": "Search",
+        "kind": "service",
+        "center": {
+          "x": -6.6,
+          "y": 11.9,
+          "z": -1.8
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Search",
+        "sublabel": "queries"
+      },
+      {
+        "id": "Accounts",
+        "kind": "service",
+        "center": {
+          "x": -6.6,
+          "y": 11.9,
+          "z": 1.8
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Accounts",
+        "sublabel": "users"
+      },
+      {
+        "id": "Cart",
+        "kind": "service",
+        "center": {
+          "x": -6.6,
+          "y": 11.9,
+          "z": 5.4
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Cart",
+        "sublabel": "baskets"
+      },
+      {
+        "id": "Inventory",
+        "kind": "service",
+        "center": {
+          "x": -2.2,
+          "y": 11.9,
+          "z": 1.8
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Inventory",
+        "sublabel": "stock"
+      },
+      {
+        "id": "Checkout",
+        "kind": "service",
+        "center": {
+          "x": -2.2,
+          "y": 11.9,
+          "z": -5.4
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Checkout",
+        "sublabel": "orchestrates"
+      },
+      {
+        "id": "Payments",
+        "kind": "service",
+        "center": {
+          "x": -2.2,
+          "y": 11.9,
+          "z": 5.4
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Payments",
+        "sublabel": "charges"
+      },
+      {
+        "id": "Fulfillment",
+        "kind": "service",
+        "center": {
+          "x": 2.2,
+          "y": 11.9,
+          "z": -5.4
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Fulfillment",
+        "sublabel": "shipping"
+      },
+      {
+        "id": "Orders",
+        "kind": "service",
+        "center": {
+          "x": -2.2,
+          "y": 11.9,
+          "z": -1.8
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Orders",
+        "sublabel": "order records"
+      },
+      {
+        "id": "Notifications",
+        "kind": "service",
+        "center": {
+          "x": 2.2,
+          "y": 11.9,
+          "z": -1.8
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "Notifications",
+        "sublabel": "email, push"
+      },
+      {
+        "id": "CatalogDB",
+        "kind": "store",
+        "center": {
+          "x": 6.6,
+          "y": 7.6,
+          "z": -5.4
+        },
+        "size": {
+          "x": 1.8,
+          "y": 1.2,
+          "z": 1.8
+        },
+        "label": "CatalogDB",
+        "sublabel": "products"
+      },
+      {
+        "id": "Blob",
+        "kind": "store",
+        "center": {
+          "x": 6.6,
+          "y": 7.6,
+          "z": -1.8
+        },
+        "size": {
+          "x": 1.8,
+          "y": 1.2,
+          "z": 1.8
+        },
+        "label": "Blob",
+        "sublabel": "images"
+      },
+      {
+        "id": "SearchIndex",
+        "kind": "store",
+        "center": {
+          "x": 11.0,
+          "y": 7.6,
+          "z": -5.4
+        },
+        "size": {
+          "x": 1.8,
+          "y": 1.2,
+          "z": 1.8
+        },
+        "label": "SearchIndex",
+        "sublabel": "search index"
+      },
+      {
+        "id": "Redis",
+        "kind": "store",
+        "center": {
+          "x": 11.0,
+          "y": 7.6,
+          "z": 1.8
+        },
+        "size": {
+          "x": 1.8,
+          "y": 1.2,
+          "z": 1.8
+        },
+        "label": "Redis",
+        "sublabel": "carts, sessions"
+      },
+      {
+        "id": "CommerceDB",
+        "kind": "store",
+        "center": {
+          "x": 11.0,
+          "y": 7.6,
+          "z": -1.8
+        },
+        "size": {
+          "x": 1.8,
+          "y": 1.2,
+          "z": 1.8
+        },
+        "label": "CommerceDB",
+        "sublabel": "source of truth"
+      },
+      {
+        "id": "ProductEvents",
+        "kind": "queue",
+        "center": {
+          "x": 6.6,
+          "y": 7.62,
+          "z": 1.8
+        },
+        "size": {
+          "x": 3.6,
+          "y": 0.9,
+          "z": 0.9
+        },
+        "label": "ProductEvents",
+        "sublabel": "catalog changes"
+      },
+      {
+        "id": "OrderEvents",
+        "kind": "queue",
+        "center": {
+          "x": 6.6,
+          "y": 7.62,
+          "z": 5.4
+        },
+        "size": {
+          "x": 3.6,
+          "y": 0.9,
+          "z": 0.9
+        },
+        "label": "OrderEvents",
+        "sublabel": "order lifecycle"
+      }
+    ],
+    "outside": [
+      {
+        "id": "Shopper",
+        "kind": "actor",
+        "center": {
+          "x": -15.4,
+          "y": 16.53,
+          "z": -1.8
+        },
+        "size": {
+          "x": 1.5,
+          "y": 1.45,
+          "z": 1.5
+        },
+        "label": "Shopper",
+        "sublabel": "browses and buys"
+      },
+      {
+        "id": "Merchant",
+        "kind": "actor",
+        "center": {
+          "x": -15.4,
+          "y": 16.53,
+          "z": 1.8
+        },
+        "size": {
+          "x": 1.5,
+          "y": 1.45,
+          "z": 1.5
+        },
+        "label": "Merchant",
+        "sublabel": "manages the catalog"
+      },
+      {
+        "id": "Stripe",
+        "kind": "external",
+        "center": {
+          "x": 15.4,
+          "y": 11.9,
+          "z": 5.4
+        },
+        "size": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 1.2
+        },
+        "label": "Stripe",
+        "sublabel": "card payments"
+      },
+      {
+        "id": "Shippo",
+        "kind": "external",
+        "center": {
+          "x": 15.4,
+          "y": 11.9,
+          "z": -5.4
+        },
+        "size": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 1.2
+        },
+        "label": "Shippo",
+        "sublabel": "shipping labels"
+      },
+      {
+        "id": "SendGrid",
+        "kind": "external",
+        "center": {
+          "x": 15.4,
+          "y": 11.9,
+          "z": -1.8
+        },
+        "size": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 1.2
+        },
+        "label": "SendGrid",
+        "sublabel": "transactional email"
+      }
+    ],
+    "leaders": [
+      {
+        "element": "Storefront",
+        "from": {
+          "x": -11.95,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": -11.95,
+          "y": 15.8,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Storefront",
+        "from": {
+          "x": -11.0,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": -11.0,
+          "y": 15.8,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Storefront",
+        "from": {
+          "x": -10.05,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": -10.05,
+          "y": 15.8,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "MobileBFF",
+        "from": {
+          "x": -11.48,
+          "y": 0.7,
+          "z": -1.8
+        },
+        "to": {
+          "x": -11.48,
+          "y": 15.8,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "MobileBFF",
+        "from": {
+          "x": -10.53,
+          "y": 0.7,
+          "z": -1.8
+        },
+        "to": {
+          "x": -10.53,
+          "y": 15.8,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "AdminUI",
+        "from": {
+          "x": -11.0,
+          "y": 0.7,
+          "z": 1.8
+        },
+        "to": {
+          "x": -11.0,
+          "y": 15.8,
+          "z": 1.8
+        }
+      },
+      {
+        "element": "Gateway",
+        "from": {
+          "x": -11.95,
+          "y": 0.7,
+          "z": 5.4
+        },
+        "to": {
+          "x": -11.95,
+          "y": 15.8,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "Gateway",
+        "from": {
+          "x": -11.0,
+          "y": 0.7,
+          "z": 5.4
+        },
+        "to": {
+          "x": -11.0,
+          "y": 15.8,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "Gateway",
+        "from": {
+          "x": -10.05,
+          "y": 0.7,
+          "z": 5.4
+        },
+        "to": {
+          "x": -10.05,
+          "y": 15.8,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "Catalog",
+        "from": {
+          "x": -7.07,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": -7.07,
+          "y": 11.4,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Catalog",
+        "from": {
+          "x": -6.13,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": -6.13,
+          "y": 11.4,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Search",
+        "from": {
+          "x": -7.07,
+          "y": 0.7,
+          "z": -1.8
+        },
+        "to": {
+          "x": -7.07,
+          "y": 11.4,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "Search",
+        "from": {
+          "x": -6.13,
+          "y": 0.7,
+          "z": -1.8
+        },
+        "to": {
+          "x": -6.13,
+          "y": 11.4,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "Accounts",
+        "from": {
+          "x": -7.07,
+          "y": 0.7,
+          "z": 1.8
+        },
+        "to": {
+          "x": -7.07,
+          "y": 11.4,
+          "z": 1.8
+        }
+      },
+      {
+        "element": "Accounts",
+        "from": {
+          "x": -6.13,
+          "y": 0.7,
+          "z": 1.8
+        },
+        "to": {
+          "x": -6.13,
+          "y": 11.4,
+          "z": 1.8
+        }
+      },
+      {
+        "element": "Cart",
+        "from": {
+          "x": -7.55,
+          "y": 0.7,
+          "z": 5.4
+        },
+        "to": {
+          "x": -7.55,
+          "y": 11.4,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "Cart",
+        "from": {
+          "x": -6.6,
+          "y": 0.7,
+          "z": 5.4
+        },
+        "to": {
+          "x": -6.6,
+          "y": 11.4,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "Cart",
+        "from": {
+          "x": -5.65,
+          "y": 0.7,
+          "z": 5.4
+        },
+        "to": {
+          "x": -5.65,
+          "y": 11.4,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "Inventory",
+        "from": {
+          "x": -2.67,
+          "y": 0.7,
+          "z": 1.8
+        },
+        "to": {
+          "x": -2.67,
+          "y": 11.4,
+          "z": 1.8
+        }
+      },
+      {
+        "element": "Inventory",
+        "from": {
+          "x": -1.72,
+          "y": 0.7,
+          "z": 1.8
+        },
+        "to": {
+          "x": -1.72,
+          "y": 11.4,
+          "z": 1.8
+        }
+      },
+      {
+        "element": "Checkout",
+        "from": {
+          "x": -3.15,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": -3.15,
+          "y": 11.4,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Checkout",
+        "from": {
+          "x": -2.2,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": -2.2,
+          "y": 11.4,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Checkout",
+        "from": {
+          "x": -1.25,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": -1.25,
+          "y": 11.4,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Payments",
+        "from": {
+          "x": -2.67,
+          "y": 0.7,
+          "z": 5.4
+        },
+        "to": {
+          "x": -2.67,
+          "y": 11.4,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "Payments",
+        "from": {
+          "x": -1.72,
+          "y": 0.7,
+          "z": 5.4
+        },
+        "to": {
+          "x": -1.72,
+          "y": 11.4,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "Fulfillment",
+        "from": {
+          "x": 2.2,
+          "y": 0.7,
+          "z": -5.4
+        },
+        "to": {
+          "x": 2.2,
+          "y": 11.4,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Orders",
+        "from": {
+          "x": -2.67,
+          "y": 0.7,
+          "z": -1.8
+        },
+        "to": {
+          "x": -2.67,
+          "y": 11.4,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "Orders",
+        "from": {
+          "x": -1.72,
+          "y": 0.7,
+          "z": -1.8
+        },
+        "to": {
+          "x": -1.72,
+          "y": 11.4,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "Notifications",
+        "from": {
+          "x": 1.73,
+          "y": 0.7,
+          "z": -1.8
+        },
+        "to": {
+          "x": 1.73,
+          "y": 11.4,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "Notifications",
+        "from": {
+          "x": 2.68,
+          "y": 0.7,
+          "z": -1.8
+        },
+        "to": {
+          "x": 2.68,
+          "y": 11.4,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "CatalogDB",
+        "from": {
+          "x": 6.03,
+          "y": 0.12,
+          "z": -5.4
+        },
+        "to": {
+          "x": 6.03,
+          "y": 7.0,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "CatalogDB",
+        "from": {
+          "x": 7.18,
+          "y": 0.12,
+          "z": -5.4
+        },
+        "to": {
+          "x": 7.18,
+          "y": 7.0,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Blob",
+        "from": {
+          "x": 6.6,
+          "y": 0.12,
+          "z": -1.8
+        },
+        "to": {
+          "x": 6.6,
+          "y": 7.0,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "SearchIndex",
+        "from": {
+          "x": 9.85,
+          "y": 0.12,
+          "z": -5.4
+        },
+        "to": {
+          "x": 10.28,
+          "y": 7.0,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "SearchIndex",
+        "from": {
+          "x": 11.0,
+          "y": 0.12,
+          "z": -5.4
+        },
+        "to": {
+          "x": 11.0,
+          "y": 7.0,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "SearchIndex",
+        "from": {
+          "x": 12.15,
+          "y": 0.12,
+          "z": -5.4
+        },
+        "to": {
+          "x": 11.72,
+          "y": 7.0,
+          "z": -5.4
+        }
+      },
+      {
+        "element": "Redis",
+        "from": {
+          "x": 10.43,
+          "y": 0.12,
+          "z": 1.8
+        },
+        "to": {
+          "x": 10.43,
+          "y": 7.0,
+          "z": 1.8
+        }
+      },
+      {
+        "element": "Redis",
+        "from": {
+          "x": 11.58,
+          "y": 0.12,
+          "z": 1.8
+        },
+        "to": {
+          "x": 11.58,
+          "y": 7.0,
+          "z": 1.8
+        }
+      },
+      {
+        "element": "CommerceDB",
+        "from": {
+          "x": 10.43,
+          "y": 0.12,
+          "z": -1.8
+        },
+        "to": {
+          "x": 10.43,
+          "y": 7.0,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "CommerceDB",
+        "from": {
+          "x": 11.58,
+          "y": 0.12,
+          "z": -1.8
+        },
+        "to": {
+          "x": 11.58,
+          "y": 7.0,
+          "z": -1.8
+        }
+      },
+      {
+        "element": "ProductEvents",
+        "from": {
+          "x": 6.6,
+          "y": 0.12,
+          "z": 1.8
+        },
+        "to": {
+          "x": 6.6,
+          "y": 7.17,
+          "z": 1.8
+        }
+      },
+      {
+        "element": "OrderEvents",
+        "from": {
+          "x": 5.45,
+          "y": 0.12,
+          "z": 5.4
+        },
+        "to": {
+          "x": 5.45,
+          "y": 7.17,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "OrderEvents",
+        "from": {
+          "x": 6.6,
+          "y": 0.12,
+          "z": 5.4
+        },
+        "to": {
+          "x": 6.6,
+          "y": 7.17,
+          "z": 5.4
+        }
+      },
+      {
+        "element": "OrderEvents",
+        "from": {
+          "x": 7.75,
+          "y": 0.12,
+          "z": 5.4
+        },
+        "to": {
+          "x": 7.75,
+          "y": 7.17,
+          "z": 5.4
+        }
+      }
+    ],
+    "pipes": [
+      {
+        "id": "Shopper>Storefront",
+        "from": "Shopper",
+        "to": "Storefront",
+        "async": false,
+        "points": [
+          {
+            "x": -15.1,
+            "y": 16.3,
+            "z": -2.05
+          },
+          {
+            "x": -13.2,
+            "y": 16.3,
+            "z": -2.05
+          },
+          {
+            "x": -13.2,
+            "y": 16.3,
+            "z": -3.6
+          },
+          {
+            "x": -11.64,
+            "y": 16.3,
+            "z": -3.6
+          },
+          {
+            "x": -11.64,
+            "y": 16.3,
+            "z": -4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -15.1,
+            "y": 16.3,
+            "z": -2.05
+          },
+          {
+            "x": -13.2,
+            "y": 16.3,
+            "z": -2.05
+          },
+          {
+            "x": -13.2,
+            "y": 16.3,
+            "z": -3.6
+          },
+          {
+            "x": -11.64,
+            "y": 16.3,
+            "z": -3.6
+          },
+          {
+            "x": -11.64,
+            "y": 16.3,
+            "z": -4.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Shopper>MobileBFF",
+        "from": "Shopper",
+        "to": "MobileBFF",
+        "async": false,
+        "points": [
+          {
+            "x": -15.1,
+            "y": 16.1,
+            "z": -1.8
+          },
+          {
+            "x": -12.4,
+            "y": 16.1,
+            "z": -1.8
+          }
+        ],
+        "route": [
+          {
+            "x": -15.1,
+            "y": 16.1,
+            "z": -1.8
+          },
+          {
+            "x": -12.4,
+            "y": 16.1,
+            "z": -1.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Merchant>AdminUI",
+        "from": "Merchant",
+        "to": "AdminUI",
+        "async": false,
+        "points": [
+          {
+            "x": -15.1,
+            "y": 16.1,
+            "z": 1.8
+          },
+          {
+            "x": -12.4,
+            "y": 16.1,
+            "z": 1.8
+          }
+        ],
+        "route": [
+          {
+            "x": -15.1,
+            "y": 16.1,
+            "z": 1.8
+          },
+          {
+            "x": -12.4,
+            "y": 16.1,
+            "z": 1.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Storefront>Gateway",
+        "from": "Storefront",
+        "to": "Gateway",
+        "async": false,
+        "points": [
+          {
+            "x": -10.68,
+            "y": 16.1,
+            "z": -4.6
+          },
+          {
+            "x": -10.68,
+            "y": 16.1,
+            "z": -3.92
+          },
+          {
+            "x": -9.12,
+            "y": 16.1,
+            "z": -3.92
+          },
+          {
+            "x": -9.12,
+            "y": 16.1,
+            "z": 3.28
+          },
+          {
+            "x": -10.68,
+            "y": 16.1,
+            "z": 3.28
+          },
+          {
+            "x": -10.68,
+            "y": 16.1,
+            "z": 4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -10.68,
+            "y": 16.1,
+            "z": -4.6
+          },
+          {
+            "x": -10.68,
+            "y": 16.1,
+            "z": -3.92
+          },
+          {
+            "x": -9.12,
+            "y": 16.1,
+            "z": -3.92
+          },
+          {
+            "x": -9.12,
+            "y": 16.1,
+            "z": 3.28
+          },
+          {
+            "x": -10.68,
+            "y": 16.1,
+            "z": 3.28
+          },
+          {
+            "x": -10.68,
+            "y": 16.1,
+            "z": 4.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "MobileBFF>Gateway",
+        "from": "MobileBFF",
+        "to": "Gateway",
+        "async": false,
+        "points": [
+          {
+            "x": -11.64,
+            "y": 16.4,
+            "z": -1.0
+          },
+          {
+            "x": -11.64,
+            "y": 16.4,
+            "z": 0.0
+          },
+          {
+            "x": -11.64,
+            "y": 17.5,
+            "z": 0.0
+          },
+          {
+            "x": -8.8,
+            "y": 17.5,
+            "z": 0.0
+          },
+          {
+            "x": -8.8,
+            "y": 17.5,
+            "z": 3.6
+          },
+          {
+            "x": -11.64,
+            "y": 17.5,
+            "z": 3.6
+          },
+          {
+            "x": -11.64,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.64,
+            "y": 16.4,
+            "z": 4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -11.64,
+            "y": 16.4,
+            "z": -1.0
+          },
+          {
+            "x": -11.64,
+            "y": 16.4,
+            "z": 0.0
+          },
+          {
+            "x": -11.64,
+            "y": 17.5,
+            "z": 0.0
+          },
+          {
+            "x": -8.8,
+            "y": 17.5,
+            "z": 0.0
+          },
+          {
+            "x": -8.8,
+            "y": 17.5,
+            "z": 3.6
+          },
+          {
+            "x": -11.64,
+            "y": 17.5,
+            "z": 3.6
+          },
+          {
+            "x": -11.64,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.64,
+            "y": 16.4,
+            "z": 4.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "AdminUI>Gateway",
+        "from": "AdminUI",
+        "to": "Gateway",
+        "async": false,
+        "points": [
+          {
+            "x": -11.32,
+            "y": 16.1,
+            "z": 2.6
+          },
+          {
+            "x": -11.32,
+            "y": 16.1,
+            "z": 4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -11.32,
+            "y": 16.1,
+            "z": 2.6
+          },
+          {
+            "x": -11.32,
+            "y": 16.1,
+            "z": 4.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Gateway>Catalog",
+        "from": "Gateway",
+        "to": "Catalog",
+        "async": false,
+        "points": [
+          {
+            "x": -8.8,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -8.8,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -8.8,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": -4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 4.6
+          },
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.0,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -8.8,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -8.8,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -8.8,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": -4.6
+          }
+        ],
+        "trunk": "Gateway",
+        "radius": 0.1
+      },
+      {
+        "id": "Gateway>Search",
+        "from": "Gateway",
+        "to": "Search",
+        "async": false,
+        "points": [
+          {
+            "x": -9.12,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -9.12,
+            "y": 12.1,
+            "z": 3.6
+          },
+          {
+            "x": -9.12,
+            "y": 12.1,
+            "z": -0.32
+          },
+          {
+            "x": -6.6,
+            "y": 12.1,
+            "z": -0.32
+          },
+          {
+            "x": -6.6,
+            "y": 12.1,
+            "z": -1.0
+          }
+        ],
+        "route": [
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 4.6
+          },
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.0,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -9.12,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -9.12,
+            "y": 12.1,
+            "z": 3.6
+          },
+          {
+            "x": -9.12,
+            "y": 12.1,
+            "z": -0.32
+          },
+          {
+            "x": -6.6,
+            "y": 12.1,
+            "z": -0.32
+          },
+          {
+            "x": -6.6,
+            "y": 12.1,
+            "z": -1.0
+          }
+        ],
+        "trunk": "Gateway",
+        "radius": 0.1
+      },
+      {
+        "id": "Gateway>Cart",
+        "from": "Gateway",
+        "to": "Cart",
+        "async": false,
+        "points": [
+          {
+            "x": -7.05,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -7.05,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -7.05,
+            "y": 11.7,
+            "z": 4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 4.6
+          },
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.0,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -7.05,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -7.05,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -7.05,
+            "y": 11.7,
+            "z": 4.6
+          }
+        ],
+        "trunk": "Gateway",
+        "radius": 0.1
+      },
+      {
+        "id": "Gateway>Checkout",
+        "from": "Gateway",
+        "to": "Checkout",
+        "async": false,
+        "points": [
+          {
+            "x": -4.72,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.72,
+            "y": 12.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.72,
+            "y": 12.1,
+            "z": -3.92
+          },
+          {
+            "x": -2.84,
+            "y": 12.1,
+            "z": -3.92
+          },
+          {
+            "x": -2.84,
+            "y": 12.1,
+            "z": -4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 4.6
+          },
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.0,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.72,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.72,
+            "y": 12.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.72,
+            "y": 12.1,
+            "z": -3.92
+          },
+          {
+            "x": -2.84,
+            "y": 12.1,
+            "z": -3.92
+          },
+          {
+            "x": -2.84,
+            "y": 12.1,
+            "z": -4.6
+          }
+        ],
+        "trunk": "Gateway",
+        "radius": 0.1
+      },
+      {
+        "id": "Gateway>Orders",
+        "from": "Gateway",
+        "to": "Orders",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": 0.0
+          },
+          {
+            "x": -2.2,
+            "y": 12.1,
+            "z": 0.0
+          },
+          {
+            "x": -2.2,
+            "y": 12.1,
+            "z": -1.0
+          }
+        ],
+        "route": [
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 4.6
+          },
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.0,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.4,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.4,
+            "y": 12.1,
+            "z": 0.0
+          },
+          {
+            "x": -2.2,
+            "y": 12.1,
+            "z": 0.0
+          },
+          {
+            "x": -2.2,
+            "y": 12.1,
+            "z": -1.0
+          }
+        ],
+        "trunk": "Gateway",
+        "radius": 0.1
+      },
+      {
+        "id": "Gateway>Accounts",
+        "from": "Gateway",
+        "to": "Accounts",
+        "async": false,
+        "points": [
+          {
+            "x": -7.5,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -7.5,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -7.5,
+            "y": 11.7,
+            "z": 2.6
+          }
+        ],
+        "route": [
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 4.6
+          },
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.0,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -7.5,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -7.5,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -7.5,
+            "y": 11.7,
+            "z": 2.6
+          }
+        ],
+        "trunk": "Gateway",
+        "radius": 0.1
+      },
+      {
+        "id": "Catalog>CatalogDB",
+        "from": "Catalog",
+        "to": "CatalogDB",
+        "async": false,
+        "points": [
+          {
+            "x": -5.96,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -5.96,
+            "y": 12.0,
+            "z": -3.28
+          },
+          {
+            "x": -5.96,
+            "y": 13.1,
+            "z": -3.28
+          },
+          {
+            "x": 4.72,
+            "y": 13.1,
+            "z": -3.28
+          },
+          {
+            "x": 4.72,
+            "y": 8.7,
+            "z": -3.28
+          },
+          {
+            "x": 7.2,
+            "y": 8.7,
+            "z": -3.28
+          },
+          {
+            "x": 7.2,
+            "y": 7.6,
+            "z": -3.28
+          },
+          {
+            "x": 7.2,
+            "y": 7.6,
+            "z": -4.73
+          }
+        ],
+        "route": [
+          {
+            "x": -5.96,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -5.96,
+            "y": 12.0,
+            "z": -3.28
+          },
+          {
+            "x": -5.96,
+            "y": 13.1,
+            "z": -3.28
+          },
+          {
+            "x": 4.72,
+            "y": 13.1,
+            "z": -3.28
+          },
+          {
+            "x": 4.72,
+            "y": 8.7,
+            "z": -3.28
+          },
+          {
+            "x": 7.2,
+            "y": 8.7,
+            "z": -3.28
+          },
+          {
+            "x": 7.2,
+            "y": 7.6,
+            "z": -3.28
+          },
+          {
+            "x": 7.2,
+            "y": 7.6,
+            "z": -4.73
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Catalog>Blob",
+        "from": "Catalog",
+        "to": "Blob",
+        "async": false,
+        "points": [
+          {
+            "x": -6.92,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -6.92,
+            "y": 12.0,
+            "z": -4.24
+          },
+          {
+            "x": -6.92,
+            "y": 12.7,
+            "z": -4.24
+          },
+          {
+            "x": 3.76,
+            "y": 12.7,
+            "z": -4.24
+          },
+          {
+            "x": 3.76,
+            "y": 8.3,
+            "z": -4.24
+          },
+          {
+            "x": 6.28,
+            "y": 8.3,
+            "z": -4.24
+          },
+          {
+            "x": 6.28,
+            "y": 7.6,
+            "z": -4.24
+          },
+          {
+            "x": 6.28,
+            "y": 7.6,
+            "z": -2.64
+          }
+        ],
+        "route": [
+          {
+            "x": -6.92,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -6.92,
+            "y": 12.0,
+            "z": -4.24
+          },
+          {
+            "x": -6.92,
+            "y": 12.7,
+            "z": -4.24
+          },
+          {
+            "x": 3.76,
+            "y": 12.7,
+            "z": -4.24
+          },
+          {
+            "x": 3.76,
+            "y": 8.3,
+            "z": -4.24
+          },
+          {
+            "x": 6.28,
+            "y": 8.3,
+            "z": -4.24
+          },
+          {
+            "x": 6.28,
+            "y": 7.6,
+            "z": -4.24
+          },
+          {
+            "x": 6.28,
+            "y": 7.6,
+            "z": -2.64
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Catalog>ProductEvents",
+        "from": "Catalog",
+        "to": "ProductEvents",
+        "async": true,
+        "points": [
+          {
+            "x": -6.28,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -6.28,
+            "y": 12.0,
+            "z": -3.6
+          },
+          {
+            "x": -6.28,
+            "y": 13.1,
+            "z": -3.6
+          },
+          {
+            "x": 4.4,
+            "y": 13.1,
+            "z": -3.6
+          },
+          {
+            "x": 4.4,
+            "y": 8.7,
+            "z": -3.6
+          },
+          {
+            "x": 4.4,
+            "y": 8.7,
+            "z": 0.0
+          },
+          {
+            "x": 6.92,
+            "y": 8.7,
+            "z": 0.0
+          },
+          {
+            "x": 6.92,
+            "y": 7.6,
+            "z": 0.0
+          },
+          {
+            "x": 6.92,
+            "y": 7.6,
+            "z": 1.35
+          }
+        ],
+        "route": [
+          {
+            "x": -6.28,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -6.28,
+            "y": 12.0,
+            "z": -3.6
+          },
+          {
+            "x": -6.28,
+            "y": 13.1,
+            "z": -3.6
+          },
+          {
+            "x": 4.4,
+            "y": 13.1,
+            "z": -3.6
+          },
+          {
+            "x": 4.4,
+            "y": 8.7,
+            "z": -3.6
+          },
+          {
+            "x": 4.4,
+            "y": 8.7,
+            "z": 0.0
+          },
+          {
+            "x": 6.92,
+            "y": 8.7,
+            "z": 0.0
+          },
+          {
+            "x": 6.92,
+            "y": 7.6,
+            "z": 0.0
+          },
+          {
+            "x": 6.92,
+            "y": 7.6,
+            "z": 1.35
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "ProductEvents>Search",
+        "from": "ProductEvents",
+        "to": "Search",
+        "async": true,
+        "points": [
+          {
+            "x": 6.6,
+            "y": 7.3,
+            "z": 1.35
+          },
+          {
+            "x": 6.6,
+            "y": 7.3,
+            "z": -0.32
+          },
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": -0.32
+          },
+          {
+            "x": -4.72,
+            "y": 11.7,
+            "z": -0.32
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": -0.32
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": -1.0
+          }
+        ],
+        "route": [
+          {
+            "x": 6.6,
+            "y": 7.3,
+            "z": 1.35
+          },
+          {
+            "x": 6.6,
+            "y": 7.3,
+            "z": -0.32
+          },
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": -0.32
+          },
+          {
+            "x": -4.72,
+            "y": 11.7,
+            "z": -0.32
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": -0.32
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": -1.0
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Search>SearchIndex",
+        "from": "Search",
+        "to": "SearchIndex",
+        "async": false,
+        "points": [
+          {
+            "x": -6.6,
+            "y": 12.0,
+            "z": -2.6
+          },
+          {
+            "x": -6.6,
+            "y": 12.0,
+            "z": -2.96
+          },
+          {
+            "x": -6.6,
+            "y": 12.7,
+            "z": -2.96
+          },
+          {
+            "x": 9.44,
+            "y": 12.7,
+            "z": -2.96
+          },
+          {
+            "x": 9.44,
+            "y": 8.3,
+            "z": -2.96
+          },
+          {
+            "x": 11.0,
+            "y": 8.3,
+            "z": -2.96
+          },
+          {
+            "x": 11.0,
+            "y": 7.6,
+            "z": -2.96
+          },
+          {
+            "x": 11.0,
+            "y": 7.6,
+            "z": -4.5
+          }
+        ],
+        "route": [
+          {
+            "x": -6.6,
+            "y": 12.0,
+            "z": -2.6
+          },
+          {
+            "x": -6.6,
+            "y": 12.0,
+            "z": -2.96
+          },
+          {
+            "x": -6.6,
+            "y": 12.7,
+            "z": -2.96
+          },
+          {
+            "x": 9.44,
+            "y": 12.7,
+            "z": -2.96
+          },
+          {
+            "x": 9.44,
+            "y": 8.3,
+            "z": -2.96
+          },
+          {
+            "x": 11.0,
+            "y": 8.3,
+            "z": -2.96
+          },
+          {
+            "x": 11.0,
+            "y": 7.6,
+            "z": -2.96
+          },
+          {
+            "x": 11.0,
+            "y": 7.6,
+            "z": -4.5
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Cart>Redis",
+        "from": "Cart",
+        "to": "Redis",
+        "async": false,
+        "points": [
+          {
+            "x": -6.92,
+            "y": 12.0,
+            "z": 4.6
+          },
+          {
+            "x": -6.92,
+            "y": 12.0,
+            "z": 3.92
+          },
+          {
+            "x": -6.92,
+            "y": 12.7,
+            "z": 3.92
+          },
+          {
+            "x": 9.12,
+            "y": 12.7,
+            "z": 3.92
+          },
+          {
+            "x": 9.12,
+            "y": 8.3,
+            "z": 3.92
+          },
+          {
+            "x": 10.68,
+            "y": 8.3,
+            "z": 3.92
+          },
+          {
+            "x": 10.68,
+            "y": 7.6,
+            "z": 3.92
+          },
+          {
+            "x": 10.68,
+            "y": 7.6,
+            "z": 2.64
+          }
+        ],
+        "route": [
+          {
+            "x": -6.92,
+            "y": 12.0,
+            "z": 4.6
+          },
+          {
+            "x": -6.92,
+            "y": 12.0,
+            "z": 3.92
+          },
+          {
+            "x": -6.92,
+            "y": 12.7,
+            "z": 3.92
+          },
+          {
+            "x": 9.12,
+            "y": 12.7,
+            "z": 3.92
+          },
+          {
+            "x": 9.12,
+            "y": 8.3,
+            "z": 3.92
+          },
+          {
+            "x": 10.68,
+            "y": 8.3,
+            "z": 3.92
+          },
+          {
+            "x": 10.68,
+            "y": 7.6,
+            "z": 3.92
+          },
+          {
+            "x": 10.68,
+            "y": 7.6,
+            "z": 2.64
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Cart>Inventory",
+        "from": "Cart",
+        "to": "Inventory",
+        "async": false,
+        "points": [
+          {
+            "x": -6.6,
+            "y": 12.1,
+            "z": 4.6
+          },
+          {
+            "x": -6.6,
+            "y": 12.1,
+            "z": 3.92
+          },
+          {
+            "x": -2.2,
+            "y": 12.1,
+            "z": 3.92
+          },
+          {
+            "x": -2.2,
+            "y": 12.1,
+            "z": 2.6
+          }
+        ],
+        "route": [
+          {
+            "x": -6.6,
+            "y": 12.1,
+            "z": 4.6
+          },
+          {
+            "x": -6.6,
+            "y": 12.1,
+            "z": 3.92
+          },
+          {
+            "x": -2.2,
+            "y": 12.1,
+            "z": 3.92
+          },
+          {
+            "x": -2.2,
+            "y": 12.1,
+            "z": 2.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Checkout>Cart",
+        "from": "Checkout",
+        "to": "Cart",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": 4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": -4.4,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -4.4,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -6.6,
+            "y": 11.7,
+            "z": 4.6
+          }
+        ],
+        "trunk": "Checkout",
+        "radius": 0.1
+      },
+      {
+        "id": "Checkout>Payments",
+        "from": "Checkout",
+        "to": "Payments",
+        "async": false,
+        "points": [
+          {
+            "x": 0.0,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": 0.0,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": 0.0,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": 4.6
+          }
+        ],
+        "route": [
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": 0.0,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": 0.0,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": 0.0,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": 4.6
+          }
+        ],
+        "trunk": "Checkout",
+        "radius": 0.1
+      },
+      {
+        "id": "Checkout>Orders",
+        "from": "Checkout",
+        "to": "Orders",
+        "async": false,
+        "points": [
+          {
+            "x": -2.2,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": -2.6
+          }
+        ],
+        "route": [
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": -2.6
+          }
+        ],
+        "trunk": "Checkout",
+        "radius": 0.1
+      },
+      {
+        "id": "Checkout>Inventory",
+        "from": "Checkout",
+        "to": "Inventory",
+        "async": false,
+        "points": [
+          {
+            "x": -0.32,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": -0.32,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -0.32,
+            "y": 11.7,
+            "z": -0.32
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": -0.32
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": 1.0
+          }
+        ],
+        "route": [
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": -0.32,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": -0.32,
+            "y": 11.7,
+            "z": -3.6
+          },
+          {
+            "x": -0.32,
+            "y": 11.7,
+            "z": -0.32
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": -0.32
+          },
+          {
+            "x": -2.2,
+            "y": 11.7,
+            "z": 1.0
+          }
+        ],
+        "trunk": "Checkout",
+        "radius": 0.1
+      },
+      {
+        "id": "Payments>Stripe",
+        "from": "Payments",
+        "to": "Stripe",
+        "async": false,
+        "points": [
+          {
+            "x": -0.8,
+            "y": 11.7,
+            "z": 5.4
+          },
+          {
+            "x": 14.4,
+            "y": 11.7,
+            "z": 5.4
+          }
+        ],
+        "route": [
+          {
+            "x": -0.8,
+            "y": 11.7,
+            "z": 5.4
+          },
+          {
+            "x": 14.4,
+            "y": 11.7,
+            "z": 5.4
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Orders>CommerceDB",
+        "from": "Orders",
+        "to": "CommerceDB",
+        "async": false,
+        "points": [
+          {
+            "x": -2.84,
+            "y": 12.0,
+            "z": -1.0
+          },
+          {
+            "x": -2.84,
+            "y": 12.0,
+            "z": -0.64
+          },
+          {
+            "x": -2.84,
+            "y": 12.7,
+            "z": -0.64
+          },
+          {
+            "x": 8.16,
+            "y": 12.7,
+            "z": -0.64
+          },
+          {
+            "x": 8.16,
+            "y": 8.3,
+            "z": -0.64
+          },
+          {
+            "x": 10.4,
+            "y": 8.3,
+            "z": -0.64
+          },
+          {
+            "x": 10.4,
+            "y": 7.6,
+            "z": -0.64
+          },
+          {
+            "x": 10.4,
+            "y": 7.6,
+            "z": -1.13
+          }
+        ],
+        "route": [
+          {
+            "x": -2.84,
+            "y": 12.0,
+            "z": -1.0
+          },
+          {
+            "x": -2.84,
+            "y": 12.0,
+            "z": -0.64
+          },
+          {
+            "x": -2.84,
+            "y": 12.7,
+            "z": -0.64
+          },
+          {
+            "x": 8.16,
+            "y": 12.7,
+            "z": -0.64
+          },
+          {
+            "x": 8.16,
+            "y": 8.3,
+            "z": -0.64
+          },
+          {
+            "x": 10.4,
+            "y": 8.3,
+            "z": -0.64
+          },
+          {
+            "x": 10.4,
+            "y": 7.6,
+            "z": -0.64
+          },
+          {
+            "x": 10.4,
+            "y": 7.6,
+            "z": -1.13
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Orders>OrderEvents",
+        "from": "Orders",
+        "to": "OrderEvents",
+        "async": true,
+        "points": [
+          {
+            "x": -1.88,
+            "y": 12.1,
+            "z": -1.0
+          },
+          {
+            "x": -1.88,
+            "y": 12.1,
+            "z": -0.64
+          },
+          {
+            "x": 3.76,
+            "y": 12.1,
+            "z": -0.64
+          },
+          {
+            "x": 3.76,
+            "y": 7.7,
+            "z": -0.64
+          },
+          {
+            "x": 3.76,
+            "y": 7.7,
+            "z": 2.96
+          },
+          {
+            "x": 6.92,
+            "y": 7.7,
+            "z": 2.96
+          },
+          {
+            "x": 6.92,
+            "y": 7.7,
+            "z": 4.95
+          }
+        ],
+        "route": [
+          {
+            "x": -1.88,
+            "y": 12.1,
+            "z": -1.0
+          },
+          {
+            "x": -1.88,
+            "y": 12.1,
+            "z": -0.64
+          },
+          {
+            "x": 3.76,
+            "y": 12.1,
+            "z": -0.64
+          },
+          {
+            "x": 3.76,
+            "y": 7.7,
+            "z": -0.64
+          },
+          {
+            "x": 3.76,
+            "y": 7.7,
+            "z": 2.96
+          },
+          {
+            "x": 6.92,
+            "y": 7.7,
+            "z": 2.96
+          },
+          {
+            "x": 6.92,
+            "y": 7.7,
+            "z": 4.95
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "OrderEvents>Fulfillment",
+        "from": "OrderEvents",
+        "to": "Fulfillment",
+        "async": true,
+        "points": [
+          {
+            "x": 6.6,
+            "y": 7.6,
+            "z": 4.95
+          },
+          {
+            "x": 6.6,
+            "y": 7.6,
+            "z": 3.28
+          },
+          {
+            "x": 6.6,
+            "y": 9.1,
+            "z": 3.28
+          },
+          {
+            "x": 4.08,
+            "y": 9.1,
+            "z": 3.28
+          },
+          {
+            "x": 4.08,
+            "y": 13.5,
+            "z": 3.28
+          },
+          {
+            "x": 4.08,
+            "y": 13.5,
+            "z": -3.92
+          },
+          {
+            "x": 2.2,
+            "y": 13.5,
+            "z": -3.92
+          },
+          {
+            "x": 2.2,
+            "y": 12.0,
+            "z": -3.92
+          },
+          {
+            "x": 2.2,
+            "y": 12.0,
+            "z": -4.6
+          }
+        ],
+        "route": [
+          {
+            "x": 6.6,
+            "y": 7.6,
+            "z": 4.95
+          },
+          {
+            "x": 6.6,
+            "y": 7.6,
+            "z": 3.28
+          },
+          {
+            "x": 6.6,
+            "y": 9.1,
+            "z": 3.28
+          },
+          {
+            "x": 4.08,
+            "y": 9.1,
+            "z": 3.28
+          },
+          {
+            "x": 4.08,
+            "y": 13.5,
+            "z": 3.28
+          },
+          {
+            "x": 4.08,
+            "y": 13.5,
+            "z": -3.92
+          },
+          {
+            "x": 2.2,
+            "y": 13.5,
+            "z": -3.92
+          },
+          {
+            "x": 2.2,
+            "y": 12.0,
+            "z": -3.92
+          },
+          {
+            "x": 2.2,
+            "y": 12.0,
+            "z": -4.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "OrderEvents>Notifications",
+        "from": "OrderEvents",
+        "to": "Notifications",
+        "async": true,
+        "points": [
+          {
+            "x": 6.28,
+            "y": 7.3,
+            "z": 4.95
+          },
+          {
+            "x": 6.28,
+            "y": 7.3,
+            "z": 3.6
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": 3.6
+          },
+          {
+            "x": 4.4,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": 4.4,
+            "y": 11.7,
+            "z": 0.0
+          },
+          {
+            "x": 1.88,
+            "y": 11.7,
+            "z": 0.0
+          },
+          {
+            "x": 1.88,
+            "y": 11.7,
+            "z": -1.0
+          }
+        ],
+        "route": [
+          {
+            "x": 6.28,
+            "y": 7.3,
+            "z": 4.95
+          },
+          {
+            "x": 6.28,
+            "y": 7.3,
+            "z": 3.6
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": 3.6
+          },
+          {
+            "x": 4.4,
+            "y": 11.7,
+            "z": 3.6
+          },
+          {
+            "x": 4.4,
+            "y": 11.7,
+            "z": 0.0
+          },
+          {
+            "x": 1.88,
+            "y": 11.7,
+            "z": 0.0
+          },
+          {
+            "x": 1.88,
+            "y": 11.7,
+            "z": -1.0
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Fulfillment>Shippo",
+        "from": "Fulfillment",
+        "to": "Shippo",
+        "async": false,
+        "points": [
+          {
+            "x": 3.6,
+            "y": 11.7,
+            "z": -5.4
+          },
+          {
+            "x": 14.4,
+            "y": 11.7,
+            "z": -5.4
+          }
+        ],
+        "route": [
+          {
+            "x": 3.6,
+            "y": 11.7,
+            "z": -5.4
+          },
+          {
+            "x": 14.4,
+            "y": 11.7,
+            "z": -5.4
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Fulfillment>Inventory",
+        "from": "Fulfillment",
+        "to": "Inventory",
+        "async": false,
+        "points": [
+          {
+            "x": 1.88,
+            "y": 11.7,
+            "z": -4.6
+          },
+          {
+            "x": 1.88,
+            "y": 11.7,
+            "z": -4.24
+          },
+          {
+            "x": -0.64,
+            "y": 11.7,
+            "z": -4.24
+          },
+          {
+            "x": -0.64,
+            "y": 11.7,
+            "z": -0.64
+          },
+          {
+            "x": -2.52,
+            "y": 11.7,
+            "z": -0.64
+          },
+          {
+            "x": -2.52,
+            "y": 11.7,
+            "z": 1.0
+          }
+        ],
+        "route": [
+          {
+            "x": 1.88,
+            "y": 11.7,
+            "z": -4.6
+          },
+          {
+            "x": 1.88,
+            "y": 11.7,
+            "z": -4.24
+          },
+          {
+            "x": -0.64,
+            "y": 11.7,
+            "z": -4.24
+          },
+          {
+            "x": -0.64,
+            "y": 11.7,
+            "z": -0.64
+          },
+          {
+            "x": -2.52,
+            "y": 11.7,
+            "z": -0.64
+          },
+          {
+            "x": -2.52,
+            "y": 11.7,
+            "z": 1.0
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Notifications>SendGrid",
+        "from": "Notifications",
+        "to": "SendGrid",
+        "async": false,
+        "points": [
+          {
+            "x": 3.6,
+            "y": 11.7,
+            "z": -1.8
+          },
+          {
+            "x": 14.4,
+            "y": 11.7,
+            "z": -1.8
+          }
+        ],
+        "route": [
+          {
+            "x": 3.6,
+            "y": 11.7,
+            "z": -1.8
+          },
+          {
+            "x": 14.4,
+            "y": 11.7,
+            "z": -1.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Inventory>CommerceDB",
+        "from": "Inventory",
+        "to": "CommerceDB",
+        "async": false,
+        "points": [
+          {
+            "x": -1.88,
+            "y": 12.3,
+            "z": 1.0
+          },
+          {
+            "x": -1.88,
+            "y": 12.3,
+            "z": -0.32
+          },
+          {
+            "x": 8.48,
+            "y": 12.3,
+            "z": -0.32
+          },
+          {
+            "x": 8.48,
+            "y": 7.9,
+            "z": -0.32
+          },
+          {
+            "x": 11.32,
+            "y": 7.9,
+            "z": -0.32
+          },
+          {
+            "x": 11.32,
+            "y": 7.9,
+            "z": -0.96
+          }
+        ],
+        "route": [
+          {
+            "x": -1.88,
+            "y": 12.3,
+            "z": 1.0
+          },
+          {
+            "x": -1.88,
+            "y": 12.3,
+            "z": -0.32
+          },
+          {
+            "x": 8.48,
+            "y": 12.3,
+            "z": -0.32
+          },
+          {
+            "x": 8.48,
+            "y": 7.9,
+            "z": -0.32
+          },
+          {
+            "x": 11.32,
+            "y": 7.9,
+            "z": -0.32
+          },
+          {
+            "x": 11.32,
+            "y": 7.9,
+            "z": -0.96
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Accounts>CommerceDB",
+        "from": "Accounts",
+        "to": "CommerceDB",
+        "async": false,
+        "points": [
+          {
+            "x": -6.6,
+            "y": 12.0,
+            "z": 1.0
+          },
+          {
+            "x": -6.6,
+            "y": 12.0,
+            "z": 0.0
+          },
+          {
+            "x": -6.6,
+            "y": 12.7,
+            "z": 0.0
+          },
+          {
+            "x": 8.8,
+            "y": 12.7,
+            "z": 0.0
+          },
+          {
+            "x": 8.8,
+            "y": 8.3,
+            "z": 0.0
+          },
+          {
+            "x": 11.0,
+            "y": 8.3,
+            "z": 0.0
+          },
+          {
+            "x": 11.0,
+            "y": 7.6,
+            "z": 0.0
+          },
+          {
+            "x": 11.0,
+            "y": 7.6,
+            "z": -0.9
+          }
+        ],
+        "route": [
+          {
+            "x": -6.6,
+            "y": 12.0,
+            "z": 1.0
+          },
+          {
+            "x": -6.6,
+            "y": 12.0,
+            "z": 0.0
+          },
+          {
+            "x": -6.6,
+            "y": 12.7,
+            "z": 0.0
+          },
+          {
+            "x": 8.8,
+            "y": 12.7,
+            "z": 0.0
+          },
+          {
+            "x": 8.8,
+            "y": 8.3,
+            "z": 0.0
+          },
+          {
+            "x": 11.0,
+            "y": 8.3,
+            "z": 0.0
+          },
+          {
+            "x": 11.0,
+            "y": 7.6,
+            "z": 0.0
+          },
+          {
+            "x": 11.0,
+            "y": 7.6,
+            "z": -0.9
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      }
+    ],
+    "trunks": [
+      {
+        "hub": "Checkout",
+        "stub": [
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -4.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.0,
+            "z": -3.6
+          },
+          {
+            "x": -2.2,
+            "y": 12.7,
+            "z": -3.6
+          }
+        ],
+        "run": [
+          {
+            "x": -4.65,
+            "y": 12.7,
+            "z": -3.6
+          },
+          {
+            "x": 0.25,
+            "y": 12.7,
+            "z": -3.6
+          }
+        ],
+        "pipes": [
+          "Checkout>Cart",
+          "Checkout>Payments",
+          "Checkout>Orders",
+          "Checkout>Inventory"
+        ],
+        "radius": 0.15
+      },
+      {
+        "hub": "Gateway",
+        "stub": [
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 4.6
+          },
+          {
+            "x": -11.0,
+            "y": 16.4,
+            "z": 3.6
+          },
+          {
+            "x": -11.0,
+            "y": 17.1,
+            "z": 3.6
+          }
+        ],
+        "run": [
+          {
+            "x": -11.25,
+            "y": 17.1,
+            "z": 3.6
+          },
+          {
+            "x": -4.15,
+            "y": 17.1,
+            "z": 3.6
+          }
+        ],
+        "pipes": [
+          "Gateway>Catalog",
+          "Gateway>Search",
+          "Gateway>Cart",
+          "Gateway>Checkout",
+          "Gateway>Orders",
+          "Gateway>Accounts"
+        ],
+        "radius": 0.15
+      }
+    ],
+    "boundary": {
+      "label": "Shopfront",
+      "min": {
+        "x": -13.2,
+        "y": 6.6,
+        "z": -7.2
+      },
+      "max": {
+        "x": 13.2,
+        "y": 17.4,
+        "z": 7.2
+      }
+    },
+    "clashes": 0
+  },
+  "timelines": [
+    {
+      "scenario": "checkout",
+      "steps": [
+        {
+          "index": 0,
+          "from": "Shopper",
+          "to": "Storefront",
+          "via": [],
+          "arrow": "sync",
+          "label": "POST /checkout",
+          "row": 0
+        },
+        {
+          "index": 1,
+          "from": "Storefront",
+          "to": "Gateway",
+          "via": [],
+          "arrow": "sync",
+          "label": null,
+          "row": 1
+        },
+        {
+          "index": 2,
+          "from": "Gateway",
+          "to": "Checkout",
+          "via": [],
+          "arrow": "sync",
+          "label": null,
+          "row": 2
+        },
+        {
+          "index": 3,
+          "from": "Checkout",
+          "to": "Cart",
+          "via": [],
+          "arrow": "sync",
+          "label": "read cart",
+          "row": 3
+        },
+        {
+          "index": 4,
+          "from": "Cart",
+          "to": "Checkout",
+          "via": [],
+          "arrow": "reply",
+          "label": "items",
+          "row": 4
+        },
+        {
+          "index": 5,
+          "from": "Checkout",
+          "to": "Payments",
+          "via": [],
+          "arrow": "sync",
+          "label": "charge card",
+          "row": 5
+        },
+        {
+          "index": 6,
+          "from": "Payments",
+          "to": "Stripe",
+          "via": [],
+          "arrow": "sync",
+          "label": null,
+          "row": 6
+        },
+        {
+          "index": 7,
+          "from": "Stripe",
+          "to": "Payments",
+          "via": [],
+          "arrow": "reply",
+          "label": "charged",
+          "row": 7
+        },
+        {
+          "index": 8,
+          "from": "Payments",
+          "to": "Checkout",
+          "via": [],
+          "arrow": "reply",
+          "label": null,
+          "row": 8
+        },
+        {
+          "index": 9,
+          "from": "Checkout",
+          "to": "Orders",
+          "via": [],
+          "arrow": "sync",
+          "label": "write order",
+          "row": 9
+        },
+        {
+          "index": 10,
+          "from": "Orders",
+          "to": "CommerceDB",
+          "via": [],
+          "arrow": "sync",
+          "label": null,
+          "row": 10
+        },
+        {
+          "index": 11,
+          "from": "CommerceDB",
+          "to": "Orders",
+          "via": [],
+          "arrow": "reply",
+          "label": null,
+          "row": 11
+        },
+        {
+          "index": 12,
+          "from": "Orders",
+          "to": "OrderEvents",
+          "via": [],
+          "arrow": "async",
+          "label": "order placed",
+          "row": 12
+        },
+        {
+          "index": 13,
+          "from": "OrderEvents",
+          "to": "Notifications",
+          "via": [],
+          "arrow": "async",
+          "label": null,
+          "row": 13
+        },
+        {
+          "index": 14,
+          "from": "Notifications",
+          "to": "SendGrid",
+          "via": [],
+          "arrow": "sync",
+          "label": "confirmation",
+          "row": 14
+        }
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "node": "Storefront",
+      "span": {
+        "file": 0,
+        "start": 291,
+        "end": 318
+      }
+    },
+    {
+      "node": "Storefront",
+      "span": {
+        "file": 0,
+        "start": 1038,
+        "end": 1048
+      }
+    },
+    {
+      "node": "Storefront",
+      "span": {
+        "file": 0,
+        "start": 1092,
+        "end": 1102
+      }
+    },
+    {
+      "node": "Storefront",
+      "span": {
+        "file": 0,
+        "start": 2205,
+        "end": 2215
+      }
+    },
+    {
+      "node": "Storefront",
+      "span": {
+        "file": 0,
+        "start": 2591,
+        "end": 2601
+      }
+    },
+    {
+      "node": "Storefront",
+      "span": {
+        "file": 0,
+        "start": 2621,
+        "end": 2631
+      }
+    },
+    {
+      "node": "MobileBFF",
+      "span": {
+        "file": 0,
+        "start": 319,
+        "end": 353
+      }
+    },
+    {
+      "node": "MobileBFF",
+      "span": {
+        "file": 0,
+        "start": 1061,
+        "end": 1070
+      }
+    },
+    {
+      "node": "MobileBFF",
+      "span": {
+        "file": 0,
+        "start": 1114,
+        "end": 1123
+      }
+    },
+    {
+      "node": "MobileBFF",
+      "span": {
+        "file": 0,
+        "start": 2242,
+        "end": 2251
+      }
+    },
+    {
+      "node": "AdminUI",
+      "span": {
+        "file": 0,
+        "start": 354,
+        "end": 392
+      }
+    },
+    {
+      "node": "AdminUI",
+      "span": {
+        "file": 0,
+        "start": 1083,
+        "end": 1090
+      }
+    },
+    {
+      "node": "AdminUI",
+      "span": {
+        "file": 0,
+        "start": 1136,
+        "end": 1143
+      }
+    },
+    {
+      "node": "AdminUI",
+      "span": {
+        "file": 0,
+        "start": 2259,
+        "end": 2266
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 393,
+        "end": 430
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1106,
+        "end": 1113
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1128,
+        "end": 1135
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1150,
+        "end": 1157
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1159,
+        "end": 1166
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1178,
+        "end": 1185
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1196,
+        "end": 1203
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1212,
+        "end": 1219
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1232,
+        "end": 1239
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 1250,
+        "end": 1257
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 2217,
+        "end": 2224
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 2635,
+        "end": 2642
+      }
+    },
+    {
+      "node": "Gateway",
+      "span": {
+        "file": 0,
+        "start": 2645,
+        "end": 2652
+      }
+    },
+    {
+      "node": "Catalog",
+      "span": {
+        "file": 0,
+        "start": 431,
+        "end": 463
+      }
+    },
+    {
+      "node": "Catalog",
+      "span": {
+        "file": 0,
+        "start": 1170,
+        "end": 1177
+      }
+    },
+    {
+      "node": "Catalog",
+      "span": {
+        "file": 0,
+        "start": 1271,
+        "end": 1278
+      }
+    },
+    {
+      "node": "Catalog",
+      "span": {
+        "file": 0,
+        "start": 1298,
+        "end": 1305
+      }
+    },
+    {
+      "node": "Catalog",
+      "span": {
+        "file": 0,
+        "start": 1320,
+        "end": 1327
+      }
+    },
+    {
+      "node": "Catalog",
+      "span": {
+        "file": 0,
+        "start": 2329,
+        "end": 2336
+      }
+    },
+    {
+      "node": "Search",
+      "span": {
+        "file": 0,
+        "start": 464,
+        "end": 495
+      }
+    },
+    {
+      "node": "Search",
+      "span": {
+        "file": 0,
+        "start": 1189,
+        "end": 1195
+      }
+    },
+    {
+      "node": "Search",
+      "span": {
+        "file": 0,
+        "start": 1368,
+        "end": 1374
+      }
+    },
+    {
+      "node": "Search",
+      "span": {
+        "file": 0,
+        "start": 1375,
+        "end": 1381
+      }
+    },
+    {
+      "node": "Search",
+      "span": {
+        "file": 0,
+        "start": 2338,
+        "end": 2344
+      }
+    },
+    {
+      "node": "Accounts",
+      "span": {
+        "file": 0,
+        "start": 496,
+        "end": 525
+      }
+    },
+    {
+      "node": "Accounts",
+      "span": {
+        "file": 0,
+        "start": 1261,
+        "end": 1269
+      }
+    },
+    {
+      "node": "Accounts",
+      "span": {
+        "file": 0,
+        "start": 1781,
+        "end": 1789
+      }
+    },
+    {
+      "node": "Accounts",
+      "span": {
+        "file": 0,
+        "start": 2346,
+        "end": 2354
+      }
+    },
+    {
+      "node": "Cart",
+      "span": {
+        "file": 0,
+        "start": 526,
+        "end": 557
+      }
+    },
+    {
+      "node": "Cart",
+      "span": {
+        "file": 0,
+        "start": 1207,
+        "end": 1211
+      }
+    },
+    {
+      "node": "Cart",
+      "span": {
+        "file": 0,
+        "start": 1404,
+        "end": 1408
+      }
+    },
+    {
+      "node": "Cart",
+      "span": {
+        "file": 0,
+        "start": 1427,
+        "end": 1431
+      }
+    },
+    {
+      "node": "Cart",
+      "span": {
+        "file": 0,
+        "start": 1467,
+        "end": 1471
+      }
+    },
+    {
+      "node": "Cart",
+      "span": {
+        "file": 0,
+        "start": 2297,
+        "end": 2301
+      }
+    },
+    {
+      "node": "Cart",
+      "span": {
+        "file": 0,
+        "start": 2679,
+        "end": 2683
+      }
+    },
+    {
+      "node": "Cart",
+      "span": {
+        "file": 0,
+        "start": 2698,
+        "end": 2702
+      }
+    },
+    {
+      "node": "Inventory",
+      "span": {
+        "file": 0,
+        "start": 558,
+        "end": 587
+      }
+    },
+    {
+      "node": "Inventory",
+      "span": {
+        "file": 0,
+        "start": 1444,
+        "end": 1453
+      }
+    },
+    {
+      "node": "Inventory",
+      "span": {
+        "file": 0,
+        "start": 1524,
+        "end": 1533
+      }
+    },
+    {
+      "node": "Inventory",
+      "span": {
+        "file": 0,
+        "start": 1717,
+        "end": 1726
+      }
+    },
+    {
+      "node": "Inventory",
+      "span": {
+        "file": 0,
+        "start": 1753,
+        "end": 1762
+      }
+    },
+    {
+      "node": "Inventory",
+      "span": {
+        "file": 0,
+        "start": 2356,
+        "end": 2365
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 588,
+        "end": 624
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 1223,
+        "end": 1231
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 1455,
+        "end": 1463
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 1472,
+        "end": 1480
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 1493,
+        "end": 1501
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 1512,
+        "end": 1520
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 2303,
+        "end": 2311
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 2656,
+        "end": 2664
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 2667,
+        "end": 2675
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 2707,
+        "end": 2715
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 2726,
+        "end": 2734
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 2829,
+        "end": 2837
+      }
+    },
+    {
+      "node": "Checkout",
+      "span": {
+        "file": 0,
+        "start": 2840,
+        "end": 2848
+      }
+    },
+    {
+      "node": "Payments",
+      "span": {
+        "file": 0,
+        "start": 625,
+        "end": 656
+      }
+    },
+    {
+      "node": "Payments",
+      "span": {
+        "file": 0,
+        "start": 1484,
+        "end": 1492
+      }
+    },
+    {
+      "node": "Payments",
+      "span": {
+        "file": 0,
+        "start": 1535,
+        "end": 1543
+      }
+    },
+    {
+      "node": "Payments",
+      "span": {
+        "file": 0,
+        "start": 2367,
+        "end": 2375
+      }
+    },
+    {
+      "node": "Payments",
+      "span": {
+        "file": 0,
+        "start": 2738,
+        "end": 2746
+      }
+    },
+    {
+      "node": "Payments",
+      "span": {
+        "file": 0,
+        "start": 2763,
+        "end": 2771
+      }
+    },
+    {
+      "node": "Payments",
+      "span": {
+        "file": 0,
+        "start": 2795,
+        "end": 2803
+      }
+    },
+    {
+      "node": "Payments",
+      "span": {
+        "file": 0,
+        "start": 2816,
+        "end": 2824
+      }
+    },
+    {
+      "node": "Fulfillment",
+      "span": {
+        "file": 0,
+        "start": 657,
+        "end": 689
+      }
+    },
+    {
+      "node": "Fulfillment",
+      "span": {
+        "file": 0,
+        "start": 1633,
+        "end": 1644
+      }
+    },
+    {
+      "node": "Fulfillment",
+      "span": {
+        "file": 0,
+        "start": 1676,
+        "end": 1687
+      }
+    },
+    {
+      "node": "Fulfillment",
+      "span": {
+        "file": 0,
+        "start": 1700,
+        "end": 1711
+      }
+    },
+    {
+      "node": "Fulfillment",
+      "span": {
+        "file": 0,
+        "start": 2406,
+        "end": 2417
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 690,
+        "end": 727
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 1243,
+        "end": 1249
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 1505,
+        "end": 1511
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 1559,
+        "end": 1565
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 1587,
+        "end": 1593
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 2377,
+        "end": 2383
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 2852,
+        "end": 2858
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 2875,
+        "end": 2881
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 2913,
+        "end": 2919
+      }
+    },
+    {
+      "node": "Orders",
+      "span": {
+        "file": 0,
+        "start": 2922,
+        "end": 2928
+      }
+    },
+    {
+      "node": "Notifications",
+      "span": {
+        "file": 0,
+        "start": 728,
+        "end": 763
+      }
+    },
+    {
+      "node": "Notifications",
+      "span": {
+        "file": 0,
+        "start": 1662,
+        "end": 1675
+      }
+    },
+    {
+      "node": "Notifications",
+      "span": {
+        "file": 0,
+        "start": 1727,
+        "end": 1740
+      }
+    },
+    {
+      "node": "Notifications",
+      "span": {
+        "file": 0,
+        "start": 2385,
+        "end": 2398
+      }
+    },
+    {
+      "node": "Notifications",
+      "span": {
+        "file": 0,
+        "start": 2976,
+        "end": 2989
+      }
+    },
+    {
+      "node": "Notifications",
+      "span": {
+        "file": 0,
+        "start": 2992,
+        "end": 3005
+      }
+    },
+    {
+      "node": "CatalogDB",
+      "span": {
+        "file": 0,
+        "start": 764,
+        "end": 796
+      }
+    },
+    {
+      "node": "CatalogDB",
+      "span": {
+        "file": 0,
+        "start": 1288,
+        "end": 1297
+      }
+    },
+    {
+      "node": "CatalogDB",
+      "span": {
+        "file": 0,
+        "start": 1826,
+        "end": 1835
+      }
+    },
+    {
+      "node": "CatalogDB",
+      "span": {
+        "file": 0,
+        "start": 2441,
+        "end": 2450
+      }
+    },
+    {
+      "node": "Blob",
+      "span": {
+        "file": 0,
+        "start": 797,
+        "end": 827
+      }
+    },
+    {
+      "node": "Blob",
+      "span": {
+        "file": 0,
+        "start": 1315,
+        "end": 1319
+      }
+    },
+    {
+      "node": "Blob",
+      "span": {
+        "file": 0,
+        "start": 2509,
+        "end": 2513
+      }
+    },
+    {
+      "node": "SearchIndex",
+      "span": {
+        "file": 0,
+        "start": 828,
+        "end": 864
+      }
+    },
+    {
+      "node": "SearchIndex",
+      "span": {
+        "file": 0,
+        "start": 1392,
+        "end": 1403
+      }
+    },
+    {
+      "node": "SearchIndex",
+      "span": {
+        "file": 0,
+        "start": 1843,
+        "end": 1854
+      }
+    },
+    {
+      "node": "SearchIndex",
+      "span": {
+        "file": 0,
+        "start": 2490,
+        "end": 2501
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 865,
+        "end": 904
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1421,
+        "end": 1426
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 1904,
+        "end": 1909
+      }
+    },
+    {
+      "node": "Redis",
+      "span": {
+        "file": 0,
+        "start": 2464,
+        "end": 2469
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 905,
+        "end": 944
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 1576,
+        "end": 1586
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 1770,
+        "end": 1780
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 1798,
+        "end": 1808
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 1967,
+        "end": 1977
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 2043,
+        "end": 2053
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 2111,
+        "end": 2121
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 2452,
+        "end": 2462
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 2885,
+        "end": 2895
+      }
+    },
+    {
+      "node": "CommerceDB",
+      "span": {
+        "file": 0,
+        "start": 2898,
+        "end": 2908
+      }
+    },
+    {
+      "node": "ProductEvents",
+      "span": {
+        "file": 0,
+        "start": 945,
+        "end": 984
+      }
+    },
+    {
+      "node": "ProductEvents",
+      "span": {
+        "file": 0,
+        "start": 1337,
+        "end": 1350
+      }
+    },
+    {
+      "node": "ProductEvents",
+      "span": {
+        "file": 0,
+        "start": 1351,
+        "end": 1364
+      }
+    },
+    {
+      "node": "ProductEvents",
+      "span": {
+        "file": 0,
+        "start": 2518,
+        "end": 2531
+      }
+    },
+    {
+      "node": "OrderEvents",
+      "span": {
+        "file": 0,
+        "start": 985,
+        "end": 1024
+      }
+    },
+    {
+      "node": "OrderEvents",
+      "span": {
+        "file": 0,
+        "start": 1604,
+        "end": 1615
+      }
+    },
+    {
+      "node": "OrderEvents",
+      "span": {
+        "file": 0,
+        "start": 1616,
+        "end": 1627
+      }
+    },
+    {
+      "node": "OrderEvents",
+      "span": {
+        "file": 0,
+        "start": 1645,
+        "end": 1656
+      }
+    },
+    {
+      "node": "OrderEvents",
+      "span": {
+        "file": 0,
+        "start": 2536,
+        "end": 2547
+      }
+    },
+    {
+      "node": "OrderEvents",
+      "span": {
+        "file": 0,
+        "start": 2932,
+        "end": 2943
+      }
+    },
+    {
+      "node": "OrderEvents",
+      "span": {
+        "file": 0,
+        "start": 2961,
+        "end": 2972
+      }
+    },
+    {
+      "node": "Shopper",
+      "span": {
+        "file": 0,
+        "start": 103,
+        "end": 139
+      }
+    },
+    {
+      "node": "Shopper",
+      "span": {
+        "file": 0,
+        "start": 1026,
+        "end": 1033
+      }
+    },
+    {
+      "node": "Shopper",
+      "span": {
+        "file": 0,
+        "start": 1049,
+        "end": 1056
+      }
+    },
+    {
+      "node": "Shopper",
+      "span": {
+        "file": 0,
+        "start": 2580,
+        "end": 2587
+      }
+    },
+    {
+      "node": "Merchant",
+      "span": {
+        "file": 0,
+        "start": 140,
+        "end": 179
+      }
+    },
+    {
+      "node": "Merchant",
+      "span": {
+        "file": 0,
+        "start": 1071,
+        "end": 1079
+      }
+    },
+    {
+      "node": "Stripe",
+      "span": {
+        "file": 0,
+        "start": 180,
+        "end": 213
+      }
+    },
+    {
+      "node": "Stripe",
+      "span": {
+        "file": 0,
+        "start": 1552,
+        "end": 1558
+      }
+    },
+    {
+      "node": "Stripe",
+      "span": {
+        "file": 0,
+        "start": 2775,
+        "end": 2781
+      }
+    },
+    {
+      "node": "Stripe",
+      "span": {
+        "file": 0,
+        "start": 2784,
+        "end": 2790
+      }
+    },
+    {
+      "node": "Shippo",
+      "span": {
+        "file": 0,
+        "start": 214,
+        "end": 249
+      }
+    },
+    {
+      "node": "Shippo",
+      "span": {
+        "file": 0,
+        "start": 1693,
+        "end": 1699
+      }
+    },
+    {
+      "node": "SendGrid",
+      "span": {
+        "file": 0,
+        "start": 250,
+        "end": 289
+      }
+    },
+    {
+      "node": "SendGrid",
+      "span": {
+        "file": 0,
+        "start": 1744,
+        "end": 1752
+      }
+    },
+    {
+      "node": "SendGrid",
+      "span": {
+        "file": 0,
+        "start": 3009,
+        "end": 3017
+      }
+    }
+  ]
+}

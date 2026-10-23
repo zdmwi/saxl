@@ -152,36 +152,100 @@ fn snip_html_opens_on_the_tower() {
     assert_eq!(tower_scene["timelines"].as_array().unwrap().len(), 2);
 }
 
+fn shopfront() -> ValidatedModel {
+    model(include_str!("../../../examples/shopfront.saxl"))
+}
+
+/// Checks what every tower layout guarantees: tiers stack in declaration
+/// order, no two containers share a cell, actors stand left of the grid and
+/// externals right of it, every replica has a leader up to its container,
+/// every relation is a pipe, and no two unrelated pipes touch.
+fn assert_tower_invariants(m: &ValidatedModel, tiers: &[&str]) -> saxl_renderer::Tower {
+    let scene = saxl_renderer::scene(m, &ViewKind::Tower).unwrap();
+    let t = scene.tower.unwrap();
+    let labels: Vec<_> = t.tiers.iter().map(|x| x.label.as_str()).collect();
+    assert_eq!(labels, tiers);
+    // Declared first, stacked highest.
+    for pair in t.tiers.windows(2) {
+        assert!(
+            pair[0].min.y > pair[1].min.y,
+            "{} above {}",
+            pair[0].label,
+            pair[1].label
+        );
+    }
+    for (i, a) in t.containers.iter().enumerate() {
+        for b in &t.containers[i + 1..] {
+            let same =
+                (a.center.x - b.center.x).abs() < 1e-6 && (a.center.z - b.center.z).abs() < 1e-6;
+            assert!(!same, "{} and {} share a cell", a.id, b.id);
+        }
+    }
+    let min_x = t
+        .containers
+        .iter()
+        .map(|c| c.center.x)
+        .fold(f64::MAX, f64::min);
+    let max_x = t
+        .containers
+        .iter()
+        .map(|c| c.center.x)
+        .fold(f64::MIN, f64::max);
+    for b in &t.outside {
+        if b.kind == saxl_renderer::NodeKind::Actor {
+            assert!(b.center.x < min_x, "{}", b.id);
+        } else {
+            assert!(b.center.x > max_x, "{}", b.id);
+        }
+    }
+    assert_eq!(t.leaders.len(), t.pods.len());
+    for l in &t.leaders {
+        let c = t.containers.iter().find(|c| c.id == l.element).unwrap();
+        assert!(
+            (l.to.x - c.center.x).abs() <= c.size.x / 2.0,
+            "{}",
+            l.element
+        );
+        assert!(
+            (l.to.z - c.center.z).abs() <= c.size.z / 2.0,
+            "{}",
+            l.element
+        );
+    }
+    assert_eq!(t.pipes.len(), m.model().relations.len());
+    assert_eq!(t.clashes, 0);
+    t
+}
+
 #[test]
 fn tower_structure() {
-    let scene = saxl_renderer::scene(&snip(), &ViewKind::Tower).unwrap();
-    let t = scene.tower.unwrap();
-    // One pod per replica: Redirect ×3, Dashboard ×2, LinksAPI ×2, Worker ×1,
-    // and one each for the three managed workloads.
-    assert_eq!(t.pods.len(), 11);
-    assert_eq!(t.pillars.len(), t.pods.len());
-    assert!(t.containers.iter().all(|c| (c.center.y - 3.4).abs() < 1e-9));
-    // Actors on the left (x < 0), externals on the right, all outside the shell.
-    for b in &t.outside {
-        let actor = b.kind == saxl_renderer::NodeKind::Actor;
-        assert_eq!(b.center.x < 0.0, actor, "{}", b.id);
-        assert!(b.center.x.hypot(b.center.z) > t.shell.radius);
+    let t = assert_tower_invariants(&snip(), &["k8s cluster", "managed"]);
+    // One pod per replica: Redirect ×3, Dashboard ×2, LinksAPI ×2, Worker ×1;
+    // one pad per managed instance: Postgres ×2 (primary+replica), Redis, Clicks.
+    assert_eq!(t.pods.len(), 12);
+    assert_eq!(t.pods.iter().filter(|p| p.managed).count(), 4);
+    // Snip has no hub with four outgoing relations.
+    assert!(t.trunks.is_empty());
+}
+
+#[test]
+fn shopfront_tower_structure() {
+    let m = shopfront();
+    let t = assert_tower_invariants(&m, &["edge cluster", "domain cluster", "managed"]);
+    assert_eq!(t.containers.len(), 21);
+    assert_eq!(t.outside.len(), 5);
+    let mut hubs: Vec<_> = t.trunks.iter().map(|x| x.hub.as_str()).collect();
+    hubs.sort_unstable();
+    assert_eq!(hubs, ["Checkout", "Gateway"]);
+    // Every branch names its trunk, and every trunk lists its branches.
+    for trunk in &t.trunks {
+        for id in &trunk.pipes {
+            let pipe = t.pipes.iter().find(|p| &p.id == id).unwrap();
+            assert_eq!(pipe.trunk.as_deref(), Some(trunk.hub.as_str()));
+        }
     }
-    let fills: Vec<_> = t
-        .fills
-        .iter()
-        .map(|f| (f.store.as_str(), f.role, f.entities.len()))
-        .collect();
-    assert_eq!(
-        fills,
-        [
-            ("Postgres", saxl_renderer::FillRole::Truth, 3),
-            ("Redis", saxl_renderer::FillRole::Cache, 1)
-        ]
-    );
-    // Click flows Clicks → Worker → Postgres.
-    assert_eq!(t.flows.len(), 1);
-    assert_eq!(t.flows[0].points.len(), 3);
+    let scene = saxl_renderer::scene(&m, &ViewKind::Tower).unwrap();
+    insta::assert_snapshot!("shopfront-scene-tower", saxl_renderer::to_json(&scene));
 }
 
 #[test]
