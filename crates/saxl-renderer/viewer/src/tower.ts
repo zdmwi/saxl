@@ -292,8 +292,27 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     data: new Group(),
   };
   for (const g of Object.values(layers)) world.add(g);
+  // Lines that join two layers live in their own groups: each is shown only
+  // while both layers it connects are shown (see applyVisibility).
+  const contextLinks = new Group();
+  const flows = new Group();
+  world.add(contextLinks, flows);
+  const shown: Record<Layer, boolean> = {
+    shell: true,
+    containers: true,
+    pillars: true,
+    floor: true,
+    data: true,
+  };
+  for (const key of opts.restore?.hidden ?? []) if (key in shown) shown[key as Layer] = false;
   const pickable: Object3D[] = [];
   const boxes = new Map<string, Box3>();
+  /** Which layer each pickable box belongs to. */
+  const layerOf = new Map<string, Layer>();
+  const boxShown = (id: string) => {
+    const layer = layerOf.get(id);
+    return layer === undefined || shown[layer];
+  };
 
   // Floor: slabs, pods, infrastructure, captions.
   for (const s of tower.slabs) {
@@ -311,6 +330,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     const g = boxMesh(b, colors.structure, 0.35, 0.8);
     pickable.push(g.children[0]);
     boxes.set(b.id, b);
+    layerOf.set(b.id, "floor");
     layers.floor.add(g);
     const label = textSprite(b.label ?? b.id, colors.fg, 0.3);
     label.position.set(b.center.x, b.center.y + 0.45, b.center.z);
@@ -322,6 +342,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     const g = boxMesh(b, kindColor(colors, b.kind), 0.28, 0.9, true);
     pickable.push(g.children[0]);
     boxes.set(b.id, b);
+    layerOf.set(b.id, "containers");
     layers.containers.add(g);
     const label = textSprite(b.label ?? b.id, colors.fg, 0.34);
     label.position.set(b.center.x, b.center.y + b.size.y / 2 + 0.3, b.center.z);
@@ -352,6 +373,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     const g = boxMesh(b, colors.structure, 0.3, 0.9);
     pickable.push(g.children[0]);
     boxes.set(b.id, b);
+    layerOf.set(b.id, "shell");
     layers.shell.add(g);
     const label = textSprite(b.label ?? b.id, colors.fg, 0.34);
     label.position.set(b.center.x, b.center.y + b.size.y / 2 + 0.3, b.center.z);
@@ -359,7 +381,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
   }
   for (const l of tower.context_links) {
     const line = new BufferGeometry().setFromPoints([v3(l.from), v3(l.to)]);
-    layers.shell.add(new Line(line, new LineBasicMaterial({ color: colors.structure, transparent: true, opacity: 0.5 })));
+    contextLinks.add(new Line(line, new LineBasicMaterial({ color: colors.structure, transparent: true, opacity: 0.5 })));
   }
 
   // Data: fills at rest, flows in motion.
@@ -370,7 +392,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
   const particles: { mesh: Mesh; curve: CatmullRomCurve3; offset: number }[] = [];
   for (const flow of tower.flows) {
     const points = flow.points.map(v3);
-    layers.data.add(
+    flows.add(
       new Line(new BufferGeometry().setFromPoints(points), new LineBasicMaterial({ color: colors.event, transparent: true, opacity: 0.6 })),
     );
     const curve = new CatmullRomCurve3(points, false, "centripetal", 0);
@@ -378,15 +400,18 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
       const mesh = new Mesh(new SphereGeometry(0.07, 12, 8), new MeshBasicMaterial({ color: colors.event }));
       mesh.position.copy(curve.getPointAt(i / 3));
       particles.push({ mesh, curve, offset: i / 3 });
-      layers.data.add(mesh);
+      flows.add(mesh);
     }
   }
 
   // Selection outline.
   const outline = new Group();
   world.add(outline);
+  let selectedId: string | null = null;
   function selectBox(id: string | null) {
+    selectedId = id;
     outline.clear();
+    outline.visible = id === null || boxShown(id);
     const b = id ? boxes.get(id) : undefined;
     if (!b) return;
     const pad = 0.12;
@@ -405,7 +430,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     markerGroup.clear();
     for (const [id, list] of markers) {
       const b = boxes.get(id);
-      if (!b || list.length === 0) continue;
+      if (!b || list.length === 0 || !boxShown(id)) continue;
       const error = list.some((m) => m.severity === "error");
       const sprite = textSprite("!", error ? "#fff" : "#151a22", 0.4, error ? "#d4552b" : "#f5b742");
       sprite.position.set(b.center.x + b.size.x / 2, b.center.y + b.size.y / 2 + 0.25, b.center.z);
@@ -422,12 +447,10 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     const label = h("label");
     const box = h("input");
     box.type = "checkbox";
-    box.checked = !opts.restore?.hidden.includes(key);
-    layers[key].visible = box.checked;
-    if (key === "containers") markerGroup.visible = box.checked;
+    box.checked = shown[key];
     box.addEventListener("change", () => {
-      layers[key].visible = box.checked;
-      if (key === "containers") markerGroup.visible = box.checked;
+      shown[key] = box.checked;
+      applyVisibility();
     });
     label.append(box, ` ${text}`);
     layerBox.append(label);
@@ -506,6 +529,8 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
     for (const step of timeline.steps) {
       const f = Math.min(1, Math.max(0, t - step.index));
       if (f <= 0) continue;
+      // A step is a connection too: hide it if anything it passes through is hidden.
+      if (![step.from, ...step.via, step.to].every(boxShown)) continue;
       const points = waypoints(step);
       if (points.length < 2) continue;
       const part = prefix(points, easeInOut(f));
@@ -527,6 +552,18 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
         thread.add(head);
       }
     }
+  }
+
+  /** Shows each layer per its toggle, and each connection only while every
+   * layer it joins is shown. */
+  function applyVisibility() {
+    for (const [key] of LAYERS) layers[key].visible = shown[key];
+    layers.pillars.visible = shown.pillars && shown.floor && shown.containers;
+    contextLinks.visible = shown.shell && shown.containers;
+    flows.visible = shown.data && shown.containers;
+    outline.visible = selectedId === null || boxShown(selectedId);
+    drawMarkers();
+    drawThread();
   }
 
   function setTime(next: number) {
@@ -648,6 +685,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
   stage.dataset.outside = String(tower.outside.length);
   stage.dataset.infra = String(tower.infra.length);
   stage.dataset.scenarios = String(timelines.length);
+  applyVisibility();
   if (restore) {
     framed = restore.framed;
     if (framed) {
@@ -671,7 +709,7 @@ export function mountTower(stage: HTMLElement, scene: Scene, opts: TowerOptions)
         scenario: timeline?.scenario,
         t,
         rise,
-        hidden: LAYERS.filter(([key]) => !layers[key].visible).map(([key]) => key),
+        hidden: LAYERS.filter(([key]) => !shown[key]).map(([key]) => key),
       };
     },
     play(scenario) {
