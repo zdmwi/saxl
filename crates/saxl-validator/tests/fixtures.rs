@@ -1,4 +1,4 @@
-//! The fixture harness (PLAN §15). Runs every fixture through the parser and,
+//! The fixture harness. Runs every fixture through the parser and,
 //! when parsing succeeds, the validator, and checks the `# expect:` headers.
 #![allow(clippy::unwrap_used, clippy::expect_used, clippy::panic, missing_docs)]
 

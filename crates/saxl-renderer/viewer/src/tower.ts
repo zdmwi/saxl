@@ -1,6 +1,6 @@
 // The tower: a three.js view of the deployment floor, containers on pillars,
-// the context shell, data as color, and scenarios played back as a thread
-// (PLAN §12.4, §12.5). Geometry comes from the scene; this module draws it
+// the context shell, data as color, and scenarios played back as a thread.
+// Geometry comes from the scene; this module draws it
 // and runs playback.
 
 import {

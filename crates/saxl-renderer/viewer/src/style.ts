@@ -1,5 +1,5 @@
-// Viewer styles. Colors are CSS custom properties with light and dark values
-// (PLAN §12.5); node, edge, and group classes match the Rust SVG output.
+// Viewer styles. Colors are CSS custom properties with light and dark values;
+// node, edge, and group classes match the Rust SVG output.
 
 export const CSS = `
 .saxl-viewer{--saxl-service:#5b57d1;--saxl-store:#0f8a6c;--saxl-event:#d4552b;--saxl-request:#c98407;--saxl-structure:#7d889a;--saxl-fg:#151a22;--saxl-muted:#586274;--saxl-bg:#f8f9fb;--saxl-panel:#ffffff;--saxl-line:#dde1e7}

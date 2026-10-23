@@ -9,3 +9,4 @@ node_modules/
 /playground/web/dist/
 /playground/web/test-results/
 /playground/web/playwright-report/
+/docs/PLAN.md

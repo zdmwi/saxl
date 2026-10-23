@@ -123,7 +123,7 @@ fn html_escapes_script_end_tags() {
     assert_eq!(parsed["scenes"][0]["view"]["kind"], "context");
 }
 
-/// PLAN §15 end to end: the default HTML opens on a tower with 7 containers,
+/// End to end: the default HTML opens on a tower with 7 containers,
 /// 4 outside elements, 1 infrastructure node, and 2 scenarios.
 #[test]
 fn snip_html_opens_on_the_tower() {

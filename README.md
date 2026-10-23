@@ -83,7 +83,7 @@ scenario redirect_hit {
 allow W102 "single region is acceptable for the prototype"
 ```
 
-In short: `->` is a synchronous call and `~>` an asynchronous message; `-->` is a reply, used in scenarios. A chain such as `Clicks ~> Worker -> Postgres` declares each hop. The [plan](docs/PLAN.md) has the full grammar and semantics.
+In short: `->` is a synchronous call and `~>` an asynchronous message; `-->` is a reply, used in scenarios. A chain such as `Clicks ~> Worker -> Postgres` declares each hop. Every diagnostic's [documentation](docs/rules/README.md) has a failing and a fixed example.
 
 ## Views
 

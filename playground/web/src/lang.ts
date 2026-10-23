@@ -1,4 +1,4 @@
-// saxl highlighting for CodeMirror. Mirrors the lexer (PLAN §4.2): keywords,
+// saxl highlighting for CodeMirror. Mirrors the lexer (`lexer.rs`): keywords,
 // names, strings, arrows, step labels, and comments.
 
 import { HighlightStyle, StreamLanguage, syntaxHighlighting } from "@codemirror/language";

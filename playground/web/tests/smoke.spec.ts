@@ -1,4 +1,4 @@
-// Smoke test (PLAN §15): Snip renders, an error dims the view and shows a
+// Smoke test: Snip renders, an error dims the view and shows a
 // diagnostic, and fixing it updates the view.
 import { expect, test } from "@playwright/test";
 
