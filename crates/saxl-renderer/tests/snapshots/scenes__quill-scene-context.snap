@@ -1,0 +1,412 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "context"
+  },
+  "title": "Context: Quill",
+  "size": {
+    "w": 693.6,
+    "h": 344.0
+  },
+  "nodes": [
+    {
+      "id": "Quill",
+      "kind": "library",
+      "label": "Quill",
+      "sublabel": "Markdown to HTML",
+      "rect": {
+        "x": 224.0,
+        "y": 24.0,
+        "w": 240.0,
+        "h": 296.0
+      },
+      "source": {
+        "file": 0,
+        "start": 30,
+        "end": 62
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "SiteGen",
+      "kind": "consumer",
+      "label": "SiteGen",
+      "sublabel": "static sites",
+      "rect": {
+        "x": 24.0,
+        "y": 104.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 64,
+        "end": 95
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Editor",
+      "kind": "consumer",
+      "label": "Editor",
+      "sublabel": "live preview",
+      "rect": {
+        "x": 24.0,
+        "y": 184.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 96,
+        "end": 127
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "unicode",
+      "kind": "package",
+      "label": "unicode",
+      "sublabel": "segmentation",
+      "rect": {
+        "x": 546.8,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 128,
+        "end": 159
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "syntect",
+      "kind": "package",
+      "label": "syntect",
+      "sublabel": "highlighting",
+      "rect": {
+        "x": 546.8,
+        "y": 104.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 160,
+        "end": 191
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Extension",
+      "kind": "hook",
+      "label": "Extension",
+      "sublabel": "custom blocks",
+      "rect": {
+        "x": 544.0,
+        "y": 184.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 698,
+        "end": 732
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Highlighter",
+      "kind": "hook",
+      "label": "Highlighter",
+      "sublabel": "colors code",
+      "rect": {
+        "x": 544.6,
+        "y": 264.0,
+        "w": 124.4,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 733,
+        "end": 765
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "SiteGen",
+      "to": "Quill",
+      "style": "sync",
+      "points": [
+        {
+          "x": 144.0,
+          "y": 132.0
+        },
+        {
+          "x": 224.0,
+          "y": 132.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Editor",
+      "to": "Quill",
+      "style": "async",
+      "points": [
+        {
+          "x": 144.0,
+          "y": 212.0
+        },
+        {
+          "x": 224.0,
+          "y": 212.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Quill",
+      "to": "unicode",
+      "style": "sync",
+      "points": [
+        {
+          "x": 464.0,
+          "y": 52.0
+        },
+        {
+          "x": 546.8,
+          "y": 52.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Quill",
+      "to": "syntect",
+      "style": "sync",
+      "points": [
+        {
+          "x": 464.0,
+          "y": 132.0
+        },
+        {
+          "x": 546.8,
+          "y": 132.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Quill",
+      "to": "Extension",
+      "style": "sync",
+      "points": [
+        {
+          "x": 464.0,
+          "y": 212.0
+        },
+        {
+          "x": 544.0,
+          "y": 212.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Quill",
+      "to": "Highlighter",
+      "style": "sync",
+      "points": [
+        {
+          "x": 464.0,
+          "y": 292.0
+        },
+        {
+          "x": 544.6,
+          "y": 292.0
+        }
+      ],
+      "label": null
+    }
+  ],
+  "groups": [],
+  "tower": null,
+  "timelines": [],
+  "anchors": [
+    {
+      "node": "Quill",
+      "span": {
+        "file": 0,
+        "start": 30,
+        "end": 62
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 64,
+        "end": 95
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 767,
+        "end": 774
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 786,
+        "end": 793
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 1552,
+        "end": 1559
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 1890,
+        "end": 1897
+      }
+    },
+    {
+      "node": "Editor",
+      "span": {
+        "file": 0,
+        "start": 96,
+        "end": 127
+      }
+    },
+    {
+      "node": "Editor",
+      "span": {
+        "file": 0,
+        "start": 807,
+        "end": 813
+      }
+    },
+    {
+      "node": "unicode",
+      "span": {
+        "file": 0,
+        "start": 128,
+        "end": 159
+      }
+    },
+    {
+      "node": "unicode",
+      "span": {
+        "file": 0,
+        "start": 900,
+        "end": 907
+      }
+    },
+    {
+      "node": "syntect",
+      "span": {
+        "file": 0,
+        "start": 160,
+        "end": 191
+      }
+    },
+    {
+      "node": "syntect",
+      "span": {
+        "file": 0,
+        "start": 1031,
+        "end": 1038
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 698,
+        "end": 732
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 938,
+        "end": 947
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 1637,
+        "end": 1646
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 1662,
+        "end": 1671
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 733,
+        "end": 765
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1006,
+        "end": 1017
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1787,
+        "end": 1798
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1819,
+        "end": 1830
+      }
+    }
+  ]
+}

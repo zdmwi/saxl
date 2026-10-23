@@ -34,6 +34,45 @@ fn snip_scene_snapshots() {
 }
 
 #[test]
+fn quill_scene_snapshots() {
+    let m = model(include_str!("../../../examples/quill.saxl"));
+    for view in saxl_renderer::views(&m) {
+        if view == ViewKind::Tower {
+            continue;
+        }
+        let scene = saxl_renderer::scene(&m, &view).unwrap();
+        insta::assert_snapshot!(
+            format!("quill-scene-{}", view.slug()),
+            saxl_renderer::to_json(&scene)
+        );
+        insta::assert_snapshot!(
+            format!("quill-svg-{}", view.slug()),
+            saxl_renderer::to_svg(&scene).unwrap()
+        );
+    }
+}
+
+#[test]
+fn library_views_have_library_titles() {
+    let m = model(include_str!("../../../examples/quill.saxl"));
+    let titles: Vec<_> = saxl_renderer::scenes(&m)
+        .into_iter()
+        .map(|s| s.title)
+        .collect();
+    assert_eq!(
+        titles,
+        [
+            "Context: Quill",
+            "Modules: Quill",
+            "Runtime: render_note",
+            "Types: Quill",
+            "Packages: Quill",
+            "Tower: Quill"
+        ]
+    );
+}
+
+#[test]
 fn every_view_is_rendered() {
     let scenes = saxl_renderer::scenes(&snip());
     let slugs: Vec<_> = scenes.iter().map(|s| s.view.slug()).collect();

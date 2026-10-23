@@ -56,6 +56,18 @@ fn shape(kind: ElementKind) -> Shape {
     }
 }
 
+/// The node kind a tower box reports. Library kinds reuse the closest system
+/// kind until the tower draws them.
+fn tower_kind(kind: ElementKind) -> NodeKind {
+    match kind {
+        ElementKind::Actor | ElementKind::Consumer => NodeKind::Actor,
+        ElementKind::External | ElementKind::Package | ElementKind::Hook => NodeKind::External,
+        ElementKind::Service | ElementKind::Api | ElementKind::Module => NodeKind::Service,
+        ElementKind::Store => NodeKind::Store,
+        ElementKind::Queue => NodeKind::Queue,
+    }
+}
+
 /// An element's box: its kind's shape, `base` the tier's height.
 fn element_box(n: &PNode, id: &str, kind: ElementKind, x: f64, z: f64, base: f64) -> Box3 {
     let (size, mid) = match kind {
@@ -78,7 +90,7 @@ fn element_box(n: &PNode, id: &str, kind: ElementKind, x: f64, z: f64, base: f64
     };
     Box3 {
         id: id.to_owned(),
-        kind: kind.into(),
+        kind: tower_kind(kind),
         center: Point3::new(x, base + mid, z),
         size,
         label: Some(n.label.clone()),

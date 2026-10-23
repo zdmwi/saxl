@@ -2,9 +2,9 @@
 //! group, groups sit side by side in their region, and regions stack
 //! vertically. Infrastructure nodes sit in a column on the region's left edge.
 
-use crate::layout::{PAD, node_size, place};
+use crate::layout::{PAD, SMALL_PX, node_size, place, text_width};
 use crate::project::{DeployRegion, PNode};
-use crate::scene::{GroupKind, Rect, SceneGroup, SceneNode, Size2};
+use crate::scene::{Rect, SceneGroup, SceneNode, Size2};
 
 /// Padding inside every box.
 const INSET: f64 = 16.0;
@@ -32,6 +32,11 @@ fn column(nodes: Vec<PNode>, x: f64, y: f64, out: &mut Vec<SceneNode>) -> (f64, 
     (width, (cy - y - GAP).max(0.0))
 }
 
+/// The width a box needs for its caption, which starts 10px in.
+fn label_width(label: &str) -> f64 {
+    text_width(label, SMALL_PX) + 2.0 * 10.0
+}
+
 pub(crate) fn layout(regions: Vec<DeployRegion>) -> Layout {
     let mut nodes = Vec::new();
     let mut groups = Vec::new();
@@ -50,7 +55,9 @@ pub(crate) fn layout(regions: Vec<DeployRegion>) -> Layout {
         for group in region.groups {
             let first = nodes.len();
             let (w, h) = column(group.nodes, x + INSET, top + HEADER, &mut nodes);
-            let gw = (w + 2.0 * INSET).max(MIN_GROUP_W);
+            let gw = (w + 2.0 * INSET)
+                .max(MIN_GROUP_W)
+                .max(label_width(&group.label));
             // Center narrow columns in the minimum group width.
             let shift = (gw - 2.0 * INSET - w) / 2.0;
             for n in &mut nodes[first..] {
@@ -67,13 +74,15 @@ pub(crate) fn layout(regions: Vec<DeployRegion>) -> Layout {
             x += gw + GAP;
             content_h = content_h.max(gh);
         }
-        let right = (x - GAP + INSET).max(PAD + MIN_GROUP_W);
+        let right = (x - GAP + INSET)
+            .max(PAD + MIN_GROUP_W)
+            .max(PAD + label_width(&region.label));
         let rect = Rect::new(PAD, y, right - PAD, HEADER + content_h + INSET);
         groups.insert(
             region_index,
             SceneGroup {
                 id: region.id,
-                kind: GroupKind::Region,
+                kind: region.kind,
                 label: region.label,
                 rect,
                 depth: 0,

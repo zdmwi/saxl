@@ -2,8 +2,8 @@
 //! with no geometry. The layouts in `layout/` add the geometry.
 
 use saxl_core::{
-    Attribute, ElementKind, GroupKind as IrGroupKind, Model, NameRef, Placement, Span, Step,
-    StepArrow,
+    Attribute, ElementKind, GroupKind as IrGroupKind, Model, NameRef, PackageKind, Placement,
+    RootKind, Span, Step, StepArrow,
 };
 use saxl_validator::{Target, ValidatedModel};
 
@@ -54,7 +54,8 @@ pub(crate) fn element_node(model: &Model, index: usize) -> PNode {
     }
 }
 
-/// Containers: every element, every relation.
+/// Containers (Modules, for a library): every element, every relation, and
+/// every `impl`.
 pub(crate) struct Containers {
     pub nodes: Vec<PNode>,
     pub edges: Vec<PEdge>,
@@ -63,9 +64,13 @@ pub(crate) struct Containers {
 pub(crate) fn containers(vm: &ValidatedModel) -> Containers {
     let model = vm.model();
     let nodes = (0..model.elements.len())
-        .map(|i| element_node(model, i))
+        .map(|i| {
+            let mut node = element_node(model, i);
+            node.badges = feature_badges(vm, i);
+            node
+        })
         .collect();
-    let edges = model
+    let mut edges: Vec<PEdge> = model
         .relations
         .iter()
         .zip(&vm.resolved().relation_ends)
@@ -79,10 +84,38 @@ pub(crate) fn containers(vm: &ValidatedModel) -> Containers {
             })
         })
         .collect();
+    edges.extend(
+        vm.resolved()
+            .impl_ends
+            .iter()
+            .flatten()
+            .map(|(by, hook)| PEdge {
+                from: by.index(),
+                to: hook.index(),
+                style: EdgeStyle::Impl,
+                label: None,
+            }),
+    );
     Containers { nodes, edges }
 }
 
-/// Context: the system as one box; actors left, externals right.
+/// `feature f` badges for the features an element is gated on, in order of
+/// first appearance.
+fn feature_badges(vm: &ValidatedModel, index: usize) -> Vec<String> {
+    let mut badges: Vec<String> = Vec::new();
+    for p in &vm.resolved().publications[index] {
+        if let Some(f) = &p.feature {
+            let badge = format!("feature {f}");
+            if !badges.contains(&badge) {
+                badges.push(badge);
+            }
+        }
+    }
+    badges
+}
+
+/// Context: the system or library as one box; actors and consumers left;
+/// externals, packages, and hooks right.
 pub(crate) struct Context {
     pub system: PNode,
     pub actors: Vec<PNode>,
@@ -96,6 +129,9 @@ pub(crate) fn context(vm: &ValidatedModel) -> Context {
     let model = vm.model();
     let mut system = PNode::new("system", NodeKind::System, "");
     if let Some(s) = model.roots.first() {
+        if s.kind == RootKind::Library {
+            system.kind = NodeKind::Library;
+        }
         system.id.clone_from(&s.name.text);
         system.label.clone_from(&s.name.text);
         system.sublabel.clone_from(&s.description);
@@ -104,8 +140,8 @@ pub(crate) fn context(vm: &ValidatedModel) -> Context {
     let (mut actors, mut externals, mut links) = (Vec::new(), Vec::new(), Vec::new());
     for (i, e) in model.elements.iter().enumerate() {
         let list = match e.kind {
-            ElementKind::Actor => &mut actors,
-            ElementKind::External => &mut externals,
+            ElementKind::Actor | ElementKind::Consumer => &mut actors,
+            ElementKind::External | ElementKind::Package | ElementKind::Hook => &mut externals,
             _ => continue,
         };
         list.push(element_node(model, i));
@@ -145,9 +181,11 @@ pub(crate) fn context(vm: &ValidatedModel) -> Context {
     }
 }
 
-/// Deployment: regions of groups of workload nodes.
+/// Deployment: regions of groups of workload nodes. Packages, for a library,
+/// use the same shape: registries of packages of published elements.
 pub(crate) struct DeployRegion {
     pub id: String,
+    pub kind: GroupKind,
     pub label: String,
     pub infra: Vec<PNode>,
     pub groups: Vec<DeployGroup>,
@@ -228,8 +266,65 @@ pub(crate) fn deployment(vm: &ValidatedModel) -> Vec<DeployRegion> {
                 .collect();
             DeployRegion {
                 id: r.clone(),
+                kind: GroupKind::Region,
                 label: r.clone(),
                 infra,
+                groups,
+            }
+        })
+        .collect()
+}
+
+pub(crate) fn packages(vm: &ValidatedModel) -> Vec<DeployRegion> {
+    let model = vm.model();
+    model
+        .registries
+        .iter()
+        .map(|registry| {
+            let r = &registry.name.text;
+            let groups = registry
+                .packages
+                .iter()
+                .enumerate()
+                .map(|(p, package)| {
+                    let mut nodes = Vec::new();
+                    for w in &package.workloads {
+                        let badges: Vec<String> = w
+                            .feature()
+                            .map(|f| format!("feature {}", f.text))
+                            .into_iter()
+                            .collect();
+                        for name in &w.names {
+                            let Some(id) = vm.resolved().element(&name.text) else {
+                                continue;
+                            };
+                            let mut node = element_node(model, id.index());
+                            node.id = format!("{r}/{}/{}", package.name.text, name.text);
+                            node.badges.clone_from(&badges);
+                            nodes.push(node);
+                        }
+                    }
+                    let keyword = match package.kind {
+                        PackageKind::Crate => "crate",
+                        PackageKind::Package => "package",
+                    };
+                    let mut label = format!("{keyword} {}", package.name.text);
+                    if let Some(t) = &package.target {
+                        label.push_str(&format!(" · {}", t.text));
+                    }
+                    DeployGroup {
+                        id: format!("{r}/{p}"),
+                        kind: GroupKind::Package,
+                        label,
+                        nodes,
+                    }
+                })
+                .collect();
+            DeployRegion {
+                id: r.clone(),
+                kind: GroupKind::Registry,
+                label: r.clone(),
+                infra: Vec::new(),
                 groups,
             }
         })
@@ -436,6 +531,11 @@ pub(crate) fn data(vm: &ValidatedModel) -> Data {
             }
         };
         cards.push(PNode {
+            badges: if entity.public {
+                vec!["pub".to_owned()]
+            } else {
+                Vec::new()
+            },
             sublabel: Some(sublabel),
             source: Some(entity.span),
             fields: entity.fields.iter().map(|f| f.text.clone()).collect(),
@@ -451,6 +551,14 @@ pub(crate) fn data(vm: &ValidatedModel) -> Data {
         cards,
         links,
     }
+}
+
+/// Whether the model describes a library.
+pub(crate) fn is_library(model: &Model) -> bool {
+    model
+        .roots
+        .first()
+        .is_some_and(|r| r.kind == RootKind::Library)
 }
 
 /// The system's or library's name, for titles.

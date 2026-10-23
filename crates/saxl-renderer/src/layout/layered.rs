@@ -3,8 +3,8 @@
 //!
 //! 1. Break cycles: reverse DFS back edges (and edges into actors or out of
 //!    externals), for layout only.
-//! 2. Assign layers by longest path. Actors are pinned to layer 0 and
-//!    externals to the last layer.
+//! 2. Assign layers by longest path. Actors and consumers are pinned to
+//!    layer 0; externals, packages, and hooks to the last layer.
 //! 3. Insert dummy nodes on edges spanning more than one layer.
 //! 4. Reduce crossings with barycenter ordering, four down-and-up sweeps.
 //! 5. Assign coordinates, then pull nodes toward the median of their neighbors.
@@ -48,7 +48,7 @@ pub(crate) fn layout(nodes: Vec<PNode>, edges: &[PEdge]) -> Layout {
             oriented.push(None);
             continue;
         }
-        let reverse = kinds[e.to] == NodeKind::Actor || kinds[e.from] == NodeKind::External;
+        let reverse = kinds[e.to].is_source() || kinds[e.from].is_sink();
         oriented.push(Some(if reverse {
             (e.to, e.from, true)
         } else {
@@ -301,8 +301,8 @@ fn assign_layers(
     kinds: &[NodeKind],
     oriented: &[Option<(usize, usize, bool)>],
 ) -> Vec<usize> {
-    let has_actors = kinds.contains(&NodeKind::Actor);
-    let base = |k: NodeKind| usize::from(has_actors && k != NodeKind::Actor);
+    let has_sources = kinds.iter().any(|k| k.is_source());
+    let base = |k: NodeKind| usize::from(has_sources && !k.is_source());
     let mut indegree = vec![0usize; n];
     let mut out: Vec<Vec<usize>> = vec![Vec::new(); n];
     for (u, v, _) in oriented.iter().flatten() {
@@ -322,19 +322,19 @@ fn assign_layers(
         }
     }
     for (l, k) in layer.iter_mut().zip(kinds) {
-        if *k == NodeKind::Actor {
+        if k.is_source() {
             *l = 0;
         }
     }
     let last = kinds
         .iter()
         .zip(&layer)
-        .filter(|(k, _)| **k != NodeKind::External)
+        .filter(|(k, _)| !k.is_sink())
         .map(|(_, l)| *l + 1)
         .max()
         .unwrap_or(0);
     for (l, k) in layer.iter_mut().zip(kinds) {
-        if *k == NodeKind::External {
+        if k.is_sink() {
             *l = last;
         }
     }

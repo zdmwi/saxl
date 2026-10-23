@@ -2,6 +2,7 @@
 // module only decides how things look.
 
 import type { EdgeStyle } from "./generated/EdgeStyle";
+import type { NodeKind } from "./generated/NodeKind";
 import type { Point2 } from "./generated/Point2";
 import type { Scene } from "./generated/Scene";
 import type { SceneEdge } from "./generated/SceneEdge";
@@ -44,7 +45,7 @@ export function draw(scene: Scene, markers: Map<string, Marker[]> = new Map()): 
   const id = `saxl${++instance}`;
   const svg = el("svg", { role: "img", "aria-label": scene.title });
   const defs = el("defs");
-  for (const style of ["sync", "async", "reply"] as EdgeStyle[]) {
+  for (const style of ["sync", "async", "reply", "impl"] as EdgeStyle[]) {
     const marker = el("marker", {
       id: `${id}-arrow-${style}`,
       class: `arrow-${style}`,
@@ -149,9 +150,25 @@ export function cylinderPaths(n: SceneNode): { body: string; rim: string } | nul
   return null;
 }
 
+/** How rounded a node's corners are. Mirrors `corner_radius` in `svg.rs`. */
+function cornerRadius(kind: NodeKind): number {
+  switch (kind) {
+    case "actor":
+    case "consumer":
+      return 18;
+    case "hook":
+      return 14;
+    case "system":
+    case "library":
+      return 12;
+    default:
+      return 6;
+  }
+}
+
 function node(n: SceneNode, marks: Marker[]): SVGGElement {
   const r = n.rect;
-  const radius = n.kind === "actor" ? 18 : n.kind === "system" ? 12 : 6;
+  const radius = cornerRadius(n.kind);
   const g = el("g", { class: `node node-${n.kind}`, "data-id": n.id, tabindex: 0 });
   const shape = cylinderPaths(n);
   if (shape) {
@@ -185,7 +202,7 @@ function node(n: SceneNode, marks: Marker[]): SVGGElement {
     g.append(
       el(
         "text",
-        { class: "badge", x: cx, y: y + BADGE_ROW - 8, "text-anchor": "middle" },
+        { class: "badge", x: tx, y: y + BADGE_ROW - 8, "text-anchor": anchor },
         n.badges.join("  "),
       ),
     );

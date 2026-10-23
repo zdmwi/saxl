@@ -1,0 +1,1286 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "containers"
+  },
+  "title": "Modules: Quill",
+  "size": {
+    "w": 1233.6,
+    "h": 538.0
+  },
+  "nodes": [
+    {
+      "id": "SiteGen",
+      "kind": "consumer",
+      "label": "SiteGen",
+      "sublabel": "static sites",
+      "rect": {
+        "x": 24.0,
+        "y": 158.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 64,
+        "end": 95
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Editor",
+      "kind": "consumer",
+      "label": "Editor",
+      "sublabel": "live preview",
+      "rect": {
+        "x": 24.0,
+        "y": 347.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 96,
+        "end": 127
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "unicode",
+      "kind": "package",
+      "label": "unicode",
+      "sublabel": "segmentation",
+      "rect": {
+        "x": 1086.8,
+        "y": 104.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 128,
+        "end": 159
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "syntect",
+      "kind": "package",
+      "label": "syntect",
+      "sublabel": "highlighting",
+      "rect": {
+        "x": 1086.8,
+        "y": 384.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 160,
+        "end": 191
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "parse",
+      "kind": "api",
+      "label": "parse",
+      "sublabel": "text → Doc",
+      "rect": {
+        "x": 444.0,
+        "y": 104.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "to_html",
+      "kind": "api",
+      "label": "to_html",
+      "sublabel": "text → HTML",
+      "rect": {
+        "x": 234.0,
+        "y": 212.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "lexer",
+      "kind": "module",
+      "label": "lexer",
+      "sublabel": "line tokens",
+      "rect": {
+        "x": 654.0,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 308,
+        "end": 362
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "blocks",
+      "kind": "module",
+      "label": "blocks",
+      "sublabel": "block structure",
+      "rect": {
+        "x": 644.0,
+        "y": 184.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 363,
+        "end": 418
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "inlines",
+      "kind": "module",
+      "label": "inlines",
+      "sublabel": "emphasis, links",
+      "rect": {
+        "x": 864.0,
+        "y": 104.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 419,
+        "end": 475
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "ast",
+      "kind": "module",
+      "label": "ast",
+      "sublabel": "Doc tree",
+      "rect": {
+        "x": 874.0,
+        "y": 240.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 476,
+        "end": 528
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "html",
+      "kind": "module",
+      "label": "html",
+      "sublabel": "HTML writer",
+      "rect": {
+        "x": 444.0,
+        "y": 320.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 529,
+        "end": 582
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "escape",
+      "kind": "module",
+      "label": "escape",
+      "sublabel": "entities",
+      "rect": {
+        "x": 654.0,
+        "y": 264.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 583,
+        "end": 638
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "highlight",
+      "kind": "module",
+      "label": "highlight",
+      "sublabel": "syntect adapter",
+      "rect": {
+        "x": 224.0,
+        "y": 406.0,
+        "w": 140.0,
+        "h": 76.0
+      },
+      "source": {
+        "file": 0,
+        "start": 639,
+        "end": 697
+      },
+      "badges": [
+        "feature syntect"
+      ],
+      "fields": []
+    },
+    {
+      "id": "Extension",
+      "kind": "hook",
+      "label": "Extension",
+      "sublabel": "custom blocks",
+      "rect": {
+        "x": 1084.0,
+        "y": 184.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 698,
+        "end": 732
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Highlighter",
+      "kind": "hook",
+      "label": "Highlighter",
+      "sublabel": "colors code",
+      "rect": {
+        "x": 1084.6,
+        "y": 304.0,
+        "w": 124.4,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 733,
+        "end": 765
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "SiteGen",
+      "to": "parse",
+      "style": "sync",
+      "points": [
+        {
+          "x": 144.0,
+          "y": 181.0
+        },
+        {
+          "x": 224.0,
+          "y": 132.0
+        },
+        {
+          "x": 364.0,
+          "y": 132.0
+        },
+        {
+          "x": 444.0,
+          "y": 127.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "SiteGen",
+      "to": "to_html",
+      "style": "sync",
+      "points": [
+        {
+          "x": 144.0,
+          "y": 191.0
+        },
+        {
+          "x": 234.0,
+          "y": 235.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Editor",
+      "to": "to_html",
+      "style": "async",
+      "points": [
+        {
+          "x": 144.0,
+          "y": 370.0
+        },
+        {
+          "x": 234.0,
+          "y": 245.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "to_html",
+      "to": "parse",
+      "style": "sync",
+      "points": [
+        {
+          "x": 354.0,
+          "y": 235.0
+        },
+        {
+          "x": 444.0,
+          "y": 137.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "parse",
+      "to": "lexer",
+      "style": "sync",
+      "points": [
+        {
+          "x": 564.0,
+          "y": 127.0
+        },
+        {
+          "x": 654.0,
+          "y": 52.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "parse",
+      "to": "blocks",
+      "style": "sync",
+      "points": [
+        {
+          "x": 564.0,
+          "y": 137.0
+        },
+        {
+          "x": 644.0,
+          "y": 212.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "blocks",
+      "to": "inlines",
+      "style": "sync",
+      "points": [
+        {
+          "x": 784.0,
+          "y": 202.0
+        },
+        {
+          "x": 864.0,
+          "y": 132.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "inlines",
+      "to": "unicode",
+      "style": "sync",
+      "points": [
+        {
+          "x": 1004.0,
+          "y": 132.0
+        },
+        {
+          "x": 1086.8,
+          "y": 132.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "blocks",
+      "to": "ast",
+      "style": "sync",
+      "points": [
+        {
+          "x": 784.0,
+          "y": 222.0
+        },
+        {
+          "x": 874.0,
+          "y": 263.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "blocks",
+      "to": "Extension",
+      "style": "sync",
+      "points": [
+        {
+          "x": 784.0,
+          "y": 212.0
+        },
+        {
+          "x": 864.0,
+          "y": 212.0
+        },
+        {
+          "x": 1004.0,
+          "y": 212.0
+        },
+        {
+          "x": 1084.0,
+          "y": 212.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "to_html",
+      "to": "html",
+      "style": "sync",
+      "points": [
+        {
+          "x": 354.0,
+          "y": 245.0
+        },
+        {
+          "x": 444.0,
+          "y": 348.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "html",
+      "to": "escape",
+      "style": "sync",
+      "points": [
+        {
+          "x": 564.0,
+          "y": 338.0
+        },
+        {
+          "x": 654.0,
+          "y": 292.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "html",
+      "to": "ast",
+      "style": "sync",
+      "points": [
+        {
+          "x": 564.0,
+          "y": 348.0
+        },
+        {
+          "x": 644.0,
+          "y": 348.0
+        },
+        {
+          "x": 784.0,
+          "y": 348.0
+        },
+        {
+          "x": 874.0,
+          "y": 273.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "html",
+      "to": "Highlighter",
+      "style": "sync",
+      "points": [
+        {
+          "x": 564.0,
+          "y": 358.0
+        },
+        {
+          "x": 644.0,
+          "y": 380.0
+        },
+        {
+          "x": 784.0,
+          "y": 380.0
+        },
+        {
+          "x": 864.0,
+          "y": 332.0
+        },
+        {
+          "x": 1004.0,
+          "y": 332.0
+        },
+        {
+          "x": 1084.6,
+          "y": 322.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "highlight",
+      "to": "syntect",
+      "style": "sync",
+      "points": [
+        {
+          "x": 364.0,
+          "y": 449.0
+        },
+        {
+          "x": 444.0,
+          "y": 476.0
+        },
+        {
+          "x": 564.0,
+          "y": 476.0
+        },
+        {
+          "x": 644.0,
+          "y": 476.0
+        },
+        {
+          "x": 784.0,
+          "y": 476.0
+        },
+        {
+          "x": 864.0,
+          "y": 428.0
+        },
+        {
+          "x": 1004.0,
+          "y": 428.0
+        },
+        {
+          "x": 1086.8,
+          "y": 412.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "highlight",
+      "to": "Highlighter",
+      "style": "impl",
+      "points": [
+        {
+          "x": 364.0,
+          "y": 439.0
+        },
+        {
+          "x": 444.0,
+          "y": 412.0
+        },
+        {
+          "x": 564.0,
+          "y": 412.0
+        },
+        {
+          "x": 644.0,
+          "y": 412.0
+        },
+        {
+          "x": 784.0,
+          "y": 412.0
+        },
+        {
+          "x": 864.0,
+          "y": 364.0
+        },
+        {
+          "x": 1004.0,
+          "y": 364.0
+        },
+        {
+          "x": 1084.6,
+          "y": 332.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "Editor",
+      "to": "Highlighter",
+      "style": "impl",
+      "points": [
+        {
+          "x": 144.0,
+          "y": 380.0
+        },
+        {
+          "x": 224.0,
+          "y": 510.0
+        },
+        {
+          "x": 364.0,
+          "y": 510.0
+        },
+        {
+          "x": 444.0,
+          "y": 444.0
+        },
+        {
+          "x": 564.0,
+          "y": 444.0
+        },
+        {
+          "x": 644.0,
+          "y": 444.0
+        },
+        {
+          "x": 784.0,
+          "y": 444.0
+        },
+        {
+          "x": 864.0,
+          "y": 396.0
+        },
+        {
+          "x": 1004.0,
+          "y": 396.0
+        },
+        {
+          "x": 1084.6,
+          "y": 342.0
+        }
+      ],
+      "label": null
+    }
+  ],
+  "groups": [],
+  "tower": null,
+  "timelines": [],
+  "anchors": [
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 64,
+        "end": 95
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 767,
+        "end": 774
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 786,
+        "end": 793
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 1552,
+        "end": 1559
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 1890,
+        "end": 1897
+      }
+    },
+    {
+      "node": "Editor",
+      "span": {
+        "file": 0,
+        "start": 96,
+        "end": 127
+      }
+    },
+    {
+      "node": "Editor",
+      "span": {
+        "file": 0,
+        "start": 807,
+        "end": 813
+      }
+    },
+    {
+      "node": "unicode",
+      "span": {
+        "file": 0,
+        "start": 128,
+        "end": 159
+      }
+    },
+    {
+      "node": "unicode",
+      "span": {
+        "file": 0,
+        "start": 900,
+        "end": 907
+      }
+    },
+    {
+      "node": "syntect",
+      "span": {
+        "file": 0,
+        "start": 160,
+        "end": 191
+      }
+    },
+    {
+      "node": "syntect",
+      "span": {
+        "file": 0,
+        "start": 1031,
+        "end": 1038
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 780,
+        "end": 785
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 841,
+        "end": 846
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 847,
+        "end": 852
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 866,
+        "end": 871
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1595,
+        "end": 1600
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1609,
+        "end": 1614
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1710,
+        "end": 1715
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1724,
+        "end": 1729
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 799,
+        "end": 806
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 820,
+        "end": 827
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 828,
+        "end": 835
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 948,
+        "end": 955
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1262,
+        "end": 1269
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1563,
+        "end": 1570
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1584,
+        "end": 1591
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1734,
+        "end": 1741
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1750,
+        "end": 1757
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1859,
+        "end": 1866
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1878,
+        "end": 1885
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 308,
+        "end": 362
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 860,
+        "end": 865
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 1213,
+        "end": 1218
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 363,
+        "end": 418
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 885
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 885
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 908,
+        "end": 914
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 925,
+        "end": 931
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1618,
+        "end": 1624
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1627,
+        "end": 1633
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1676,
+        "end": 1682
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1699,
+        "end": 1705
+      }
+    },
+    {
+      "node": "inlines",
+      "span": {
+        "file": 0,
+        "start": 419,
+        "end": 475
+      }
+    },
+    {
+      "node": "inlines",
+      "span": {
+        "file": 0,
+        "start": 889,
+        "end": 896
+      }
+    },
+    {
+      "node": "inlines",
+      "span": {
+        "file": 0,
+        "start": 889,
+        "end": 896
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 476,
+        "end": 528
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 921,
+        "end": 924
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 989,
+        "end": 992
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 1110,
+        "end": 1113
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 1160,
+        "end": 1163
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 529,
+        "end": 582
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 965
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 965
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 976,
+        "end": 980
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 993,
+        "end": 997
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1761,
+        "end": 1765
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1779,
+        "end": 1783
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1835,
+        "end": 1839
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1850,
+        "end": 1854
+      }
+    },
+    {
+      "node": "escape",
+      "span": {
+        "file": 0,
+        "start": 583,
+        "end": 638
+      }
+    },
+    {
+      "node": "escape",
+      "span": {
+        "file": 0,
+        "start": 969,
+        "end": 975
+      }
+    },
+    {
+      "node": "highlight",
+      "span": {
+        "file": 0,
+        "start": 639,
+        "end": 697
+      }
+    },
+    {
+      "node": "highlight",
+      "span": {
+        "file": 0,
+        "start": 1018,
+        "end": 1027
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 698,
+        "end": 732
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 938,
+        "end": 947
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 1637,
+        "end": 1646
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 1662,
+        "end": 1671
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 733,
+        "end": 765
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1006,
+        "end": 1017
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1787,
+        "end": 1798
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1819,
+        "end": 1830
+      }
+    }
+  ]
+}

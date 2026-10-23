@@ -171,6 +171,24 @@ fn out_path(name: &str) -> PathBuf {
 }
 
 #[test]
+fn library_view_aliases() {
+    for (view, title) in [
+        ("modules", "Modules: Quill"),
+        ("types", "Types: Quill"),
+        ("packages", "Packages: Quill"),
+    ] {
+        let svg = out_path(&format!("quill-{view}.svg"));
+        saxl()
+            .args(["render", "examples/quill.saxl", "--view", view, "-o"])
+            .arg(&svg)
+            .assert()
+            .success();
+        let text = std::fs::read_to_string(&svg).unwrap();
+        assert!(text.contains(&format!("<title>{title}</title>")), "{view}");
+    }
+}
+
+#[test]
 fn render_formats() {
     let svg = out_path("containers.svg");
     saxl()

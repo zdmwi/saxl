@@ -73,7 +73,7 @@ impl SpanIndex {
     }
 
     fn spans_for(&self, id: &str, kind: NodeKind) -> Vec<Span> {
-        if kind == NodeKind::System {
+        if matches!(kind, NodeKind::System | NodeKind::Library) {
             return self.system.into_iter().collect();
         }
         if let Some(entity) = id.strip_prefix("data:") {

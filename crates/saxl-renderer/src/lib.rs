@@ -33,6 +33,7 @@ pub enum RenderError {
 /// Projects and lays out one view.
 pub fn scene(model: &ValidatedModel, view: &ViewKind) -> Result<Scene, RenderError> {
     let system = project::system_name(model.model());
+    let library = project::is_library(model.model());
     let mut scene = Scene {
         view: view.clone(),
         title: String::new(),
@@ -53,7 +54,8 @@ pub fn scene(model: &ValidatedModel, view: &ViewKind) -> Result<Scene, RenderErr
         ViewKind::Containers => {
             let p = project::containers(model);
             let l = layout::layered::layout(p.nodes, &p.edges);
-            scene.title = format!("Containers: {system}");
+            let name = if library { "Modules" } else { "Containers" };
+            scene.title = format!("{name}: {system}");
             (scene.nodes, scene.edges, scene.size) = (l.nodes, l.edges, l.size);
         }
         ViewKind::Runtime { scenario } => {
@@ -66,12 +68,18 @@ pub fn scene(model: &ValidatedModel, view: &ViewKind) -> Result<Scene, RenderErr
         }
         ViewKind::Data => {
             let l = layout::data::layout(project::data(model));
-            scene.title = format!("Data: {system}");
+            let name = if library { "Types" } else { "Data" };
+            scene.title = format!("{name}: {system}");
             (scene.nodes, scene.edges, scene.size) = (l.nodes, l.edges, l.size);
         }
         ViewKind::Deployment => {
-            let l = layout::deployment::layout(project::deployment(model));
-            scene.title = format!("Deployment: {system}");
+            let (name, regions) = if library {
+                ("Packages", project::packages(model))
+            } else {
+                ("Deployment", project::deployment(model))
+            };
+            let l = layout::deployment::layout(regions);
+            scene.title = format!("{name}: {system}");
             (scene.nodes, scene.groups, scene.size) = (l.nodes, l.groups, l.size);
         }
         ViewKind::Tower => {
@@ -89,7 +97,9 @@ pub fn scene(model: &ValidatedModel, view: &ViewKind) -> Result<Scene, RenderErr
 }
 
 /// Every view the model supports, in a fixed order: context, containers, one
-/// runtime view per scenario, data, deployment, tower.
+/// runtime view per scenario, data, deployment, tower. A library's
+/// containers, data, and deployment views are titled Modules, Types, and
+/// Packages.
 pub fn views(model: &ValidatedModel) -> Vec<ViewKind> {
     let mut views = vec![ViewKind::Context, ViewKind::Containers];
     views.extend(model.model().scenarios.iter().map(|s| ViewKind::Runtime {

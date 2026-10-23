@@ -1,10 +1,11 @@
 //! Runtime view: a sequence diagram. One column per participant in order of
 //! first appearance, one row per element-to-element hop. Rows in a `parallel`
-//! block share a playback slot and are bracketed by a group.
+//! block share a playback slot and are bracketed by a group. A hook's column
+//! is tinted: steps into it run code the library does not own.
 
 use crate::layout::{PAD, node_size, place};
 use crate::project::Runtime;
-use crate::scene::{GroupKind, Point2, Rect, SceneEdge, SceneGroup, SceneNode, Size2};
+use crate::scene::{GroupKind, NodeKind, Point2, Rect, SceneEdge, SceneGroup, SceneNode, Size2};
 
 /// Distance between participant columns.
 const COLUMN: f64 = 180.0;
@@ -68,7 +69,7 @@ pub(crate) fn layout(p: Runtime) -> Layout {
     }
 
     let width = center(ids.len().saturating_sub(1)) + widest / 2.0 + PAD + LOOP_W;
-    let groups = p
+    let mut groups: Vec<SceneGroup> = p
         .parallels
         .iter()
         .enumerate()
@@ -97,6 +98,26 @@ pub(crate) fn layout(p: Runtime) -> Layout {
     } else {
         row_y(p.rows.len() - 1) + ROW / 2.0 + PAD
     };
+    let zones = nodes
+        .iter()
+        .enumerate()
+        .filter(|(_, n)| n.kind == NodeKind::Hook)
+        .map(|(i, n)| SceneGroup {
+            id: format!("hook-{}", n.id),
+            kind: GroupKind::Hook,
+            // Unlabeled: a caption would collide with arrow labels, which
+            // sit at column boundaries.
+            label: String::new(),
+            rect: Rect::new(
+                center(i) - spacing / 2.0 + 8.0,
+                PAD / 2.0,
+                spacing - 16.0,
+                height - PAD,
+            ),
+            depth: 0,
+        })
+        .collect::<Vec<_>>();
+    groups.splice(0..0, zones);
     Layout {
         nodes,
         edges,
