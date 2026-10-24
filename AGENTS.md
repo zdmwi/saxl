@@ -53,6 +53,6 @@ Allowed Types:
 Rules for the agent:
 - Use imperative mood in the summary (e.g., "add feature" not "added feature").
 - Keep the first line under 72 characters.
-- Never include `Co-authored-by` or `Generated-by` AI trailers unless requested.
+- End every commit an AI agent helped write with a `Co-Authored-By` trailer naming the model, e.g. `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - Validate messages using: `echo "type(scope): description" | npx commitlint`.
 
