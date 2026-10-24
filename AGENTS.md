@@ -26,6 +26,13 @@ When you create a branch yourself rather than at a person's direction, prefix it
 your own agent name instead — `claude/`, `codex/`, `copilot/`, `cursor/`, or the
 vendor-neutral `ai/` — so the branch records who wrote it.
 
+## Updating branches
+
+Prefer rebasing over merging. To bring a branch up to date with `main`, run
+`git rebase origin/main` and push with `git push --force-with-lease`, instead of
+merging `main` into the branch. This keeps history linear and keeps merge commits
+out of pull requests.
+
 ## Commit Conventions
 Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for all git commit messages:
 
