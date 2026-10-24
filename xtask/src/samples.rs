@@ -1358,6 +1358,36 @@ mod tests {
         );
     }
 
+    /// The model as JSON with every span removed, so models compare by content.
+    fn shape(src: &str) -> serde_json::Value {
+        fn strip(v: &mut serde_json::Value) {
+            match v {
+                serde_json::Value::Object(map) => {
+                    map.remove("span");
+                    map.remove("code_span");
+                    map.values_mut().for_each(strip);
+                }
+                serde_json::Value::Array(items) => items.iter_mut().for_each(strip),
+                _ => {}
+            }
+        }
+        let mut v = serde_json::to_value(saxl_parser::parse(src, FileId(0)).model).unwrap();
+        strip(&mut v);
+        v
+    }
+
+    /// The samples cover every construct, so they exercise the formatter more
+    /// widely than the repository's own files. Training targets go through it.
+    #[test]
+    fn formatting_samples_keeps_the_model() {
+        for index in 0..2000 {
+            let sample = generate(11, index);
+            let once = saxl_parser::format(&sample.source).unwrap();
+            assert_eq!(saxl_parser::format(&once).unwrap(), once, "sample {index}");
+            assert_eq!(shape(&sample.source), shape(&once), "sample {index}");
+        }
+    }
+
     #[test]
     fn same_seed_same_file() {
         assert_eq!(generate(3, 41).source, generate(3, 41).source);

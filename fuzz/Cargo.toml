@@ -12,6 +12,7 @@ libfuzzer-sys = "0.4"
 saxl-core = { path = "../crates/saxl-core" }
 saxl-parser = { path = "../crates/saxl-parser" }
 saxl-validator = { path = "../crates/saxl-validator" }
+serde_json = "1"
 
 [[bin]]
 name = "parse"
@@ -23,6 +24,13 @@ bench = false
 [[bin]]
 name = "parse_validate"
 path = "fuzz_targets/parse_validate.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fmt_roundtrip"
+path = "fuzz_targets/fmt_roundtrip.rs"
 test = false
 doc = false
 bench = false
