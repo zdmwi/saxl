@@ -1,4 +1,4 @@
-//! E003: there must be exactly one `system` statement.
+//! E003: there must be exactly one `system` or `library` statement.
 
 use saxl_core::{Diagnostic, FileId, Severity, Span};
 
@@ -16,11 +16,11 @@ impl super::Rule for Rule {
     }
 
     fn summary(&self) -> &'static str {
-        "there must be exactly one `system` statement"
+        "there must be exactly one `system` or `library` statement"
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
-        match cx.model.systems.as_slice() {
+        match cx.model.roots.as_slice() {
             [] => {
                 let m = cx.model;
                 let file = m
@@ -35,27 +35,35 @@ impl super::Rule for Rule {
                 out.push(
                     Diagnostic::error(
                         "E003",
-                        "no `system` statement",
+                        "no `system` or `library` statement",
                         Span::new(file, 0, 0),
                         "file starts here",
                     )
                     .with_help(
-                        "add `system <Name> \"description\"` to name the system being described",
+                        "add `system <Name> \"description\"` or `library <Name> \"description\"` to name what the file describes",
                     ),
                 );
             }
             [_] => {}
             [first, rest @ ..] => {
-                for system in rest {
-                    out.push(
-                        Diagnostic::error(
-                            "E003",
-                            "more than one `system` statement",
-                            system.span,
-                            "second `system`",
+                let first_kw = first.kind.keyword();
+                for root in rest {
+                    let kw = root.kind.keyword();
+                    let (message, help) = if root.kind == first.kind {
+                        (
+                            format!("more than one `{kw}` statement"),
+                            format!("describe one {kw} per file"),
                         )
-                        .with_secondary(first.span, "first `system` here")
-                        .with_help("describe one system per file"),
+                    } else {
+                        (
+                            "both a `system` and a `library` statement".to_owned(),
+                            "describe the system and the library in separate files".to_owned(),
+                        )
+                    };
+                    out.push(
+                        Diagnostic::error("E003", message, root.span, format!("second `{kw}`"))
+                            .with_secondary(first.span, format!("first `{first_kw}` here"))
+                            .with_help(help),
                     );
                 }
             }

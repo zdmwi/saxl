@@ -1,0 +1,17 @@
+# expect: E009 @ 10:5
+# expect: E009 @ 15:12
+library Quill
+api parse
+module lexer
+parse -> lexer
+publish "crates.io" {
+  crate quill {
+    parse, lexer
+    parse
+  }
+}
+publish npm {
+  package "@quill/wasm" target wasm32 {
+    parse, lexer
+  }
+}

@@ -1,9 +1,9 @@
 //! Syntax tree to IR: expands relation chains, merges duplicate relations, and
-//! assembles deployment regions.
+//! assembles deployment regions and publish registries.
 
 use saxl_core::{
-    Allow, DataEntity, Element, Group, InfraKind, InfraNode, Model, Region, Relation, Scenario,
-    System, Workload,
+    Allow, DataEntity, Element, Group, Impl, InfraKind, InfraNode, Model, Package, Region,
+    Registry, Relation, Root, Scenario, Workload,
 };
 
 use crate::ast::{self, DeployItem, Stmt};
@@ -12,11 +12,13 @@ pub(crate) fn lower(stmts: Vec<Stmt>) -> Model {
     let mut model = Model::default();
     for stmt in stmts {
         match stmt {
-            Stmt::System {
+            Stmt::Root {
+                kind,
                 name,
                 description,
                 span,
-            } => model.systems.push(System {
+            } => model.roots.push(Root {
+                kind,
                 name: name.name(),
                 description,
                 span,
@@ -25,11 +27,22 @@ pub(crate) fn lower(stmts: Vec<Stmt>) -> Model {
                 kind,
                 name,
                 description,
+                at,
                 span,
             } => model.elements.push(Element {
                 name: name.name(),
                 kind,
                 description,
+                at,
+                span,
+            }),
+            Stmt::Impl {
+                implementor,
+                hook,
+                span,
+            } => model.impls.push(Impl {
+                implementor: implementor.name_ref(),
+                hook: hook.name_ref(),
                 span,
             }),
             Stmt::Relation {
@@ -57,6 +70,7 @@ pub(crate) fn lower(stmts: Vec<Stmt>) -> Model {
                 name,
                 placement,
                 fields,
+                public,
                 span,
             } => model.data.push(DataEntity {
                 name: name.name(),
@@ -71,6 +85,7 @@ pub(crate) fn lower(stmts: Vec<Stmt>) -> Model {
                     },
                 },
                 fields: fields.iter().map(ast::Ident::name).collect(),
+                public,
                 span,
             }),
             Stmt::Deploy { name, items, span } => {
@@ -102,6 +117,24 @@ pub(crate) fn lower(stmts: Vec<Stmt>) -> Model {
                 }
                 model.regions.push(region);
             }
+            Stmt::Publish {
+                name,
+                packages,
+                span,
+            } => model.registries.push(Registry {
+                name: name.name(),
+                packages: packages
+                    .into_iter()
+                    .map(|p| Package {
+                        kind: p.kind,
+                        name: p.name.name(),
+                        target: p.target.as_ref().map(ast::Ident::name),
+                        workloads: p.workloads.into_iter().map(lower_workload).collect(),
+                        span: p.span,
+                    })
+                    .collect(),
+                span,
+            }),
             Stmt::Scenario { name, steps, span } => model.scenarios.push(Scenario {
                 name: name.name(),
                 steps: steps.into_iter().map(lower_step).collect(),

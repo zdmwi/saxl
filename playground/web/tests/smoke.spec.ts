@@ -45,3 +45,15 @@ test("explain a diagnostic", async ({ page }) => {
   await expect(page.locator("dialog.explain h2")).toHaveText("W104");
   await expect(page.locator("dialog.explain pre")).toContainText("# W104:");
 });
+
+test("load the library example", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".viewer-pane")).toHaveAttribute("data-state", "fresh");
+  await page.getByLabel("Example").selectOption({ label: "Quill (Markdown library)" });
+
+  // Quill's 9 apis and modules hang in the tower, with library view names.
+  await expect(page.locator(".saxl-stage")).toHaveAttribute("data-containers", "9");
+  await expect(page.locator(".diags li.empty")).toHaveText("No problems.");
+  await expect(page.locator(".saxl-bar button", { hasText: "Modules" })).toBeVisible();
+  await expect(page.locator(".saxl-bar button", { hasText: "Packages" })).toBeVisible();
+});

@@ -1,0 +1,17 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e004_library_outside.saxl
+---
+E004
+
+  × relation connects two elements outside the library
+   ╭─[tests/fixtures/invalid/validate/e004_library_outside.saxl:5:1]
+ 4 │ package unicode
+ 5 │ App -> unicode
+   · ───────┬──────
+   ·        ╰── `App` (consumer) and `unicode` (package) are both outside the library
+   ╰────
+  help: a relation needs at least one api or module inside the library
+
+checked 1 file: 1 error, 0 warnings, 0 infos

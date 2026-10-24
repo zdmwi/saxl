@@ -4625,6 +4625,7 @@ expression: "saxl_renderer::to_json(&scene)"
     ],
     "boundary": {
       "label": "Shopfront",
+      "kind": "system",
       "min": {
         "x": -13.2,
         "y": 6.6,

@@ -3,4 +3,4 @@
 /**
  * What a group box depicts.
  */
-export type GroupKind = "region" | "cluster" | "managed" | "parallel";
+export type GroupKind = "region" | "cluster" | "managed" | "parallel" | "registry" | "package" | "hook";

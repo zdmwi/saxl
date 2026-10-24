@@ -35,23 +35,29 @@ export const CSS = `
 .saxl-viewer .node-service{color:var(--saxl-service)}
 .saxl-viewer .node-store{color:var(--saxl-store)}
 .saxl-viewer .node-queue{color:var(--saxl-event)}
+.saxl-viewer .node-api,.saxl-viewer .node-module,.saxl-viewer .node-library{color:var(--saxl-service)}
+.saxl-viewer .node-hook{color:var(--saxl-request)}
 .saxl-viewer .node .base{fill:var(--saxl-bg)}
 .saxl-viewer .node .tint{fill:currentColor;fill-opacity:.1;stroke:currentColor;stroke-width:1.5}
 .saxl-viewer .node:hover .tint{fill-opacity:.18}
 .saxl-viewer .node .rim{fill:none;stroke:currentColor;stroke-width:1.5}
 .saxl-viewer .node.selected .tint,.saxl-viewer .node.selected .rim{stroke-width:3}
-.saxl-viewer .node-external .tint,.saxl-viewer .node-infra .tint{stroke-dasharray:5 3}
-.saxl-viewer .node-system .tint{fill-opacity:.05;stroke-width:2}
+.saxl-viewer .node-external .tint,.saxl-viewer .node-infra .tint,.saxl-viewer .node-package .tint{stroke-dasharray:5 3}
+.saxl-viewer .node-system .tint,.saxl-viewer .node-library .tint{fill-opacity:.05;stroke-width:2}
+.saxl-viewer .node-api .tint{stroke-width:2.5;fill-opacity:.16}
 .saxl-viewer .edge{fill:none;stroke:var(--saxl-muted);stroke-width:1.5}
 .saxl-viewer .edge-async{stroke:var(--saxl-event);stroke-dasharray:6 4}
 .saxl-viewer .edge-reply{stroke-dasharray:2 4;opacity:.75}
+.saxl-viewer .edge-impl{stroke:var(--saxl-request);stroke-dasharray:6 4}
 .saxl-viewer .edge-label{paint-order:stroke;stroke:var(--saxl-bg);stroke-width:4px}
 .saxl-viewer .lifeline{stroke:var(--saxl-structure);stroke-dasharray:4 4;opacity:.6}
 .saxl-viewer .group rect{fill:none;stroke:var(--saxl-structure);stroke-width:1.2}
-.saxl-viewer .group-cluster rect,.saxl-viewer .group-managed rect{stroke-dasharray:6 3}
+.saxl-viewer .group-cluster rect,.saxl-viewer .group-managed rect,.saxl-viewer .group-package rect{stroke-dasharray:6 3}
+.saxl-viewer .group-hook rect{stroke:none;fill:var(--saxl-request);fill-opacity:.07}
 .saxl-viewer .group-parallel rect{stroke:var(--saxl-request);fill:var(--saxl-request);fill-opacity:.06}
 .saxl-viewer .arrow-sync,.saxl-viewer .arrow-reply{fill:var(--saxl-muted)}
 .saxl-viewer .arrow-async{fill:var(--saxl-event)}
+.saxl-viewer .arrow-impl{fill:var(--saxl-bg);stroke:var(--saxl-request)}
 .saxl-viewer.dimmed .saxl-stage{opacity:.45}
 .saxl-viewer .marker circle{fill:var(--saxl-request);stroke:var(--saxl-bg);stroke-width:2}
 .saxl-viewer .marker text{fill:#151a22;font-size:12px;font-weight:700}

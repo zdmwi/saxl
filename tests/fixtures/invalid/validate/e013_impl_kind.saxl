@@ -1,0 +1,14 @@
+# expect: E013 @ 12:12
+# expect: E013 @ 13:1
+# expect: E013 @ 13:14
+library Quill
+consumer App
+package unicode
+api parse
+module ast
+parse -> ast
+parse -> unicode
+App -> parse
+parse impl ast
+unicode impl ast
+allow W110 "fixture"

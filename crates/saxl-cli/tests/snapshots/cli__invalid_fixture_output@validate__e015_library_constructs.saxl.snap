@@ -1,0 +1,54 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e015_library_constructs.saxl
+---
+E015
+
+  × `service` is not allowed in a library
+   ╭─[tests/fixtures/invalid/validate/e015_library_constructs.saxl:7:1]
+ 6 │ api parse
+ 7 │ service Worker
+   · ───────┬──────
+   ·        ╰── `Worker` is a service
+ 8 │ hook Highlighter at "src/hl.rs"
+   ╰────
+  help: a library uses `consumer`, `package`, `api`, `module`, and `hook`
+
+E015
+
+  × `at` is not allowed on a hook
+   ╭─[tests/fixtures/invalid/validate/e015_library_constructs.saxl:8:21]
+ 7 │ service Worker
+ 8 │ hook Highlighter at "src/hl.rs"
+   ·                     ─────┬─────
+   ·                          ╰── `Highlighter` has no code in this library
+ 9 │ parse -> Worker
+   ╰────
+  help: only an api or a module says where its code lives
+
+E015
+
+  × `deploy` is not allowed in a library
+    ╭─[tests/fixtures/invalid/validate/e015_library_constructs.saxl:11:1]
+ 10 │ parse -> Highlighter
+ 11 │ deploy region eu {
+    · ───┬──
+    ·    ╰── a library is published, not deployed
+ 12 │   cluster main {
+    ╰────
+  help: list the library's packages in a `publish` block instead
+
+E015
+
+  × `x2` is not allowed in a `publish` block
+    ╭─[tests/fixtures/invalid/validate/e015_library_constructs.saxl:18:11]
+ 17 │   crate quill {
+ 18 │     parse x2
+    ·           ─┬
+    ·            ╰── a deployment attribute
+ 19 │   }
+    ╰────
+  help: `publish` workloads take only `feature <name>`
+
+checked 1 file: 4 errors, 0 warnings, 0 infos

@@ -34,6 +34,71 @@ fn snip_scene_snapshots() {
 }
 
 #[test]
+fn quill_scene_snapshots() {
+    let m = model(include_str!("../../../examples/quill.saxl"));
+    for view in saxl_renderer::views(&m) {
+        let scene = saxl_renderer::scene(&m, &view).unwrap();
+        insta::assert_snapshot!(
+            format!("quill-scene-{}", view.slug()),
+            saxl_renderer::to_json(&scene)
+        );
+        if view != ViewKind::Tower {
+            insta::assert_snapshot!(
+                format!("quill-svg-{}", view.slug()),
+                saxl_renderer::to_svg(&scene).unwrap()
+            );
+        }
+    }
+}
+
+#[test]
+fn quill_tower_puts_hooks_outside_the_library() {
+    use saxl_renderer::NodeKind;
+    let m = model(include_str!("../../../examples/quill.saxl"));
+    let scene = saxl_renderer::scene(&m, &ViewKind::Tower).unwrap();
+    let tower = scene.tower.unwrap();
+    assert_eq!(tower.boundary.kind, NodeKind::Library);
+    let tiers: Vec<_> = tower.tiers.iter().map(|t| t.label.as_str()).collect();
+    assert_eq!(tiers, ["crate quill"]);
+    let hooks: Vec<_> = tower
+        .outside
+        .iter()
+        .filter(|b| b.kind == NodeKind::Hook)
+        .collect();
+    assert_eq!(hooks.len(), 2);
+    for hook in hooks {
+        assert!(hook.center.x > tower.boundary.max.x, "{}", hook.id);
+    }
+    // Scenario steps into a hook follow a pipe out to it.
+    for hook in ["Extension", "Highlighter"] {
+        assert!(tower.pipes.iter().any(|p| p.to == hook), "{hook}");
+    }
+    // `parse` ships in both packages, so it has a pod on each registry's plate.
+    let pods = tower.pods.iter().filter(|p| p.element == "parse").count();
+    assert_eq!(pods, 2);
+}
+
+#[test]
+fn library_views_have_library_titles() {
+    let m = model(include_str!("../../../examples/quill.saxl"));
+    let titles: Vec<_> = saxl_renderer::scenes(&m)
+        .into_iter()
+        .map(|s| s.title)
+        .collect();
+    assert_eq!(
+        titles,
+        [
+            "Context: Quill",
+            "Modules: Quill",
+            "Runtime: render_note",
+            "Types: Quill",
+            "Packages: Quill",
+            "Tower: Quill"
+        ]
+    );
+}
+
+#[test]
 fn every_view_is_rendered() {
     let scenes = saxl_renderer::scenes(&snip());
     let slugs: Vec<_> = scenes.iter().map(|s| s.view.slug()).collect();

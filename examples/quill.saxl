@@ -1,0 +1,69 @@
+# Quill: toy Markdown library
+library Quill "Markdown to HTML"
+
+consumer SiteGen "static sites"
+consumer Editor  "live preview"
+package  unicode "segmentation"
+package  syntect "highlighting"
+
+api    parse       "text → Doc"      at "src/parse.rs"
+api    to_html     "text → HTML"     at "src/render.rs"
+module lexer       "line tokens"     at "src/lexer.rs"
+module blocks      "block structure" at "src/blocks/**"
+module inlines     "emphasis, links" at "src/inlines.rs"
+module ast         "Doc tree"        at "src/ast.rs"
+module html        "HTML writer"     at "src/html.rs"
+module escape      "entities"        at "src/escape.rs"
+module highlight   "syntect adapter" at "src/highlight.rs"
+hook   Extension   "custom blocks"
+hook   Highlighter "colors code"
+
+SiteGen   -> parse
+SiteGen   -> to_html
+Editor    ~> to_html
+to_html   -> parse
+parse     -> lexer
+parse     -> blocks -> inlines -> unicode
+blocks    -> ast
+blocks    -> Extension
+to_html   -> html -> escape
+html      -> ast
+html      -> Highlighter
+highlight -> syntect
+highlight impl Highlighter
+Editor    impl Highlighter
+
+data Doc     in ast pub     { blocks, footnotes }
+data Block   in ast pub     { kind, children, span }
+data Token   in lexer       { kind, text, line }
+data Options in to_html pub { tables, footnotes, highlighter }
+
+publish "crates.io" {
+  crate quill {
+    parse, to_html, lexer, blocks, inlines, ast, html, escape
+    highlight feature syntect
+  }
+}
+
+publish npm {
+  package "@quill/wasm" target wasm32 {
+    parse, to_html
+  }
+}
+
+scenario render_note {
+  SiteGen -> to_html : markdown
+  to_html -> parse : src
+  parse -> blocks
+  blocks -> Extension : note fence
+  Extension --> blocks : Block::Note
+  blocks --> parse : Doc
+  parse --> to_html : Doc
+  to_html -> html : walk Doc
+  html -> Highlighter : rust code block
+  Highlighter --> html : spans
+  html --> to_html : String
+  to_html --> SiteGen : HTML
+}
+
+allow I202 "extensions are opt-in"

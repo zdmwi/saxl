@@ -1,0 +1,21 @@
+# expect: E015 @ 7:1
+# expect: E015 @ 8:21
+# expect: E015 @ 11:1
+# expect: E015 @ 18:11
+library Quill
+api parse
+service Worker
+hook Highlighter at "src/hl.rs"
+parse -> Worker
+parse -> Highlighter
+deploy region eu {
+  cluster main {
+    parse
+  }
+}
+publish "crates.io" {
+  crate quill {
+    parse x2
+  }
+}
+allow I202 "fixture"

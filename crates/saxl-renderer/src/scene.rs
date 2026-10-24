@@ -193,16 +193,47 @@ pub enum NodeKind {
     DataCard,
     /// A region or group slab in the tower's floor.
     Floor,
+    /// Code that calls a library.
+    Consumer,
+    /// A library's third-party dependency.
+    Package,
+    /// A library's public entry point.
+    Api,
+    /// A library's internal component.
+    Module,
+    /// An interface a library calls and others implement.
+    Hook,
+    /// The whole library, in the context view.
+    Library,
+}
+
+impl NodeKind {
+    /// Kinds the layered layout pins to its first layer: callers from outside.
+    pub fn is_source(self) -> bool {
+        matches!(self, Self::Actor | Self::Consumer)
+    }
+
+    /// Kinds the layered layout pins to its last layer: things called from
+    /// inside that live outside.
+    pub fn is_sink(self) -> bool {
+        matches!(self, Self::External | Self::Package | Self::Hook)
+    }
 }
 
 impl From<saxl_core::ElementKind> for NodeKind {
     fn from(kind: saxl_core::ElementKind) -> Self {
+        use saxl_core::ElementKind as K;
         match kind {
-            saxl_core::ElementKind::Actor => Self::Actor,
-            saxl_core::ElementKind::External => Self::External,
-            saxl_core::ElementKind::Service => Self::Service,
-            saxl_core::ElementKind::Store => Self::Store,
-            saxl_core::ElementKind::Queue => Self::Queue,
+            K::Actor => Self::Actor,
+            K::External => Self::External,
+            K::Service => Self::Service,
+            K::Store => Self::Store,
+            K::Queue => Self::Queue,
+            K::Consumer => Self::Consumer,
+            K::Package => Self::Package,
+            K::Api => Self::Api,
+            K::Module => Self::Module,
+            K::Hook => Self::Hook,
         }
     }
 }
@@ -241,6 +272,8 @@ pub enum EdgeStyle {
     Async,
     /// A reply (dotted).
     Reply,
+    /// An implementation of a hook (dashed, hollow arrowhead).
+    Impl,
 }
 
 impl From<saxl_core::Style> for EdgeStyle {
@@ -291,6 +324,12 @@ pub enum GroupKind {
     Managed,
     /// A `parallel` block in the runtime view.
     Parallel,
+    /// A registry in a library's packages view.
+    Registry,
+    /// A published package.
+    Package,
+    /// A hook's column in the runtime view: code the library does not own.
+    Hook,
 }
 
 /// A labeled box drawn behind nodes.
@@ -531,8 +570,10 @@ pub struct Trunk {
 #[derive(Debug, Clone, PartialEq, Serialize)]
 #[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 pub struct Boundary {
-    /// The system's name.
+    /// The system's or library's name.
     pub label: String,
+    /// `system` or `library`.
+    pub kind: NodeKind,
     /// Lower corner.
     pub min: Point3,
     /// Upper corner.

@@ -1,0 +1,2258 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "tower"
+  },
+  "title": "Tower: Quill",
+  "size": {
+    "w": 0.0,
+    "h": 0.0
+  },
+  "nodes": [],
+  "edges": [],
+  "groups": [],
+  "tower": {
+    "slabs": [
+      {
+        "id": "registry:crates.io",
+        "kind": "floor",
+        "center": {
+          "x": 0.0,
+          "y": -0.25,
+          "z": 0.0
+        },
+        "size": {
+          "x": 16.72,
+          "y": 0.5,
+          "z": 13.68
+        },
+        "label": "crates.io",
+        "sublabel": "registry"
+      },
+      {
+        "id": "package:crates.io/crate quill",
+        "kind": "floor",
+        "center": {
+          "x": 0.0,
+          "y": 0.11,
+          "z": 0.0
+        },
+        "size": {
+          "x": 13.0,
+          "y": 0.22,
+          "z": 10.8
+        },
+        "label": "crate quill",
+        "sublabel": "package"
+      },
+      {
+        "id": "registry:npm",
+        "kind": "floor",
+        "center": {
+          "x": 18.72,
+          "y": -0.25,
+          "z": 0.0
+        },
+        "size": {
+          "x": 16.72,
+          "y": 0.5,
+          "z": 13.68
+        },
+        "label": "npm",
+        "sublabel": "registry"
+      },
+      {
+        "id": "package:npm/package @quill/wasm",
+        "kind": "floor",
+        "center": {
+          "x": 18.72,
+          "y": 0.11,
+          "z": 0.0
+        },
+        "size": {
+          "x": 13.0,
+          "y": 0.22,
+          "z": 10.8
+        },
+        "label": "package @quill/wasm",
+        "sublabel": "package"
+      }
+    ],
+    "labels": [
+      {
+        "text": "CRATES.IO · REGISTRY",
+        "position": {
+          "x": -7.86,
+          "y": 0.0,
+          "z": 6.59
+        }
+      },
+      {
+        "text": "CRATE QUILL",
+        "position": {
+          "x": -6.1,
+          "y": 0.0,
+          "z": 4.9
+        }
+      },
+      {
+        "text": "NPM · REGISTRY",
+        "position": {
+          "x": 10.86,
+          "y": 0.0,
+          "z": 6.59
+        }
+      },
+      {
+        "text": "PACKAGE @QUILL/WASM",
+        "position": {
+          "x": 12.62,
+          "y": 0.0,
+          "z": 4.9
+        }
+      }
+    ],
+    "pods": [
+      {
+        "element": "parse",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/parse",
+          "kind": "api",
+          "center": {
+            "x": -4.4,
+            "y": 0.35,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "parse",
+        "managed": false,
+        "geometry": {
+          "id": "pod:npm/@quill/wasm/parse",
+          "kind": "api",
+          "center": {
+            "x": 14.32,
+            "y": 0.35,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "to_html",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/to_html",
+          "kind": "api",
+          "center": {
+            "x": -4.4,
+            "y": 0.35,
+            "z": 0.0
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "to_html",
+        "managed": false,
+        "geometry": {
+          "id": "pod:npm/@quill/wasm/to_html",
+          "kind": "api",
+          "center": {
+            "x": 14.32,
+            "y": 0.35,
+            "z": 0.0
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "lexer",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/lexer",
+          "kind": "module",
+          "center": {
+            "x": -4.4,
+            "y": 0.35,
+            "z": 3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "blocks",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/blocks",
+          "kind": "module",
+          "center": {
+            "x": 0.0,
+            "y": 0.35,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "inlines",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/inlines",
+          "kind": "module",
+          "center": {
+            "x": 0.0,
+            "y": 0.35,
+            "z": 0.0
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "ast",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/ast",
+          "kind": "module",
+          "center": {
+            "x": 0.0,
+            "y": 0.35,
+            "z": 3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "html",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/html",
+          "kind": "module",
+          "center": {
+            "x": 4.4,
+            "y": 0.35,
+            "z": -3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "escape",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/escape",
+          "kind": "module",
+          "center": {
+            "x": 4.4,
+            "y": 0.35,
+            "z": 0.0
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      },
+      {
+        "element": "highlight",
+        "managed": false,
+        "geometry": {
+          "id": "pod:crates.io/quill/highlight",
+          "kind": "module",
+          "center": {
+            "x": 4.4,
+            "y": 0.35,
+            "z": 3.6
+          },
+          "size": {
+            "x": 0.7,
+            "y": 0.7,
+            "z": 0.7
+          },
+          "label": null,
+          "sublabel": null
+        }
+      }
+    ],
+    "tags": [
+      {
+        "element": "highlight",
+        "text": "feature syntect",
+        "position": {
+          "x": 4.4,
+          "y": 0.05,
+          "z": 4.45
+        }
+      }
+    ],
+    "infra": [],
+    "level": 7.0,
+    "tiers": [
+      {
+        "id": "crate quill",
+        "label": "crate quill",
+        "min": {
+          "x": -6.45,
+          "y": 6.95,
+          "z": -5.25
+        },
+        "max": {
+          "x": 6.45,
+          "y": 6.95,
+          "z": 5.25
+        }
+      }
+    ],
+    "containers": [
+      {
+        "id": "parse",
+        "kind": "api",
+        "center": {
+          "x": -4.4,
+          "y": 7.5,
+          "z": -3.6
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "parse",
+        "sublabel": "text → Doc"
+      },
+      {
+        "id": "to_html",
+        "kind": "api",
+        "center": {
+          "x": -4.4,
+          "y": 7.5,
+          "z": 0.0
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "to_html",
+        "sublabel": "text → HTML"
+      },
+      {
+        "id": "lexer",
+        "kind": "module",
+        "center": {
+          "x": -4.4,
+          "y": 7.5,
+          "z": 3.6
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "lexer",
+        "sublabel": "line tokens"
+      },
+      {
+        "id": "blocks",
+        "kind": "module",
+        "center": {
+          "x": 0.0,
+          "y": 7.5,
+          "z": -3.6
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "blocks",
+        "sublabel": "block structure"
+      },
+      {
+        "id": "inlines",
+        "kind": "module",
+        "center": {
+          "x": 0.0,
+          "y": 7.5,
+          "z": 0.0
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "inlines",
+        "sublabel": "emphasis, links"
+      },
+      {
+        "id": "ast",
+        "kind": "module",
+        "center": {
+          "x": 0.0,
+          "y": 7.5,
+          "z": 3.6
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "ast",
+        "sublabel": "Doc tree"
+      },
+      {
+        "id": "html",
+        "kind": "module",
+        "center": {
+          "x": 4.4,
+          "y": 7.5,
+          "z": -3.6
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "html",
+        "sublabel": "HTML writer"
+      },
+      {
+        "id": "escape",
+        "kind": "module",
+        "center": {
+          "x": 4.4,
+          "y": 7.5,
+          "z": 0.0
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "escape",
+        "sublabel": "entities"
+      },
+      {
+        "id": "highlight",
+        "kind": "module",
+        "center": {
+          "x": 4.4,
+          "y": 7.5,
+          "z": 3.6
+        },
+        "size": {
+          "x": 2.8,
+          "y": 1.0,
+          "z": 1.6
+        },
+        "label": "highlight",
+        "sublabel": "syntect adapter"
+      }
+    ],
+    "outside": [
+      {
+        "id": "SiteGen",
+        "kind": "consumer",
+        "center": {
+          "x": -8.8,
+          "y": 7.73,
+          "z": 0.0
+        },
+        "size": {
+          "x": 1.5,
+          "y": 1.45,
+          "z": 1.5
+        },
+        "label": "SiteGen",
+        "sublabel": "static sites"
+      },
+      {
+        "id": "Editor",
+        "kind": "consumer",
+        "center": {
+          "x": -8.8,
+          "y": 7.73,
+          "z": 3.6
+        },
+        "size": {
+          "x": 1.5,
+          "y": 1.45,
+          "z": 1.5
+        },
+        "label": "Editor",
+        "sublabel": "live preview"
+      },
+      {
+        "id": "unicode",
+        "kind": "package",
+        "center": {
+          "x": 8.8,
+          "y": 7.5,
+          "z": 0.0
+        },
+        "size": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 1.2
+        },
+        "label": "unicode",
+        "sublabel": "segmentation"
+      },
+      {
+        "id": "syntect",
+        "kind": "package",
+        "center": {
+          "x": 8.8,
+          "y": 7.5,
+          "z": 3.6
+        },
+        "size": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 1.2
+        },
+        "label": "syntect",
+        "sublabel": "highlighting"
+      },
+      {
+        "id": "Extension",
+        "kind": "hook",
+        "center": {
+          "x": 8.8,
+          "y": 7.5,
+          "z": -3.6
+        },
+        "size": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 1.2
+        },
+        "label": "Extension",
+        "sublabel": "custom blocks"
+      },
+      {
+        "id": "Highlighter",
+        "kind": "hook",
+        "center": {
+          "x": 8.8,
+          "y": 7.5,
+          "z": -7.2
+        },
+        "size": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 1.2
+        },
+        "label": "Highlighter",
+        "sublabel": "colors code"
+      }
+    ],
+    "leaders": [
+      {
+        "element": "parse",
+        "from": {
+          "x": -4.4,
+          "y": 0.7,
+          "z": -3.6
+        },
+        "to": {
+          "x": -4.4,
+          "y": 7.0,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "parse",
+        "from": {
+          "x": 14.32,
+          "y": 0.7,
+          "z": -3.6
+        },
+        "to": {
+          "x": -4.4,
+          "y": 7.0,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "to_html",
+        "from": {
+          "x": -4.4,
+          "y": 0.7,
+          "z": 0.0
+        },
+        "to": {
+          "x": -4.4,
+          "y": 7.0,
+          "z": 0.0
+        }
+      },
+      {
+        "element": "to_html",
+        "from": {
+          "x": 14.32,
+          "y": 0.7,
+          "z": 0.0
+        },
+        "to": {
+          "x": -4.4,
+          "y": 7.0,
+          "z": 0.0
+        }
+      },
+      {
+        "element": "lexer",
+        "from": {
+          "x": -4.4,
+          "y": 0.7,
+          "z": 3.6
+        },
+        "to": {
+          "x": -4.4,
+          "y": 7.0,
+          "z": 3.6
+        }
+      },
+      {
+        "element": "blocks",
+        "from": {
+          "x": 0.0,
+          "y": 0.7,
+          "z": -3.6
+        },
+        "to": {
+          "x": 0.0,
+          "y": 7.0,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "inlines",
+        "from": {
+          "x": 0.0,
+          "y": 0.7,
+          "z": 0.0
+        },
+        "to": {
+          "x": 0.0,
+          "y": 7.0,
+          "z": 0.0
+        }
+      },
+      {
+        "element": "ast",
+        "from": {
+          "x": 0.0,
+          "y": 0.7,
+          "z": 3.6
+        },
+        "to": {
+          "x": 0.0,
+          "y": 7.0,
+          "z": 3.6
+        }
+      },
+      {
+        "element": "html",
+        "from": {
+          "x": 4.4,
+          "y": 0.7,
+          "z": -3.6
+        },
+        "to": {
+          "x": 4.4,
+          "y": 7.0,
+          "z": -3.6
+        }
+      },
+      {
+        "element": "escape",
+        "from": {
+          "x": 4.4,
+          "y": 0.7,
+          "z": 0.0
+        },
+        "to": {
+          "x": 4.4,
+          "y": 7.0,
+          "z": 0.0
+        }
+      },
+      {
+        "element": "highlight",
+        "from": {
+          "x": 4.4,
+          "y": 0.7,
+          "z": 3.6
+        },
+        "to": {
+          "x": 4.4,
+          "y": 7.0,
+          "z": 3.6
+        }
+      }
+    ],
+    "pipes": [
+      {
+        "id": "SiteGen>parse",
+        "from": "SiteGen",
+        "to": "parse",
+        "async": false,
+        "points": [
+          {
+            "x": -8.5,
+            "y": 7.5,
+            "z": -0.25
+          },
+          {
+            "x": -6.6,
+            "y": 7.5,
+            "z": -0.25
+          },
+          {
+            "x": -6.6,
+            "y": 7.5,
+            "z": -1.8
+          },
+          {
+            "x": -5.04,
+            "y": 7.5,
+            "z": -1.8
+          },
+          {
+            "x": -5.04,
+            "y": 7.5,
+            "z": -2.8
+          }
+        ],
+        "route": [
+          {
+            "x": -8.5,
+            "y": 7.5,
+            "z": -0.25
+          },
+          {
+            "x": -6.6,
+            "y": 7.5,
+            "z": -0.25
+          },
+          {
+            "x": -6.6,
+            "y": 7.5,
+            "z": -1.8
+          },
+          {
+            "x": -5.04,
+            "y": 7.5,
+            "z": -1.8
+          },
+          {
+            "x": -5.04,
+            "y": 7.5,
+            "z": -2.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "SiteGen>to_html",
+        "from": "SiteGen",
+        "to": "to_html",
+        "async": false,
+        "points": [
+          {
+            "x": -8.5,
+            "y": 7.3,
+            "z": 0.0
+          },
+          {
+            "x": -5.8,
+            "y": 7.3,
+            "z": 0.0
+          }
+        ],
+        "route": [
+          {
+            "x": -8.5,
+            "y": 7.3,
+            "z": 0.0
+          },
+          {
+            "x": -5.8,
+            "y": 7.3,
+            "z": 0.0
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "Editor>to_html",
+        "from": "Editor",
+        "to": "to_html",
+        "async": true,
+        "points": [
+          {
+            "x": -8.5,
+            "y": 7.3,
+            "z": 3.44
+          },
+          {
+            "x": -6.6,
+            "y": 7.3,
+            "z": 3.44
+          },
+          {
+            "x": -6.6,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": 0.8
+          }
+        ],
+        "route": [
+          {
+            "x": -8.5,
+            "y": 7.3,
+            "z": 3.44
+          },
+          {
+            "x": -6.6,
+            "y": 7.3,
+            "z": 3.44
+          },
+          {
+            "x": -6.6,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": 0.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "to_html>parse",
+        "from": "to_html",
+        "to": "parse",
+        "async": false,
+        "points": [
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": -0.8
+          },
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": -2.8
+          }
+        ],
+        "route": [
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": -0.8
+          },
+          {
+            "x": -4.72,
+            "y": 7.3,
+            "z": -2.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "parse>lexer",
+        "from": "parse",
+        "to": "lexer",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 7.3,
+            "z": -2.8
+          },
+          {
+            "x": -4.4,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": -2.2,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": -2.2,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": -4.4,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": -4.4,
+            "y": 7.3,
+            "z": 2.8
+          }
+        ],
+        "route": [
+          {
+            "x": -4.4,
+            "y": 7.3,
+            "z": -2.8
+          },
+          {
+            "x": -4.4,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": -2.2,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": -2.2,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": -4.4,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": -4.4,
+            "y": 7.3,
+            "z": 2.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "parse>blocks",
+        "from": "parse",
+        "to": "blocks",
+        "async": false,
+        "points": [
+          {
+            "x": -3.0,
+            "y": 7.3,
+            "z": -3.6
+          },
+          {
+            "x": -1.4,
+            "y": 7.3,
+            "z": -3.6
+          }
+        ],
+        "route": [
+          {
+            "x": -3.0,
+            "y": 7.3,
+            "z": -3.6
+          },
+          {
+            "x": -1.4,
+            "y": 7.3,
+            "z": -3.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "blocks>inlines",
+        "from": "blocks",
+        "to": "inlines",
+        "async": false,
+        "points": [
+          {
+            "x": -0.32,
+            "y": 7.3,
+            "z": -2.8
+          },
+          {
+            "x": -0.32,
+            "y": 7.3,
+            "z": -0.8
+          }
+        ],
+        "route": [
+          {
+            "x": -0.32,
+            "y": 7.3,
+            "z": -2.8
+          },
+          {
+            "x": -0.32,
+            "y": 7.3,
+            "z": -0.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "inlines>unicode",
+        "from": "inlines",
+        "to": "unicode",
+        "async": false,
+        "points": [
+          {
+            "x": 0.0,
+            "y": 7.7,
+            "z": 0.8
+          },
+          {
+            "x": 0.0,
+            "y": 7.7,
+            "z": 1.8
+          },
+          {
+            "x": 8.8,
+            "y": 7.7,
+            "z": 1.8
+          },
+          {
+            "x": 8.8,
+            "y": 7.7,
+            "z": 0.6
+          }
+        ],
+        "route": [
+          {
+            "x": 0.0,
+            "y": 7.7,
+            "z": 0.8
+          },
+          {
+            "x": 0.0,
+            "y": 7.7,
+            "z": 1.8
+          },
+          {
+            "x": 8.8,
+            "y": 7.7,
+            "z": 1.8
+          },
+          {
+            "x": 8.8,
+            "y": 7.7,
+            "z": 0.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "blocks>ast",
+        "from": "blocks",
+        "to": "ast",
+        "async": false,
+        "points": [
+          {
+            "x": 0.0,
+            "y": 7.3,
+            "z": -2.8
+          },
+          {
+            "x": 0.0,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": 0.0,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": 0.0,
+            "y": 7.3,
+            "z": 2.8
+          }
+        ],
+        "route": [
+          {
+            "x": 0.0,
+            "y": 7.3,
+            "z": -2.8
+          },
+          {
+            "x": 0.0,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": -1.8
+          },
+          {
+            "x": 2.2,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": 0.0,
+            "y": 7.3,
+            "z": 1.8
+          },
+          {
+            "x": 0.0,
+            "y": 7.3,
+            "z": 2.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "blocks>Extension",
+        "from": "blocks",
+        "to": "Extension",
+        "async": false,
+        "points": [
+          {
+            "x": 0.32,
+            "y": 7.6,
+            "z": -2.8
+          },
+          {
+            "x": 0.32,
+            "y": 7.6,
+            "z": -2.12
+          },
+          {
+            "x": 0.32,
+            "y": 8.7,
+            "z": -2.12
+          },
+          {
+            "x": 9.12,
+            "y": 8.7,
+            "z": -2.12
+          },
+          {
+            "x": 9.12,
+            "y": 7.6,
+            "z": -2.12
+          },
+          {
+            "x": 9.12,
+            "y": 7.6,
+            "z": -3.0
+          }
+        ],
+        "route": [
+          {
+            "x": 0.32,
+            "y": 7.6,
+            "z": -2.8
+          },
+          {
+            "x": 0.32,
+            "y": 7.6,
+            "z": -2.12
+          },
+          {
+            "x": 0.32,
+            "y": 8.7,
+            "z": -2.12
+          },
+          {
+            "x": 9.12,
+            "y": 8.7,
+            "z": -2.12
+          },
+          {
+            "x": 9.12,
+            "y": 7.6,
+            "z": -2.12
+          },
+          {
+            "x": 9.12,
+            "y": 7.6,
+            "z": -3.0
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "to_html>html",
+        "from": "to_html",
+        "to": "html",
+        "async": false,
+        "points": [
+          {
+            "x": -4.4,
+            "y": 7.7,
+            "z": -0.8
+          },
+          {
+            "x": -4.4,
+            "y": 7.7,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": -2.8
+          }
+        ],
+        "route": [
+          {
+            "x": -4.4,
+            "y": 7.7,
+            "z": -0.8
+          },
+          {
+            "x": -4.4,
+            "y": 7.7,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": -1.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.7,
+            "z": -2.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "html>escape",
+        "from": "html",
+        "to": "escape",
+        "async": false,
+        "points": [
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -2.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -0.8
+          }
+        ],
+        "route": [
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -2.8
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -0.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "html>ast",
+        "from": "html",
+        "to": "ast",
+        "async": false,
+        "points": [
+          {
+            "x": 4.08,
+            "y": 7.6,
+            "z": -2.8
+          },
+          {
+            "x": 4.08,
+            "y": 7.6,
+            "z": -2.12
+          },
+          {
+            "x": 4.08,
+            "y": 8.3,
+            "z": -2.12
+          },
+          {
+            "x": 1.88,
+            "y": 8.3,
+            "z": -2.12
+          },
+          {
+            "x": 1.88,
+            "y": 8.3,
+            "z": 1.48
+          },
+          {
+            "x": -0.32,
+            "y": 8.3,
+            "z": 1.48
+          },
+          {
+            "x": -0.32,
+            "y": 7.6,
+            "z": 1.48
+          },
+          {
+            "x": -0.32,
+            "y": 7.6,
+            "z": 2.8
+          }
+        ],
+        "route": [
+          {
+            "x": 4.08,
+            "y": 7.6,
+            "z": -2.8
+          },
+          {
+            "x": 4.08,
+            "y": 7.6,
+            "z": -2.12
+          },
+          {
+            "x": 4.08,
+            "y": 8.3,
+            "z": -2.12
+          },
+          {
+            "x": 1.88,
+            "y": 8.3,
+            "z": -2.12
+          },
+          {
+            "x": 1.88,
+            "y": 8.3,
+            "z": 1.48
+          },
+          {
+            "x": -0.32,
+            "y": 8.3,
+            "z": 1.48
+          },
+          {
+            "x": -0.32,
+            "y": 7.6,
+            "z": 1.48
+          },
+          {
+            "x": -0.32,
+            "y": 7.6,
+            "z": 2.8
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "html>Highlighter",
+        "from": "html",
+        "to": "Highlighter",
+        "async": false,
+        "points": [
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -4.4
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -5.4
+          },
+          {
+            "x": 8.8,
+            "y": 7.3,
+            "z": -5.4
+          },
+          {
+            "x": 8.8,
+            "y": 7.3,
+            "z": -6.6
+          }
+        ],
+        "route": [
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -4.4
+          },
+          {
+            "x": 4.4,
+            "y": 7.3,
+            "z": -5.4
+          },
+          {
+            "x": 8.8,
+            "y": 7.3,
+            "z": -5.4
+          },
+          {
+            "x": 8.8,
+            "y": 7.3,
+            "z": -6.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      },
+      {
+        "id": "highlight>syntect",
+        "from": "highlight",
+        "to": "syntect",
+        "async": false,
+        "points": [
+          {
+            "x": 5.8,
+            "y": 7.3,
+            "z": 3.6
+          },
+          {
+            "x": 7.8,
+            "y": 7.3,
+            "z": 3.6
+          }
+        ],
+        "route": [
+          {
+            "x": 5.8,
+            "y": 7.3,
+            "z": 3.6
+          },
+          {
+            "x": 7.8,
+            "y": 7.3,
+            "z": 3.6
+          }
+        ],
+        "trunk": null,
+        "radius": 0.1
+      }
+    ],
+    "trunks": [],
+    "boundary": {
+      "label": "Quill",
+      "kind": "library",
+      "min": {
+        "x": -6.6,
+        "y": 6.6,
+        "z": -5.4
+      },
+      "max": {
+        "x": 6.6,
+        "y": 8.6,
+        "z": 5.4
+      }
+    },
+    "clashes": 0
+  },
+  "timelines": [
+    {
+      "scenario": "render_note",
+      "steps": [
+        {
+          "index": 0,
+          "from": "SiteGen",
+          "to": "to_html",
+          "via": [],
+          "arrow": "sync",
+          "label": "markdown",
+          "row": 0
+        },
+        {
+          "index": 1,
+          "from": "to_html",
+          "to": "parse",
+          "via": [],
+          "arrow": "sync",
+          "label": "src",
+          "row": 1
+        },
+        {
+          "index": 2,
+          "from": "parse",
+          "to": "blocks",
+          "via": [],
+          "arrow": "sync",
+          "label": null,
+          "row": 2
+        },
+        {
+          "index": 3,
+          "from": "blocks",
+          "to": "Extension",
+          "via": [],
+          "arrow": "sync",
+          "label": "note fence",
+          "row": 3
+        },
+        {
+          "index": 4,
+          "from": "Extension",
+          "to": "blocks",
+          "via": [],
+          "arrow": "reply",
+          "label": "Block::Note",
+          "row": 4
+        },
+        {
+          "index": 5,
+          "from": "blocks",
+          "to": "parse",
+          "via": [],
+          "arrow": "reply",
+          "label": "Doc",
+          "row": 5
+        },
+        {
+          "index": 6,
+          "from": "parse",
+          "to": "to_html",
+          "via": [],
+          "arrow": "reply",
+          "label": "Doc",
+          "row": 6
+        },
+        {
+          "index": 7,
+          "from": "to_html",
+          "to": "html",
+          "via": [],
+          "arrow": "sync",
+          "label": "walk Doc",
+          "row": 7
+        },
+        {
+          "index": 8,
+          "from": "html",
+          "to": "Highlighter",
+          "via": [],
+          "arrow": "sync",
+          "label": "rust code block",
+          "row": 8
+        },
+        {
+          "index": 9,
+          "from": "Highlighter",
+          "to": "html",
+          "via": [],
+          "arrow": "reply",
+          "label": "spans",
+          "row": 9
+        },
+        {
+          "index": 10,
+          "from": "html",
+          "to": "to_html",
+          "via": [],
+          "arrow": "reply",
+          "label": "String",
+          "row": 10
+        },
+        {
+          "index": 11,
+          "from": "to_html",
+          "to": "SiteGen",
+          "via": [],
+          "arrow": "reply",
+          "label": "HTML",
+          "row": 11
+        }
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 780,
+        "end": 785
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 841,
+        "end": 846
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 847,
+        "end": 852
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 866,
+        "end": 871
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1595,
+        "end": 1600
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1609,
+        "end": 1614
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1710,
+        "end": 1715
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1724,
+        "end": 1729
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 799,
+        "end": 806
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 820,
+        "end": 827
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 828,
+        "end": 835
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 948,
+        "end": 955
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1262,
+        "end": 1269
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1563,
+        "end": 1570
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1584,
+        "end": 1591
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1734,
+        "end": 1741
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1750,
+        "end": 1757
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1859,
+        "end": 1866
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1878,
+        "end": 1885
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 308,
+        "end": 362
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 860,
+        "end": 865
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 1213,
+        "end": 1218
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 363,
+        "end": 418
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 885
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 885
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 908,
+        "end": 914
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 925,
+        "end": 931
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1618,
+        "end": 1624
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1627,
+        "end": 1633
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1676,
+        "end": 1682
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1699,
+        "end": 1705
+      }
+    },
+    {
+      "node": "inlines",
+      "span": {
+        "file": 0,
+        "start": 419,
+        "end": 475
+      }
+    },
+    {
+      "node": "inlines",
+      "span": {
+        "file": 0,
+        "start": 889,
+        "end": 896
+      }
+    },
+    {
+      "node": "inlines",
+      "span": {
+        "file": 0,
+        "start": 889,
+        "end": 896
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 476,
+        "end": 528
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 921,
+        "end": 924
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 989,
+        "end": 992
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 1110,
+        "end": 1113
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 1160,
+        "end": 1163
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 529,
+        "end": 582
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 965
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 965
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 976,
+        "end": 980
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 993,
+        "end": 997
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1761,
+        "end": 1765
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1779,
+        "end": 1783
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1835,
+        "end": 1839
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1850,
+        "end": 1854
+      }
+    },
+    {
+      "node": "escape",
+      "span": {
+        "file": 0,
+        "start": 583,
+        "end": 638
+      }
+    },
+    {
+      "node": "escape",
+      "span": {
+        "file": 0,
+        "start": 969,
+        "end": 975
+      }
+    },
+    {
+      "node": "highlight",
+      "span": {
+        "file": 0,
+        "start": 639,
+        "end": 697
+      }
+    },
+    {
+      "node": "highlight",
+      "span": {
+        "file": 0,
+        "start": 1018,
+        "end": 1027
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 64,
+        "end": 95
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 767,
+        "end": 774
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 786,
+        "end": 793
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 1552,
+        "end": 1559
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 1890,
+        "end": 1897
+      }
+    },
+    {
+      "node": "Editor",
+      "span": {
+        "file": 0,
+        "start": 96,
+        "end": 127
+      }
+    },
+    {
+      "node": "Editor",
+      "span": {
+        "file": 0,
+        "start": 807,
+        "end": 813
+      }
+    },
+    {
+      "node": "unicode",
+      "span": {
+        "file": 0,
+        "start": 128,
+        "end": 159
+      }
+    },
+    {
+      "node": "unicode",
+      "span": {
+        "file": 0,
+        "start": 900,
+        "end": 907
+      }
+    },
+    {
+      "node": "syntect",
+      "span": {
+        "file": 0,
+        "start": 160,
+        "end": 191
+      }
+    },
+    {
+      "node": "syntect",
+      "span": {
+        "file": 0,
+        "start": 1031,
+        "end": 1038
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 698,
+        "end": 732
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 938,
+        "end": 947
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 1637,
+        "end": 1646
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 1662,
+        "end": 1671
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 733,
+        "end": 765
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1006,
+        "end": 1017
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1787,
+        "end": 1798
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1819,
+        "end": 1830
+      }
+    }
+  ]
+}

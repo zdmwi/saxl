@@ -27,17 +27,21 @@ pub(crate) const TOKENS: &[(&str, &str, &str)] = &[
 /// written out instead of using CSS variables, which many SVG tools ignore.
 const COLOR_RULES: &str = ".bg{fill:$bg}text{fill:$fg}.sub,.group-label,.badge,.edge-label{fill:$muted}\
 .node{color:$structure}.node-service{color:$service}.node-store{color:$store}.node-queue{color:$event}\
-.node .base{fill:$bg}.edge{stroke:$muted}.edge-async{stroke:$event}.edge-label{stroke:$bg}\
+.node-api,.node-module,.node-library{color:$service}.node-hook{color:$request}\
+.node .base{fill:$bg}.edge{stroke:$muted}.edge-async{stroke:$event}.edge-impl{stroke:$request}.edge-label{stroke:$bg}\
 .lifeline,.group rect{stroke:$structure}.group-parallel rect{stroke:$request;fill:$request}\
-.arrow-sync,.arrow-reply{fill:$muted}.arrow-async{fill:$event}";
+.group-hook rect{fill:$request}.group-hook .group-label{fill:$request}\
+.arrow-sync,.arrow-reply{fill:$muted}.arrow-async{fill:$event}.arrow-impl{fill:$bg;stroke:$request}";
 
 /// Rules that don't depend on the color scheme.
 const SHAPE_RULES: &str = "text{font-size:14px}.sub,.badge,.field,.edge-label,.group-label{font-size:12px}\
 .badge{font-weight:600}.node .tint{fill:currentColor;fill-opacity:.1;stroke:currentColor;stroke-width:1.5}\
-.node-external .tint,.node-infra .tint{stroke-dasharray:5 3}.node-system .tint{fill-opacity:.05;stroke-width:2}\
-.edge{fill:none;stroke-width:1.5}.edge-async{stroke-dasharray:6 4}.edge-reply{stroke-dasharray:2 4;opacity:.75}\
+.node-external .tint,.node-infra .tint,.node-package .tint{stroke-dasharray:5 3}\
+.node-system .tint,.node-library .tint{fill-opacity:.05;stroke-width:2}.node-api .tint{stroke-width:2.5;fill-opacity:.16}\
+.edge{fill:none;stroke-width:1.5}.edge-async,.edge-impl{stroke-dasharray:6 4}.edge-reply{stroke-dasharray:2 4;opacity:.75}\
 .edge-label{paint-order:stroke;stroke-width:4px}.lifeline{stroke-dasharray:4 4;opacity:.6}\
-.group rect{fill:none;stroke-width:1.2}.group-cluster rect,.group-managed rect{stroke-dasharray:6 3}\
+.group rect{fill:none;stroke-width:1.2}.group-cluster rect,.group-managed rect,.group-package rect{stroke-dasharray:6 3}\
+.group-hook rect{stroke:none;fill-opacity:.07}\
 .group-parallel rect{fill-opacity:.06}.node .rim{fill:none;stroke:currentColor;stroke-width:1.5}";
 
 fn colors(dark: bool) -> String {
@@ -86,6 +90,7 @@ fn style_name(style: EdgeStyle) -> &'static str {
         EdgeStyle::Sync => "sync",
         EdgeStyle::Async => "async",
         EdgeStyle::Reply => "reply",
+        EdgeStyle::Impl => "impl",
     }
 }
 
@@ -100,6 +105,12 @@ fn kind_name(kind: NodeKind) -> &'static str {
         NodeKind::Infra => "infra",
         NodeKind::DataCard => "data_card",
         NodeKind::Floor => "floor",
+        NodeKind::Consumer => "consumer",
+        NodeKind::Package => "package",
+        NodeKind::Api => "api",
+        NodeKind::Module => "module",
+        NodeKind::Hook => "hook",
+        NodeKind::Library => "library",
     }
 }
 
@@ -109,6 +120,9 @@ fn group_name(kind: GroupKind) -> &'static str {
         GroupKind::Cluster => "cluster",
         GroupKind::Managed => "managed",
         GroupKind::Parallel => "parallel",
+        GroupKind::Registry => "registry",
+        GroupKind::Package => "package",
+        GroupKind::Hook => "hook",
     }
 }
 
@@ -127,7 +141,7 @@ pub fn to_svg(scene: &Scene) -> Result<String, RenderError> {
     let _ = writeln!(s, "<title>{}</title>", escape(&scene.title));
     let _ = writeln!(s, "<style>{}</style>", style());
     s.push_str("<defs>");
-    for style in ["sync", "async", "reply"] {
+    for style in ["sync", "async", "reply", "impl"] {
         let _ = write!(
             s,
             r#"<marker id="arrow-{style}" class="arrow-{style}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z"/></marker>"#
@@ -212,13 +226,20 @@ pub(crate) fn label_anchor(points: &[Point2]) -> Point2 {
     Point2::new((a.x + b.x) / 2.0, (a.y + b.y) / 2.0)
 }
 
+/// How rounded a node's corners are. People and consumers are the roundest;
+/// hooks are rounder than code so they read as sockets.
+pub(crate) fn corner_radius(kind: NodeKind) -> f64 {
+    match kind {
+        NodeKind::Actor | NodeKind::Consumer => 18.0,
+        NodeKind::Hook => 14.0,
+        NodeKind::System | NodeKind::Library => 12.0,
+        _ => 6.0,
+    }
+}
+
 fn node(s: &mut String, n: &SceneNode) {
     let r = &n.rect;
-    let radius = match n.kind {
-        NodeKind::Actor => 18.0,
-        NodeKind::System => 12.0,
-        _ => 6.0,
-    };
+    let radius = corner_radius(n.kind);
     let _ = write!(
         s,
         r#"<g class="node node-{}" data-id="{}">"#,
@@ -274,7 +295,7 @@ fn node(s: &mut String, n: &SceneNode) {
     if !n.badges.is_empty() {
         let _ = write!(
             s,
-            r#"<text class="badge" x="{cx}" y="{}" text-anchor="middle">{}</text>"#,
+            r#"<text class="badge" x="{tx}" y="{}" text-anchor="{anchor}">{}</text>"#,
             num(y + BADGE_ROW - 8.0),
             escape(&badge_text(&n.badges))
         );

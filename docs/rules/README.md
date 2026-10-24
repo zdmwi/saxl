@@ -15,15 +15,19 @@ Every problem saxl reports has a stable code. Parse (`P`) and validator errors (
 | [P007](P007.md) | error | parser | malformed replica count |
 | [E001](E001.md) | error | validator | a name is declared twice |
 | [E002](E002.md) | error | validator | a reference names nothing that is declared |
-| [E003](E003.md) | error | validator | there must be exactly one `system` statement |
+| [E003](E003.md) | error | validator | there must be exactly one `system` or `library` statement |
 | [E004](E004.md) | error | validator | a relation connects two outside elements |
 | [E005](E005.md) | error | validator | a data placement names the wrong kind of element |
 | [E006](E006.md) | error | validator | a scenario step has no matching relation |
 | [E007](E007.md) | error | validator | a reply has no matching open call |
-| [E008](E008.md) | error | validator | an actor or external appears in a deployment |
-| [E009](E009.md) | error | validator | an element is deployed twice in one region |
+| [E008](E008.md) | error | validator | an element outside the system or library is deployed or published |
+| [E009](E009.md) | error | validator | an element is deployed twice in one region, or published twice |
 | [E010](E010.md) | error | validator | `allow` names an error or unknown code |
 | [E011](E011.md) | error | validator | an infrastructure node is used in a relation, data placement, or deployment |
+| [E012](E012.md) | error | validator | a consumer calls something that is not an `api` |
+| [E013](E013.md) | error | validator | an `impl` statement names the wrong kind of element |
+| [E014](E014.md) | error | validator | two elements' `at` patterns match the same file |
+| [E015](E015.md) | error | validator | a construct is used in the wrong kind of file, or on the wrong element |
 | [W101](W101.md) | warning | validator | an internal element is not deployed in any region |
 | [W102](W102.md) | warning | validator | every workload is in a single region |
 | [W103](W103.md) | warning | validator | a source-of-truth store has no `primary+replica` |
@@ -31,5 +35,8 @@ Every problem saxl reports has a stable code. Parse (`P`) and validator errors (
 | [W105](W105.md) | warning | validator | a step's style differs from its relation's style |
 | [W106](W106.md) | warning | validator | a queue has no producer or no consumer |
 | [W107](W107.md) | warning | validator | synchronous calls form a cycle |
-| [W108](W108.md) | warning | validator | unknown deployment attribute |
+| [W108](W108.md) | warning | validator | unknown deployment or publish attribute |
+| [W109](W109.md) | warning | validator | a module depends on one gated behind a feature it is not gated on |
+| [W110](W110.md) | warning | validator | a library's api or module is in no package |
 | [I201](I201.md) | info | validator | a single-replica service takes part in synchronous calls |
+| [I202](I202.md) | info | validator | a hook has no implementation inside the library |

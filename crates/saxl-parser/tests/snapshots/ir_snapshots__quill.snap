@@ -1,0 +1,1601 @@
+---
+source: crates/saxl-parser/tests/ir_snapshots.rs
+expression: "parse_clean(include_str!(\"../../../tests/fixtures/library/quill.saxl\"))"
+---
+{
+  "ir_version": 2,
+  "roots": [
+    {
+      "kind": "library",
+      "name": {
+        "text": "Quill",
+        "span": {
+          "file": 0,
+          "start": 38,
+          "end": 43
+        }
+      },
+      "description": "Markdown to HTML",
+      "span": {
+        "file": 0,
+        "start": 30,
+        "end": 62
+      }
+    }
+  ],
+  "elements": [
+    {
+      "name": {
+        "text": "SiteGen",
+        "span": {
+          "file": 0,
+          "start": 73,
+          "end": 80
+        }
+      },
+      "kind": "consumer",
+      "description": "static sites",
+      "span": {
+        "file": 0,
+        "start": 64,
+        "end": 95
+      }
+    },
+    {
+      "name": {
+        "text": "Editor",
+        "span": {
+          "file": 0,
+          "start": 105,
+          "end": 111
+        }
+      },
+      "kind": "consumer",
+      "description": "live preview",
+      "span": {
+        "file": 0,
+        "start": 96,
+        "end": 127
+      }
+    },
+    {
+      "name": {
+        "text": "unicode",
+        "span": {
+          "file": 0,
+          "start": 137,
+          "end": 144
+        }
+      },
+      "kind": "package",
+      "description": "segmentation",
+      "span": {
+        "file": 0,
+        "start": 128,
+        "end": 159
+      }
+    },
+    {
+      "name": {
+        "text": "syntect",
+        "span": {
+          "file": 0,
+          "start": 169,
+          "end": 176
+        }
+      },
+      "kind": "package",
+      "description": "highlighting",
+      "span": {
+        "file": 0,
+        "start": 160,
+        "end": 191
+      }
+    },
+    {
+      "name": {
+        "text": "parse",
+        "span": {
+          "file": 0,
+          "start": 200,
+          "end": 205
+        }
+      },
+      "kind": "api",
+      "description": "text → Doc",
+      "at": {
+        "text": "src/parse.rs",
+        "span": {
+          "file": 0,
+          "start": 235,
+          "end": 249
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      }
+    },
+    {
+      "name": {
+        "text": "to_html",
+        "span": {
+          "file": 0,
+          "start": 257,
+          "end": 264
+        }
+      },
+      "kind": "api",
+      "description": "text → HTML",
+      "at": {
+        "text": "src/render.rs",
+        "span": {
+          "file": 0,
+          "start": 292,
+          "end": 307
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      }
+    },
+    {
+      "name": {
+        "text": "lexer",
+        "span": {
+          "file": 0,
+          "start": 315,
+          "end": 320
+        }
+      },
+      "kind": "module",
+      "description": "line tokens",
+      "at": {
+        "text": "src/lexer.rs",
+        "span": {
+          "file": 0,
+          "start": 348,
+          "end": 362
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 308,
+        "end": 362
+      }
+    },
+    {
+      "name": {
+        "text": "blocks",
+        "span": {
+          "file": 0,
+          "start": 370,
+          "end": 376
+        }
+      },
+      "kind": "module",
+      "description": "block structure",
+      "at": {
+        "text": "src/blocks/**",
+        "span": {
+          "file": 0,
+          "start": 403,
+          "end": 418
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 363,
+        "end": 418
+      }
+    },
+    {
+      "name": {
+        "text": "inlines",
+        "span": {
+          "file": 0,
+          "start": 426,
+          "end": 433
+        }
+      },
+      "kind": "module",
+      "description": "emphasis, links",
+      "at": {
+        "text": "src/inlines.rs",
+        "span": {
+          "file": 0,
+          "start": 459,
+          "end": 475
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 419,
+        "end": 475
+      }
+    },
+    {
+      "name": {
+        "text": "ast",
+        "span": {
+          "file": 0,
+          "start": 483,
+          "end": 486
+        }
+      },
+      "kind": "module",
+      "description": "Doc tree",
+      "at": {
+        "text": "src/ast.rs",
+        "span": {
+          "file": 0,
+          "start": 516,
+          "end": 528
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 476,
+        "end": 528
+      }
+    },
+    {
+      "name": {
+        "text": "html",
+        "span": {
+          "file": 0,
+          "start": 536,
+          "end": 540
+        }
+      },
+      "kind": "module",
+      "description": "HTML writer",
+      "at": {
+        "text": "src/html.rs",
+        "span": {
+          "file": 0,
+          "start": 569,
+          "end": 582
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 529,
+        "end": 582
+      }
+    },
+    {
+      "name": {
+        "text": "escape",
+        "span": {
+          "file": 0,
+          "start": 590,
+          "end": 596
+        }
+      },
+      "kind": "module",
+      "description": "entities",
+      "at": {
+        "text": "src/escape.rs",
+        "span": {
+          "file": 0,
+          "start": 623,
+          "end": 638
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 583,
+        "end": 638
+      }
+    },
+    {
+      "name": {
+        "text": "highlight",
+        "span": {
+          "file": 0,
+          "start": 646,
+          "end": 655
+        }
+      },
+      "kind": "module",
+      "description": "syntect adapter",
+      "at": {
+        "text": "src/highlight.rs",
+        "span": {
+          "file": 0,
+          "start": 679,
+          "end": 697
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 639,
+        "end": 697
+      }
+    },
+    {
+      "name": {
+        "text": "Extension",
+        "span": {
+          "file": 0,
+          "start": 705,
+          "end": 714
+        }
+      },
+      "kind": "hook",
+      "description": "custom blocks",
+      "span": {
+        "file": 0,
+        "start": 698,
+        "end": 732
+      }
+    },
+    {
+      "name": {
+        "text": "Highlighter",
+        "span": {
+          "file": 0,
+          "start": 740,
+          "end": 751
+        }
+      },
+      "kind": "hook",
+      "description": "colors code",
+      "span": {
+        "file": 0,
+        "start": 733,
+        "end": 765
+      }
+    }
+  ],
+  "relations": [
+    {
+      "from": {
+        "text": "SiteGen",
+        "span": {
+          "file": 0,
+          "start": 767,
+          "end": 774
+        }
+      },
+      "to": {
+        "text": "parse",
+        "span": {
+          "file": 0,
+          "start": 780,
+          "end": 785
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 767,
+        "end": 785
+      }
+    },
+    {
+      "from": {
+        "text": "SiteGen",
+        "span": {
+          "file": 0,
+          "start": 786,
+          "end": 793
+        }
+      },
+      "to": {
+        "text": "to_html",
+        "span": {
+          "file": 0,
+          "start": 799,
+          "end": 806
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 786,
+        "end": 806
+      }
+    },
+    {
+      "from": {
+        "text": "Editor",
+        "span": {
+          "file": 0,
+          "start": 807,
+          "end": 813
+        }
+      },
+      "to": {
+        "text": "to_html",
+        "span": {
+          "file": 0,
+          "start": 820,
+          "end": 827
+        }
+      },
+      "style": "async",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 807,
+        "end": 827
+      }
+    },
+    {
+      "from": {
+        "text": "to_html",
+        "span": {
+          "file": 0,
+          "start": 828,
+          "end": 835
+        }
+      },
+      "to": {
+        "text": "parse",
+        "span": {
+          "file": 0,
+          "start": 841,
+          "end": 846
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 828,
+        "end": 846
+      }
+    },
+    {
+      "from": {
+        "text": "parse",
+        "span": {
+          "file": 0,
+          "start": 847,
+          "end": 852
+        }
+      },
+      "to": {
+        "text": "lexer",
+        "span": {
+          "file": 0,
+          "start": 860,
+          "end": 865
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 847,
+        "end": 865
+      }
+    },
+    {
+      "from": {
+        "text": "parse",
+        "span": {
+          "file": 0,
+          "start": 866,
+          "end": 871
+        }
+      },
+      "to": {
+        "text": "blocks",
+        "span": {
+          "file": 0,
+          "start": 879,
+          "end": 885
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 866,
+        "end": 885
+      }
+    },
+    {
+      "from": {
+        "text": "blocks",
+        "span": {
+          "file": 0,
+          "start": 879,
+          "end": 885
+        }
+      },
+      "to": {
+        "text": "inlines",
+        "span": {
+          "file": 0,
+          "start": 889,
+          "end": 896
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 896
+      }
+    },
+    {
+      "from": {
+        "text": "inlines",
+        "span": {
+          "file": 0,
+          "start": 889,
+          "end": 896
+        }
+      },
+      "to": {
+        "text": "unicode",
+        "span": {
+          "file": 0,
+          "start": 900,
+          "end": 907
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 889,
+        "end": 907
+      }
+    },
+    {
+      "from": {
+        "text": "blocks",
+        "span": {
+          "file": 0,
+          "start": 908,
+          "end": 914
+        }
+      },
+      "to": {
+        "text": "ast",
+        "span": {
+          "file": 0,
+          "start": 921,
+          "end": 924
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 908,
+        "end": 924
+      }
+    },
+    {
+      "from": {
+        "text": "blocks",
+        "span": {
+          "file": 0,
+          "start": 925,
+          "end": 931
+        }
+      },
+      "to": {
+        "text": "Extension",
+        "span": {
+          "file": 0,
+          "start": 938,
+          "end": 947
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 925,
+        "end": 947
+      }
+    },
+    {
+      "from": {
+        "text": "to_html",
+        "span": {
+          "file": 0,
+          "start": 948,
+          "end": 955
+        }
+      },
+      "to": {
+        "text": "html",
+        "span": {
+          "file": 0,
+          "start": 961,
+          "end": 965
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 948,
+        "end": 965
+      }
+    },
+    {
+      "from": {
+        "text": "html",
+        "span": {
+          "file": 0,
+          "start": 961,
+          "end": 965
+        }
+      },
+      "to": {
+        "text": "escape",
+        "span": {
+          "file": 0,
+          "start": 969,
+          "end": 975
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 975
+      }
+    },
+    {
+      "from": {
+        "text": "html",
+        "span": {
+          "file": 0,
+          "start": 976,
+          "end": 980
+        }
+      },
+      "to": {
+        "text": "ast",
+        "span": {
+          "file": 0,
+          "start": 989,
+          "end": 992
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 976,
+        "end": 992
+      }
+    },
+    {
+      "from": {
+        "text": "html",
+        "span": {
+          "file": 0,
+          "start": 993,
+          "end": 997
+        }
+      },
+      "to": {
+        "text": "Highlighter",
+        "span": {
+          "file": 0,
+          "start": 1006,
+          "end": 1017
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 993,
+        "end": 1017
+      }
+    },
+    {
+      "from": {
+        "text": "highlight",
+        "span": {
+          "file": 0,
+          "start": 1018,
+          "end": 1027
+        }
+      },
+      "to": {
+        "text": "syntect",
+        "span": {
+          "file": 0,
+          "start": 1031,
+          "end": 1038
+        }
+      },
+      "style": "sync",
+      "description": null,
+      "span": {
+        "file": 0,
+        "start": 1018,
+        "end": 1038
+      }
+    }
+  ],
+  "data": [
+    {
+      "name": {
+        "text": "Doc",
+        "span": {
+          "file": 0,
+          "start": 1099,
+          "end": 1102
+        }
+      },
+      "placement": {
+        "kind": "in",
+        "store": {
+          "text": "ast",
+          "span": {
+            "file": 0,
+            "start": 1110,
+            "end": 1113
+          }
+        },
+        "cached": []
+      },
+      "fields": [
+        {
+          "text": "blocks",
+          "span": {
+            "file": 0,
+            "start": 1124,
+            "end": 1130
+          }
+        },
+        {
+          "text": "footnotes",
+          "span": {
+            "file": 0,
+            "start": 1132,
+            "end": 1141
+          }
+        }
+      ],
+      "public": true,
+      "span": {
+        "file": 0,
+        "start": 1094,
+        "end": 1143
+      }
+    },
+    {
+      "name": {
+        "text": "Block",
+        "span": {
+          "file": 0,
+          "start": 1149,
+          "end": 1154
+        }
+      },
+      "placement": {
+        "kind": "in",
+        "store": {
+          "text": "ast",
+          "span": {
+            "file": 0,
+            "start": 1160,
+            "end": 1163
+          }
+        },
+        "cached": []
+      },
+      "fields": [
+        {
+          "text": "kind",
+          "span": {
+            "file": 0,
+            "start": 1174,
+            "end": 1178
+          }
+        },
+        {
+          "text": "children",
+          "span": {
+            "file": 0,
+            "start": 1180,
+            "end": 1188
+          }
+        },
+        {
+          "text": "span",
+          "span": {
+            "file": 0,
+            "start": 1190,
+            "end": 1194
+          }
+        }
+      ],
+      "public": true,
+      "span": {
+        "file": 0,
+        "start": 1144,
+        "end": 1196
+      }
+    },
+    {
+      "name": {
+        "text": "Token",
+        "span": {
+          "file": 0,
+          "start": 1202,
+          "end": 1207
+        }
+      },
+      "placement": {
+        "kind": "in",
+        "store": {
+          "text": "lexer",
+          "span": {
+            "file": 0,
+            "start": 1213,
+            "end": 1218
+          }
+        },
+        "cached": []
+      },
+      "fields": [
+        {
+          "text": "kind",
+          "span": {
+            "file": 0,
+            "start": 1227,
+            "end": 1231
+          }
+        },
+        {
+          "text": "text",
+          "span": {
+            "file": 0,
+            "start": 1233,
+            "end": 1237
+          }
+        },
+        {
+          "text": "line",
+          "span": {
+            "file": 0,
+            "start": 1239,
+            "end": 1243
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 1197,
+        "end": 1245
+      }
+    },
+    {
+      "name": {
+        "text": "Options",
+        "span": {
+          "file": 0,
+          "start": 1251,
+          "end": 1258
+        }
+      },
+      "placement": {
+        "kind": "in",
+        "store": {
+          "text": "to_html",
+          "span": {
+            "file": 0,
+            "start": 1262,
+            "end": 1269
+          }
+        },
+        "cached": []
+      },
+      "fields": [
+        {
+          "text": "tables",
+          "span": {
+            "file": 0,
+            "start": 1276,
+            "end": 1282
+          }
+        },
+        {
+          "text": "footnotes",
+          "span": {
+            "file": 0,
+            "start": 1284,
+            "end": 1293
+          }
+        },
+        {
+          "text": "highlighter",
+          "span": {
+            "file": 0,
+            "start": 1295,
+            "end": 1306
+          }
+        }
+      ],
+      "public": true,
+      "span": {
+        "file": 0,
+        "start": 1246,
+        "end": 1308
+      }
+    }
+  ],
+  "regions": [],
+  "registries": [
+    {
+      "name": {
+        "text": "crates.io",
+        "span": {
+          "file": 0,
+          "start": 1318,
+          "end": 1329
+        }
+      },
+      "packages": [
+        {
+          "kind": "crate",
+          "name": {
+            "text": "quill",
+            "span": {
+              "file": 0,
+              "start": 1340,
+              "end": 1345
+            }
+          },
+          "target": null,
+          "workloads": [
+            {
+              "names": [
+                {
+                  "text": "parse",
+                  "span": {
+                    "file": 0,
+                    "start": 1352,
+                    "end": 1357
+                  }
+                },
+                {
+                  "text": "to_html",
+                  "span": {
+                    "file": 0,
+                    "start": 1359,
+                    "end": 1366
+                  }
+                },
+                {
+                  "text": "lexer",
+                  "span": {
+                    "file": 0,
+                    "start": 1368,
+                    "end": 1373
+                  }
+                },
+                {
+                  "text": "blocks",
+                  "span": {
+                    "file": 0,
+                    "start": 1375,
+                    "end": 1381
+                  }
+                },
+                {
+                  "text": "inlines",
+                  "span": {
+                    "file": 0,
+                    "start": 1383,
+                    "end": 1390
+                  }
+                },
+                {
+                  "text": "ast",
+                  "span": {
+                    "file": 0,
+                    "start": 1392,
+                    "end": 1395
+                  }
+                },
+                {
+                  "text": "html",
+                  "span": {
+                    "file": 0,
+                    "start": 1397,
+                    "end": 1401
+                  }
+                },
+                {
+                  "text": "escape",
+                  "span": {
+                    "file": 0,
+                    "start": 1403,
+                    "end": 1409
+                  }
+                }
+              ],
+              "attributes": [],
+              "span": {
+                "file": 0,
+                "start": 1352,
+                "end": 1409
+              }
+            },
+            {
+              "names": [
+                {
+                  "text": "highlight",
+                  "span": {
+                    "file": 0,
+                    "start": 1414,
+                    "end": 1423
+                  }
+                }
+              ],
+              "attributes": [
+                {
+                  "kind": "feature",
+                  "name": {
+                    "text": "syntect",
+                    "span": {
+                      "file": 0,
+                      "start": 1432,
+                      "end": 1439
+                    }
+                  },
+                  "span": {
+                    "file": 0,
+                    "start": 1424,
+                    "end": 1439
+                  }
+                }
+              ],
+              "span": {
+                "file": 0,
+                "start": 1414,
+                "end": 1439
+              }
+            }
+          ],
+          "span": {
+            "file": 0,
+            "start": 1334,
+            "end": 1443
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 1310,
+        "end": 1445
+      }
+    },
+    {
+      "name": {
+        "text": "npm",
+        "span": {
+          "file": 0,
+          "start": 1455,
+          "end": 1458
+        }
+      },
+      "packages": [
+        {
+          "kind": "package",
+          "name": {
+            "text": "@quill/wasm",
+            "span": {
+              "file": 0,
+              "start": 1471,
+              "end": 1484
+            }
+          },
+          "target": {
+            "text": "wasm32",
+            "span": {
+              "file": 0,
+              "start": 1492,
+              "end": 1498
+            }
+          },
+          "workloads": [
+            {
+              "names": [
+                {
+                  "text": "parse",
+                  "span": {
+                    "file": 0,
+                    "start": 1505,
+                    "end": 1510
+                  }
+                },
+                {
+                  "text": "to_html",
+                  "span": {
+                    "file": 0,
+                    "start": 1512,
+                    "end": 1519
+                  }
+                }
+              ],
+              "attributes": [],
+              "span": {
+                "file": 0,
+                "start": 1505,
+                "end": 1519
+              }
+            }
+          ],
+          "span": {
+            "file": 0,
+            "start": 1463,
+            "end": 1523
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 1447,
+        "end": 1525
+      }
+    }
+  ],
+  "impls": [
+    {
+      "implementor": {
+        "text": "highlight",
+        "span": {
+          "file": 0,
+          "start": 1039,
+          "end": 1048
+        }
+      },
+      "hook": {
+        "text": "Highlighter",
+        "span": {
+          "file": 0,
+          "start": 1054,
+          "end": 1065
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 1039,
+        "end": 1065
+      }
+    },
+    {
+      "implementor": {
+        "text": "Editor",
+        "span": {
+          "file": 0,
+          "start": 1066,
+          "end": 1072
+        }
+      },
+      "hook": {
+        "text": "Highlighter",
+        "span": {
+          "file": 0,
+          "start": 1081,
+          "end": 1092
+        }
+      },
+      "span": {
+        "file": 0,
+        "start": 1066,
+        "end": 1092
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "name": {
+        "text": "render_note",
+        "span": {
+          "file": 0,
+          "start": 1536,
+          "end": 1547
+        }
+      },
+      "steps": [
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "SiteGen",
+              "span": {
+                "file": 0,
+                "start": 1552,
+                "end": 1559
+              }
+            },
+            {
+              "text": "to_html",
+              "span": {
+                "file": 0,
+                "start": 1563,
+                "end": 1570
+              }
+            }
+          ],
+          "arrows": [
+            "call"
+          ],
+          "label": "markdown",
+          "span": {
+            "file": 0,
+            "start": 1552,
+            "end": 1581
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "to_html",
+              "span": {
+                "file": 0,
+                "start": 1584,
+                "end": 1591
+              }
+            },
+            {
+              "text": "parse",
+              "span": {
+                "file": 0,
+                "start": 1595,
+                "end": 1600
+              }
+            }
+          ],
+          "arrows": [
+            "call"
+          ],
+          "label": "src",
+          "span": {
+            "file": 0,
+            "start": 1584,
+            "end": 1606
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "parse",
+              "span": {
+                "file": 0,
+                "start": 1609,
+                "end": 1614
+              }
+            },
+            {
+              "text": "blocks",
+              "span": {
+                "file": 0,
+                "start": 1618,
+                "end": 1624
+              }
+            }
+          ],
+          "arrows": [
+            "call"
+          ],
+          "label": null,
+          "span": {
+            "file": 0,
+            "start": 1609,
+            "end": 1624
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "blocks",
+              "span": {
+                "file": 0,
+                "start": 1627,
+                "end": 1633
+              }
+            },
+            {
+              "text": "Extension",
+              "span": {
+                "file": 0,
+                "start": 1637,
+                "end": 1646
+              }
+            }
+          ],
+          "arrows": [
+            "call"
+          ],
+          "label": "note fence",
+          "span": {
+            "file": 0,
+            "start": 1627,
+            "end": 1659
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "Extension",
+              "span": {
+                "file": 0,
+                "start": 1662,
+                "end": 1671
+              }
+            },
+            {
+              "text": "blocks",
+              "span": {
+                "file": 0,
+                "start": 1676,
+                "end": 1682
+              }
+            }
+          ],
+          "arrows": [
+            "reply"
+          ],
+          "label": "Block::Note",
+          "span": {
+            "file": 0,
+            "start": 1662,
+            "end": 1696
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "blocks",
+              "span": {
+                "file": 0,
+                "start": 1699,
+                "end": 1705
+              }
+            },
+            {
+              "text": "parse",
+              "span": {
+                "file": 0,
+                "start": 1710,
+                "end": 1715
+              }
+            }
+          ],
+          "arrows": [
+            "reply"
+          ],
+          "label": "Doc",
+          "span": {
+            "file": 0,
+            "start": 1699,
+            "end": 1721
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "parse",
+              "span": {
+                "file": 0,
+                "start": 1724,
+                "end": 1729
+              }
+            },
+            {
+              "text": "to_html",
+              "span": {
+                "file": 0,
+                "start": 1734,
+                "end": 1741
+              }
+            }
+          ],
+          "arrows": [
+            "reply"
+          ],
+          "label": "Doc",
+          "span": {
+            "file": 0,
+            "start": 1724,
+            "end": 1747
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "to_html",
+              "span": {
+                "file": 0,
+                "start": 1750,
+                "end": 1757
+              }
+            },
+            {
+              "text": "html",
+              "span": {
+                "file": 0,
+                "start": 1761,
+                "end": 1765
+              }
+            }
+          ],
+          "arrows": [
+            "call"
+          ],
+          "label": "walk Doc",
+          "span": {
+            "file": 0,
+            "start": 1750,
+            "end": 1776
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "html",
+              "span": {
+                "file": 0,
+                "start": 1779,
+                "end": 1783
+              }
+            },
+            {
+              "text": "Highlighter",
+              "span": {
+                "file": 0,
+                "start": 1787,
+                "end": 1798
+              }
+            }
+          ],
+          "arrows": [
+            "call"
+          ],
+          "label": "rust code block",
+          "span": {
+            "file": 0,
+            "start": 1779,
+            "end": 1816
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "Highlighter",
+              "span": {
+                "file": 0,
+                "start": 1819,
+                "end": 1830
+              }
+            },
+            {
+              "text": "html",
+              "span": {
+                "file": 0,
+                "start": 1835,
+                "end": 1839
+              }
+            }
+          ],
+          "arrows": [
+            "reply"
+          ],
+          "label": "spans",
+          "span": {
+            "file": 0,
+            "start": 1819,
+            "end": 1847
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "html",
+              "span": {
+                "file": 0,
+                "start": 1850,
+                "end": 1854
+              }
+            },
+            {
+              "text": "to_html",
+              "span": {
+                "file": 0,
+                "start": 1859,
+                "end": 1866
+              }
+            }
+          ],
+          "arrows": [
+            "reply"
+          ],
+          "label": "String",
+          "span": {
+            "file": 0,
+            "start": 1850,
+            "end": 1875
+          }
+        },
+        {
+          "kind": "message",
+          "hops": [
+            {
+              "text": "to_html",
+              "span": {
+                "file": 0,
+                "start": 1878,
+                "end": 1885
+              }
+            },
+            {
+              "text": "SiteGen",
+              "span": {
+                "file": 0,
+                "start": 1890,
+                "end": 1897
+              }
+            }
+          ],
+          "arrows": [
+            "reply"
+          ],
+          "label": "HTML",
+          "span": {
+            "file": 0,
+            "start": 1878,
+            "end": 1904
+          }
+        }
+      ],
+      "span": {
+        "file": 0,
+        "start": 1527,
+        "end": 1906
+      }
+    }
+  ],
+  "allows": [
+    {
+      "code": "I202",
+      "code_span": {
+        "file": 0,
+        "start": 1914,
+        "end": 1918
+      },
+      "reason": "extensions are opt-in",
+      "span": {
+        "file": 0,
+        "start": 1908,
+        "end": 1942
+      }
+    }
+  ]
+}

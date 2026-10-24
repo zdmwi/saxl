@@ -28,9 +28,15 @@ pub struct Args {
 enum View {
     Tower,
     Context,
+    /// Titled Modules for a library.
+    #[value(alias = "modules")]
     Containers,
     Runtime,
+    /// Titled Types for a library.
+    #[value(alias = "types")]
     Data,
+    /// Titled Packages for a library.
+    #[value(alias = "packages")]
     Deployment,
     All,
 }
@@ -108,7 +114,7 @@ pub fn run(args: &Args) -> Result<ExitCode, CliError> {
             }
             let title = model
                 .model()
-                .systems
+                .roots
                 .first()
                 .map_or_else(|| "saxl".to_owned(), |s| s.name.text.clone());
             saxl_renderer::to_html(

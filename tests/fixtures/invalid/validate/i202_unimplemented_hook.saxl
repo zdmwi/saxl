@@ -1,0 +1,17 @@
+# expect: I202 @ 5:1
+library Quill
+consumer Editor
+api to_html
+hook Highlighter
+hook Extension
+module plain
+Editor -> to_html
+to_html -> Highlighter
+to_html -> Extension
+Editor impl Highlighter
+plain impl Extension
+publish "crates.io" {
+  crate quill {
+    to_html, plain
+  }
+}

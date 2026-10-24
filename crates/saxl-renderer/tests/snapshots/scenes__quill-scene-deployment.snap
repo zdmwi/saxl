@@ -1,0 +1,882 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "deployment"
+  },
+  "title": "Packages: Quill",
+  "size": {
+    "w": 301.6,
+    "h": 1028.0
+  },
+  "nodes": [
+    {
+      "id": "crates.io/quill/parse",
+      "kind": "api",
+      "label": "parse",
+      "sublabel": "text → Doc",
+      "rect": {
+        "x": 56.0,
+        "y": 80.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "crates.io/quill/to_html",
+      "kind": "api",
+      "label": "to_html",
+      "sublabel": "text → HTML",
+      "rect": {
+        "x": 56.0,
+        "y": 152.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "crates.io/quill/lexer",
+      "kind": "module",
+      "label": "lexer",
+      "sublabel": "line tokens",
+      "rect": {
+        "x": 56.0,
+        "y": 224.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 308,
+        "end": 362
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "crates.io/quill/blocks",
+      "kind": "module",
+      "label": "blocks",
+      "sublabel": "block structure",
+      "rect": {
+        "x": 56.0,
+        "y": 296.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 363,
+        "end": 418
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "crates.io/quill/inlines",
+      "kind": "module",
+      "label": "inlines",
+      "sublabel": "emphasis, links",
+      "rect": {
+        "x": 56.0,
+        "y": 368.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 419,
+        "end": 475
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "crates.io/quill/ast",
+      "kind": "module",
+      "label": "ast",
+      "sublabel": "Doc tree",
+      "rect": {
+        "x": 56.0,
+        "y": 440.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 476,
+        "end": 528
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "crates.io/quill/html",
+      "kind": "module",
+      "label": "html",
+      "sublabel": "HTML writer",
+      "rect": {
+        "x": 56.0,
+        "y": 512.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 529,
+        "end": 582
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "crates.io/quill/escape",
+      "kind": "module",
+      "label": "escape",
+      "sublabel": "entities",
+      "rect": {
+        "x": 56.0,
+        "y": 584.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 583,
+        "end": 638
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "crates.io/quill/highlight",
+      "kind": "module",
+      "label": "highlight",
+      "sublabel": "syntect adapter",
+      "rect": {
+        "x": 56.0,
+        "y": 656.0,
+        "w": 140.0,
+        "h": 76.0
+      },
+      "source": {
+        "file": 0,
+        "start": 639,
+        "end": 697
+      },
+      "badges": [
+        "feature syntect"
+      ],
+      "fields": []
+    },
+    {
+      "id": "npm/@quill/wasm/parse",
+      "kind": "api",
+      "label": "parse",
+      "sublabel": "text → Doc",
+      "rect": {
+        "x": 90.8,
+        "y": 844.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "npm/@quill/wasm/to_html",
+      "kind": "api",
+      "label": "to_html",
+      "sublabel": "text → HTML",
+      "rect": {
+        "x": 90.8,
+        "y": 916.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [],
+  "groups": [
+    {
+      "id": "crates.io",
+      "kind": "registry",
+      "label": "crates.io",
+      "rect": {
+        "x": 24.0,
+        "y": 24.0,
+        "w": 204.0,
+        "h": 740.0
+      },
+      "depth": 0
+    },
+    {
+      "id": "crates.io/0",
+      "kind": "package",
+      "label": "crate quill",
+      "rect": {
+        "x": 40.0,
+        "y": 52.0,
+        "w": 172.0,
+        "h": 696.0
+      },
+      "depth": 1
+    },
+    {
+      "id": "npm",
+      "kind": "registry",
+      "label": "npm",
+      "rect": {
+        "x": 24.0,
+        "y": 788.0,
+        "w": 253.6,
+        "h": 216.0
+      },
+      "depth": 0
+    },
+    {
+      "id": "npm/0",
+      "kind": "package",
+      "label": "package @quill/wasm · wasm32",
+      "rect": {
+        "x": 40.0,
+        "y": 816.0,
+        "w": 221.6,
+        "h": 172.0
+      },
+      "depth": 1
+    }
+  ],
+  "tower": null,
+  "timelines": [],
+  "anchors": [
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      }
+    },
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 780,
+        "end": 785
+      }
+    },
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 841,
+        "end": 846
+      }
+    },
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 847,
+        "end": 852
+      }
+    },
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 866,
+        "end": 871
+      }
+    },
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 1595,
+        "end": 1600
+      }
+    },
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 1609,
+        "end": 1614
+      }
+    },
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 1710,
+        "end": 1715
+      }
+    },
+    {
+      "node": "crates.io/quill/parse",
+      "span": {
+        "file": 0,
+        "start": 1724,
+        "end": 1729
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 799,
+        "end": 806
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 820,
+        "end": 827
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 828,
+        "end": 835
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 948,
+        "end": 955
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 1262,
+        "end": 1269
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 1563,
+        "end": 1570
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 1584,
+        "end": 1591
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 1734,
+        "end": 1741
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 1750,
+        "end": 1757
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 1859,
+        "end": 1866
+      }
+    },
+    {
+      "node": "crates.io/quill/to_html",
+      "span": {
+        "file": 0,
+        "start": 1878,
+        "end": 1885
+      }
+    },
+    {
+      "node": "crates.io/quill/lexer",
+      "span": {
+        "file": 0,
+        "start": 308,
+        "end": 362
+      }
+    },
+    {
+      "node": "crates.io/quill/lexer",
+      "span": {
+        "file": 0,
+        "start": 860,
+        "end": 865
+      }
+    },
+    {
+      "node": "crates.io/quill/lexer",
+      "span": {
+        "file": 0,
+        "start": 1213,
+        "end": 1218
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 363,
+        "end": 418
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 885
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 885
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 908,
+        "end": 914
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 925,
+        "end": 931
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 1618,
+        "end": 1624
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 1627,
+        "end": 1633
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 1676,
+        "end": 1682
+      }
+    },
+    {
+      "node": "crates.io/quill/blocks",
+      "span": {
+        "file": 0,
+        "start": 1699,
+        "end": 1705
+      }
+    },
+    {
+      "node": "crates.io/quill/inlines",
+      "span": {
+        "file": 0,
+        "start": 419,
+        "end": 475
+      }
+    },
+    {
+      "node": "crates.io/quill/inlines",
+      "span": {
+        "file": 0,
+        "start": 889,
+        "end": 896
+      }
+    },
+    {
+      "node": "crates.io/quill/inlines",
+      "span": {
+        "file": 0,
+        "start": 889,
+        "end": 896
+      }
+    },
+    {
+      "node": "crates.io/quill/ast",
+      "span": {
+        "file": 0,
+        "start": 476,
+        "end": 528
+      }
+    },
+    {
+      "node": "crates.io/quill/ast",
+      "span": {
+        "file": 0,
+        "start": 921,
+        "end": 924
+      }
+    },
+    {
+      "node": "crates.io/quill/ast",
+      "span": {
+        "file": 0,
+        "start": 989,
+        "end": 992
+      }
+    },
+    {
+      "node": "crates.io/quill/ast",
+      "span": {
+        "file": 0,
+        "start": 1110,
+        "end": 1113
+      }
+    },
+    {
+      "node": "crates.io/quill/ast",
+      "span": {
+        "file": 0,
+        "start": 1160,
+        "end": 1163
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 529,
+        "end": 582
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 965
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 965
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 976,
+        "end": 980
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 993,
+        "end": 997
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 1761,
+        "end": 1765
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 1779,
+        "end": 1783
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 1835,
+        "end": 1839
+      }
+    },
+    {
+      "node": "crates.io/quill/html",
+      "span": {
+        "file": 0,
+        "start": 1850,
+        "end": 1854
+      }
+    },
+    {
+      "node": "crates.io/quill/escape",
+      "span": {
+        "file": 0,
+        "start": 583,
+        "end": 638
+      }
+    },
+    {
+      "node": "crates.io/quill/escape",
+      "span": {
+        "file": 0,
+        "start": 969,
+        "end": 975
+      }
+    },
+    {
+      "node": "crates.io/quill/highlight",
+      "span": {
+        "file": 0,
+        "start": 639,
+        "end": 697
+      }
+    },
+    {
+      "node": "crates.io/quill/highlight",
+      "span": {
+        "file": 0,
+        "start": 1018,
+        "end": 1027
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 780,
+        "end": 785
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 841,
+        "end": 846
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 847,
+        "end": 852
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 866,
+        "end": 871
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 1595,
+        "end": 1600
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 1609,
+        "end": 1614
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 1710,
+        "end": 1715
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/parse",
+      "span": {
+        "file": 0,
+        "start": 1724,
+        "end": 1729
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 799,
+        "end": 806
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 820,
+        "end": 827
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 828,
+        "end": 835
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 948,
+        "end": 955
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 1262,
+        "end": 1269
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 1563,
+        "end": 1570
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 1584,
+        "end": 1591
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 1734,
+        "end": 1741
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 1750,
+        "end": 1757
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 1859,
+        "end": 1866
+      }
+    },
+    {
+      "node": "npm/@quill/wasm/to_html",
+      "span": {
+        "file": 0,
+        "start": 1878,
+        "end": 1885
+      }
+    }
+  ]
+}

@@ -89,7 +89,7 @@ fn check_github() {
 fn ir_prints_model() {
     let out = stdout(saxl().args(["ir", "examples/snip.saxl"]));
     let json: serde_json::Value = serde_json::from_str(&out).unwrap();
-    assert_eq!(json["ir_version"], 1);
+    assert_eq!(json["ir_version"], 2);
     assert_eq!(json["elements"].as_array().unwrap().len(), 11);
 }
 
@@ -116,7 +116,7 @@ fn ir_schema() {
 #[test]
 fn explain() {
     let list = stdout(saxl().arg("explain"));
-    assert_eq!(list.lines().count(), 27);
+    assert_eq!(list.lines().count(), 34);
     assert!(list.contains("E006  a scenario step has no matching relation"));
     let doc = stdout(saxl().args(["explain", "w102"]));
     assert!(doc.starts_with("# W102:"));
@@ -138,6 +138,26 @@ fn init_writes_once() {
     check
         .current_dir(&dir)
         .args(["check", "architecture.saxl", "--deny", "warnings"])
+        .assert()
+        .success();
+}
+
+#[test]
+fn init_library() {
+    let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join("saxl-init-library-test");
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+    let mut cmd = Command::cargo_bin("saxl").unwrap();
+    cmd.current_dir(&dir)
+        .args(["init", "--library", "lib.saxl"])
+        .assert()
+        .success();
+    let written = std::fs::read_to_string(dir.join("lib.saxl")).unwrap();
+    assert!(written.contains("library Quill"));
+    let mut check = Command::cargo_bin("saxl").unwrap();
+    check
+        .current_dir(&dir)
+        .args(["check", "lib.saxl", "--deny", "warnings"])
         .assert()
         .success();
 }
@@ -168,6 +188,24 @@ fn out_path(name: &str) -> PathBuf {
     let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join("saxl-render-test");
     std::fs::create_dir_all(&dir).unwrap();
     dir.join(name)
+}
+
+#[test]
+fn library_view_aliases() {
+    for (view, title) in [
+        ("modules", "Modules: Quill"),
+        ("types", "Types: Quill"),
+        ("packages", "Packages: Quill"),
+    ] {
+        let svg = out_path(&format!("quill-{view}.svg"));
+        saxl()
+            .args(["render", "examples/quill.saxl", "--view", view, "-o"])
+            .arg(&svg)
+            .assert()
+            .success();
+        let text = std::fs::read_to_string(&svg).unwrap();
+        assert!(text.contains(&format!("<title>{title}</title>")), "{view}");
+    }
 }
 
 #[test]

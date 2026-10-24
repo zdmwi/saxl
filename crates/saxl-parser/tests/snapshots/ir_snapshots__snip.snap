@@ -3,9 +3,10 @@ source: crates/saxl-parser/tests/ir_snapshots.rs
 expression: "parse_clean(include_str!(\"../../../examples/snip.saxl\"))"
 ---
 {
-  "ir_version": 1,
-  "systems": [
+  "ir_version": 2,
+  "roots": [
     {
+      "kind": "system",
       "name": {
         "text": "Snip",
         "span": {

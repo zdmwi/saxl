@@ -3,4 +3,4 @@
 /**
  * What a node depicts.
  */
-export type NodeKind = "actor" | "external" | "service" | "store" | "queue" | "system" | "infra" | "data_card" | "floor";
+export type NodeKind = "actor" | "external" | "service" | "store" | "queue" | "system" | "infra" | "data_card" | "floor" | "consumer" | "package" | "api" | "module" | "hook" | "library";

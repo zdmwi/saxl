@@ -8,8 +8,12 @@
 //! Actors stand in a column left of the grid on the top tier; externals in a
 //! column right of it, at the tier of a container they relate to. Pipes are
 //! routed through the lanes between cells by [`pipes`].
+//!
+//! A library uses the same shape: each published package is a tier and each
+//! registry a floor plate. Consumers stand where actors do; packages and
+//! hooks where externals do, so a call into a hook leaves the boundary.
 
-use saxl_core::{ElementKind, GroupKind as IrGroupKind};
+use saxl_core::{ElementKind, GroupKind as IrGroupKind, PackageKind};
 use saxl_validator::ValidatedModel;
 
 use crate::layout::node_size;
@@ -45,20 +49,31 @@ struct TierInfo {
     members: Vec<usize>,
 }
 
+/// An element's footprint, for routing pipes around it.
 fn shape(kind: ElementKind) -> Shape {
     match kind {
-        ElementKind::Actor => Shape::Actor,
-        ElementKind::External => Shape::External,
-        ElementKind::Service => Shape::Service,
+        ElementKind::Actor | ElementKind::Consumer => Shape::Actor,
+        ElementKind::External | ElementKind::Package | ElementKind::Hook => Shape::External,
+        ElementKind::Service | ElementKind::Api | ElementKind::Module => Shape::Service,
         ElementKind::Store => Shape::Store,
         ElementKind::Queue => Shape::Queue,
+    }
+}
+
+/// Which side of the grid an outside element stands on: left for callers,
+/// right for what the inside calls. `None` for elements inside.
+fn outside_side(kind: ElementKind) -> Option<bool> {
+    match kind {
+        ElementKind::Actor | ElementKind::Consumer => Some(true),
+        ElementKind::External | ElementKind::Package | ElementKind::Hook => Some(false),
+        _ => None,
     }
 }
 
 /// An element's box: its kind's shape, `base` the tier's height.
 fn element_box(n: &PNode, id: &str, kind: ElementKind, x: f64, z: f64, base: f64) -> Box3 {
     let (size, mid) = match kind {
-        ElementKind::Service => (
+        ElementKind::Service | ElementKind::Api | ElementKind::Module => (
             Point3::new(SERVICE.0, SERVICE.1, SERVICE.2),
             SERVICE.1 / 2.0,
         ),
@@ -67,8 +82,10 @@ fn element_box(n: &PNode, id: &str, kind: ElementKind, x: f64, z: f64, base: f64
             STORE.1 / 2.0,
         ),
         ElementKind::Queue => (Point3::new(QUEUE.0, 2.0 * QUEUE.1, 2.0 * QUEUE.1), QUEUE.2),
-        ElementKind::Actor => (Point3::new(ACTOR.0, ACTOR.1, ACTOR.2), ACTOR.1 / 2.0),
-        ElementKind::External => (
+        ElementKind::Actor | ElementKind::Consumer => {
+            (Point3::new(ACTOR.0, ACTOR.1, ACTOR.2), ACTOR.1 / 2.0)
+        }
+        ElementKind::External | ElementKind::Package | ElementKind::Hook => (
             Point3::new(EXTERNAL.0, EXTERNAL.1, EXTERNAL.2),
             EXTERNAL.1 / 2.0,
         ),
@@ -101,8 +118,11 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
     let resolved = vm.resolved();
     let n = model.elements.len();
 
-    // Tiers: one per deployment group, keyed by its caption, in declaration
-    // order; an element joins the group of its first deployment.
+    let library = project::is_library(model);
+
+    // Tiers: one per deployment group (or published package), keyed by its
+    // caption, in declaration order; an element joins the group of its first
+    // deployment (or publication).
     let group_label = |r: usize, g: usize| {
         let group = &model.regions[r].groups[g];
         match group.kind {
@@ -113,39 +133,85 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
             IrGroupKind::Managed => "managed".to_owned(),
         }
     };
+    let package_label = |r: usize, p: usize| {
+        let package = &model.registries[r].packages[p];
+        let keyword = match package.kind {
+            PackageKind::Crate => "crate",
+            PackageKind::Package => "package",
+        };
+        format!("{keyword} {}", package.name.text)
+    };
+    // Floor plates: `(name, zone captions)`, one per region (or registry).
+    let plates: Vec<(String, Vec<String>)> = if library {
+        model
+            .registries
+            .iter()
+            .enumerate()
+            .map(|(r, registry)| {
+                let zones = (0..registry.packages.len())
+                    .map(|p| package_label(r, p))
+                    .collect();
+                (registry.name.text.clone(), zones)
+            })
+            .collect()
+    } else {
+        model
+            .regions
+            .iter()
+            .enumerate()
+            .map(|(r, region)| {
+                let zones = (0..region.groups.len())
+                    .map(|g| group_label(r, g))
+                    .collect();
+                (region.name.text.clone(), zones)
+            })
+            .collect()
+    };
+    let home = |i: usize| {
+        if library {
+            resolved.publications[i]
+                .first()
+                .map(|p| package_label(p.registry, p.package))
+        } else {
+            resolved.deployments[i]
+                .first()
+                .map(|d| group_label(d.region, d.group))
+        }
+    };
     let mut tiers: Vec<TierInfo> = Vec::new();
-    for (r, region) in model.regions.iter().enumerate() {
-        for g in 0..region.groups.len() {
-            let label = group_label(r, g);
-            if !tiers.iter().any(|t| t.label == label) {
-                tiers.push(TierInfo {
-                    label,
-                    members: Vec::new(),
-                });
-            }
+    for label in plates.iter().flat_map(|(_, zones)| zones) {
+        if !tiers.iter().any(|t| t.label == *label) {
+            tiers.push(TierInfo {
+                label: label.clone(),
+                members: Vec::new(),
+            });
         }
     }
-    let mut undeployed = Vec::new();
+    let mut homeless = Vec::new();
     for (i, e) in model.elements.iter().enumerate() {
         if !e.kind.is_internal() {
             continue;
         }
-        match resolved.deployments[i].first() {
-            Some(d) => {
-                let label = group_label(d.region, d.group);
+        match home(i) {
+            Some(label) => {
                 if let Some(t) = tiers.iter_mut().find(|t| t.label == label) {
                     t.members.push(i);
                 }
             }
-            None => undeployed.push(i),
+            None => homeless.push(i),
         }
     }
-    if !undeployed.is_empty() {
+    if !homeless.is_empty() {
+        let label = if library {
+            "not published"
+        } else {
+            "not deployed"
+        };
         tiers.insert(
             0,
             TierInfo {
-                label: "not deployed".to_owned(),
-                members: undeployed,
+                label: label.to_owned(),
+                members: homeless,
             },
         );
     }
@@ -181,7 +247,15 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
                 (mean(&placed).unwrap_or(f64::INFINITY), i)
             })
             .collect();
-        order.sort_by(|a, b| a.0.total_cmp(&b.0).then(a.1.cmp(&b.1)));
+        // A library's apis come first, so they fill the columns facing its
+        // consumers.
+        let api = |i: usize| model.elements[i].kind != ElementKind::Api;
+        order.sort_by(|a, b| {
+            api(a.1)
+                .cmp(&api(b.1))
+                .then(a.0.total_cmp(&b.0))
+                .then(a.1.cmp(&b.1))
+        });
         for (slot, &(_, i)) in order.iter().enumerate() {
             let slot = slot as i32;
             cell[i] = Some((col0 + slot / rows, slot % rows, t));
@@ -194,10 +268,10 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
     // Outside: actors left of the grid on the top tier, externals right of it
     // at a related container's tier; each in the free row nearest its
     // neighbors' rows.
-    for (kind, col) in [(ElementKind::Actor, -1), (ElementKind::External, cols)] {
+    for (left, col) in [(true, -1), (false, cols)] {
         let mut used: Vec<i32> = Vec::new();
         for (i, e) in model.elements.iter().enumerate() {
-            if e.kind != kind {
+            if outside_side(e.kind) != Some(left) {
                 continue;
             }
             let placed: Vec<(i32, i32)> = neighbors[i]
@@ -206,7 +280,7 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
                 .collect();
             let rows_of: Vec<f64> = placed.iter().map(|p| f64::from(p.0)).collect();
             let want = mean(&rows_of).map_or(0, |m| m.round() as i32);
-            let tier = if kind == ElementKind::Actor {
+            let tier = if left {
                 top_tier
             } else {
                 placed.first().map_or(top_tier, |p| p.1)
@@ -249,6 +323,11 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
         trunks: Vec::new(),
         boundary: Boundary {
             label: project::system_name(model).to_owned(),
+            kind: if library {
+                NodeKind::Library
+            } else {
+                NodeKind::System
+            },
             min: world([-0.5 * CX, -0.5 * CY, -BOUNDARY.0]),
             max: world([
                 (f64::from(cols) - 0.5) * CX,
@@ -293,41 +372,49 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
         });
     }
 
-    // Floor: one plate per region, side by side along x; in each, one zone
-    // per group under its tier's band.
+    // Floor: one plate per region (or registry), side by side along x; in
+    // each, one zone per group (or package) under its tier's band.
     let plate_w = (f64::from(cols) + 0.8) * CX;
     let (fz0, fz1) = (-0.9 * CY - y0, (f64::from(rows) - 0.1) * CY - y0);
     let deploy = project::deployment(vm);
-    for (r, region) in model.regions.iter().enumerate() {
+    let (plate_word, zone_word) = if library {
+        ("registry", "package")
+    } else {
+        ("region", "group")
+    };
+    for (r, (plate, zones)) in plates.iter().enumerate() {
         let shift = r as f64 * (plate_w + 2.0);
         let (fx0, fx1) = (-0.9 * CX - x0 + shift, -0.9 * CX - x0 + shift + plate_w);
         tower.slabs.push(Box3 {
-            id: format!("region:{}", region.name.text),
+            id: format!("{plate_word}:{plate}"),
             kind: NodeKind::Floor,
             center: Point3::new((fx0 + fx1) / 2.0, -0.25, (fz0 + fz1) / 2.0),
             size: Point3::new(fx1 - fx0, 0.5, fz1 - fz0),
-            label: Some(region.name.text.clone()),
-            sublabel: Some("region".to_owned()),
+            label: Some(plate.clone()),
+            sublabel: Some(plate_word.to_owned()),
         });
         tower.labels.push(Label3 {
-            text: format!("{} · REGION", region.name.text.to_uppercase()),
+            text: format!("{} · {}", plate.to_uppercase(), plate_word.to_uppercase()),
             position: Point3::new(fx0 + 0.5, 0.0, fz1 - 0.25),
         });
-        for g in 0..region.groups.len() {
-            let label = group_label(r, g);
-            let Some((_, c0, c1, _)) = bands.iter().find(|b| b.0 == label) else {
+        for label in zones {
+            // A package that only re-exports owns no tier; its zone spans the
+            // plate so its pods still sit in a named zone.
+            let band = bands.iter().find(|b| b.0 == *label).map(|b| (b.1, b.2));
+            let Some((c0, c1)) = band.or_else(|| library.then_some((0, cols - 1))) else {
                 continue;
             };
+            let (c0, c1) = (&c0, &c1);
             let zx0 = (f64::from(*c0) - 0.5) * CX - x0 + shift + 0.1;
             let zx1 = (f64::from(*c1) + 0.5) * CX - x0 + shift - 0.1;
             let (zz0, zz1) = (-0.5 * CY - y0, (f64::from(rows) - 0.5) * CY - y0);
             tower.slabs.push(Box3 {
-                id: format!("group:{}/{label}", region.name.text),
+                id: format!("{zone_word}:{plate}/{label}"),
                 kind: NodeKind::Floor,
                 center: Point3::new((zx0 + zx1) / 2.0, 0.11, (zz0 + zz1) / 2.0),
                 size: Point3::new(zx1 - zx0, 0.22, zz1 - zz0),
                 label: Some(label.clone()),
-                sublabel: Some("group".to_owned()),
+                sublabel: Some(zone_word.to_owned()),
             });
             tower.labels.push(Label3 {
                 text: label.to_uppercase(),
@@ -345,6 +432,45 @@ pub(crate) fn layout(vm: &ValidatedModel) -> Tower {
                     size: Point3::new(w, 0.28, 1.2),
                     label: Some(p.label.clone()),
                     sublabel: p.sublabel.clone(),
+                });
+            }
+        }
+    }
+
+    // A library's publications: one pod per package an element ships in, a
+    // leader up to its container, and a tag when a feature gates it.
+    for (i, e) in model.elements.iter().enumerate() {
+        let Some((x, z, base)) = at(i).filter(|_| library) else {
+            continue;
+        };
+        for p in &resolved.publications[i] {
+            let shift = p.registry as f64 * (plate_w + 2.0);
+            let registry = &model.registries[p.registry];
+            tower.pods.push(Pod {
+                element: e.name.text.clone(),
+                managed: false,
+                geometry: Box3 {
+                    id: format!(
+                        "pod:{}/{}/{}",
+                        registry.name.text, registry.packages[p.package].name.text, e.name.text
+                    ),
+                    kind: e.kind.into(),
+                    center: Point3::new(x + shift, POD / 2.0, z),
+                    size: Point3::new(POD, POD, POD),
+                    label: None,
+                    sublabel: None,
+                },
+            });
+            tower.leaders.push(Leader {
+                element: e.name.text.clone(),
+                from: Point3::new(x + shift, POD, z),
+                to: Point3::new(x, LEVEL + base, z),
+            });
+            if let Some(f) = &p.feature {
+                tower.tags.push(Tag {
+                    element: e.name.text.clone(),
+                    text: format!("feature {f}"),
+                    position: Point3::new(x + shift, 0.05, z + 0.85),
                 });
             }
         }

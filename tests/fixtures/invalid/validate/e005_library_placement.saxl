@@ -1,0 +1,13 @@
+# expect: E005 @ 10:13
+# expect: E005 @ 11:26
+# expect: E005 @ 12:16
+library Quill
+api parse
+module ast
+package unicode
+parse -> ast
+parse -> unicode
+data Doc in unicode { blocks }
+data Block in ast cached parse { kind }
+data Token via ast -> ast { text }
+allow W110 "fixture"

@@ -1,0 +1,42 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/w109_feature_leak.saxl
+---
+W109
+
+  ⚠ always-built `html` depends on `highlight`, which needs feature `syntect`
+    ╭─[tests/fixtures/invalid/validate/w109_feature_leak.saxl:10:1]
+  9 │ to_html -> html
+ 10 │ html -> highlight
+    · ────────┬────────
+    ·         ╰── `highlight` is only built with feature `syntect`
+ 11 │ tables -> highlight
+    ╰────
+  help: call a hook that `highlight` implements instead, or gate `html` behind `syntect` too
+
+W109
+
+  ⚠ `tables` (feature `gfm`) depends on `highlight`, which needs feature `syntect`
+    ╭─[tests/fixtures/invalid/validate/w109_feature_leak.saxl:11:1]
+ 10 │ html -> highlight
+ 11 │ tables -> highlight
+    · ─────────┬─────────
+    ·          ╰── `highlight` is only built with feature `syntect`
+ 12 │ to_html -> tables
+    ╰────
+  help: call a hook that `highlight` implements instead, or gate `tables` behind `syntect` too
+
+W109
+
+  ⚠ always-built `to_html` depends on `tables`, which needs feature `gfm`
+    ╭─[tests/fixtures/invalid/validate/w109_feature_leak.saxl:12:1]
+ 11 │ tables -> highlight
+ 12 │ to_html -> tables
+    · ────────┬────────
+    ·         ╰── `tables` is only built with feature `gfm`
+ 13 │ publish "crates.io" {
+    ╰────
+  help: call a hook that `tables` implements instead, or gate `to_html` behind `gfm` too
+
+checked 1 file: 0 errors, 3 warnings, 0 infos

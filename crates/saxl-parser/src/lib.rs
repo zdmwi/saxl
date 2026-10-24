@@ -51,13 +51,61 @@ mod tests {
         let parsed = parse(include_str!("../../../examples/snip.saxl"), FileId(0));
         assert!(parsed.diagnostics.is_empty(), "{:#?}", parsed.diagnostics);
         let m = &parsed.model;
-        assert_eq!(m.systems.len(), 1);
+        assert_eq!(m.roots.len(), 1);
+        assert_eq!(m.roots[0].kind, saxl_core::RootKind::System);
         assert_eq!(m.elements.len(), 11);
         assert_eq!(m.relations.len(), 12);
         assert_eq!(m.data.len(), 3);
         assert_eq!(m.regions.len(), 1);
         assert_eq!(m.scenarios.len(), 2);
         assert_eq!(m.allows.len(), 1);
+    }
+
+    #[test]
+    fn quill_parses_cleanly() {
+        let parsed = parse(include_str!("../../../examples/quill.saxl"), FileId(0));
+        assert!(parsed.diagnostics.is_empty(), "{:#?}", parsed.diagnostics);
+        let m = &parsed.model;
+        assert_eq!(m.roots[0].kind, saxl_core::RootKind::Library);
+        assert_eq!(m.elements.len(), 15);
+        assert_eq!(m.elements.iter().filter(|e| e.at.is_some()).count(), 9);
+        assert_eq!(m.relations.len(), 15);
+        assert_eq!(m.impls.len(), 2);
+        assert_eq!(m.data.iter().filter(|d| d.public).count(), 3);
+        assert_eq!(m.registries.len(), 2);
+        assert_eq!(m.registries[0].name.text, "crates.io");
+        assert_eq!(m.registries[1].packages[0].name.text, "@quill/wasm");
+        assert_eq!(
+            m.registries[1].packages[0]
+                .target
+                .as_ref()
+                .map(|t| t.text.as_str()),
+            Some("wasm32")
+        );
+        assert_eq!(m.scenarios.len(), 1);
+    }
+
+    #[test]
+    fn library_syntax_errors() {
+        // `at` needs a string, `impl` takes one hook, and a publish block holds packages.
+        assert_eq!(codes("module m at src\n"), vec!["P001"]);
+        assert_eq!(codes("a impl b -> c\n"), vec!["P001"]);
+        assert_eq!(codes("a impl\n"), vec!["P001"]);
+        assert_eq!(codes("publish npm {\n  module m {\n  }\n}\n"), vec!["P001"]);
+        assert_eq!(
+            codes("publish npm {\n  crate c {\n    m feature\n  }\n}\n"),
+            vec!["P001"]
+        );
+    }
+
+    #[test]
+    fn contextual_words_stay_names() {
+        let parsed = parse(
+            "service target\nservice feature\ntarget -> feature\n",
+            FileId(0),
+        );
+        assert!(parsed.diagnostics.is_empty(), "{:#?}", parsed.diagnostics);
+        assert_eq!(parsed.model.relations.len(), 1);
     }
 
     #[test]

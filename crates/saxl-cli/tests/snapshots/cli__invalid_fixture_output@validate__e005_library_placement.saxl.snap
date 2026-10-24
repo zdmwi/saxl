@@ -1,0 +1,42 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e005_library_placement.saxl
+---
+E005
+
+  × the `in` target must be an api or module
+    ╭─[tests/fixtures/invalid/validate/e005_library_placement.saxl:10:13]
+  9 │ parse -> unicode
+ 10 │ data Doc in unicode { blocks }
+    ·             ───┬───
+    ·                ╰── `unicode` is a package
+ 11 │ data Block in ast cached parse { kind }
+    ╰────
+  help: name an api or module here, or declare `unicode` as one
+
+E005
+
+  × a library type can't be cached
+    ╭─[tests/fixtures/invalid/validate/e005_library_placement.saxl:11:26]
+ 10 │ data Doc in unicode { blocks }
+ 11 │ data Block in ast cached parse { kind }
+    ·                          ──┬──
+    ·                            ╰── `cached` only applies to stores
+ 12 │ data Token via ast -> ast { text }
+    ╰────
+  help: remove `cached …`; a type lives in the module that owns it
+
+E005
+
+  × a library type can't flow through a queue
+    ╭─[tests/fixtures/invalid/validate/e005_library_placement.saxl:12:16]
+ 11 │ data Block in ast cached parse { kind }
+ 12 │ data Token via ast -> ast { text }
+    ·                ─┬─
+    ·                 ╰── `via` only applies to queues
+ 13 │ allow W110 "fixture"
+    ╰────
+  help: write `data <Name> in <module>` instead
+
+checked 1 file: 3 errors, 0 warnings, 0 infos

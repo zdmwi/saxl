@@ -22,6 +22,9 @@ impl super::Rule for Rule {
     }
 
     fn check(&self, cx: &Context<'_>, out: &mut Vec<Diagnostic>) {
+        if cx.is_library() {
+            return;
+        }
         let mut in_calls = BTreeSet::new();
         for scenario in cx.scenarios() {
             super::for_each_message(&scenario.steps, &mut |hops, arrows, _| {

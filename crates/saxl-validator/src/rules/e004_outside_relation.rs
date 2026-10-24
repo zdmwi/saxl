@@ -24,22 +24,27 @@ impl super::Rule for Rule {
             let Some((from, to)) = ends else { continue };
             let (f, t) = (cx.element(*from), cx.element(*to));
             if !f.kind.is_internal() && !t.kind.is_internal() {
+                let (root, inside) = if cx.is_library() {
+                    ("library", "api or module")
+                } else {
+                    ("system", "service, store, or queue")
+                };
                 out.push(
                     Diagnostic::error(
                         "E004",
-                        "relation connects two elements outside the system",
+                        format!("relation connects two elements outside the {root}"),
                         rel.span,
                         format!(
-                            "`{}` ({}) and `{}` ({}) are both outside the system",
+                            "`{}` ({}) and `{}` ({}) are both outside the {root}",
                             f.name.text,
                             f.kind.keyword(),
                             t.name.text,
                             t.kind.keyword()
                         ),
                     )
-                    .with_help(
-                        "a relation needs at least one service, store, or queue inside the system",
-                    ),
+                    .with_help(format!(
+                        "a relation needs at least one {inside} inside the {root}"
+                    )),
                 );
             }
         }

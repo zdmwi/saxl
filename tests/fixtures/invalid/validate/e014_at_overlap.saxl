@@ -1,0 +1,12 @@
+# expect: E014 @ 6:18
+# expect: E014 @ 7:18
+# expect: E014 @ 8:19
+library Quill
+api parse at "src/**"
+module escape at "src/escape.rs"
+module blocks at "src/blocks/**"
+module inlines at "src/blocks/*.rs"
+parse -> escape
+parse -> blocks
+parse -> inlines
+allow W110 "fixture"

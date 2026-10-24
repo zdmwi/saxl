@@ -1,0 +1,473 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "data"
+  },
+  "title": "Types: Quill",
+  "size": {
+    "w": 516.0,
+    "h": 500.0
+  },
+  "nodes": [
+    {
+      "id": "ast",
+      "kind": "module",
+      "label": "ast",
+      "sublabel": "Doc tree",
+      "rect": {
+        "x": 24.0,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 476,
+        "end": 528
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "lexer",
+      "kind": "module",
+      "label": "lexer",
+      "sublabel": "line tokens",
+      "rect": {
+        "x": 184.0,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 308,
+        "end": 362
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "to_html",
+      "kind": "api",
+      "label": "to_html",
+      "sublabel": "text → HTML",
+      "rect": {
+        "x": 344.0,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "data:Doc",
+      "kind": "data_card",
+      "label": "Doc",
+      "sublabel": "in ast",
+      "rect": {
+        "x": 24.0,
+        "y": 160.0,
+        "w": 120.0,
+        "h": 120.0
+      },
+      "source": {
+        "file": 0,
+        "start": 1094,
+        "end": 1143
+      },
+      "badges": [
+        "pub"
+      ],
+      "fields": [
+        "blocks",
+        "footnotes"
+      ]
+    },
+    {
+      "id": "data:Block",
+      "kind": "data_card",
+      "label": "Block",
+      "sublabel": "in ast",
+      "rect": {
+        "x": 184.0,
+        "y": 160.0,
+        "w": 120.0,
+        "h": 138.0
+      },
+      "source": {
+        "file": 0,
+        "start": 1144,
+        "end": 1196
+      },
+      "badges": [
+        "pub"
+      ],
+      "fields": [
+        "kind",
+        "children",
+        "span"
+      ]
+    },
+    {
+      "id": "data:Token",
+      "kind": "data_card",
+      "label": "Token",
+      "sublabel": "in lexer",
+      "rect": {
+        "x": 344.0,
+        "y": 160.0,
+        "w": 120.0,
+        "h": 118.0
+      },
+      "source": {
+        "file": 0,
+        "start": 1197,
+        "end": 1245
+      },
+      "badges": [],
+      "fields": [
+        "kind",
+        "text",
+        "line"
+      ]
+    },
+    {
+      "id": "data:Options",
+      "kind": "data_card",
+      "label": "Options",
+      "sublabel": "in to_html",
+      "rect": {
+        "x": 24.0,
+        "y": 338.0,
+        "w": 120.0,
+        "h": 138.0
+      },
+      "source": {
+        "file": 0,
+        "start": 1246,
+        "end": 1308
+      },
+      "badges": [
+        "pub"
+      ],
+      "fields": [
+        "tables",
+        "footnotes",
+        "highlighter"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "data:Doc",
+      "to": "ast",
+      "style": "sync",
+      "points": [
+        {
+          "x": 48.0,
+          "y": 160.0
+        },
+        {
+          "x": 48.0,
+          "y": 96.0
+        },
+        {
+          "x": 76.0,
+          "y": 96.0
+        },
+        {
+          "x": 76.0,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Block",
+      "to": "ast",
+      "style": "sync",
+      "points": [
+        {
+          "x": 208.0,
+          "y": 160.0
+        },
+        {
+          "x": 208.0,
+          "y": 106.0
+        },
+        {
+          "x": 92.0,
+          "y": 106.0
+        },
+        {
+          "x": 92.0,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Token",
+      "to": "lexer",
+      "style": "sync",
+      "points": [
+        {
+          "x": 368.0,
+          "y": 160.0
+        },
+        {
+          "x": 368.0,
+          "y": 116.0
+        },
+        {
+          "x": 244.0,
+          "y": 116.0
+        },
+        {
+          "x": 244.0,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "data:Options",
+      "to": "to_html",
+      "style": "sync",
+      "points": [
+        {
+          "x": 48.0,
+          "y": 338.0
+        },
+        {
+          "x": 48.0,
+          "y": 318.0
+        },
+        {
+          "x": 168.0,
+          "y": 318.0
+        },
+        {
+          "x": 168.0,
+          "y": 126.0
+        },
+        {
+          "x": 404.0,
+          "y": 126.0
+        },
+        {
+          "x": 404.0,
+          "y": 80.0
+        }
+      ],
+      "label": null
+    }
+  ],
+  "groups": [],
+  "tower": null,
+  "timelines": [],
+  "anchors": [
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 476,
+        "end": 528
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 921,
+        "end": 924
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 989,
+        "end": 992
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 1110,
+        "end": 1113
+      }
+    },
+    {
+      "node": "ast",
+      "span": {
+        "file": 0,
+        "start": 1160,
+        "end": 1163
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 308,
+        "end": 362
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 860,
+        "end": 865
+      }
+    },
+    {
+      "node": "lexer",
+      "span": {
+        "file": 0,
+        "start": 1213,
+        "end": 1218
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 799,
+        "end": 806
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 820,
+        "end": 827
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 828,
+        "end": 835
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 948,
+        "end": 955
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1262,
+        "end": 1269
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1563,
+        "end": 1570
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1584,
+        "end": 1591
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1734,
+        "end": 1741
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1750,
+        "end": 1757
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1859,
+        "end": 1866
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1878,
+        "end": 1885
+      }
+    },
+    {
+      "node": "data:Doc",
+      "span": {
+        "file": 0,
+        "start": 1094,
+        "end": 1143
+      }
+    },
+    {
+      "node": "data:Block",
+      "span": {
+        "file": 0,
+        "start": 1144,
+        "end": 1196
+      }
+    },
+    {
+      "node": "data:Token",
+      "span": {
+        "file": 0,
+        "start": 1197,
+        "end": 1245
+      }
+    },
+    {
+      "node": "data:Options",
+      "span": {
+        "file": 0,
+        "start": 1246,
+        "end": 1308
+      }
+    }
+  ]
+}

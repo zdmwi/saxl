@@ -1,0 +1,5 @@
+# expect: E004 @ 5:1
+library Quill
+consumer App
+package unicode
+App -> unicode

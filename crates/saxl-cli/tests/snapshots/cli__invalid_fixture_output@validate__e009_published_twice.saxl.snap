@@ -1,0 +1,41 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e009_published_twice.saxl
+---
+E009
+
+  × `parse` is listed twice in package `quill`
+    ╭─[tests/fixtures/invalid/validate/e009_published_twice.saxl:10:5]
+  8 │   crate quill {
+  9 │     parse, lexer
+    ·     ──┬──
+    ·       ╰── first listed here
+ 10 │     parse
+    ·     ──┬──
+    ·       ╰── listed again here
+ 11 │   }
+    ╰────
+  help: list each element once per package
+
+E009
+
+  × module `lexer` is published in two packages
+    ╭─[tests/fixtures/invalid/validate/e009_published_twice.saxl:15:12]
+  8 │   crate quill {
+  9 │     parse, lexer
+    ·            ──┬──
+    ·              ╰── first published here
+ 10 │     parse
+ 11 │   }
+ 12 │ }
+ 13 │ publish npm {
+ 14 │   package "@quill/wasm" target wasm32 {
+ 15 │     parse, lexer
+    ·            ──┬──
+    ·              ╰── published again in `@quill/wasm`
+ 16 │   }
+    ╰────
+  help: a module belongs to one package; only an api can be re-exported by another
+
+checked 1 file: 2 errors, 0 warnings, 0 infos

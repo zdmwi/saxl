@@ -3,4 +3,4 @@
 /**
  * How an edge is drawn.
  */
-export type EdgeStyle = "sync" | "async" | "reply";
+export type EdgeStyle = "sync" | "async" | "reply" | "impl";

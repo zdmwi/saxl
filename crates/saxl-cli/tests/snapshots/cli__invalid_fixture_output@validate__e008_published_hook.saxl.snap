@@ -1,0 +1,18 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e008_published_hook.saxl
+---
+E008
+
+  × `Highlighter` is a hook and can't be published
+   ╭─[tests/fixtures/invalid/validate/e008_published_hook.saxl:8:14]
+ 7 │   crate quill {
+ 8 │     to_html, Highlighter
+   ·              ─────┬─────
+   ·                   ╰── hooks are not part of the library
+ 9 │   }
+   ╰────
+  help: only apis and modules are published
+
+checked 1 file: 1 error, 0 warnings, 0 infos

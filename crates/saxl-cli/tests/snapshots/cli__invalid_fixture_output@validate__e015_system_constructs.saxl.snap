@@ -1,0 +1,78 @@
+---
+source: crates/saxl-cli/tests/cli.rs
+expression: "String::from_utf8(output.stdout).unwrap()"
+input_file: tests/fixtures/invalid/validate/e015_system_constructs.saxl
+---
+E015
+
+  × `at` is not allowed in a system
+   ╭─[tests/fixtures/invalid/validate/e015_system_constructs.saxl:8:16]
+ 7 │ system Shop
+ 8 │ service Web at "src/web.rs"
+   ·                ──────┬─────
+   ·                      ╰── only library elements say where their code lives
+ 9 │ module Cart
+   ╰────
+  help: remove the `at` clause
+
+E015
+
+  × `module` is not allowed in a system
+    ╭─[tests/fixtures/invalid/validate/e015_system_constructs.saxl:9:1]
+  8 │ service Web at "src/web.rs"
+  9 │ module Cart
+    · ─────┬─────
+    ·      ╰── `Cart` is a module
+ 10 │ store DB
+    ╰────
+  help: describe the library in its own file, starting with `library <Name>`
+
+E015
+
+  × `impl` is not allowed in a system
+    ╭─[tests/fixtures/invalid/validate/e015_system_constructs.saxl:13:1]
+ 12 │ Web -> DB
+ 13 │ Cart impl Web
+    · ──────┬──────
+    ·       ╰── only libraries have hooks
+ 14 │ data Order in DB pub { id }
+    ╰────
+  help: describe the library in its own file, starting with `library <Name>`
+
+E015
+
+  × `pub` is not allowed in a system
+    ╭─[tests/fixtures/invalid/validate/e015_system_constructs.saxl:14:6]
+ 13 │ Cart impl Web
+ 14 │ data Order in DB pub { id }
+    ·      ──┬──
+    ·        ╰── marked `pub`
+ 15 │ deploy region eu {
+    ╰────
+  help: remove `pub`; only library types are public or internal
+
+E015
+
+  × `feature` is not allowed in a `deploy` block
+    ╭─[tests/fixtures/invalid/validate/e015_system_constructs.saxl:17:9]
+ 16 │   cluster main {
+ 17 │     Web feature beta
+    ·         ──────┬─────
+    ·               ╰── a publish attribute
+ 18 │   }
+    ╰────
+  help: feature flags belong to a library's `publish` block
+
+E015
+
+  × `publish` is not allowed in a system
+    ╭─[tests/fixtures/invalid/validate/e015_system_constructs.saxl:20:1]
+ 19 │ }
+ 20 │ publish npm {
+    · ───┬───
+    ·    ╰── a system is deployed, not published
+ 21 │   package web {
+    ╰────
+  help: list the system's workloads in a `deploy region` block instead
+
+checked 1 file: 6 errors, 0 warnings, 0 infos

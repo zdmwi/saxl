@@ -37,6 +37,13 @@ export interface ViewerHandle {
   destroy(): void;
 }
 
+/** A tab's label: the view's name from the scene title ("Modules: Quill"), so
+ * a library's views get their own names. Falls back to the fixed label. */
+function tabLabel(scene: Scene): string {
+  const name = scene.title.split(":")[0];
+  return name && scene.view.kind !== "runtime" ? name : LABELS[scene.view.kind];
+}
+
 const LABELS: Record<ViewKind["kind"], string> = {
   context: "Context",
   containers: "Containers",
@@ -101,7 +108,7 @@ export function mount(el: HTMLElement, scenes: Scene[], opts: ViewerOptions = {}
       const kind = scene.view.kind;
       if (seen.has(kind)) continue;
       seen.add(kind);
-      const button = h("button", undefined, LABELS[kind]);
+      const button = h("button", undefined, tabLabel(scene));
       button.type = "button";
       button.setAttribute("aria-pressed", String(current?.kind === kind));
       button.addEventListener("click", () => {

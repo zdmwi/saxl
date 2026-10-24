@@ -21,3 +21,8 @@ fn valid_fixtures() {
 fn snip() {
     insta::assert_json_snapshot!(parse_clean(include_str!("../../../examples/snip.saxl")));
 }
+
+#[test]
+fn quill() {
+    insta::assert_json_snapshot!(parse_clean(include_str!("../../../examples/quill.saxl")));
+}

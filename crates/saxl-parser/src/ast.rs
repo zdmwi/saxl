@@ -1,6 +1,9 @@
 //! The private syntax tree. It mirrors the grammar; `lower` turns it into the IR.
 
-use saxl_core::{Attribute, ElementKind, GroupKind, Name, NameRef, Span, StepArrow, Style};
+use saxl_core::{
+    Attribute, ElementKind, Glob, GroupKind, Name, NameRef, PackageKind, RootKind, Span, StepArrow,
+    Style,
+};
 
 /// An identifier as written.
 #[derive(Debug, Clone)]
@@ -27,7 +30,8 @@ impl Ident {
 
 #[derive(Debug)]
 pub(crate) enum Stmt {
-    System {
+    Root {
+        kind: RootKind,
         name: Ident,
         description: Option<String>,
         span: Span,
@@ -36,6 +40,13 @@ pub(crate) enum Stmt {
         kind: ElementKind,
         name: Ident,
         description: Option<String>,
+        at: Option<Glob>,
+        span: Span,
+    },
+    /// `implementor impl hook`.
+    Impl {
+        implementor: Ident,
+        hook: Ident,
         span: Span,
     },
     /// `A -> B ~> C "desc"`. `arrows.len() == hops.len() - 1`.
@@ -48,11 +59,17 @@ pub(crate) enum Stmt {
         name: Ident,
         placement: Placement,
         fields: Vec<Ident>,
+        public: bool,
         span: Span,
     },
     Deploy {
         name: Ident,
         items: Vec<DeployItem>,
+        span: Span,
+    },
+    Publish {
+        name: Ident,
+        packages: Vec<PublishedPackage>,
         span: Span,
     },
     Scenario {
@@ -85,6 +102,15 @@ pub(crate) enum DeployItem {
         workloads: Vec<Workload>,
         span: Span,
     },
+}
+
+#[derive(Debug)]
+pub(crate) struct PublishedPackage {
+    pub kind: PackageKind,
+    pub name: Ident,
+    pub target: Option<Ident>,
+    pub workloads: Vec<Workload>,
+    pub span: Span,
 }
 
 #[derive(Debug)]

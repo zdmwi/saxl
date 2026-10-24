@@ -1,0 +1,904 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_json(&scene)"
+---
+{
+  "view": {
+    "kind": "runtime",
+    "scenario": "render_note"
+  },
+  "title": "Runtime: render_note",
+  "size": {
+    "w": 1324.0,
+    "h": 642.0
+  },
+  "nodes": [
+    {
+      "id": "SiteGen",
+      "kind": "consumer",
+      "label": "SiteGen",
+      "sublabel": "static sites",
+      "rect": {
+        "x": 50.0,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 64,
+        "end": 95
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "to_html",
+      "kind": "api",
+      "label": "to_html",
+      "sublabel": "text → HTML",
+      "rect": {
+        "x": 230.0,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "parse",
+      "kind": "api",
+      "label": "parse",
+      "sublabel": "text → Doc",
+      "rect": {
+        "x": 410.0,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "blocks",
+      "kind": "module",
+      "label": "blocks",
+      "sublabel": "block structure",
+      "rect": {
+        "x": 580.0,
+        "y": 24.0,
+        "w": 140.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 363,
+        "end": 418
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Extension",
+      "kind": "hook",
+      "label": "Extension",
+      "sublabel": "custom blocks",
+      "rect": {
+        "x": 767.2,
+        "y": 24.0,
+        "w": 125.6,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 698,
+        "end": 732
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "html",
+      "kind": "module",
+      "label": "html",
+      "sublabel": "HTML writer",
+      "rect": {
+        "x": 950.0,
+        "y": 24.0,
+        "w": 120.0,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 529,
+        "end": 582
+      },
+      "badges": [],
+      "fields": []
+    },
+    {
+      "id": "Highlighter",
+      "kind": "hook",
+      "label": "Highlighter",
+      "sublabel": "colors code",
+      "rect": {
+        "x": 1127.8,
+        "y": 24.0,
+        "w": 124.4,
+        "h": 56.0
+      },
+      "source": {
+        "file": 0,
+        "start": 733,
+        "end": 765
+      },
+      "badges": [],
+      "fields": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "SiteGen",
+      "to": "to_html",
+      "style": "sync",
+      "points": [
+        {
+          "x": 110.0,
+          "y": 112.0
+        },
+        {
+          "x": 290.0,
+          "y": 112.0
+        }
+      ],
+      "label": "markdown"
+    },
+    {
+      "from": "to_html",
+      "to": "parse",
+      "style": "sync",
+      "points": [
+        {
+          "x": 290.0,
+          "y": 156.0
+        },
+        {
+          "x": 470.0,
+          "y": 156.0
+        }
+      ],
+      "label": "src"
+    },
+    {
+      "from": "parse",
+      "to": "blocks",
+      "style": "sync",
+      "points": [
+        {
+          "x": 470.0,
+          "y": 200.0
+        },
+        {
+          "x": 650.0,
+          "y": 200.0
+        }
+      ],
+      "label": null
+    },
+    {
+      "from": "blocks",
+      "to": "Extension",
+      "style": "sync",
+      "points": [
+        {
+          "x": 650.0,
+          "y": 244.0
+        },
+        {
+          "x": 830.0,
+          "y": 244.0
+        }
+      ],
+      "label": "note fence"
+    },
+    {
+      "from": "Extension",
+      "to": "blocks",
+      "style": "reply",
+      "points": [
+        {
+          "x": 830.0,
+          "y": 288.0
+        },
+        {
+          "x": 650.0,
+          "y": 288.0
+        }
+      ],
+      "label": "Block::Note"
+    },
+    {
+      "from": "blocks",
+      "to": "parse",
+      "style": "reply",
+      "points": [
+        {
+          "x": 650.0,
+          "y": 332.0
+        },
+        {
+          "x": 470.0,
+          "y": 332.0
+        }
+      ],
+      "label": "Doc"
+    },
+    {
+      "from": "parse",
+      "to": "to_html",
+      "style": "reply",
+      "points": [
+        {
+          "x": 470.0,
+          "y": 376.0
+        },
+        {
+          "x": 290.0,
+          "y": 376.0
+        }
+      ],
+      "label": "Doc"
+    },
+    {
+      "from": "to_html",
+      "to": "html",
+      "style": "sync",
+      "points": [
+        {
+          "x": 290.0,
+          "y": 420.0
+        },
+        {
+          "x": 1010.0,
+          "y": 420.0
+        }
+      ],
+      "label": "walk Doc"
+    },
+    {
+      "from": "html",
+      "to": "Highlighter",
+      "style": "sync",
+      "points": [
+        {
+          "x": 1010.0,
+          "y": 464.0
+        },
+        {
+          "x": 1190.0,
+          "y": 464.0
+        }
+      ],
+      "label": "rust code block"
+    },
+    {
+      "from": "Highlighter",
+      "to": "html",
+      "style": "reply",
+      "points": [
+        {
+          "x": 1190.0,
+          "y": 508.0
+        },
+        {
+          "x": 1010.0,
+          "y": 508.0
+        }
+      ],
+      "label": "spans"
+    },
+    {
+      "from": "html",
+      "to": "to_html",
+      "style": "reply",
+      "points": [
+        {
+          "x": 1010.0,
+          "y": 552.0
+        },
+        {
+          "x": 290.0,
+          "y": 552.0
+        }
+      ],
+      "label": "String"
+    },
+    {
+      "from": "to_html",
+      "to": "SiteGen",
+      "style": "reply",
+      "points": [
+        {
+          "x": 290.0,
+          "y": 596.0
+        },
+        {
+          "x": 110.0,
+          "y": 596.0
+        }
+      ],
+      "label": "HTML"
+    }
+  ],
+  "groups": [
+    {
+      "id": "hook-Extension",
+      "kind": "hook",
+      "label": "",
+      "rect": {
+        "x": 748.0,
+        "y": 12.0,
+        "w": 164.0,
+        "h": 618.0
+      },
+      "depth": 0
+    },
+    {
+      "id": "hook-Highlighter",
+      "kind": "hook",
+      "label": "",
+      "rect": {
+        "x": 1108.0,
+        "y": 12.0,
+        "w": 164.0,
+        "h": 618.0
+      },
+      "depth": 0
+    }
+  ],
+  "tower": null,
+  "timelines": [
+    {
+      "scenario": "render_note",
+      "steps": [
+        {
+          "index": 0,
+          "from": "SiteGen",
+          "to": "to_html",
+          "via": [],
+          "arrow": "sync",
+          "label": "markdown",
+          "row": 0
+        },
+        {
+          "index": 1,
+          "from": "to_html",
+          "to": "parse",
+          "via": [],
+          "arrow": "sync",
+          "label": "src",
+          "row": 1
+        },
+        {
+          "index": 2,
+          "from": "parse",
+          "to": "blocks",
+          "via": [],
+          "arrow": "sync",
+          "label": null,
+          "row": 2
+        },
+        {
+          "index": 3,
+          "from": "blocks",
+          "to": "Extension",
+          "via": [],
+          "arrow": "sync",
+          "label": "note fence",
+          "row": 3
+        },
+        {
+          "index": 4,
+          "from": "Extension",
+          "to": "blocks",
+          "via": [],
+          "arrow": "reply",
+          "label": "Block::Note",
+          "row": 4
+        },
+        {
+          "index": 5,
+          "from": "blocks",
+          "to": "parse",
+          "via": [],
+          "arrow": "reply",
+          "label": "Doc",
+          "row": 5
+        },
+        {
+          "index": 6,
+          "from": "parse",
+          "to": "to_html",
+          "via": [],
+          "arrow": "reply",
+          "label": "Doc",
+          "row": 6
+        },
+        {
+          "index": 7,
+          "from": "to_html",
+          "to": "html",
+          "via": [],
+          "arrow": "sync",
+          "label": "walk Doc",
+          "row": 7
+        },
+        {
+          "index": 8,
+          "from": "html",
+          "to": "Highlighter",
+          "via": [],
+          "arrow": "sync",
+          "label": "rust code block",
+          "row": 8
+        },
+        {
+          "index": 9,
+          "from": "Highlighter",
+          "to": "html",
+          "via": [],
+          "arrow": "reply",
+          "label": "spans",
+          "row": 9
+        },
+        {
+          "index": 10,
+          "from": "html",
+          "to": "to_html",
+          "via": [],
+          "arrow": "reply",
+          "label": "String",
+          "row": 10
+        },
+        {
+          "index": 11,
+          "from": "to_html",
+          "to": "SiteGen",
+          "via": [],
+          "arrow": "reply",
+          "label": "HTML",
+          "row": 11
+        }
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 64,
+        "end": 95
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 767,
+        "end": 774
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 786,
+        "end": 793
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 1552,
+        "end": 1559
+      }
+    },
+    {
+      "node": "SiteGen",
+      "span": {
+        "file": 0,
+        "start": 1890,
+        "end": 1897
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 250,
+        "end": 307
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 799,
+        "end": 806
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 820,
+        "end": 827
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 828,
+        "end": 835
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 948,
+        "end": 955
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1262,
+        "end": 1269
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1563,
+        "end": 1570
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1584,
+        "end": 1591
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1734,
+        "end": 1741
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1750,
+        "end": 1757
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1859,
+        "end": 1866
+      }
+    },
+    {
+      "node": "to_html",
+      "span": {
+        "file": 0,
+        "start": 1878,
+        "end": 1885
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 193,
+        "end": 249
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 780,
+        "end": 785
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 841,
+        "end": 846
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 847,
+        "end": 852
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 866,
+        "end": 871
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1595,
+        "end": 1600
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1609,
+        "end": 1614
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1710,
+        "end": 1715
+      }
+    },
+    {
+      "node": "parse",
+      "span": {
+        "file": 0,
+        "start": 1724,
+        "end": 1729
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 363,
+        "end": 418
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 885
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 879,
+        "end": 885
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 908,
+        "end": 914
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 925,
+        "end": 931
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1618,
+        "end": 1624
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1627,
+        "end": 1633
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1676,
+        "end": 1682
+      }
+    },
+    {
+      "node": "blocks",
+      "span": {
+        "file": 0,
+        "start": 1699,
+        "end": 1705
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 698,
+        "end": 732
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 938,
+        "end": 947
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 1637,
+        "end": 1646
+      }
+    },
+    {
+      "node": "Extension",
+      "span": {
+        "file": 0,
+        "start": 1662,
+        "end": 1671
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 529,
+        "end": 582
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 965
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 961,
+        "end": 965
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 976,
+        "end": 980
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 993,
+        "end": 997
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1761,
+        "end": 1765
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1779,
+        "end": 1783
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1835,
+        "end": 1839
+      }
+    },
+    {
+      "node": "html",
+      "span": {
+        "file": 0,
+        "start": 1850,
+        "end": 1854
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 733,
+        "end": 765
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1006,
+        "end": 1017
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1787,
+        "end": 1798
+      }
+    },
+    {
+      "node": "Highlighter",
+      "span": {
+        "file": 0,
+        "start": 1819,
+        "end": 1830
+      }
+    }
+  ]
+}

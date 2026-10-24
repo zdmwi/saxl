@@ -1,0 +1,49 @@
+---
+source: crates/saxl-renderer/tests/scenes.rs
+expression: "saxl_renderer::to_svg(&scene).unwrap()"
+---
+<svg xmlns="http://www.w3.org/2000/svg" width="1324" height="642" viewBox="0 0 1324 642" font-family="ui-monospace, Menlo, Consolas, monospace">
+<title>Runtime: render_note</title>
+<style>.bg{fill:#f8f9fb}text{fill:#151a22}.sub,.group-label,.badge,.edge-label{fill:#586274}.node{color:#7d889a}.node-service{color:#5b57d1}.node-store{color:#0f8a6c}.node-queue{color:#d4552b}.node-api,.node-module,.node-library{color:#5b57d1}.node-hook{color:#c98407}.node .base{fill:#f8f9fb}.edge{stroke:#586274}.edge-async{stroke:#d4552b}.edge-impl{stroke:#c98407}.edge-label{stroke:#f8f9fb}.lifeline,.group rect{stroke:#7d889a}.group-parallel rect{stroke:#c98407;fill:#c98407}.group-hook rect{fill:#c98407}.group-hook .group-label{fill:#c98407}.arrow-sync,.arrow-reply{fill:#586274}.arrow-async{fill:#d4552b}.arrow-impl{fill:#f8f9fb;stroke:#c98407}@media (prefers-color-scheme:dark){.bg{fill:#151a21}text{fill:#e6e9ef}.sub,.group-label,.badge,.edge-label{fill:#97a1b2}.node{color:#6d7789}.node-service{color:#8f8cf0}.node-store{color:#3fc79f}.node-queue{color:#f07a52}.node-api,.node-module,.node-library{color:#8f8cf0}.node-hook{color:#f5b742}.node .base{fill:#151a21}.edge{stroke:#97a1b2}.edge-async{stroke:#f07a52}.edge-impl{stroke:#f5b742}.edge-label{stroke:#151a21}.lifeline,.group rect{stroke:#6d7789}.group-parallel rect{stroke:#f5b742;fill:#f5b742}.group-hook rect{fill:#f5b742}.group-hook .group-label{fill:#f5b742}.arrow-sync,.arrow-reply{fill:#97a1b2}.arrow-async{fill:#f07a52}.arrow-impl{fill:#151a21;stroke:#f5b742}}text{font-size:14px}.sub,.badge,.field,.edge-label,.group-label{font-size:12px}.badge{font-weight:600}.node .tint{fill:currentColor;fill-opacity:.1;stroke:currentColor;stroke-width:1.5}.node-external .tint,.node-infra .tint,.node-package .tint{stroke-dasharray:5 3}.node-system .tint,.node-library .tint{fill-opacity:.05;stroke-width:2}.node-api .tint{stroke-width:2.5;fill-opacity:.16}.edge{fill:none;stroke-width:1.5}.edge-async,.edge-impl{stroke-dasharray:6 4}.edge-reply{stroke-dasharray:2 4;opacity:.75}.edge-label{paint-order:stroke;stroke-width:4px}.lifeline{stroke-dasharray:4 4;opacity:.6}.group rect{fill:none;stroke-width:1.2}.group-cluster rect,.group-managed rect,.group-package rect{stroke-dasharray:6 3}.group-hook rect{stroke:none;fill-opacity:.07}.group-parallel rect{fill-opacity:.06}.node .rim{fill:none;stroke:currentColor;stroke-width:1.5}</style>
+<defs><marker id="arrow-sync" class="arrow-sync" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z"/></marker><marker id="arrow-async" class="arrow-async" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z"/></marker><marker id="arrow-reply" class="arrow-reply" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z"/></marker><marker id="arrow-impl" class="arrow-impl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z"/></marker></defs>
+<rect class="bg" width="1324" height="642"/>
+<g class="group group-hook"><rect x="748" y="12" width="164" height="618" rx="8"/><text class="group-label" x="758" y="30"></text></g>
+<g class="group group-hook"><rect x="1108" y="12" width="164" height="618" rx="8"/><text class="group-label" x="1118" y="30"></text></g>
+<line class="lifeline" x1="110" y1="80" x2="110" y2="618"/>
+<line class="lifeline" x1="290" y1="80" x2="290" y2="618"/>
+<line class="lifeline" x1="470" y1="80" x2="470" y2="618"/>
+<line class="lifeline" x1="650" y1="80" x2="650" y2="618"/>
+<line class="lifeline" x1="830" y1="80" x2="830" y2="618"/>
+<line class="lifeline" x1="1010" y1="80" x2="1010" y2="618"/>
+<line class="lifeline" x1="1190" y1="80" x2="1190" y2="618"/>
+<polyline class="edge edge-sync" points="110,112 290,112" marker-end="url(#arrow-sync)"/>
+<text class="edge-label" x="200" y="106" text-anchor="middle">markdown</text>
+<polyline class="edge edge-sync" points="290,156 470,156" marker-end="url(#arrow-sync)"/>
+<text class="edge-label" x="380" y="150" text-anchor="middle">src</text>
+<polyline class="edge edge-sync" points="470,200 650,200" marker-end="url(#arrow-sync)"/>
+<polyline class="edge edge-sync" points="650,244 830,244" marker-end="url(#arrow-sync)"/>
+<text class="edge-label" x="740" y="238" text-anchor="middle">note fence</text>
+<polyline class="edge edge-reply" points="830,288 650,288" marker-end="url(#arrow-reply)"/>
+<text class="edge-label" x="740" y="282" text-anchor="middle">Block::Note</text>
+<polyline class="edge edge-reply" points="650,332 470,332" marker-end="url(#arrow-reply)"/>
+<text class="edge-label" x="560" y="326" text-anchor="middle">Doc</text>
+<polyline class="edge edge-reply" points="470,376 290,376" marker-end="url(#arrow-reply)"/>
+<text class="edge-label" x="380" y="370" text-anchor="middle">Doc</text>
+<polyline class="edge edge-sync" points="290,420 1010,420" marker-end="url(#arrow-sync)"/>
+<text class="edge-label" x="650" y="414" text-anchor="middle">walk Doc</text>
+<polyline class="edge edge-sync" points="1010,464 1190,464" marker-end="url(#arrow-sync)"/>
+<text class="edge-label" x="1100" y="458" text-anchor="middle">rust code block</text>
+<polyline class="edge edge-reply" points="1190,508 1010,508" marker-end="url(#arrow-reply)"/>
+<text class="edge-label" x="1100" y="502" text-anchor="middle">spans</text>
+<polyline class="edge edge-reply" points="1010,552 290,552" marker-end="url(#arrow-reply)"/>
+<text class="edge-label" x="650" y="546" text-anchor="middle">String</text>
+<polyline class="edge edge-reply" points="290,596 110,596" marker-end="url(#arrow-reply)"/>
+<text class="edge-label" x="200" y="590" text-anchor="middle">HTML</text>
+<g class="node node-consumer" data-id="SiteGen"><rect class="base" x="50" y="24" width="120" height="56" rx="18"/><rect class="tint" x="50" y="24" width="120" height="56" rx="18"/><text x="110" y="46" text-anchor="middle" font-weight="600">SiteGen</text><text class="sub" x="110" y="64" text-anchor="middle">static sites</text></g>
+<g class="node node-api" data-id="to_html"><rect class="base" x="230" y="24" width="120" height="56" rx="6"/><rect class="tint" x="230" y="24" width="120" height="56" rx="6"/><text x="290" y="46" text-anchor="middle" font-weight="600">to_html</text><text class="sub" x="290" y="64" text-anchor="middle">text → HTML</text></g>
+<g class="node node-api" data-id="parse"><rect class="base" x="410" y="24" width="120" height="56" rx="6"/><rect class="tint" x="410" y="24" width="120" height="56" rx="6"/><text x="470" y="46" text-anchor="middle" font-weight="600">parse</text><text class="sub" x="470" y="64" text-anchor="middle">text → Doc</text></g>
+<g class="node node-module" data-id="blocks"><rect class="base" x="580" y="24" width="140" height="56" rx="6"/><rect class="tint" x="580" y="24" width="140" height="56" rx="6"/><text x="650" y="46" text-anchor="middle" font-weight="600">blocks</text><text class="sub" x="650" y="64" text-anchor="middle">block structure</text></g>
+<g class="node node-hook" data-id="Extension"><rect class="base" x="767.2" y="24" width="125.6" height="56" rx="14"/><rect class="tint" x="767.2" y="24" width="125.6" height="56" rx="14"/><text x="830" y="46" text-anchor="middle" font-weight="600">Extension</text><text class="sub" x="830" y="64" text-anchor="middle">custom blocks</text></g>
+<g class="node node-module" data-id="html"><rect class="base" x="950" y="24" width="120" height="56" rx="6"/><rect class="tint" x="950" y="24" width="120" height="56" rx="6"/><text x="1010" y="46" text-anchor="middle" font-weight="600">html</text><text class="sub" x="1010" y="64" text-anchor="middle">HTML writer</text></g>
+<g class="node node-hook" data-id="Highlighter"><rect class="base" x="1127.8" y="24" width="124.4" height="56" rx="14"/><rect class="tint" x="1127.8" y="24" width="124.4" height="56" rx="14"/><text x="1190" y="46" text-anchor="middle" font-weight="600">Highlighter</text><text class="sub" x="1190" y="64" text-anchor="middle">colors code</text></g>
+</svg>
