@@ -1,6 +1,6 @@
 # saxl
 
-saxl (Software Architecture eXpression Language) is a small text language for describing a software system once and generating every architecture view from that one description: context, containers, runtime scenarios, data, deployment, and a 3D "tower" that stacks them all.
+saxl (Software Architecture eXpression Language) is a small text language for describing a software system once and generating every architecture view from that one description: context, containers, runtime scenarios, data, deployment, and a 3D "tower" that stacks them all. It can describe a [library](#libraries) the same way.
 
 Because every view comes from the same model, the views can't contradict each other. And because the model is structured, it can be checked: the validator works like a type checker for the architecture, catching scenarios that use connections nobody declared, services with nowhere to run, data with no source of truth, and single points of failure.
 
@@ -107,6 +107,54 @@ Every view below is generated from the file above.
 
 **Tower:** an axonometric 3D view. The deployment floor sits at the bottom; containers hang above it in tiers, one per deployment group (in declaration order, top first), each on dashed leaders from its replicas; relations are pipes routed so that unrelated pipes never touch, and a container with four or more outgoing relations sends them through a shared trunk. It is interactive (drag the model to rotate, drag empty space to pan, hover or click to focus, explode the tiers, and play a scenario as tokens moving along the pipes), so it lives in the HTML output, `saxl serve`, and the playground rather than in an image. [examples/shopfront.saxl](examples/shopfront.saxl) is a 24-container example that exercises it.
 
+## Libraries
+
+A file that starts with `library` instead of `system` describes code that other code calls. [examples/quill.saxl](examples/quill.saxl), a toy Markdown library, is the reference example:
+
+```saxl
+library Quill "Markdown to HTML"
+
+consumer SiteGen "static sites"
+package  syntect "highlighting"
+
+api    to_html     "text → HTML"     at "src/render.rs"
+module html        "HTML writer"     at "src/html.rs"
+module highlight   "syntect adapter" at "src/highlight.rs"
+hook   Highlighter "colors code"
+
+SiteGen   -> to_html
+to_html   -> html -> Highlighter
+highlight -> syntect
+highlight impl Highlighter
+
+data Options in to_html pub { tables, highlighter }
+
+publish "crates.io" {
+  crate quill {
+    to_html, html
+    highlight feature syntect
+  }
+}
+```
+
+| Keyword | Meaning |
+|---|---|
+| `consumer` | Code that calls the library. |
+| `package` | A third-party dependency. |
+| `api`, `module` | A public entry point, and an internal component. Consumers may only call an `api`. |
+| `hook` | An interface the library calls and someone else implements. `A impl Hook` says who does. |
+| `at "glob"` | Optional: where an api's or module's code lives. |
+| `pub` | Marks a type as part of the public API. |
+| `publish` | The packages the library ships, by registry. `feature f` marks code built only with that feature. |
+
+`~>` is a call that doesn't wait, such as an async method or a channel send. Relations, scenarios, and `allow` work as they do for systems.
+
+The containers, data, and deployment views become **Modules**, **Types**, and **Packages**; `--view modules`, `types`, and `packages` select them. The tower stacks each package as a tier over one floor plate per registry, with hooks outside the boundary so a scenario shows calls leaving the library.
+
+![Modules view of Quill](docs/images/quill-modules.svg)
+
+The checks change with the root. For example, [E012](docs/rules/E012.md) catches a consumer calling an internal module, and [W109](docs/rules/W109.md) catches a module that is always built depending on one behind a feature, which builds with default features and fails for anyone who turns the feature off.
+
 ## Install
 
 saxl is not published yet. Build the CLI from this repository (Rust 1.97, pinned by `rust-toolchain.toml`):
@@ -141,7 +189,7 @@ saxl serve architecture.saxl
 | `saxl fmt <file>…` | Rewrite files in canonical form, keeping comments. `--check` lists files that need it and fails instead. |
 | `saxl explain [<code>]` | Print a diagnostic's documentation, or list every code. |
 | `saxl ir <file>` | Print the model as JSON. `--schema` prints its JSON Schema. |
-| `saxl init [<path>]` | Write the Snip example as a starting point. |
+| `saxl init [<path>]` | Write the Snip example as a starting point. `--library` writes Quill instead. |
 
 Exit codes: 0 for success, 1 when the input has errors (or warnings under `--deny warnings`), 2 for usage and I/O errors.
 

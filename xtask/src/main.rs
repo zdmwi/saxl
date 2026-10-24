@@ -180,6 +180,16 @@ fn docs() -> Result<(), String> {
         let svg = saxl_renderer::to_svg(&scene).map_err(|e| e.to_string())?;
         write(&format!("docs/images/snip-{}.svg", view.slug()), &svg)?;
     }
+    let quill = std::fs::read_to_string(root().join("examples/quill.saxl"))
+        .map_err(|e| format!("can't read Quill: {e}"))?;
+    let parsed = saxl_parser::parse(&quill, saxl_core::FileId(0));
+    let model = saxl_validator::validate(parsed.model)
+        .model
+        .ok_or_else(|| "Quill has errors".to_owned())?;
+    let scene = saxl_renderer::scene(&model, &saxl_renderer::ViewKind::Containers)
+        .map_err(|e| e.to_string())?;
+    let svg = saxl_renderer::to_svg(&scene).map_err(|e| e.to_string())?;
+    write("docs/images/quill-modules.svg", &svg)?;
     eprintln!("wrote docs/rules/ ({} pages) and docs/images/", codes.len());
     Ok(())
 }

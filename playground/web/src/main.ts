@@ -8,7 +8,7 @@ import { EditorView, basicSetup } from "codemirror";
 import { type Diagnostic, type LocatedDiagnostic, mount, type ViewerHandle } from "@saxl/viewer";
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from "lz-string";
 import { EXAMPLES } from "./examples";
-import { KEYWORDS, saxl, saxlHighlight } from "./lang";
+import { CONTEXTUAL, KEYWORDS, saxl, saxlHighlight } from "./lang";
 import { byteToUtf16, lineColToOffset } from "./positions";
 import { type CompileResult, Compiler, type Ir } from "./protocol";
 import "./style.css";
@@ -127,7 +127,7 @@ function complete(ctx: CompletionContext): CompletionResult | null {
   const word = ctx.matchBefore(/[A-Za-z_][A-Za-z0-9_-]*/);
   if (!word || (word.from === word.to && !ctx.explicit)) return null;
   const options = [
-    ...KEYWORDS.map((k) => ({ label: k, type: "keyword" })),
+    ...[...KEYWORDS, ...CONTEXTUAL].map((k) => ({ label: k, type: "keyword" })),
     ...[...declaredNames()].map(([name, kind]) => ({ label: name, type: "variable", detail: kind })),
   ];
   return { from: word.from, options, validFor: /^[A-Za-z_][A-Za-z0-9_-]*$/ };

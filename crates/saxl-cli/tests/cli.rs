@@ -142,6 +142,26 @@ fn init_writes_once() {
         .success();
 }
 
+#[test]
+fn init_library() {
+    let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join("saxl-init-library-test");
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+    let mut cmd = Command::cargo_bin("saxl").unwrap();
+    cmd.current_dir(&dir)
+        .args(["init", "--library", "lib.saxl"])
+        .assert()
+        .success();
+    let written = std::fs::read_to_string(dir.join("lib.saxl")).unwrap();
+    assert!(written.contains("library Quill"));
+    let mut check = Command::cargo_bin("saxl").unwrap();
+    check
+        .current_dir(&dir)
+        .args(["check", "lib.saxl", "--deny", "warnings"])
+        .assert()
+        .success();
+}
+
 /// Human output for every invalid fixture, and the exit code: 1 when the
 /// fixture expects a parse or validation error, 0 otherwise.
 #[test]
