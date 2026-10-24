@@ -12,6 +12,8 @@ saxl-core.workspace = true
 saxl-parser.workspace = true
 saxl-validator.workspace = true
 saxl-renderer.workspace = true
+serde.workspace = true
+serde_json.workspace = true
 
 [lints]
 workspace = true

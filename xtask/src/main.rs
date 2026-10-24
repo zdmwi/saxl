@@ -3,7 +3,9 @@
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
-const USAGE: &str = "usage: cargo xtask <types|viewer|wasm|playground|docs|ci>";
+mod samples;
+
+const USAGE: &str = "usage: cargo xtask <types|viewer|wasm|playground|docs|ci|gen-samples>";
 
 /// Where ts-rs writes the generated TypeScript types.
 const GENERATED: &str = "crates/saxl-renderer/viewer/src/generated";
@@ -20,6 +22,7 @@ fn main() -> ExitCode {
         "playground" => playground(),
         "docs" => docs(),
         "ci" => ci(),
+        "gen-samples" => samples::gen_samples(&std::env::args().skip(2).collect::<Vec<_>>()),
         _ => Err(USAGE.to_owned()),
     };
     match result {
