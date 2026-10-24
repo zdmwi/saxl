@@ -237,6 +237,7 @@ cargo xtask ci
 | `cargo xtask wasm` | Build the WebAssembly bindings (needs `wasm-bindgen-cli` 0.2.129). |
 | `cargo xtask playground` | Build the playground into `playground/web/dist`. |
 | `cargo xtask ci` | Run the CI checks locally, including that generated files are current. |
+| `cargo xtask gen-samples --out <dir>` | Write random files built from the grammar that check without errors, plus `report.json` with construct coverage. `--count` and `--seed` set how many and which. |
 
 Generated files (TypeScript types, the viewer bundle, rule pages, README images) are committed, so `cargo build` and `cargo test` never need Node. Fuzzing is described in [fuzz/README.md](fuzz/README.md).
 

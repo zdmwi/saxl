@@ -1722,6 +1722,8 @@ dependencies = [
  "saxl-parser",
  "saxl-renderer",
  "saxl-validator",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
