@@ -249,3 +249,15 @@ Generated files (TypeScript types, the viewer bundle, rule pages, README images)
 | `saxl-renderer` | Projections, layouts, and HTML, SVG, and JSON output |
 | `saxl-cli` | The `saxl` command |
 | `playground/wasm` | WebAssembly bindings for the playground |
+
+## Releases
+
+saxl uses [Semantic Versioning](https://semver.org): `MAJOR.MINOR.PATCH`. Before 1.0, a minor bump (0.2.0) may change the language, the IR, or the CLI incompatibly, and a patch bump (0.1.1) only fixes bugs. A change to the IR JSON also bumps `ir_version`.
+
+Every crate shares the workspace version in `Cargo.toml`. A release bumps it, along with the npm workspace versions and `Cargo.lock`, commits `chore(release): vX.Y.Z` to `main`, tags `vX.Y.Z`, and creates a GitHub release with generated notes.
+
+To release, run the **Release** workflow from the Actions tab on `main` and enter the version without the `v`. It runs the tests, then `scripts/release.sh`. The script refuses a version that isn't SemVer, is older than the current one, or is already tagged. To check a release locally without committing or pushing:
+
+```bash
+DRY_RUN=1 scripts/release.sh 0.2.0
+```
