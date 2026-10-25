@@ -33,6 +33,10 @@ Prefer rebasing over merging. To bring a branch up to date with `main`, run
 merging `main` into the branch. This keeps history linear and keeps merge commits
 out of pull requests.
 
+## Versioning
+
+saxl follows [Semantic Versioning](https://semver.org). Release through the Release workflow (`scripts/release.sh`), never by hand-editing versions or pushing tags. See the README's Releases section.
+
 ## Commit Conventions
 Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for all git commit messages:
 
